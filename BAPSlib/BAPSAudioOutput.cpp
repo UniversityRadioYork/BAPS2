@@ -30,7 +30,7 @@ CBAPSAudioOutput::~CBAPSAudioOutput()
 }
 
 
-BOOL CBAPSAudioOutput::Initialise(int iNumberOfChannels)
+BOOL CBAPSAudioOutput::Initialise(int iNumberOfChannels, NotifyCallback _callback)
 {
 
 	// Create the output channels object
@@ -41,7 +41,7 @@ BOOL CBAPSAudioOutput::Initialise(int iNumberOfChannels)
 	}
 
 	// Initialise the output channels object
-	if (!m_pChannels->Initialise(iNumberOfChannels))
+	if (!m_pChannels->Initialise(iNumberOfChannels, _callback))
 	{
 		CleanUp();
 		return FALSE;

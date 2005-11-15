@@ -103,6 +103,8 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //        In this function, we save the instance handle in a global variable and
 //        create and display the main program window.
 //
+
+
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    HWND hWnd;
@@ -116,12 +118,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    {
       return FALSE;
    }
-
-   g_BAPS.Initialise(1);
+   g_BAPS.Initialise(1, urm);
    CBAPSAudioOutputDevice* pDevice = g_BAPS.GetAudioOutputDevices()->GetDevice(0);
    CBAPSAudioOutputChannel* pChannel = g_BAPS.GetAudioOutputChannels()->GetChannel(0);
    pChannel->SetDevice(pDevice);
-   pChannel->LoadFile(L"c:\\arse\\track01.mp3");
+   pChannel->LoadFile(L"i:\\music\\blanktest.wav");
    pChannel->Play();
 
    ShowWindow(hWnd, nCmdShow);

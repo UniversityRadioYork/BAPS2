@@ -8,6 +8,8 @@
 #include "BAPSCommon.h"
 #include "BAPSAudioOutputDevice.h"
 
+// Function pointer for notifying a channel has stopped
+typedef void (*NotifyCallback)(int);
 
 // Still need to implement current graph state / play state
 // and send events when they change
@@ -70,7 +72,7 @@ protected:
 
 	// Sets the windows handle to which the object should send its messages
 	// and tells it its index in the collection
-	BOOL Initialise(int iIndex);
+	BOOL Initialise(int iIndex, NotifyCallback _callback);
 
 	// Releases interfaces, deletes objects, etc.
 	void CleanUp();
@@ -113,14 +115,16 @@ protected:
 	int m_iIndex;
 
 	// Handle of the DirectShow event monitoring thread
-//	HANDLE m_hEventMonitorThread;
+	HANDLE m_hEventMonitorThread;
 
 	// Event that's signalled when event monitoring should stop
-//	HANDLE m_hStopEventMonitorEvent;
+	HANDLE m_hStopEventMonitorEvent;
 
 	// The current state of the graph
 	FILTER_STATE m_FilterState;
 
+	// The callback
+	NotifyCallback callback;
 
 };
 

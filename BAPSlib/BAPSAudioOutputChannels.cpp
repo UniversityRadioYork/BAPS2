@@ -24,9 +24,9 @@ CBAPSAudioOutputChannels::~CBAPSAudioOutputChannels()
 }
 
 
-BOOL CBAPSAudioOutputChannels::Initialise(int iNumberOfChannels)
+BOOL CBAPSAudioOutputChannels::Initialise(int iNumberOfChannels, NotifyCallback _callback)
 {
-
+	callback = _callback;
 	// Check that the number of channels is valid
 	if (iNumberOfChannels > BAPS_MAX_CHANNELS || iNumberOfChannels <= 0)
 	{
@@ -44,7 +44,7 @@ BOOL CBAPSAudioOutputChannels::Initialise(int iNumberOfChannels)
 			return FALSE;
 		}
 
-		if (!m_arpChannel[iChannel]->Initialise(iChannel))
+		if (!m_arpChannel[iChannel]->Initialise(iChannel, _callback))
 		{
 			CleanUp();
 			return FALSE;

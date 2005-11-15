@@ -33,11 +33,11 @@ CBAPSAudioOutputChannel::~CBAPSAudioOutputChannel()
 }
 
 
-BOOL CBAPSAudioOutputChannel::Initialise(int iIndex)
+BOOL CBAPSAudioOutputChannel::Initialise(int iIndex, NotifyCallback _callback)
 {
-
+	callback = _callback;
 	HRESULT hr;
-//	DWORD dwThreadID;
+	DWORD dwThreadID;
 
 	// Store the index
 	m_iIndex = iIndex;
@@ -86,7 +86,7 @@ BOOL CBAPSAudioOutputChannel::Initialise(int iIndex)
 		CleanUp();
 		return FALSE;
 	}
-/*
+
 	// Create the stop monitoring event
 	m_hStopEventMonitorEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 
@@ -104,7 +104,7 @@ BOOL CBAPSAudioOutputChannel::Initialise(int iIndex)
 		CleanUp();
 		return FALSE;
 	}
-*/
+
 	return TRUE;
 
 }
@@ -118,7 +118,7 @@ void CBAPSAudioOutputChannel::CleanUp()
 	{
 		m_pMediaControl->Stop();
 	}
-/*
+
 	// Stop the event monitoring thread if it exists
 	if (NULL != m_hStopEventMonitorEvent)
 	{
@@ -139,7 +139,7 @@ void CBAPSAudioOutputChannel::CleanUp()
 		m_hStopEventMonitorEvent = NULL;
 
 	}
-*/
+
 	// Release all the DirectShow interfaces
 	if (NULL != m_pRendererFilter)
 	{
@@ -185,7 +185,7 @@ void CBAPSAudioOutputChannel::CleanUp()
 
 }
 
-/*
+
 DWORD CBAPSAudioOutputChannel::EventMonitorThreadProc(void* pParameter)
 {
 
@@ -233,7 +233,8 @@ DWORD CBAPSAudioOutputChannel::EventMonitorThreadProc()
 				// on different threads
 				m_pMediaControl->Pause();
 
-				PostMessage(m_hWndNotify, WM_BAPS_CHANNEL_EVENT, ChannelPlaybackComplete, m_iIndex);
+				callback(m_iIndex);
+//				PostMessage(m_hWndNotify, WM_BAPS_CHANNEL_EVENT, ChannelPlaybackComplete, m_iIndex);
 	
 			}
 
@@ -254,7 +255,7 @@ DWORD CBAPSAudioOutputChannel::EventMonitorThreadProc()
 	return 0;
 
 }
-*/
+
 
 int CBAPSAudioOutputChannel::ReferenceTimeToMilliseconds(LONGLONG *pllTime)
 {

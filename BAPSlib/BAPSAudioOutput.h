@@ -26,7 +26,7 @@ public:
 public:
 
 	// Initialises BAPS audio output ready for use
-	BOOL BAPS_CALL Initialise(int iNumberOfChannels = 1);
+	BOOL BAPS_CALL Initialise(int iNumberOfChannels, NotifyCallback _callback);
 
 	// Returns the collection of audio output channels
 	CBAPSAudioOutputChannels* BAPS_CALL GetAudioOutputChannels();

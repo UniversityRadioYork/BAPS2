@@ -36,7 +36,7 @@ protected:
 	~CBAPSAudioOutputChannels();
 
 	// Sets the notification window and creates the specified number of channels
-	BOOL Initialise(int iNumberOfChannels);
+	BOOL Initialise(int iNumberOfChannels, NotifyCallback _callback);
 
 	// Deletes objects and frees memory
 	void CleanUp();
@@ -50,6 +50,8 @@ protected:
 	// An array of channel pointers
 	CBAPSAudioOutputChannel* m_arpChannel[BAPS_MAX_CHANNELS];
 
+	// The notification callback for channel stopped
+	NotifyCallback callback;
 
 };
 
