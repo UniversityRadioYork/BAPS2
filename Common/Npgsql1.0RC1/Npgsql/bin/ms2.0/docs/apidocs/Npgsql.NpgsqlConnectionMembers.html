@@ -1,0 +1,332 @@
+<html dir="LTR">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5" />
+    <title>NpgsqlConnection Members</title>
+    <xml>
+    </xml>
+    <link rel="stylesheet" type="text/css" href="MSDN.css" />
+  </head>
+  <body id="bodyID" class="dtBODY">
+    <div id="nsbanner">
+      <div id="bannerrow1">
+        <table class="bannerparthead" cellspacing="0">
+          <tr id="hdr">
+            <td class="runninghead">Npgsql Api Docs</td>
+            <td class="product">
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="TitleRow">
+        <h1 class="dtH1">NpgsqlConnection Members
+					</h1>
+      </div>
+    </div>
+    <div id="nstext">
+      <p>
+        <a href="Npgsql.NpgsqlConnection.html">NpgsqlConnection overview</a>
+      </p>
+      <h4 class="dtH4">Public Instance Constructors</h4>
+      <div class="tablediv">
+        <table class="dtTABLE" cellspacing="0">
+          <tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif" />
+              <a href="Npgsql.NpgsqlConnectionConstructor.html">NpgsqlConnection</a>
+            </td>
+            <td width="50%">Overloaded. Initializes a new instance of the NpgsqlConnection class.</td>
+          </tr>
+        </table>
+      </div>
+      <h4 class="dtH4">Public Instance Properties</h4>
+      <div class="tablediv">
+        <table class="dtTABLE" cellspacing="0">
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.BackendProtocolVersion.html">BackendProtocolVersion</a>
+            </td>
+            <td width="50%"> Protocol version in use. This can only be called when there is an active connection. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.ConnectionLifeTime.html">ConnectionLifeTime</a>
+            </td>
+            <td width="50%"> Gets the time to wait before closing unused connections in the pool if the count of all connections exeeds MinPoolSize. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.ConnectionString.html">ConnectionString</a>
+            </td>
+            <td width="50%"> Gets or sets the string used to connect to a PostgreSQL database. Valid values are: <ul>
+                <li> Server: Address/Name of Postgresql Server; </li>
+                <li> Port: Port to connect to; </li>
+                <li> Protocol: Protocol version to use, instead of automatic; Integer 2 or 3; </li>
+                <li> Database: Database name. Defaults to user name if not specified; </li>
+                <li> User Id: User name; </li>
+                <li> Password: Password for clear text authentication; </li>
+                <li> SSL: True or False. Controls whether to attempt a secure connection. Default = False; </li>
+                <li> Pooling: True or False. Controls whether connection pooling is used. Default = True; </li>
+                <li> MinPoolSize: Min size of connection pool; </li>
+                <li> MaxPoolSize: Max size of connection pool; </li>
+                <li> Encoding: Encoding to be used; Can be ASCII or UNICODE. Default is ASCII. Use UNICODE if you are having problems with accents. </li>
+                <li> Timeout: Time to wait for connection open in seconds. Default is 15. </li>
+                <li> Sslmode: Mode for ssl connection control. Can be Prefer, Require, Allow or Disable. Default is Disable. Check user manual for explanation of values. </li>
+                <li> ConnectionLifeTime: Time to wait before closing unused connections in the pool in seconds. Default is 15. </li>
+                <li> SyncNotification: Specifies if Npgsql should use synchronous notifications. </li></ul></td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.ConnectionTimeout.html">ConnectionTimeout</a>
+            </td>
+            <td width="50%"> Gets the time to wait while trying to establish a connection before terminating the attempt and generating an error. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemComponentModelComponentClassContainerTopic.htm">Container</a> (inherited from <b>Component</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.Database.html">Database</a>
+            </td>
+            <td width="50%"> Gets the name of the current database or the database to be used after a connection is opened. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.Host.html">Host</a>
+            </td>
+            <td width="50%"> Backend server host name. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.Port.html">Port</a>
+            </td>
+            <td width="50%"> Backend server port. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.ServerVersion.html">ServerVersion</a>
+            </td>
+            <td width="50%"> Version of the PostgreSQL backend. This can only be called when there is an active connection. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemComponentModelComponentClassSiteTopic.htm">Site</a> (inherited from <b>Component</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.SSL.html">SSL</a>
+            </td>
+            <td width="50%"> If true, the connection will attempt to use SSL. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.State.html">State</a>
+            </td>
+            <td width="50%"> Gets the current state of the connection. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubproperty.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.SyncNotification.html">SyncNotification</a>
+            </td>
+            <td width="50%"> Gets flag indicating if we are using Synchronous notification or not. The default value is false. </td></tr></table>
+      </div>
+      <h4 class="dtH4">Public Instance Methods</h4>
+      <div class="tablediv">
+        <table class="dtTABLE" cellspacing="0">
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.BeginTransaction_overloads.html">BeginTransaction</a>
+            </td>
+            <td width="50%">Overloaded.  Begins a database transaction. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.ChangeDatabase.html">ChangeDatabase</a>
+            </td>
+            <td width="50%"> This method changes the current database by disconnecting from the actual database and connecting to the specified. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.Clone.html">Clone</a>
+            </td>
+            <td width="50%"> Create a new connection based on this one. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.Close.html">Close</a>
+            </td>
+            <td width="50%"> Releases the connection to the database. If the connection is pooled, it will be made available for re-use. If it is non-pooled, the actual connection will be shutdown. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.CreateCommand.html">CreateCommand</a>
+            </td>
+            <td width="50%"> Creates and returns a <a href="Npgsql.NpgsqlCommand.html">NpgsqlCommand</a> object associated with the <a href="Npgsql.NpgsqlConnection.html">NpgsqlConnection</a>. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemMarshalByRefObjectClassCreateObjRefTopic.htm">CreateObjRef</a> (inherited from <b>MarshalByRefObject</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemComponentModelComponentClassDisposeTopic.htm">Dispose</a> (inherited from <b>Component</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemObjectClassEqualsTopic.htm">Equals</a> (inherited from <b>Object</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemObjectClassGetHashCodeTopic.htm">GetHashCode</a> (inherited from <b>Object</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemMarshalByRefObjectClassGetLifetimeServiceTopic.htm">GetLifetimeService</a> (inherited from <b>MarshalByRefObject</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.GetSchema_overloads.html">GetSchema</a>
+            </td>
+            <td width="50%">Overloaded.  </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemObjectClassGetTypeTopic.htm">GetType</a> (inherited from <b>Object</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemMarshalByRefObjectClassInitializeLifetimeServiceTopic.htm">InitializeLifetimeService</a> (inherited from <b>MarshalByRefObject</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.Open.html">Open</a>
+            </td>
+            <td width="50%"> Opens a database connection with the property settings specified by the <a href="Npgsql.NpgsqlConnection.ConnectionString.html">ConnectionString</a>. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubmethod.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemComponentModelComponentClassToStringTopic.htm">ToString</a> (inherited from <b>Component</b>)</td>
+            <td width="50%"> </td></tr></table>
+      </div>
+      <h4 class="dtH4">Public Instance Events</h4>
+      <div class="tablediv">
+        <table class="dtTABLE" cellspacing="0">
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubevent.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.CertificateSelectionCallback.html">CertificateSelectionCallback</a>
+            </td>
+            <td width="50%"> Mono.Security.Protocol.Tls.CertificateSelectionCallback delegate. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubevent.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.CertificateValidationCallback.html">CertificateValidationCallback</a>
+            </td>
+            <td width="50%"> Mono.Security.Protocol.Tls.CertificateValidationCallback delegate. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubevent.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemComponentModelComponentClassDisposedTopic.htm">Disposed</a> (inherited from <b>Component</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubevent.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.Notice.html">Notice</a>
+            </td>
+            <td width="50%"> Occurs on NoticeResponses from the PostgreSQL backend. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubevent.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.Notification.html">Notification</a>
+            </td>
+            <td width="50%"> Occurs on NotificationResponses from the PostgreSQL backend. </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="pubevent.gif">
+              </img>
+              <a href="Npgsql.NpgsqlConnection.PrivateKeySelectionCallback.html">PrivateKeySelectionCallback</a>
+            </td>
+            <td width="50%"> Mono.Security.Protocol.Tls.PrivateKeySelectionCallback delegate. </td></tr></table>
+      </div>
+      <h4 class="dtH4">Protected Instance Properties</h4>
+      <div class="tablediv">
+        <table class="dtTABLE" cellspacing="0">
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="protproperty.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemComponentModelComponentClassDesignModeTopic.htm">DesignMode</a> (inherited from <b>Component</b>)</td>
+            <td width="50%"> </td></tr>
+<tr VALIGN="top">
+            <td width="50%">
+              <img src="protproperty.gif">
+              </img>
+              <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemComponentModelComponentClassEventsTopic.htm">Events</a> (inherited from <b>Component</b>)</td>
+            <td width="50%"> </td></tr></table>
+      </div>
+      <h4 class="dtH4">See Also</h4>
+      <p>
+        <a href="Npgsql.NpgsqlConnection.html">NpgsqlConnection Class</a> | <a href="Npgsql.html">Npgsql Namespace</a></p>
+      <object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" viewastext="true" style="display: none;">
+        <param name="Keyword" value="NpgsqlConnection class">
+        </param>
+        <param name="Keyword" value="Npgsql.NpgsqlConnection class">
+        </param>
+        <param name="Keyword" value="NpgsqlConnection class, all members">
+        </param>
+      </object>
+      <hr />
+      <div id="footer">
+        <p>
+          <a>Npgsql Development Team 2002-2005</a>
+        </p>
+        <p>Generated from assembly Npgsql [0.99.1.0]</p>
+      </div>
+    </div>
+  </body>
+</html>

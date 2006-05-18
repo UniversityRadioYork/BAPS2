@@ -1,0 +1,42 @@
+
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BAPSPresenter", "BAPSPresenter\BAPSPresenter.vcproj", "{46FD9397-DD3B-456A-9D95-504D60F6A9B5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BAPSServerService", "BAPSServerService\BAPSServerService.vcproj", "{7FA33D8B-C6CB-4964-BEAF-99E5E1C5B5A6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BAPSSetup", "BAPSSetup\BAPSSetup.vdproj", "{4529F501-C93F-4817-AC7F-A2BF9707D4D4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tinker", "Tinker\Tinker.vcproj", "{72C648CC-A0E6-4439-8474-76BE38A621B4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BAPSWatchdogService", "BAPSWatchdogService\BAPSWatchdogService.vcproj", "{2B0071DE-C59F-4D21-AA70-B1363629036F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46FD9397-DD3B-456A-9D95-504D60F6A9B5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{46FD9397-DD3B-456A-9D95-504D60F6A9B5}.Debug|Win32.Build.0 = Debug|Win32
+		{46FD9397-DD3B-456A-9D95-504D60F6A9B5}.Release|Win32.ActiveCfg = Release|Win32
+		{46FD9397-DD3B-456A-9D95-504D60F6A9B5}.Release|Win32.Build.0 = Release|Win32
+		{7FA33D8B-C6CB-4964-BEAF-99E5E1C5B5A6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7FA33D8B-C6CB-4964-BEAF-99E5E1C5B5A6}.Debug|Win32.Build.0 = Debug|Win32
+		{7FA33D8B-C6CB-4964-BEAF-99E5E1C5B5A6}.Release|Win32.ActiveCfg = Release|Win32
+		{7FA33D8B-C6CB-4964-BEAF-99E5E1C5B5A6}.Release|Win32.Build.0 = Release|Win32
+		{4529F501-C93F-4817-AC7F-A2BF9707D4D4}.Debug|Win32.ActiveCfg = Debug
+		{4529F501-C93F-4817-AC7F-A2BF9707D4D4}.Release|Win32.ActiveCfg = Release
+		{72C648CC-A0E6-4439-8474-76BE38A621B4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{72C648CC-A0E6-4439-8474-76BE38A621B4}.Debug|Win32.Build.0 = Debug|Win32
+		{72C648CC-A0E6-4439-8474-76BE38A621B4}.Release|Win32.ActiveCfg = Release|Win32
+		{72C648CC-A0E6-4439-8474-76BE38A621B4}.Release|Win32.Build.0 = Release|Win32
+		{2B0071DE-C59F-4D21-AA70-B1363629036F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2B0071DE-C59F-4D21-AA70-B1363629036F}.Debug|Win32.Build.0 = Debug|Win32
+		{2B0071DE-C59F-4D21-AA70-B1363629036F}.Release|Win32.ActiveCfg = Release|Win32
+		{2B0071DE-C59F-4D21-AA70-B1363629036F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

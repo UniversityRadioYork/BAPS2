@@ -1,0 +1,29 @@
+[OPTIONS]
+Auto TOC=9
+Compatibility=1.1 or later
+Compiled file=BAPSPresenterHelp.chm
+Contents file=Table of Contents.hhc
+Default Window=Navigation Pane
+Default topic=Introduction.htm
+Display compile progress=No
+Full-text search=Yes
+Index file=Index.hhk
+Language=0x809 English (United Kingdom)
+Title=Broadcasting And Presenting Suite
+
+[WINDOWS]
+Navigation Pane="Broadcasting And Presenting Suite help","Table of Contents.hhc","Index.hhk","Introduction.htm",,,,,,0x62520,100,0xe,[793,84,1276,632],,0x8,,,,,0
+
+
+[FILES]
+Introduction.htm
+BAPSPresenterMain.htm
+BAPSPresenter\addEntries.htm
+BAPSPresenter\manageEntries.htm
+BAPSPresenter\playingAudio.htm
+BAPSPresenter\useText.htm
+BAPSWebShowManMain.htm
+BAPSPresenter\loadShow.htm
+
+[INFOTYPES]
+

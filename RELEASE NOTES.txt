@@ -1,0 +1,82 @@
+##
+Initial release 2.0
+--
+Features:
+--
+NONE
+--
+Known Issues:
+--
+1) Maximizing windows on multi screen systems of varying resoutions chooses to maximize to the primary screen size rather than the current screen size
+2) Config system causes presenter crash when saving sporadically, although save is successful. (object disposed exception when receiving config update)
+--
+
+##
+Release 2.0 V2
+--
+Features:
+--
+Updated Help System
+Added default username and password to BAPS Presenter
+--
+Known Issues:
+--
+Config system causes presenter crash when saving sporadically, although save is successful. (object disposed exception when receiving config update)
+--
+Bug Fixes:
+--
+Maximizing windows works regardless of varying screen resolutions
+Altered play button in channel 2 to read F5 instead of F4.
+Cannot delete playing track now
+--
+##
+Release 2.0 v3
+--
+Features:
+--
+NONE
+--
+Known Issues:
+--
+Config system causes presenter crash when saving sporadically, although save is successful. (object disposed exception when receiving config update)
+--
+Bug Fixes:
+--
+Channel config for automatic advance, play on load and repeat, are reset when a channel is reset
+The load show form clears the help text in the username box when it gets focus
+--
+##
+Release 2.0 v4
+--
+Features:
+Audiowall
+--
+Known Issues:
+--
+Config system causes presenter crash when saving sporadically, although save is successful. (object disposed exception when receiving config update)
+--
+Bug Fixes
+--
+NONE
+--
+
+##
+Release 2.0 v5
+--
+Features:
+--
+NONE
+--
+Known Issues
+--
+Using audiowall clears the current cue position
+Config System occasionally crashes in client due to drop downs (presumed)
+--
+Bug Fixes
+--
+Cue and Intro positions save for duration of session
+Cue positions are now per track rather than on a load by load basis
+Text screen can no longer be closed by alt+F4 (crashfix)
+Guarded the serial port close statement to ensure a port is open before being closed
+Mutex releases removed from error states as they were causing double releases due to finally blocks
+--

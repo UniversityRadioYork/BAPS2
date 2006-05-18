@@ -1,0 +1,1303 @@
+<html><head>
+
+<title>Npgsql: User's Manual</title>
+
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="content-Style-Type" content="text/css">
+<meta http-equiv="expires" content="">
+<meta name="category" content="IT/Database/PostgreSQL/Npgsql/Docs/Internal">
+<meta name="filename" content="state-machine.htm">
+<meta name="date" content="2002-06-29">
+<meta name="author" content="Francisco Jr.">
+<meta name="robots" content="nofollow">
+<meta name="keywords" content="IT; Database; PostgreSQL; Npgsql; Communication; State Machine; Documentation;">
+<meta name="description" content="This document describes the User's Manual of Npgsql.">
+
+<link rel="stylesheet" href="global.css">
+<script language="JavaScript" src="global.js"></script>
+
+<!-- Table Layout Stylesheet -->
+
+<style>
+table.std {
+    border-bottom: 2 solid silver;
+    border-right: 2 solid silver;
+    line-height: 140%;
+    }
+tr.tableheader {
+    background-color: PowderBlue;
+    color: darkblue;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+    height: 40;
+    }
+tr.stateheader {
+    background-color: AliceBlue;
+    color: darkblue;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 8;
+    padding-bottom: 8;
+    height: 40;
+    }
+tr.columnheader {
+    text-align: center;
+    font-weight: normal;
+    height-
+    }
+tr.std {
+    text-align: left;
+    vertical-align: top;
+    }
+td.std {
+    border-top: 2 solid silver;
+    border-left: 2 solid silver;
+    padding-right: 5;
+    padding-left: 5;
+    padding-top: 5;
+    padding-bottom: 5;
+    }
+
+p.headnotes {
+    font-size:smaller;
+    margin-top: 0;
+    margin-bottom: 0;
+    }
+</style>
+
+</head><body>
+
+<h1 align="center">Npgsql: User's Manual</h1>
+<center> Copyright &copy; <a href="http://gborg.postgresql.org/project/npgsql/cvs/co.php/Npgsql/docs/thenpgsqldevelopmentteam.htm">The Npgsql Development Team </a></center>
+<hr />
+
+<p />
+
+<p class="headnotes">Last update: $Date: 2006/05/18 10:27:04 $ by $Author: mat $</p>
+<p class="headnotes">Category: External documentation</p>
+<p class="headnotes">Intended Audience: Npgsql Users</p>
+
+
+<h2> 1. What is Npgsql? </h2>
+
+<p> <a href="http://pgfoundry.org/projects/npgsql/">Npgsql </a> is a .Net Data Provider for <a href="http://www.postgresql.org">Postgresql Database Server</a>. </p>
+
+<p> It allows a .Net client application (Console, WinForms, ASP.NET, Web Services...) to use a PostgreSQL server to send and receive data. It is developed using the
+guidelines specified in the .Net docs.</p>
+
+<h2> 2. How to get and compile Npgsql </h2>
+
+<h3> 2.1 Binary package </h3>
+<p> You can get Npgsql compiled for MS.Net and Mono in the <a href="http://pgfoundry.org/frs/?group_id=1000140">Files section </a> of the project.</p>
+<p> Inside this package you will have the following directory layout: </p>
+<p> Npgsql/bin/docs - Documentation </p>
+<p> Npgsql/bin/docs/apidocs - API Documentation </p>
+<p> Npgsql/bin/ms1.1 - Npgsql compiled for MS.Net 1.1 </p>
+<p> Npgsql/bin/mono - Npgsql compiled for Mono </p>
+
+<p>As soon as Npgsql is released for other platforms/versions, they will be added accordingly to this layout.<p>
+
+<h3> 2.2 Installing binary package </h3>
+
+<p> In order for the .Net Runtime to locate the Npgsql.dll library, this file must be put in the same directory the application is, unless you specify another 
+directory as a path to private components through a configuration file (using the probing element). Please, see the .Net docs for information
+on how the runtime probes (locates) assemblies to be loaded. There is also a section called "Path to Private Components" </p>
+<p> In ASP.NET and Web Services .Net Applications, there must be a directory called "bin" below the ASP.NET root application directory.
+So, for example the application directory is called "ASPNETApplication", Npgsql.dll and Mono.Security.dll must be placed in the "ASPNETApplication\bin" directory.
+If it's not, you will get a lot of compiling errors when trying to use Npgsql.</p>
+<p> You can also put the Npgsql assembly in the Global Cache Assembly. Since 0.4 version, Npgsql is strongly signed which means you can
+use gacutil to install it. Issue the following command to do it:</p>
+<pre class="CodeBox">
+gacutil -i Npgsql.dll
+</pre>
+
+<p> Please, refer to "Installing an Assembly in the Global Cache Assembly" section of MSDN docs for more help.
+
+<p> Alternatively, you can install Npgsql on GAC (Global Assembly Cache) in order to all your applications have access to it without needing to copy Npgsql.dll all times. Note that put Npgsql in GAC is required if you want to use Npgsql design time support on VS.Net. 
+
+<p> Note that Npgsql compiled for Mono doesn't need Mono.Security.dll as it is already integrated in Mono Runtime.</p>
+
+
+<p> After that, you are set to try the examples. Just go to <a href="#section3">section 3</a>. </p>
+
+<h3> 2.3 Getting Npgsql from cvs </h3>
+
+<p> To get Npgsql from cvs use the following info in your cvs client: </p>
+Server: cvs.pgfoundry.org
+<br />
+Repository: /cvsroot/npgsql
+<br />
+Module name: Npgsql
+<br />
+User: anonymous
+<br />
+Password:
+
+
+
+<p> If you are using cvs from command line, just do that: </p>
+cvs -d :pserver:anonymous@cvs.pgfoundry.org:/cvsroot/npgsql login
+<br />
+Hit Enter key when prompted for a password
+<br />
+cvs -d :pserver:anonymous@cvs.pgfoundry.org:/cvsroot/npgsql checkout Npgsql
+
+<p> You will start to get the code: </p>
+
+<pre class="CodeBox">
+$ cvs -d :pserver:anonymous@cvs.pgfoundry.org:/cvsroot/npgsql login
+Logging in to :pserver:anonymous@cvs.pgfoundry.org:2401/cvsroot/npgsql
+CVS password:
+$ cvs -d :pserver:anonymous@cvs.pgfoundry.org:/cvsroot/npgsql co Npgsql
+cvs checkout: Updating Npgsql
+cvs checkout: Updating Npgsql/admin
+U Npgsql/admin/release.pl
+cvs checkout: Updating Npgsql/docs
+U Npgsql/docs/Npgsql.zargo
+U Npgsql/docs/NpgsqlConnectionStateMachine.png
+U Npgsql/docs/SuggestedReadings.htm
+...
+</pre>
+
+
+<h3> 2.4 Compiling Npgsql</h3>
+
+<p>The officially supported method to compile Npgsql is using <a href="http://nant.sf.net">NAnt</a>.</p>
+
+<p>You just need to run <i>nant</i> from Npgsql/src/Npgsql folder and you are done. It will create a folder called build where it will put the assembly in the build/ms folder.</p>
+
+<p>To run nunit tests, you just need to call <i>nant tests</i>. Note that first you need to setup database for tests by executing the add_* scripts in the Npgsql/src/testsuite/noninteractive folder.
+
+<p>We will provide solution projects for other development platforms like VS.Net, SharpDevelop and MonoDevelop. We already received reports of success solution projects and will make them available soon.</p>
+
+<h2> <a name="section3"></a>3. Npgsql Usage </h2>
+
+<p> This section explains Npgsql usage in a .Net Application. If you are used to developing Data Access applications using the
+Sql Server, OleDB or ODBC.NET providers, using Npgsql is very similar.</p>
+<p> In order to use Npgsql, server must be listening to TCP/IP connections. TCP connections are enabled by default on 8.0 servers. 7.3 and below, should have postmaster started with -i option. Check Postgresql Documentation for details: <a href="http://www.postgresql.org/docs/7.4/static/postmaster-start.html">http://www.postgresql.org/docs/7.4/static/postmaster-start.html</a> </p>
+<p> Note: Npgsql is still under development. Only features currently supported will be demonstrated. As Npgsql matures, more functionality will be available to be used. </p>
+
+<h3> Adding required namespaces to your source file </h3>
+
+<p> First, to use Npgsql objects more easily, you have to tell the compiler to use the Npgsql namespace. It will also be needed to use the
+System.Data namespace as a lot of classes used for data manipulation reside in it. To do that, in C#, you use the using directive: </p>
+
+<pre class="CodeBox">
+using System.Data;
+using Npgsql;
+</pre>
+
+<h3> Establishing a connection </h3>
+<p>To establish a connection to a server located at ip 127.0.0.1, port 5432, as the user joe, with the password secret, using the database joedata, you use the NpgsqlConnection as:</p>
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+
+public class NpgsqlUserManual
+{
+  public static void Main(String[] args)
+  {
+    NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+    conn.Open();
+    conn.Close();
+  }
+}
+</pre>
+
+<h3> Connection String parameters </h3>
+<p> When establishing a connection, NpgsqlConnection accepts many parameters which can be used to modify its behavior. Here is the list of current parameters you can tweak: (From NpgsqlConnection source) </p>
+
+<pre class="CodeBox">
+ Gets or sets the string used to connect to a PostgreSQL database.
+        /// Valid values are:
+        /// Server:                     Address/Name of Postgresql Server;
+        /// Port:                       Port to connect to;
+        /// Protocol:                   Protocol version to use, instead of automatic; Integer 2 or 3;
+        /// Database:                   Database name. Defaults to user name if not specified;
+        /// User Id:                    User name;
+        /// Password:                   Password for clear text authentication;
+        /// SSL:                        True or False. Controls whether to attempt a secure connection. Default = False;
+        /// Pooling:                    True or False. Controls whether connection pooling is used. Default = True;
+        /// MinPoolSize:                Min size of connection pool. Default: 1;
+        /// MaxPoolSize:                Max size of connection pool. Default: 20;
+        /// Encoding:                   Encoding to be used; 
+        /// Timeout:                    Time to wait for connection open in seconds. Default is 15.
+        /// Sslmode:                    Mode for ssl connection control. 
+        /// ConnectionLifeTime:         Time to wait before closing unused connections in the pool in seconds. Default is 15.
+        /// SyncNotification:           Specifies if Npgsql should use synchronous notifications
+        Encoding can the ASCII or UNICODE. If your application uses characters with accents and with default settings it doesn't work, try changing that.
+        Min pool size when specified will make NpgsqlConnection pre allocates this number of connections with the server.
+        Sslmode can be one of the following values: 
+            Prefer - If it is possible to connect using ssl, it will be used.
+            Require - If an ssl connection cannot be made, an exception is thrown.
+            Allow - Not supported yet, just connects without ssl.
+            Disable - No ssl connection is done.
+            Default is Disable.
+        
+</pre>
+
+<h3> Using NpgsqlCommand to add a row in a table </h3>
+<p>The previous example doesn't do anything useful. It only connects to the database and disconnects. If there is an error, a NpgsqlException is thrown.
+Now, suppose there is a table called table1 with two fields a and b both of type int. If you want to add the tuple (1, 1) in this table you could send the 
+insert statement as follows:</p>
+
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+
+public static class NpgsqlUserManual
+{
+  public static void Main(String[] args)
+  {
+    NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+    conn.Open();
+    
+    NpgsqlCommand command = new NpgsqlCommand("insert into table1 values(1, 1)", conn);
+    Int32 rowsaffected;
+    
+    try
+    {
+      rowsaffected = command.ExecuteNonQuery();
+    }
+    
+    Console.WriteLine("It was added {0} lines in table table1", rowsaffected);
+    
+    finally
+    {
+      conn.Close();
+    }
+  }
+}
+</pre>
+
+<h3> Getting a single result using NpgsqlCommand.ExecuteScalar() method </h3>
+<p> To execute statements which return just one value you use the ExecuteScalar() method of the Command object:</p>
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+
+public static class NpgsqlUserManual
+{
+  public static void Main(String[] args)
+  {
+    NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+    conn.Open();
+    
+    NpgsqlCommand command = new NpgsqlCommand("select version()", conn);
+    String serverversion;
+    
+    try
+    {
+      serverversion = (String)command.ExecuteScalar();
+    }
+    
+    Console.WriteLine("PostgreSQL server version: {0}", serverversion);
+    
+    finally
+    {
+      conn.Close();
+    }
+  }
+}
+</pre>
+
+Other queries could also be used, for example "select count(*) from table1". Also, queries that don't return single values
+could be used, but only the first column of the first row would be returned.
+
+<h3> Getting full results from a query using NpgsqlCommand.ExecuteReader() method and NpgsqlDataReader object </h3>
+<p> To execute statements which return full results from a query you use the ExecuteReader() method of the NpgsqlCommand object:</p>
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+
+public static class NpgsqlUserManual
+{
+  public static void Main(String[] args)
+  {
+    NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+    conn.Open();
+    
+    NpgsqlCommand command = new NpgsqlCommand("select * from tablea", conn);
+
+    
+    try
+    {
+	NpgsqlDataReader dr = command.ExecuteReader();
+	while(dr.Read())
+	{
+  		for (i = 0; i < dr.FieldCount; i++)
+  		{
+  			Console.Write("{0} \t", dr[i]);
+  		}
+  		Console.WriteLine();
+	}
+
+    }
+    
+    finally
+    {
+      conn.Close();
+    }
+  }
+}
+</pre>
+
+This code assumes there is a table called tablea in the database.
+
+
+<h3> Using parameters in a query </h3>
+<p> You can also send a parameterized query to the server using NpgsqlParamenter and NpgsqlParamenterCollection objects.
+A parameter is a string prefixed by : in the query string. The example below uses a parameter called column1.</p>
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+
+public static class NpgsqlUserManual
+{
+  public static void Main(String[] args)
+  {
+    NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+    conn.Open();
+    
+    // Declare the parameter in the query string
+    NpgsqlCommand command = new NpgsqlCommand("select * from tablea where column1 = :column1", conn);
+    
+    // Now add the parameter to the parameter collection of the command specifying its type.
+    command.Parameters.Add(new NpgsqlParameter("column1", DbType.Int32));
+
+    // Now, add a value to it and later execute the command as usual.
+    command.Parameters[0].Value = 4;
+
+    
+    try
+    {
+	NpgsqlDataReader dr = command.ExecuteReader();
+	while(dr.Read())
+	{
+  		for (i = 0; i < dr.FieldCount; i++)
+  		{
+  			Console.Write("{0} \t", dr[i]);
+  		}
+  		Console.WriteLine();
+	}
+
+    }
+    
+    finally
+    {
+      conn.Close();
+    }
+  }
+}
+</pre>
+
+This code assumes a table called tablea with at least a column named column1 of type int4.
+
+<h3> Using prepared statements</h3>
+<p> The previous example can also be used to send prepared statements request to server. This way, the query plan is
+create just once and reused by subsequent calls. Note that this feature is only available in server 7.3+ versions. If
+you call it in a server which doesn't support it, Npgsql will silently ignore it. This is good as you can create code which
+calls it but it will only have effect when connected to the supported servers.
+To do it, you just call the Prepare() method of the command.</p>
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+
+public static class NpgsqlUserManual
+{
+  public static void Main(String[] args)
+  {
+    NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+    conn.Open();
+    
+    // Declare the parameter in the query string
+    NpgsqlCommand command = new NpgsqlCommand("select * from tablea where column1 = :column1", conn);
+    
+    // Now add the parameter to the parameter collection of the command specifying its type.
+    command.Parameters.Add(new NpgsqlParameter("column1", DbType.Int32);
+
+    // Now, prepare the statement.
+    command.Prepare();
+
+    // Now, add a value to it and later execute the command as usual.
+    command.Parameters[0].Value = 4;
+
+    
+    try
+    {
+	NpgsqlDataReader dr = command.ExecuteReader();
+	while(dr.Read())
+	{
+  		for (i = 0; i < dr.FieldCount; i++)
+  		{
+  			Console.Write("{0} \t", dr[i]);
+  		}
+  		Console.WriteLine();
+	}
+
+    }
+    
+    finally
+    {
+      conn.Close();
+    }
+  }
+}
+</pre>
+
+This code assumes a table called tablea with at least a column named column1 of type int4.
+
+<h3> Using output parameters in a query </h3>
+<p> Output parameters can be used with Npgsql. Note that Npgsql "simulates" output parameter by parsing the first result set from the execution of a query and translating it to output parameters value. This can be done in two ways: mapped or not. A mapped parsing, tries to match the column name returned by resultset into a parameter with the same name. If a match is found, only the output parameters which has a match will be updated. If a map is not found, the output parameters are updated based on the order they were added to command parameters collection. This mapping is automatic. When parsing resultset, Npgsql tries to find a match. <b>Both Output and InputOutput parameter directions are supported</b>.</p>
+
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+
+public static class NpgsqlUserManual
+{
+    public static void Main(String[] args)
+    {
+        NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+        conn.Open();
+        
+        // Send a query to backend.
+        NpgsqlCommand command = new NpgsqlCommand("select * from tablea where column1 = 2", conn);
+        
+        // Now declare an output parameter to receive the first column of the tablea.
+        
+        NpgsqlParameter firstColumn = new NpgsqlParameter("firstcolumn", NpgsqlDbType.Integer);
+        firstColumn.Direction = ParameterDirection.Output;
+        
+        command.Parameters.Add(firstColumn);
+    
+            
+        try
+        {
+            command.ExecuteNonQuery();
+            
+            // Now, the firstcolumn parameter will have the value of the first column of the resultset.
+            Console.WriteLine(firstColumn.Value);
+            
+    
+        }
+        
+        finally
+        {
+            conn.Close();
+        }
+    }
+}
+</pre>
+
+
+
+<h3> Function calling</h3>
+<p> To call a function, you just set the CommandType property of the NpgsqlCommand object to CommandType.StoredProcedure
+and pass the name of the function you want to call as the query string.</p>
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+
+
+// This example uses a function called funcC() with the following definition:
+// create function funcC() returns int8 as '
+// select count(*) from tablea;
+// ' language 'sql';
+
+// Note that the return type of select count(*) changed from int4 to int8 in 7.3+ versions. To use this function
+// in a 7.2 server, change the return type from int8 to int4.
+
+public static class NpgsqlUserManual
+{
+  public static void Main(String[] args)
+  {
+    NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+    conn.Open();
+    
+      
+    try
+    {
+        NpgsqlCommand command = new NpgsqlCommand("funcC()", _conn);
+        command.CommandType = CommandType.StoredProcedure;
+  					
+        Object result = command.ExecuteScalar();
+  		
+        Console.WriteLine(result);
+
+
+    }
+    
+    finally
+    {
+      conn.Close();
+    }
+  }
+}
+</pre>
+
+<p>In the same way as clear queries, you can specify parameters to function calls.</p>
+
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+
+
+// This example uses a function called funcC() with the following definition:
+// create function funcC(int4) returns int8 as '
+// select count(*) from tablea where field_int4 = $1;
+// ' language 'sql';
+
+public static class NpgsqlUserManual
+{
+  public static void Main(String[] args)
+  {
+    NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+    conn.Open();
+    
+      
+    try
+    {
+        NpgsqlCommand command = new NpgsqlCommand("funcC(:a)", _conn);
+        command.CommandType = CommandType.StoredProcedure;
+        
+        command.Parameters.Add(new NpgsqlParameter("a", DbType.Int32));
+  					
+        command.Parameters[0].Value = 4;
+		
+        Object result = command.ExecuteScalar();
+  		
+        Console.WriteLine(result);
+
+
+    }
+    
+    finally
+    {
+      conn.Close();
+    }
+  }
+}
+</pre>
+
+<p> This code assumes a table called tablea with at least a field called field_int4 of type int4.
+
+
+<h3> Working with Datasets </h3>
+
+<p> You can use Npgsql when working with Datasets. This allows you to do changes in the dataset and have them propagated back to 
+backend. The below example shows how to add a row using the Dataset:</p>
+<pre class="CodeBox">
+
+// This method expects the following table in the backend:
+//
+//	create table tableb(field_int2 int2, field_timestamp timestamp, field_numeric numeric);
+//
+//	
+void AddWithDataSet(NpgsqlConnection conn)
+{	
+	conn.Open();
+			
+	DataSet ds = new DataSet();
+
+	NpgsqlDataAdapter da = new NpgsqlDataAdapter("select * from tableb", conn);
+	
+	da.InsertCommand = new NpgsqlCommand("insert into tableb(field_int2, field_timestamp, field_numeric) " + 
+							" values (:a, :b, :c)", conn);
+			
+	da.InsertCommand.Parameters.Add(new NpgsqlParameter("a", DbType.Int16));
+	
+	da.InsertCommand.Parameters.Add(new NpgsqlParameter("b", DbType.DateTime));
+			
+	da.InsertCommand.Parameters.Add(new NpgsqlParameter("c", DbType.Decimal));
+	
+	da.InsertCommand.Parameters[0].Direction = ParameterDirection.Input;
+	da.InsertCommand.Parameters[1].Direction = ParameterDirection.Input;
+	da.InsertCommand.Parameters[2].Direction = ParameterDirection.Input;
+	
+	da.InsertCommand.Parameters[0].SourceColumn = "field_int2";
+	da.InsertCommand.Parameters[1].SourceColumn = "field_timestamp";
+	da.InsertCommand.Parameters[2].SourceColumn = "field_numeric";
+	
+	da.Fill(ds);
+	
+	DataTable dt = ds.Tables[0];
+	
+	DataRow dr = dt.NewRow();
+	dr["field_int2"] = 4;
+	dr["field_timestamp"] = new DateTime(2003, 03, 03, 14, 0, 0);
+	dr["field_numeric"] = 7.3M;
+			
+	dt.Rows.Add(dr);
+			
+	DataSet ds2 = ds.GetChanges();
+	
+	da.Update(ds2);
+	
+	ds.Merge(ds2);
+	ds.AcceptChanges();
+}
+		
+</pre>
+
+<h3> Working with strong typed datasets </h3>
+
+<p> This example will show how to use a strong typed dataset generated with xsd. To do so, we need a .xsd file specifing the 
+schema to the strong dataset. You can generate this file by hand, or you can use xsd to generate it for you. To have xsd generate
+the .xsd for you, you have to suppy it with a .xml file which it will infer the .xsd from. We can use a .xml file generated with 
+a DataAdapter.WriteXml() method:</p>
+<pre class="CodeBox">
+public void GenerateXmlFromDataSet(NpgsqlConnection conn)
+{
+	conn.Open();
+			
+						
+	NpgsqlDataAdapter da = new NpgsqlDataAdapter("select * from tablea", conn);
+		
+	DataSet ds = new DataSet();
+			
+	da.Fill(ds);
+			
+	ds.WriteXml("StrongDataSetFeed.xml");
+}
+</pre>
+
+
+<p> This will give us a file which looks similar to this:</p>
+
+<pre class="CodeBox">
+&lt;?xml version="1.0" standalone="yes"?&gt;
+&lt;NewDataSet&gt;
+  &lt;Table&gt;
+    &lt;field_serial&gt;1&lt;/field_serial&gt;
+    &lt;field_text&gt;Random text&lt;/field_text&gt;
+  &lt;/Table&gt;
+  &lt;Table&gt;
+    &lt;field_serial&gt;2&lt;/field_serial&gt;
+    &lt;field_int4&gt;4&lt;/field_int4&gt;
+  &lt;/Table&gt;
+  &lt;Table&gt;
+    &lt;field_serial&gt;3&lt;/field_serial&gt;
+    &lt;field_int8&gt;8&lt;/field_int8&gt;
+  &lt;/Table&gt;
+  &lt;Table&gt;
+    &lt;field_serial&gt;4&lt;/field_serial&gt;
+    &lt;field_bool&gt;true&lt;/field_bool&gt;
+  &lt;/Table&gt;
+  &lt;Table&gt;
+    &lt;field_serial&gt;5&lt;/field_serial&gt;
+    &lt;field_text&gt;Text with ' single quote&lt;/field_text&gt;
+  &lt;/Table&gt;
+&lt;/NewDataSet&gt;
+
+</pre>
+
+<p> This file will be used with xsd to generate the .xsd file with the following command:</p>
+<pre class="CodeBox">
+xsd StrongDataSetFeed.xml
+</pre>
+
+<p> xsd will produce an xml schema which will have all types specified as string, we just change the xsd to use the 
+correct types and have a .xsd file similar to this:</p>
+<pre class="CodeBox">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"&gt;
+  &lt;xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:Locale="pt-BR"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:choice maxOccurs="unbounded"&gt;
+        &lt;xs:element name="Table"&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element name="field_serial" type="xs:int" minOccurs="0" /&gt;
+              &lt;xs:element name="field_text" type="xs:string" minOccurs="0" /&gt;
+              &lt;xs:element name="field_int4" type="xs:int" minOccurs="0" /&gt;
+              &lt;xs:element name="field_int8" type="xs:long" minOccurs="0" /&gt;
+              &lt;xs:element name="field_bool" type="xs:boolean" minOccurs="0" /&gt;
+            &lt;/xs:sequence&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+      &lt;/xs:choice&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+
+</pre>
+
+
+<p> With this file we issue the following command to have xsd generate the strong dataset:</p>
+
+<pre class="CodeBox">
+xsd StrongDataSetFeed.xsd /dataset
+</pre>
+
+<p>Which will generate a file we can compile to get an assembly with the strong dataset. To use it, we do the following:</p>
+
+<pre class="CodeBox">
+using System;
+using Npgsql;
+
+
+public class t
+{
+	public static void Main(String[] args)
+	{
+		NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+
+		conn.Open();
+		
+		NpgsqlDataAdapter da = new NpgsqlDataAdapter("Select * from tablea", conn);
+	
+
+		NewDataSet n = new NewDataSet();
+
+		da.Fill(n);
+
+		foreach (NewDataSet._TableRow tr in n._Table)
+		{
+			Console.WriteLine(tr.field_serial);
+		}
+	}
+}
+</pre>
+
+<h3>Working with binary data and bytea datatype</h3>
+
+<p> <font color="red"> Warning: </font> There is a known issue when working with bytea datatype and large data. Npgsql will consume very much memory. Please, if you need to insert more that 4MB of data, please, use Large Object API. For updates on this issue, check <a href="http://pgfoundry.org/tracker/index.php?func=detail&aid=1000458&group_id=1000140&atid=590">here </a> </p>
+<p> This sample takes a filename as argument, inserts its contents to a table called tableByteA which contains a field called field_bytea of type bytea and a field called field_serial of type serial. Later gets its contents and write a new file with the sufix "database" in its end.</p>
+<p> table schema: 
+    create table tableBytea (field_serial serial, field_bytea bytea)
+</p>
+
+
+<pre class="CodeBox">
+
+using System;
+using System.Data;
+using Npgsql;
+using System.IO;
+
+
+public class t
+{
+	public static void Main(String[] args)
+	{
+		//NpgsqlEventLog.Level = LogLevel.Debug;
+		//NpgsqlEventLog.LogName = "NpgsqlTests.LogFile";
+		NpgsqlConnection conn = new NpgsqlConnection("server=localhost;user id=npgsql_tests;password=npgsql_tests");
+		conn.Open();
+
+		FileStream fs = new FileStream(args[0], FileMode.Open, FileAccess.Read);
+
+		BinaryReader br = new BinaryReader(new BufferedStream(fs));
+
+		Byte[] bytes = br.ReadBytes((Int32)fs.Length);
+		
+		Console.WriteLine(fs.Length);
+
+		br.Close();
+		fs.Close();
+				
+		NpgsqlCommand command = new NpgsqlCommand("insert into tableBytea(field_bytea) values(:bytesData)", conn);
+		
+		NpgsqlParameter param = new NpgsqlParameter(":bytesData", DbType.Binary);
+
+		param.Value = bytes;
+		
+		command.Parameters.Add(param);
+		command.ExecuteNonQuery();
+		command = new NpgsqlCommand("select field_bytea from tableBytea where field_serial = (select max(select field_serial) from tableBytea);", conn);
+		
+
+		Byte[] result = (Byte[])command.ExecuteScalar();
+		fs = new FileStream(args[0] + "database", FileMode.Create, FileAccess.Write);
+
+		
+		BinaryWriter bw = new BinaryWriter(new BufferedStream(fs));
+
+		bw.Write(result);
+
+		bw.Flush();
+
+		fs.Close();
+		bw.Close();		
+
+
+
+		conn.Close();
+
+	}
+}
+</pre>
+
+<h3>Working with large object support</h3>
+
+<p> This sample is the same as the bytea code support above. The difference is that we will use the large object support of Postgresql. This sample stores the file in postgresql and later removes it. As bytea sample, it writes a file with a "database" suffix.
+
+</p>
+
+<pre class="CodeBox">
+using System;
+using System.Data;
+using Npgsql;
+using NpgsqlTypes;
+using System.IO;
+
+public class c
+{
+    public static void Main(String[] args)
+    {
+        NpgsqlConnection newconn = new NpgsqlConnection("server=localhost;user id=npgsql_tests;password=npgsql_tests");
+
+        newcon.Open();
+        NpgsqlTransaction t = newcon.BeginTransaction();
+        LargeObjectManager lbm = new LargeObjectManager(newcon);
+
+        int noid = lbm.Create(LargeObjectManager.READWRITE);
+        LargeObject lo =  lbm.Open(noid,LargeObjectManager.READWRITE);
+
+        FileStream fs = File.OpenRead(args[0]);
+
+        byte[] buf = new byte[fs.Length];
+        fs.Read(buf,0,(int)fs.Length);
+
+        lo.Write(buf);
+        lo.Close();
+        t.Commit();
+        
+        
+        t = newcon.BeginTransaction();
+        
+        lo =  lbm.Open(noid,LargeObjectManager.READWRITE);
+        
+        FileStream fsout = File.OpenWrite(args[0] + "database");
+        
+        buf = lo.Read(lo.Size());
+        
+        fsout.Write(buf, 0, (int)lo.Size());
+        fsout.Flush();
+        fsout.Close();
+        lo.Close();
+        t.Commit();
+        
+        
+        DeleteLargeObject(noid);
+        
+        Console.WriteLine("noid: {0}", noid);
+        newcon.Close();
+    }
+    
+    public static void DeleteLargeObject(Int32 noid)
+    {
+        NpgsqlConnection conn = new NpgsqlConnection("server=localhost;user id=npgsql_tests;password=npgsql_tests");
+
+        newcon.Open();
+        NpgsqlTransaction t = newcon.BeginTransaction();
+        LargeObjectManager lbm = new LargeObjectManager(newcon);
+        lbm.Delete(noid);
+        
+        t.Commit();
+        
+        newcon.Close();
+
+    }
+}
+</pre>
+
+
+<p> Another example, contributed by Mirek (mirek at mascort dot com dot pl), uses the large object support to get an image from database and shows it in a form. </p>
+
+<pre class="CodeBox">
+
+using System;
+using Npgsql;
+using NpgsqlTypes;
+using System.Drawing;
+using System.IO;
+
+//metod whos take picture oid  from database
+
+public int takeOID(int id)
+
+{
+
+    //it's a metod whos connect  to database and return picture oid
+    
+    BazySQL pir = new BazySQL(Login.DaneUzera[8]);
+    
+    string pytanko = String.Format("select rysunek from k_rysunki where idtowaru = " + idtowaru.ToString());
+    
+    string[] wartosci = pir.OddajSelectArray(pytanko);
+    
+    int liczba = int.Parse(wartosci[0].ToString());
+    
+    return liczba;
+
+}
+
+//take a picture from database and convert to Image type
+
+public Image pobierzRysunek(int idtowaru)
+
+{
+
+    NpgsqlConnection Polacz = new NpgsqlConnection();
+    
+    Polacz.ConnectionString = Login.DaneUzera[8].ToString();  //its metod whos return connection string
+    
+    Polacz.Open();
+    
+    NpgsqlTransaction t = Polacz.BeginTransaction();
+    
+    LargeObjectManager lbm = new LargeObjectManager(Polacz);
+    
+    LargeObject lo = lbm.Open(takeOID(idtowaru),LargeObjectManager.READWRITE); //take picture oid from metod takeOID
+    
+    byte[] buf = new byte[lo.Size()];
+    
+    buf = lo.Read(lo.Size());
+    
+    MemoryStream ms = new MemoryStream();
+    
+    ms.Write(buf,0,lo.Size());
+    
+    lo.Close();
+    
+    t.Commit();
+    
+    Polacz.Close();
+    
+    Polacz.Dispose();
+    
+    Image zdjecie = Image.FromStream(ms);
+    
+    return zdjecie;
+
+}
+
+//next I just use this metod
+
+pictureBox1.Image = Image pobierzRysunek(1); 
+</pre>
+
+<h3>Working with refcursors</h3>
+
+<p> This sample will show how you can get data from functions which return refcursors. With support provided by Npgsql you can get many resultsets from these functions without have to worry about how to work with refcursors.</p>
+<p> For example porpouses, consider the following refcursor-returning function:</p>
+
+<pre class="CodeBox">
+CREATE OR REPLACE FUNCTION testrefcursor() RETURNS SETOF refcursor AS
+
+'DECLARE ref1 refcursor;
+ref2 refcursor;
+BEGIN
+
+OPEN ref1 FOR SELECT 1;
+
+RETURN NEXT ref1;
+
+OPEN ref2 FOR SELECT 2;
+
+RETURN next ref2;
+
+RETURN;
+END;'
+LANGUAGE plpgsql;
+</pre>
+
+<p>Note that this function is really very simple as it just returns single-row resultsets. You can change the select 1 for any select you want.</p>
+
+<p>Now, to call these function and retrieve the data, you should use the following code:</p>
+
+
+<pre class="CodeBox">
+
+using System;
+using System.Data;
+using Npgsql;
+using NpgsqlTypes;
+
+public class c
+{
+    public static void Main(String[] args)
+    {
+                
+        NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Initial Catalog=eeeeee;User id=npgsql_tests;password=npgsql_tests;");
+        conn.Open();
+
+        NpgsqlTransaction t = conn.BeginTransaction();          
+        NpgsqlCommand command = new NpgsqlCommand("testrefcursor", conn);
+        command.CommandType = CommandType.StoredProcedure;
+        
+        NpgsqlDataReader dr = command.ExecuteReader();
+    
+        while(dr.Read())
+        {
+        
+            Console.WriteLine(dr.GetValue(0));
+        }
+
+        dr.NextResult();
+    
+        while(dr.Read())
+        {
+    
+            Console.WriteLine(dr.GetValue(0));
+        }
+        dr.Close();
+        t.Commit();
+        conn.Close();
+    }
+}
+
+</pre>
+
+<p> That's it!. One last thing worth noting is that <font color="red"> you have to use transaction</font> in order to this work. This is necessary to prevent cursors returned by refcursor function from closing after the implicity transaction is finished just after you do the function call.</p>
+
+<p> If you have parameters in your function, <font color="red"> you still have to put just the function name </font> as command text and add parameters to NpgsqlCommand.Parameters collection as usual. Npgsql will take care of using your parameters correctly.
+</p>
+
+
+
+
+
+<h3> 3.1 Using Npgsql Logging support </h3>
+
+<p> Sometimes it is necessary to trace Npgsql's behaviour to track errors. Npgsql can log messages to a specified file or to the console or both.
+
+<p> There are three levels of logging: <br/>
+<ul>
+  <li> None </li>
+  <li> Normal </li>
+  <li> Debug </li>
+</ul>
+</p>
+
+<p> The following NpgsqlEventLog static properties may also be used:
+<ul>
+  <li> Level - Can be one of the LogLevel enum values: None, Normal, Debug. </li>
+  <li> LogName - Full path of the file where to log into. </li>
+  <li> EchoMessages - Log to the console.</li>
+</ul>
+</p>
+
+<p> The example below shows how to log to the console and a file using the level Debug: </p>
+
+<pre class="CodeBox">
+using System.Data;
+using Npgsql;
+
+public static class NpgsqlUserManual
+{
+  public static void Main(String[] args)
+  {
+    // Enable logging.
+    NpgsqlEventLog.Level = LogLevel.Debug;
+    NpgsqlEventLog.LogName = "NpgsqlTests.LogFile";
+    NpgsqlEventLog.EchoMessages = true;
+	  
+    NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=joe;Password=secret;Database=joedata;");
+    conn.Open();
+    conn.Close();
+  }
+}
+</pre>
+
+<p> Running this code gives the following output: </p>
+<pre class="CodeBox">
+Set NpgsqlEventLog.EchoMessages = True
+Entering NpgsqlConnection.NpgsqlConnection()
+Entering NpgsqlConnection.ParseConnectionString()
+Connection string option: DATABASE = joedata
+Connection string option: SERVER = 127.0.0.1
+Connection string option: USER ID = joe
+Connection string option: PASSWORD = secret
+Entering NpgsqlConnection.Open()
+Connected to: 127.0.0.1:5432
+Entering NpgsqlConnection.WritestartupPacket()
+Entering NpgsqlStartupPacket.NpgsqlStartupPacket()
+Entering NpgsqlStartupPacket.WriteToStream()
+Entering PGUtil.WriteLimString()
+Entering PGUtil.WriteLimString()
+Entering PGUtil.WriteLimString()
+Entering PGUtil.WriteLimString()
+Entering PGUtil.WriteLimString()
+Entering NpgsqlConnection.HandleStartupPacketResponse()
+AuthenticationRequest message from Server
+Server requested cleartext password authentication.
+Entering NpgsqlPasswordPacket.NpgsqlPasswordPacket()
+Entering NpgsqlPasswordPacket.WriteToStream()
+Entering PGUtil.WriteString()
+Listening for next message
+AuthenticationRequest message from Server
+Listening for next message
+BackendKeyData message from Server
+Entering NpgsqlBackEndKeyData.ReadFromStream()
+Got ProcessID. Value: 3116
+Got SecretKey. Value: -132883070
+Listening for next message
+ReadyForQuery message from Server
+Listening for next message
+Connection completed
+Entering NpgsqlConnection.Close()
+</pre>
+
+<p>I used the Debug level to show that a lot of information can be obtained. Of course, using the Normal level would be less verbose.
+Also, this same information was added to the file NpgsqlTests.LogFile.</p>
+
+<h3> 3.2 Npgsql design time support - VS.Net support </h3>
+
+<p>
+Npgsql 0.6 and higher provide initial design time support.
+This means that you can drag and drop a NpgsqlConnection in the Form-Designer of Visual Studio .NET as you are used to with SqlConnections or OleDbConnections.<br>
+There is also a Dialog to edit and validate the ConnectionString
+</p>
+<p>To do so you must:
+<ol>
+	<li>Install Npgsql.dll into the gac</li>
+	<li>Add a new Registry-Key below 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\AssemblyFolders' and set 
+	it's default value to the path of your Npgsql.dll</li>
+	<li>Open Visual Studio .NET</li>
+	<li>Right-click the "Data"-Tab of the Toolbox</li>
+	<li>Click add/remove element</li>
+	<li>On the .Net-Tab select NpgsqlConnection</li>
+</ol>
+As result you will have an icon named NpgsqlConnection in the Data-Tab of the Toolbox
+</p>
+
+<h2> 4. Current Npgsql Status </h2>
+
+<h3> Supported data types </h3>
+
+<p> Npgsql supports the following data types: </p>
+
+
+<div align="center">
+<table  border="1">
+    <tr class="H1">
+        <td>Postgresql Type</td>
+        <td>NpgsqlDbType</td>
+        <td>System.DbType Enum</td>
+        <td>.Net System Type</td>
+    </tr>
+    
+    <tr class="H2">
+        <td>int8</td>
+        <td>Bigint</td>
+        <td>Int64</td>
+        <td>Int64</td>
+    </tr>
+    <tr class="H2">
+        <td>bool</td>
+        <td>Boolean</td>
+        <td>Boolean</td>
+        <td>Boolean</td>
+    </tr>
+    <tr class="H2">
+        <td>Box, Circle, Line, LSeg, Path, Point, Polygon</td>
+        <td>Box, Circle, Line, LSeg, Path, Point, Polygon</td>
+        <td>Object</td>
+        <td>Object</td>
+    </tr>
+    <tr class="H2">
+        <td>bytea</td>
+        <td>Bytea</td>
+        <td>Binary</td>
+        <td>Byte[]</td>
+    </tr>
+    <tr class="H2">
+        <td>date</td>
+        <td>Date</td>
+        <td>Date</td>
+        <td>DateTime</td>
+    </tr>
+    <tr class="H2">
+        <td>float8</td>
+        <td>Double</td>
+        <td>Double</td>
+        <td>Double</td>
+    </tr>
+    <tr class="H2">
+        <td>int4</td>
+        <td>Integer</td>
+        <td>Int32</td>
+        <td>Int32</td>
+    </tr>
+    <tr class="H2">
+        <td>money</td>
+        <td>Money</td>
+        <td>Decimal</td>
+        <td>Decimal</td>
+    </tr>
+    <tr class="H2">
+        <td>numeric</td>
+        <td>Numeric</td>
+        <td>Decimal</td>
+        <td>Decimal</td>
+    </tr> 
+    <tr class="H2">
+        <td>float4</td>
+        <td>Real</td>
+        <td>Single</td>
+        <td>Single</td>
+    </tr>
+    <tr class="H2">
+        <td>int2</td>
+        <td>Smallint</td>
+        <td>Int16</td>
+        <td>Int16</td>
+    </tr>
+    <tr class="H2">
+        <td>text</td>
+        <td>Text</td>
+        <td>String</td>
+        <td>String</td>
+    </tr>
+    <tr class="H2">
+        <td>time, timetz</td>
+        <td>Time</td>
+        <td>Time</td>
+        <td>DateTime</td>
+    </tr>
+    <tr class="H2">
+        <td>timestamp, timestamptz</td>
+        <td>Timestamp</td>
+        <td>DateTime</td>
+        <td>DateTime</td>
+    </tr>
+    <tr class="H2">
+        <td>varchar</td>
+        <td>Varchar</td>
+        <td>String</td>
+        <td>String</td>
+    </tr>
+    
+</table>
+</div>
+
+<h3> Features </h3>
+
+<ul>
+  <li> You can send select, insert, delete queries </li>
+  <li> You can call functions </li>
+  <li> You can get resultset from functions </li>
+  <li> You can use parameters in your queries. Input, Output and InputOuput parameters are supported </li>
+  <li> Parameter names have ":" markers or "@" markers to easy migration of code. :parameter -or- @parameter </li>
+  <li> Support for transactions </li>
+  
+</ul>
+
+
+
+
+</body>
+</html>

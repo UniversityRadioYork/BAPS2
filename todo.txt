@@ -1,0 +1,39 @@
+client auto login details
+
+custom channel names
+
+redo help system
+
+ignore messages inbound to server which the from field does not match the logged in user
+
+### config rework ###
+when receiving updates the delegate gets called
+
+nat32.com
+
+###
+
+do not activate save button until all option settings have been received in the config system
+
+crash if channel x is used after setting channel count to include x without a reboot (need dynamic channel creation/destruction)
+
+maximum connected clients is unimplemented
+
+add logging to all calls
+
+rewrite all exception handling
+
+check how and where socket exceptions can occur such that a client /terminates/ via a caught exception. This will leave an abandoned mutex. Can this be prevented or is the cleanup code to release the mutex the best option.
+
+
+The two buttons labeled “+4” are the nominal level select buttons. Since they both
+read “+4,” this indicates these outputs are sending a +4 dBu (professional level)
+signal. To send a –10 dBV (consumer level) signal, click the button. This feature
+allows you to connect either professional or consumer gear to each output.
+
+
+newMessageLabel
+newChatMessage
+chatText
+chatTo
+sendMessage

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="Auto Generated" value="Yes">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Broadcasting And Presenting Suite">
+		<param name="Local" value="Introduction.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Server">
+			<param name="Local" value="Introduction.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Presenter">
+			<param name="Local" value="Introduction.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Web Show Manager">
+			<param name="Local" value="Introduction.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Music Manager">
+			<param name="Local" value="Introduction.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BAPS Presenter">
+		<param name="Local" value="BAPSPresenterMain.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Add a track list entry">
+		<param name="Local" value="BAPSPresenter/addEntries.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Manage track list entries">
+		<param name="Local" value="BAPSPresenter/manageEntries.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Moving entries around">
+			<param name="Local" value="BAPSPresenter/manageEntries.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Deleting an entry">
+			<param name="Local" value="BAPSPresenter/manageEntries.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Playing Audio">
+		<param name="Local" value="BAPSPresenter/playingAudio.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Track Controller">
+			<param name="Local" value="BAPSPresenter/playingAudio.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Cue Position">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="'Introduction' Position">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Track Controller Summary">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Play/Pause/Stop">
+			<param name="Local" value="BAPSPresenter/playingAudio.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Track Playing">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Track Paused">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Track Stopped">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Playback options">
+			<param name="Local" value="BAPSPresenter/playingAudio.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Automatic Advance">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Play on load">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Repeat">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="AudioWall">
+				<param name="Local" value="BAPSPresenter/playingAudio.htm">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Using textual entries">
+		<param name="Local" value="BAPSPresenter/useText.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Viewing Textual entries">
+			<param name="Local" value="BAPSPresenter/useText.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Open/Close Text Window">
+				<param name="Local" value="BAPSPresenter/useText.htm">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Loading a Show">
+		<param name="Local" value="BAPSPresenter/loadShow.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Enter user details">
+			<param name="Local" value="BAPSPresenter/loadShow.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Choose a show">
+			<param name="Local" value="BAPSPresenter/loadShow.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Select the channels">
+			<param name="Local" value="BAPSPresenter/loadShow.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>
