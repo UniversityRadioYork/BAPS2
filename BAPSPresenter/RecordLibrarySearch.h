@@ -1,6 +1,7 @@
 #pragma once
 #include "BAPSButton.h"
 #include "BAPSListBox.h"
+#include "BAPSPresenterMain.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -12,6 +13,8 @@ using namespace System::Drawing;
 
 namespace BAPSPresenter {
 
+	/** We need a pre-declaration of the Main form so that we can define a handle to it here **/
+	ref class BAPSPresenterMain;
 	/// <summary>
 	/// Summary for RecordLibrarySearch
 	///
@@ -24,8 +27,8 @@ namespace BAPSPresenter {
 	public ref class RecordLibrarySearch : public System::Windows::Forms::Form
 	{
 	public:
-		RecordLibrarySearch(System::Collections::Queue^ _queue)
-			:msgQueue(_queue)
+		RecordLibrarySearch(BAPSPresenterMain^ _bapsPresenterMain, System::Collections::Queue^ _queue)
+			: bapsPresenterMain(_bapsPresenterMain), msgQueue(_queue)
 		{
 			InitializeComponent();
 			/** Tag objects for the 3 buttons to find out at runtime what they are **/
@@ -70,6 +73,8 @@ namespace BAPSPresenter {
 	private:
 		/** Placeholder for result count **/
 		int numberOfResults;
+		/** A handle to the main window **/
+		BAPSPresenterMain^ bapsPresenterMain;
 	private: BAPSPresenter::BAPSButton^  SearchButton;
 	private: BAPSPresenter::BAPSButton^  AddToChannel0;
 	private: BAPSPresenter::BAPSButton^  AddToChannel1;
@@ -86,6 +91,8 @@ namespace BAPSPresenter {
 		System::Void Artist_Leave(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void Title_Leave(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void closeButton_Click(System::Object^  sender, System::EventArgs^  e);
+		System::Void RecordLibrarySearch_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+
 	private: System::Windows::Forms::ToolStripStatusLabel^  connectionStatus;
 	protected: 
 	private: System::Windows::Forms::StatusStrip^  statusStrip;
@@ -316,12 +323,14 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->Artist);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->KeyPreview = true;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"RecordLibrarySearch";
 			this->ShowInTaskbar = false;
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->Text = L"Record Library Search";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &RecordLibrarySearch::RecordLibrarySearch_KeyDown);
 			this->statusStrip->ResumeLayout(false);
 			this->statusStrip->PerformLayout();
 			this->ResumeLayout(false);

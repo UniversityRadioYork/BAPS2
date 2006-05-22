@@ -11,8 +11,11 @@ using namespace System::Data;
 using namespace System::Drawing;
 
 
+
 namespace BAPSPresenter {
 
+	/** We need a pre-declaration of the Main form so that we can define a handle to it here **/
+	ref class BAPSPresenterMain;
 	/// <summary>
 	/// Summary for AudioWall
 	///
@@ -25,8 +28,8 @@ namespace BAPSPresenter {
 	private ref class AudioWall : public System::Windows::Forms::Form
 	{
 	public:
-		AudioWall(System::Collections::Queue^ _msgQueue, TrackList^ _tl)
-			: msgQueue(_msgQueue),tl(_tl)
+		AudioWall(BAPSPresenterMain^ _bapsPresenterMain, System::Collections::Queue^ _msgQueue, TrackList^ _tl)
+			: bapsPresenterMain(_bapsPresenterMain), msgQueue(_msgQueue),tl(_tl)
 		{
 			InitializeComponent();
 			buttons = gcnew array<BAPSButton^>(20);
@@ -59,6 +62,7 @@ namespace BAPSPresenter {
 			}
 			refreshWall();
 		}
+
 		void setChannel(TrackList^ _tl)
 		{
 			tl = _tl;
@@ -129,16 +133,22 @@ namespace BAPSPresenter {
 		System::Collections::Queue^ msgQueue;
 		TrackList^ tl;
 		array<BAPSButton^>^ buttons;
+		/** A handle to the main window **/
+		BAPSPresenterMain^ bapsPresenterMain;
 		void audioWallClick(System::Object^ o, System::EventArgs^ e)
 		{
 			BAPSButton^ bb = static_cast<BAPSButton^>(o);
 			int index = safe_cast<int>(bb->Tag);
-			Command cmd = BAPSNET_PLAYBACK | BAPSNET_LOAD | tl->Channel;
-			msgQueue->Enqueue(gcnew ActionMessageU32int(cmd, index));
-			cmd = BAPSNET_PLAYBACK | BAPSNET_PLAY | tl->Channel;
+			if (!bb->Highlighted)
+			{
+				Command cmd = BAPSNET_PLAYBACK | BAPSNET_LOAD | tl->Channel;
+				msgQueue->Enqueue(gcnew ActionMessageU32int(cmd, index));
+			}
+			Command cmd = BAPSNET_PLAYBACK | BAPSNET_PLAY | tl->Channel;
 			msgQueue->Enqueue(gcnew ActionMessage(cmd));
 		}
 
+		System::Void AudioWall_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 			 /// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -160,13 +170,16 @@ namespace BAPSPresenter {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(1026, 735);
+			this->ControlBox = false;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->KeyPreview = true;
 			this->Name = L"AudioWall";
 			this->Text = L"Audio Wall";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &AudioWall::AudioWall_KeyDown);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	};
+};
 }

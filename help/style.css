@@ -1,0 +1,28 @@
+A:link {
+  color: #deac69;
+}
+A:visited {
+  color: #deac69;
+}
+A:active {
+  color: #deac69;
+}
+A:hover {
+  color: #ea8b5e;
+}
+
+h1 {
+  text-align: center;
+  background-color: #fff5ee;
+  border: 1px solid #c0c0c0;
+}
+h2 {
+  margin: 4px 0px 0px 0px;
+  background-color: #fff5ee;
+  border: 1px solid #c0c0c0;
+}
+
+body {
+  font-family: Comic Sans MS;
+  background-image: url('marble2.gif');
+}

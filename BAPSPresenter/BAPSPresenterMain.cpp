@@ -240,7 +240,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	securityDialog = nullptr;
 	about = nullptr;
 	feedbackDialog = nullptr;
-	textDialog = gcnew TextDialog("Write on me");
+	textDialog = gcnew TextDialog(this,"Write on me");
 
 	/** Initialize the config cache **/
 	ConfigCache::initConfigCache();
@@ -271,6 +271,8 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	**/
 	senderThread = gcnew System::Threading::Thread(gcnew System::Threading::ThreadStart(this, &BAPSPresenterMain::senderFunc));
 	senderThread->Start();
+
+
 }
 
 BAPSPresenterMain::~BAPSPresenterMain()
@@ -764,6 +766,20 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 					array<System::Object^>^ dd = gcnew array<System::Object^>(1) {username};
 					this->Invoke(mi, dd);
 				}
+			}
+			break;
+		case BAPSNET_SCROLLTEXT:
+			{
+				MethodInvokerObj^ mi = gcnew MethodInvokerObj(textDialog, &TextDialog::scroll);
+				array<System::Object^>^ dd = gcnew array<System::Object^>(1) {cmdReceived & BAPSNET_SYSTEM_VALUEMASK};
+				this->Invoke(mi, dd);
+			}
+			break;
+		case BAPSNET_TEXTSIZE:
+			{
+				MethodInvokerObj^ mi = gcnew MethodInvokerObj(textDialog, &TextDialog::textSize);
+				array<System::Object^>^ dd = gcnew array<System::Object^>(1) {cmdReceived & BAPSNET_SYSTEM_VALUEMASK};
+				this->Invoke(mi, dd);
 			}
 			break;
 		default:

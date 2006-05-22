@@ -160,3 +160,9 @@ void RecordLibrarySearch::handleError(System::Object^ _errorcode, System::String
 	}
 }
 
+System::Void RecordLibrarySearch::RecordLibrarySearch_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
+{
+	MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
+	array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
+	this->Invoke(mi, dd);
+}

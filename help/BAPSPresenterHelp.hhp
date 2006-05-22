@@ -1,5 +1,4 @@
 [OPTIONS]
-Auto TOC=9
 Compatibility=1.1 or later
 Compiled file=BAPSPresenterHelp.chm
 Contents file=Table of Contents.hhc
@@ -24,6 +23,10 @@ BAPSPresenter\playingAudio.htm
 BAPSPresenter\useText.htm
 BAPSWebShowManMain.htm
 BAPSPresenter\loadShow.htm
+style.css
+marble2.gif
+BAPSControllerMain.htm
+BAPSController\BAPSPaddle.htm
 
 [INFOTYPES]
 

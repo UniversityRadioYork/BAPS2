@@ -451,3 +451,10 @@ System::Void SecurityDialog::alterRestrictionButton_Click(System::Object ^  send
 		System::Windows::Forms::MessageBox::Show("A command is still being processed please wait and use the refresh button to update the form.", "Notice:", System::Windows::Forms::MessageBoxButtons::OK);
 	}
 }
+
+System::Void SecurityDialog::SecurityDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
+{
+	MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
+	array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
+	this->Invoke(mi, dd);
+}

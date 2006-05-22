@@ -39,6 +39,7 @@ PlayoutObject::PlayoutObject(CBAPSAudioOutput *m_AudioOutput)
 	}
 	/** Make sure the channel is safe by setting the loaded track to a null track **/
 	notLoadedTrack = gcnew Track("c:\\NOT LOADED");
+	notLoadedTrack->setPosition(-1);
 	loadedTrack = notLoadedTrack;
 	if (!errorFound)
 	{

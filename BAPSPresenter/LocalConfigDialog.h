@@ -1,6 +1,7 @@
 #pragma once
 #include "ConfigManager.h"
 #include "BAPSButton.h"
+#include "BAPSPresenterMain.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -12,6 +13,8 @@ using namespace System::Drawing;
 
 namespace BAPSPresenter {
 
+	/** We need a pre-declaration of the Main form so that we can define a handle to it here **/
+	ref class BAPSPresenterMain;
 	/// <summary>
 	/// Summary for LocalConfigDialog
 	///
@@ -24,7 +27,8 @@ namespace BAPSPresenter {
 	public ref class LocalConfigDialog : public System::Windows::Forms::Form
 	{
 	public:
-		LocalConfigDialog(void)
+		LocalConfigDialog(BAPSPresenterMain^ _bapsPresenterMain)
+			: bapsPresenterMain(_bapsPresenterMain)
 		{
 			InitializeComponent();
 			serverText->Text = ConfigManager::getConfigValueString("ServerAddress", "127.0.0.1");
@@ -46,11 +50,14 @@ namespace BAPSPresenter {
 			}
 		}
 	private:
+		/** A handle to the main window **/
+		BAPSPresenterMain^ bapsPresenterMain;
+
 		System::Void saveButton_Click(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void cancelButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Windows::Forms::ListBox^  showVolumeList;
-	protected: 
+		System::Void LocalConfigDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 
+	private: System::Windows::Forms::ListBox^  showVolumeList;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::TextBox^  portText;
 	private: System::Windows::Forms::TextBox^  serverText;
@@ -250,10 +257,12 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->label3);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->KeyPreview = true;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"LocalConfigDialog";
 			this->Text = L"Settings";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &LocalConfigDialog::LocalConfigDialog_KeyDown);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

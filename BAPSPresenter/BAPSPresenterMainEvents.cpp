@@ -1,7 +1,6 @@
 #include "StdAfx.h"
 #include "BAPSPresenterMain.h"
 #include "Messages.h"
-#include "HelpDialog.h"
 #include "AudioWall.h"
 #include "LocalConfigDialog.h"
 #include "ConfigCache.h"
@@ -132,7 +131,7 @@ System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  send
 		{
 			if (e->Shift)
 			{
-				LocalConfigDialog^ ccd = gcnew LocalConfigDialog();
+				LocalConfigDialog^ ccd = gcnew LocalConfigDialog(this);
 				ccd->ShowDialog();
 				/** Show or hide the volume controls depending on the config setting **/
 				bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
@@ -140,7 +139,7 @@ System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  send
 			}
 			else
 			{
-				configDialog = gcnew ConfigDialog(msgQueue);
+				configDialog = gcnew ConfigDialog(this,msgQueue);
 				Command cmd = BAPSNET_CONFIG | BAPSNET_GETOPTIONS;
 				msgQueue->Enqueue(gcnew ActionMessage(cmd));
 				configDialog->ShowDialog();
@@ -153,7 +152,7 @@ System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  send
 	case 'S':
 		if (e->Control)
 		{
-			securityDialog = gcnew SecurityDialog(msgQueue);
+			securityDialog = gcnew SecurityDialog(this,msgQueue);
 			Command cmd = BAPSNET_CONFIG | BAPSNET_GETPERMISSIONS;
 			msgQueue->Enqueue(gcnew ActionMessage(cmd));
 			securityDialog->ShowDialog();
@@ -189,7 +188,7 @@ System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  send
 	case 'A':
 		if (e->Control)
 		{
-			about = gcnew About();
+			about = gcnew About(this);
 			msgQueue->Enqueue(gcnew ActionMessage(BAPSNET_SYSTEM|BAPSNET_VERSION));
 			about->ShowDialog();
 			about = nullptr;
@@ -213,7 +212,7 @@ System::Void BAPSPresenterMain::RefreshDirectory_Click(System::Object ^  sender,
 System::Void BAPSPresenterMain::SearchRecordLib_Click(System::Object ^  sender, System::EventArgs ^  e)
 {
 	/** We have a handle stored in the class so that data can be passed to the object **/
-	recordLibrarySearch = gcnew RecordLibrarySearch(msgQueue);
+	recordLibrarySearch = gcnew RecordLibrarySearch(this,msgQueue);
 	recordLibrarySearch->ShowDialog();
 	/** Always get rid of it again **/
 	delete recordLibrarySearch;
@@ -223,7 +222,7 @@ System::Void BAPSPresenterMain::SearchRecordLib_Click(System::Object ^  sender, 
 System::Void BAPSPresenterMain::loadShow_Click(System::Object ^  sender, System::EventArgs ^  e)
 {
 	/** Handle stored for same reason as record library **/
-	loadShowDialog = gcnew LoadShowDialog(msgQueue);
+	loadShowDialog = gcnew LoadShowDialog(this,msgQueue);
 	loadShowDialog->ShowDialog();
 	loadShowDialog = nullptr;
 }
@@ -231,7 +230,7 @@ System::Void BAPSPresenterMain::loadShow_Click(System::Object ^  sender, System:
 System::Void BAPSPresenterMain::feedbackButton_Click(System::Object ^  sender, System::EventArgs ^  e)
 {
 	/** Handle stored for same reason as record library **/
-	feedbackDialog = gcnew FeedbackDialog(msgQueue);
+	feedbackDialog = gcnew FeedbackDialog(this,msgQueue);
 	feedbackDialog->ShowDialog();
 	feedbackDialog = nullptr;
 }
@@ -357,7 +356,7 @@ System::Void BAPSPresenterMain::trackListContextMenuStrip_ItemClicked(System::Ob
 	{
 		if (audioWall==nullptr || !audioWall->Visible)
 		{
-			audioWall = gcnew AudioWall(msgQueue, tl);
+			audioWall = gcnew AudioWall(this, msgQueue, tl);
 			audioWall->Show();
 		}
 		else

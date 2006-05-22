@@ -93,6 +93,10 @@ void ConfigManager::initConfigManager()
 	repeatChoices->add("No repeat", CONFIG_REPEAT_NONE_VALUE, true);
 	repeatChoices->add("Repeat one", CONFIG_REPEAT_ONE_VALUE);
 	repeatChoices->add("Repeat all", CONFIG_REPEAT_ALL_VALUE);
+	/** The modes in which the paddle can operate **/
+	ConfigIntChoices^ paddleChoices = gcnew ConfigIntChoices();
+	paddleChoices->add("Playback Controller", CONFIG_CONTROLLER_PLAYBACK);
+	paddleChoices->add("Text Controller", CONFIG_CONTROLLER_TEXTSCREEN, true);
 
 	configDescriptions = gcnew array<ConfigDescriptor^>(CONFIG_LASTOPTION);
 	configDescriptions[CONFIG_CHANNELCOUNT] = gcnew ConfigDescriptorInt("ChannelCount", "Number of Channels", 1, CA_RD_ONLY);
@@ -121,7 +125,11 @@ void ConfigManager::initConfigManager()
 	configDescriptions[CONFIG_LOGSOURCE] = gcnew ConfigDescriptorString("LogSource", "System Log Source", "BAPS", CA_SU_ONLY);
 	configDescriptions[CONFIG_SUPPORTADDRESS] = gcnew ConfigDescriptorString("SupportAddress", "Support E-mail address", "baps@ury.york.ac.uk", CA_RD_ONLY);
 	configDescriptions[CONFIG_SMTPSERVER] = gcnew ConfigDescriptorString("SMTP Server", "SMTP server IP address", "<none>", CA_SU_ONLY);
-
+	configDescriptions[CONFIG_BAPSCONTROLLERENABLED] = gcnew ConfigDescriptorIntChoice("BAPSControllerEnabled", "BAPS Controller Enabled", noYesChoices, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSControllerButtonCount", "BAPS Controller Button Count", 6, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCODE] = gcnew ConfigDescriptorInt("BAPSControllerButtonCode", CONFIG_BAPSCONTROLLERBUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSPADDLEMODE] = gcnew ConfigDescriptorIntChoice("BAPSPaddleMode", "BAPS Paddle Mode", paddleChoices ,CA_ANY);
+	
 	configErrors = gcnew array<System::String^>(CE_LASTERROR);
 	configErrors[CE_NOERROR] = "No error";
 	configErrors[CE_PERMISSIONDENIED] = "Insufficient Privilidge";

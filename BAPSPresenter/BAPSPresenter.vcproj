@@ -520,24 +520,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="HelpDialog"
-				>
-				<File
-					RelativePath=".\HelpDialog.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\HelpDialog.h"
-					FileType="3"
-					>
-					<File
-						RelativePath=".\HelpDialog.resx"
-						SubType="Designer"
-						>
-					</File>
-				</File>
-			</Filter>
-			<Filter
 				Name="LoadShowDialog"
 				>
 				<File

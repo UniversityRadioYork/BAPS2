@@ -2,7 +2,7 @@
 #include "BAPSButton.h"
 #include "BAPSListBox.h"
 #include "BAPSLabel.h"
-
+#include "BAPSPresenterMain.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -18,6 +18,8 @@ using namespace System::Drawing;
 
 namespace BAPSPresenter {
 
+	/** We need a pre-declaration of the Main form so that we can define a handle to it here **/
+	ref class BAPSPresenterMain;
 	/// <summary>
 	/// Summary for LoadShowDialog
 	///
@@ -30,8 +32,8 @@ namespace BAPSPresenter {
 	public ref class LoadShowDialog : public System::Windows::Forms::Form
 	{
 	public:
-		LoadShowDialog(System::Collections::Queue^ _msgQueue)
-			: msgQueue(_msgQueue)
+		LoadShowDialog(BAPSPresenterMain^ _bapsPresenterMain,System::Collections::Queue^ _msgQueue)
+			: bapsPresenterMain(_bapsPresenterMain), msgQueue(_msgQueue)
 		{
 			InitializeComponent();
 			/** We keep a record of which user the shows are being selected from **/
@@ -82,6 +84,9 @@ namespace BAPSPresenter {
 		int listingResultCountLeft;
 		/** A handle on the global message Queue **/
 		System::Collections::Queue^ msgQueue;
+		/** A handle to the main window **/
+		BAPSPresenterMain^ bapsPresenterMain;
+
 	private: BAPSPresenter::BAPSButton^  goButton;
 	private: BAPSPresenter::BAPSButton^  cancelButton;
 
@@ -96,6 +101,7 @@ namespace BAPSPresenter {
 		System::Void listBox_SelectedIndexChanged(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void cancelButton_Click(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void matrix_Changed(System::Object ^  sender, System::EventArgs ^  e);
+		System::Void LoadShowDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 
 		 System::Void otherUser_Enter(System::Object^  sender, System::EventArgs^  e);
 
@@ -286,10 +292,12 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->systemUserRadio);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->KeyPreview = true;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"LoadShowDialog";
 			this->Text = L"Load Show";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &LoadShowDialog::LoadShowDialog_KeyDown);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

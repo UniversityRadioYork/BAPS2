@@ -4,6 +4,7 @@
 #include "Messages.h"
 #include "BAPSButton.h"
 #include "BAPSLabel.h"
+#include "BAPSPresenterMain.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -15,6 +16,8 @@ using namespace System::Drawing;
 
 namespace BAPSPresenter {
 
+	/** We need a pre-declaration of the Main form so that we can define a handle to it here **/
+	ref class BAPSPresenterMain;
 	/// <summary>
 	/// Summary for FeedbackDialog
 	///
@@ -27,8 +30,8 @@ namespace BAPSPresenter {
 	public ref class FeedbackDialog : public System::Windows::Forms::Form
 	{
 	public:
-		FeedbackDialog(System::Collections::Queue^ _msgQueue)
-			: msgQueue(_msgQueue)
+		FeedbackDialog(BAPSPresenterMain^ _bapsPresenterMain,System::Collections::Queue^ _msgQueue)
+			: bapsPresenterMain(_bapsPresenterMain), msgQueue(_msgQueue)
 		{
 			InitializeComponent();
 			//
@@ -59,18 +62,21 @@ namespace BAPSPresenter {
 				delete components;
 			}
 		}
-	private: BAPSPresenter::BAPSLabel^  bapsLabel1;
-	private: BAPSPresenter::BAPSButton^  sendButton;
-	private: BAPSPresenter::BAPSButton^  cancelButton;
+
 	protected: 
 	private:
+		/** A handle on the global message Queue **/
 		System::Collections::Queue^ msgQueue;
+		/** A handle to the main window **/
+		BAPSPresenterMain^ bapsPresenterMain;
+
 		System::Void sendButton_Click(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void cancelButton_Click(System::Object ^  sender, System::EventArgs ^  e);
-
-
-
-	private: System::Windows::Forms::TextBox^  feedbackText;
+		System::Void FeedbackDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+		BAPSPresenter::BAPSLabel^  bapsLabel1;
+		BAPSPresenter::BAPSButton^  sendButton;
+		BAPSPresenter::BAPSButton^  cancelButton;
+		System::Windows::Forms::TextBox^  feedbackText;
 
 
 	private:
@@ -161,12 +167,15 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->feedbackText);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->KeyPreview = true;
 			this->Name = L"FeedbackDialog";
 			this->Text = L"Feedback";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &FeedbackDialog::FeedbackDialog_KeyDown);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+
+};
 }

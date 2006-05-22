@@ -9,8 +9,12 @@ using namespace System::Drawing;
 
 #include "SecurityDialogStructs.h"
 #include "Messages.h"
+#include "BAPSPresenterMain.h"
 
 namespace BAPSPresenter {
+
+	/** We need a pre-declaration of the Main form so that we can define a handle to it here **/
+	ref class BAPSPresenterMain;
 
 	enum SecurityStatus
 	{
@@ -39,8 +43,8 @@ namespace BAPSPresenter {
 	public ref class SecurityDialog : public System::Windows::Forms::Form
 	{
 	public:
-		SecurityDialog(System::Collections::Queue^ _msgQueue)
-			: msgQueue(_msgQueue)
+		SecurityDialog(BAPSPresenterMain^ _bapsPresenterMain, System::Collections::Queue^ _msgQueue)
+			: bapsPresenterMain(_bapsPresenterMain), msgQueue(_msgQueue)
 		{
 			InitializeComponent();
 			userList->Enabled=false;
@@ -91,6 +95,8 @@ namespace BAPSPresenter {
 		int allowCount;
 		int denyCount;
 		array<PermissionInfo^>^ permissionInfo;
+		/** A handle to the main window **/
+		BAPSPresenterMain^ bapsPresenterMain;
 
 		System::Void newUserText_Leave(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void addUserButton_Click(System::Object ^  sender, System::EventArgs ^  e);
@@ -105,6 +111,7 @@ namespace BAPSPresenter {
 		System::Void deleteUserButton_Click(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void securityPageControl_SelectedIndexChanged(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void alterRestrictionButton_Click(System::Object ^  sender, System::EventArgs ^  e);
+		System::Void SecurityDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 
 	private: System::Windows::Forms::Button^  addToAllowButton;
 	protected: 
@@ -583,10 +590,12 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->securityPageControl);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->KeyPreview = true;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"SecurityDialog";
 			this->Text = L"Security Manager";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &SecurityDialog::SecurityDialog_KeyDown);
 			this->connectionManagerPage->ResumeLayout(false);
 			this->connectionManagerPage->PerformLayout();
 			this->userManagerPage->ResumeLayout(false);
@@ -598,5 +607,5 @@ namespace BAPSPresenter {
 
 		}
 #pragma endregion
-	};
+};
 }

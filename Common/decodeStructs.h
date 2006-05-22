@@ -163,4 +163,8 @@ typedef unsigned short Command;
 										//S- [VALUE-0/1] success/fail
 #define BAPSNET_CLIENTCHANGE	(12<<8)	//S- [VALUE-0] string clientToRemove 
 										//   [VALUE-1] string clientToAdd
+#define BAPSNET_SCROLLTEXT		(13<<8) //S- [VALUE-0] scroll down
+										//   [VALUE-1] scroll up
+#define BAPSNET_TEXTSIZE		(14<<8) //S- [VALUE-0] text smaller
+										//	 [VALUE-1] text bigger
 #endif // __DECODESTRUCTS_H__

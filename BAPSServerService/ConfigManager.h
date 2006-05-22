@@ -61,6 +61,11 @@ enum RepeatEnum
 	CONFIG_REPEAT_ONE_VALUE = 1,
 	CONFIG_REPEAT_ALL_VALUE = 2
 };
+enum ControllerEnum
+{
+	CONFIG_CONTROLLER_PLAYBACK = 0,
+	CONFIG_CONTROLLER_TEXTSCREEN = 1
+};
 
 ref class ConfigManager
 {

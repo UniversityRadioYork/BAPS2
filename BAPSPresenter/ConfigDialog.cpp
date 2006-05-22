@@ -501,3 +501,9 @@ void ConfigDialog::enableSaveButtonIfReady()
 	}
 	saveButton->Enabled = true;
 }
+System::Void ConfigDialog::ConfigDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
+{
+	MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
+	array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
+	this->Invoke(mi, dd);
+}

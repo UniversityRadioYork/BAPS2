@@ -25,6 +25,13 @@
 
 namespace BAPSPresenter {
 
+	ref class RecordLibrarySearch;
+	ref class ConfigDialog;
+	ref class SecurityDialog;
+	ref class About;
+	ref class FeedbackDialog;
+	ref class LoadShowDialog;
+
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -226,20 +233,15 @@ private: System::Windows::Forms::ToolStripMenuItem^  showAudioWallToolStripMenuI
 
 
 
-
-
-
-
-
-
 		 array<BAPSPresenter::TrackList^>^ trackList;
 
 		/** ### END PRIVATE VARIABLES ### **/
 		/** ### DESIGNER PRIVATE EVENT HANDLERS ### **/
-
+public:
+		System::Void BAPSPresenterMain_KeyDown(System::Object ^  sender, System::Windows::Forms::KeyEventArgs ^  e);
+private:
 		System::Void TrackBar_Scroll(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void VolumeBar_Scroll(System::Object ^  sender, System::EventArgs ^  e);
-		System::Void BAPSPresenterMain_KeyDown(System::Object ^  sender, System::Windows::Forms::KeyEventArgs ^  e);
 	
 		System::Void RefreshDirectory_Click(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void newChatMessage_TextChanged(System::Object^  sender, System::EventArgs^  e);
@@ -344,6 +346,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->repeatAllToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->repeatOneToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->repeatNoneToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator4 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->showAudioWallToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->MainTextDisplay = (gcnew System::Windows::Forms::TextBox());
 			this->chatText = (gcnew System::Windows::Forms::TextBox());
 			this->newChatMessage = (gcnew System::Windows::Forms::TextBox());
@@ -391,8 +395,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackTime2 = (gcnew BAPSPresenter::TrackTime());
 			this->trackTime1 = (gcnew BAPSPresenter::TrackTime());
 			this->trackTime0 = (gcnew BAPSPresenter::TrackTime());
-			this->showAudioWallToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->toolStripSeparator4 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->Channel2VolumeBar))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->Channel1VolumeBar))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->Channel0VolumeBar))->BeginInit();
@@ -481,7 +483,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackListContextMenuStrip->Name = L"trackListContextMenuStrip";
 			this->trackListContextMenuStrip->ShowCheckMargin = true;
 			this->trackListContextMenuStrip->ShowImageMargin = false;
-			this->trackListContextMenuStrip->Size = System::Drawing::Size(178, 226);
+			this->trackListContextMenuStrip->Size = System::Drawing::Size(178, 204);
 			this->trackListContextMenuStrip->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &BAPSPresenterMain::trackListContextMenuStrip_Opening);
 			this->trackListContextMenuStrip->ItemClicked += gcnew System::Windows::Forms::ToolStripItemClickedEventHandler(this, &BAPSPresenterMain::trackListContextMenuStrip_ItemClicked);
 			// 
@@ -541,6 +543,17 @@ private: System::ComponentModel::IContainer^  components;
 			this->repeatNoneToolStripMenuItem->Name = L"repeatNoneToolStripMenuItem";
 			this->repeatNoneToolStripMenuItem->Size = System::Drawing::Size(177, 22);
 			this->repeatNoneToolStripMenuItem->Text = L"Repeat &none";
+			// 
+			// toolStripSeparator4
+			// 
+			this->toolStripSeparator4->Name = L"toolStripSeparator4";
+			this->toolStripSeparator4->Size = System::Drawing::Size(174, 6);
+			// 
+			// showAudioWallToolStripMenuItem
+			// 
+			this->showAudioWallToolStripMenuItem->Name = L"showAudioWallToolStripMenuItem";
+			this->showAudioWallToolStripMenuItem->Size = System::Drawing::Size(177, 22);
+			this->showAudioWallToolStripMenuItem->Text = L"&Show AudioWall";
 			// 
 			// MainTextDisplay
 			// 
@@ -1200,17 +1213,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackTime0->Size = System::Drawing::Size(256, 72);
 			this->trackTime0->TabIndex = 25;
 			this->trackTime0->Text = L"trackTime0";
-			// 
-			// showAudioWallToolStripMenuItem
-			// 
-			this->showAudioWallToolStripMenuItem->Name = L"showAudioWallToolStripMenuItem";
-			this->showAudioWallToolStripMenuItem->Size = System::Drawing::Size(177, 22);
-			this->showAudioWallToolStripMenuItem->Text = L"&Show AudioWall";
-			// 
-			// toolStripSeparator4
-			// 
-			this->toolStripSeparator4->Name = L"toolStripSeparator4";
-			this->toolStripSeparator4->Size = System::Drawing::Size(174, 6);
 			// 
 			// BAPSPresenterMain
 			// 

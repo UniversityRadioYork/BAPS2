@@ -1,4 +1,5 @@
 #pragma once
+#include "BAPSPresenterMain.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -10,6 +11,8 @@ using namespace System::Drawing;
 
 namespace BAPSPresenter {
 
+	/** We need a pre-declaration of the Main form so that we can define a handle to it here **/
+	ref class BAPSPresenterMain;
 	/// <summary>
 	/// Summary for About
 	///
@@ -22,7 +25,8 @@ namespace BAPSPresenter {
 	public ref class About : public System::Windows::Forms::Form
 	{
 	public:
-		About(void)
+		About(BAPSPresenterMain^ _bapsPresenterMain)
+			: bapsPresenterMain(_bapsPresenterMain)
 		{
 			InitializeComponent();
 			pCompileDateText->Text = __DATE__;
@@ -49,8 +53,10 @@ namespace BAPSPresenter {
 				delete components;
 			}
 		}
+	private:
+		/** A handle to the main window **/
+		BAPSPresenterMain^ bapsPresenterMain;
 	private: System::Windows::Forms::Label^  sVersionLabel;
-	protected: 
 	private: System::Windows::Forms::Label^  sCompileDateLabel;
 	private: System::Windows::Forms::Label^  sCompileTimeLabel;
 	private: System::Windows::Forms::Label^  sAuthorLabel;
@@ -70,25 +76,7 @@ namespace BAPSPresenter {
 	private: System::Windows::Forms::Label^  mailTitle;
 	private: System::Windows::Forms::GroupBox^  serverGroup;
 
-	protected: 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		System::Void About_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 
 	private:
 		/// <summary>
@@ -306,10 +294,12 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->serverGroup);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->KeyPreview = true;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"About";
 			this->Text = L"About BAPS Presenter";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &About::About_KeyDown);
 			this->presenterGroup->ResumeLayout(false);
 			this->serverGroup->ResumeLayout(false);
 			this->ResumeLayout(false);

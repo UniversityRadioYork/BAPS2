@@ -10,6 +10,8 @@ using namespace System::Drawing;
 
 namespace BAPSPresenter {
 
+	/** We need a pre-declaration of the Main form so that we can define a handle to it here **/
+	ref class BAPSPresenterMain;
 	/// <summary>
 	/// Summary for TextDialog
 	///
@@ -22,7 +24,8 @@ namespace BAPSPresenter {
 	public ref class TextDialog : public System::Windows::Forms::Form
 	{
 	public:
-		TextDialog(System::String^ text)
+		TextDialog(BAPSPresenterMain^ _bapsPresenterMain, System::String^ text)
+			: bapsPresenterMain(_bapsPresenterMain)
 		{
 			InitializeComponent();
 			this->Text = "News Stories / Long Links";
@@ -50,6 +53,9 @@ namespace BAPSPresenter {
 		{
 			textText->Text = text;
 		}
+		void scroll(System::Object^ _updown);
+		void textSize(System::Object^ _updown);
+
 
 	protected:
 		/// <summary>
@@ -62,8 +68,11 @@ namespace BAPSPresenter {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::TextBox^  textText;
-	private: System::Void TextDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+	private:
+		/** A handle to the main window **/
+		BAPSPresenterMain^ bapsPresenterMain;
+		System::Windows::Forms::TextBox^  textText;
+		System::Void TextDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 
 	private:
 		/// <summary>

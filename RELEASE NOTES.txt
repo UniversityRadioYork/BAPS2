@@ -46,7 +46,7 @@ Channel config for automatic advance, play on load and repeat, are reset when a 
 The load show form clears the help text in the username box when it gets focus
 --
 ##
-Release 2.0 v4
+Release 2.1 v1
 --
 Features:
 Audiowall
@@ -61,22 +61,25 @@ NONE
 --
 
 ##
-Release 2.0 v5
+Release 2.1 v3
 --
 Features:
 --
-NONE
+Playback control from any window
+defaults to 'other user' in load show
+baps controller can be enabled/disabled
 --
 Known Issues
 --
-Using audiowall clears the current cue position
 Config System occasionally crashes in client due to drop downs (presumed)
 --
 Bug Fixes
 --
+Starting audio from audiowall no longer loads if it is already loaded
 Cue and Intro positions save for duration of session
 Cue positions are now per track rather than on a load by load basis
 Text screen can no longer be closed by alt+F4 (crashfix)
 Guarded the serial port close statement to ensure a port is open before being closed
 Mutex releases removed from error states as they were causing double releases due to finally blocks
+No Close for audiowall
 --

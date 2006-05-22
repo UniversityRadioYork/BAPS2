@@ -5,6 +5,7 @@
 #include "ConfigOptionInfo.h"
 #include "ConfigOptions.h"
 #include "DataGridComboBoxColumn.h"
+#include "BAPSPresenterMain.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -15,6 +16,9 @@ using namespace System::Drawing;
 
 
 namespace BAPSPresenter {
+
+	/** We need a pre-declaration of the Main form so that we can define a handle to it here **/
+	ref class BAPSPresenterMain;
 
 	/// <summary>
 	/// Summary for ConfigDialog
@@ -28,8 +32,9 @@ namespace BAPSPresenter {
 	public ref class ConfigDialog : public System::Windows::Forms::Form
 	{
 	public:
-		ConfigDialog(System::Collections::Queue^ _msgQueue)
-			: msgQueue(_msgQueue),
+		ConfigDialog(BAPSPresenterMain^ _bapsPresenterMain, System::Collections::Queue^ _msgQueue)
+			: bapsPresenterMain(_bapsPresenterMain),
+			  msgQueue(_msgQueue),
 			  numberOfOptions(0),
 			  optionCountSet(false)
 		{
@@ -86,6 +91,8 @@ namespace BAPSPresenter {
 		/** Storage for the number of options to be received **/
 		int numberOfOptions;
 		bool optionCountSet;
+		/** A handle to the main window **/
+		BAPSPresenterMain^ bapsPresenterMain;
 
 		System::Collections::Hashtable^ options;
 		System::Collections::Hashtable^ indexControls;
@@ -93,7 +100,7 @@ namespace BAPSPresenter {
 			 System::Collections::Queue^ msgQueue;
 
 		System::Void saveButton_Click(System::Object ^  sender, System::EventArgs ^  e);
-
+		System::Void ConfigDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 	private: System::Windows::Forms::StatusStrip^  status;
 	protected: 
 	private: System::Windows::Forms::ToolStripStatusLabel^  statusLabel;
@@ -172,8 +179,10 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->saveButton);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->KeyPreview = true;
 			this->Name = L"ConfigDialog";
 			this->Text = L"Configuration Settings";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &ConfigDialog::ConfigDialog_KeyDown);
 			this->status->ResumeLayout(false);
 			this->status->PerformLayout();
 			this->ResumeLayout(false);
@@ -181,5 +190,6 @@ namespace BAPSPresenter {
 
 		}
 #pragma endregion
-	};
+
+};
 }
