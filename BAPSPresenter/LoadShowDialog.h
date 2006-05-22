@@ -37,7 +37,8 @@ namespace BAPSPresenter {
 		{
 			InitializeComponent();
 			/** We keep a record of which user the shows are being selected from **/
-			showListType = 0;
+			/** Default is other user **/
+			showListType = 2;
 			/** Each of the radio buttons needs an id so that they can be told apart
 				at runtime
 			**/

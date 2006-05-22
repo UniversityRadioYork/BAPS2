@@ -102,7 +102,10 @@ void GlobalAudioObject::notifyCallback(int channel)
 		{
 			advanceTo = currentPlaylist->getNextPlayable(0);
 		}
-		playoutObject->loadTrack(safe_cast<Track^>(currentPlaylist->getEntry(advanceTo)));
+		if (advanceTo != -1)
+		{
+			playoutObject->loadTrack(safe_cast<Track^>(currentPlaylist->getEntry(advanceTo)));
+		}
 		if (CONFIG_GETINTn(CONFIG_AUTOPLAY, channel) == 0)
 		{
 			playoutObject->play();

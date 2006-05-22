@@ -143,9 +143,12 @@ private:
 		int nextTrack = ClientManager::getAudio()->getPlaylist(channel)->getNextPlayable(ClientManager::getAudio()->getOutput(channel)->getLoadedTrack()->getPosition()+1);
 		if (nextTrack == -1)
 		{
-			nextTrack = 0;
+			nextTrack = ClientManager::getAudio()->getPlaylist(channel)->getNextPlayable(0);
 		}
-		ClientManager::getAudio()->getOutput(channel)->loadTrack(safe_cast<Track^>(ClientManager::getAudio()->getPlaylist(channel)->getEntry(nextTrack)));
+		if (nextTrack != -1)
+		{
+			ClientManager::getAudio()->getOutput(channel)->loadTrack(safe_cast<Track^>(ClientManager::getAudio()->getPlaylist(channel)->getEntry(nextTrack)));
+		}
 	}
 	static System::IO::Ports::SerialPort^ serialPort;
 };
