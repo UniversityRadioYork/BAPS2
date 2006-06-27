@@ -219,6 +219,7 @@ BEGIN_ACTION_BLOCKED3(sendOptionConfigSettings, int optionid, bool shouldBroadca
 				}
 
 			}
+			break;
 		default:
 			/** This case will cause a client and/or server to hang, it will be a programming error server side **/ 
 			LogManager::write(System::String::Concat("The following option has an invalid type:\n", CONFIG_KEY(optionid), CONFIG_DESC(optionid)), LOG_ERROR, LOG_CONFIG);

@@ -37,9 +37,9 @@ enum ConfigOption
 
 enum ConfigType
 {
-	CONFIG_TYPE_INT,
-	CONFIG_TYPE_STR,
-	CONFIG_TYPE_CHOICE
+	CONFIG_TYPE_INT = 0,
+	CONFIG_TYPE_STR = 1,
+	CONFIG_TYPE_CHOICE =2
 };
 
 enum ConfigResult

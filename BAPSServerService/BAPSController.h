@@ -40,14 +40,17 @@ public:
 			int buttonCount = CONFIG_GETINT(CONFIG_BAPSCONTROLLERBUTTONCOUNT);
 			int channelCount = ConfigManager::getChannelCount();
 			int i;
+			bool handled = false;
 			for (i = 0 ; serialPort!=nullptr && serialPort->IsOpen && i < serialPort->BytesToRead ; i++)
 			{
 				System::Byte data = serialPort->ReadByte();
+				handled=false;
 				if (mode == CONFIG_CONTROLLER_PLAYBACK)
 				{
 					if (buttonCount>0 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 0))
 					{
 						ClientManager::getAudio()->getOutput(0)->play();
+						handled=true;
 					}
 					else if (buttonCount>1 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 1))
 					{
@@ -59,10 +62,12 @@ public:
 						{
 							loadNextTrack(0);
 						}
+						handled=true;
 					}
 					else if (channelCount > 1 && buttonCount>2 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 2))
 					{
 						ClientManager::getAudio()->getOutput(1)->play();
+						handled=true;
 					}
 					else if (channelCount > 1 && buttonCount>3 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 3))
 					{
@@ -74,10 +79,12 @@ public:
 						{
 							loadNextTrack(1);
 						}
+						handled=true;
 					}
 					else if (channelCount > 2 && buttonCount>4 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 4))
 					{
 						ClientManager::getAudio()->getOutput(2)->play();
+						handled=true;
 					}
 					else if (channelCount > 2 && buttonCount>5 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 5))
 					{
@@ -89,6 +96,7 @@ public:
 						{
 							loadNextTrack(2);
 						}
+						handled=true;
 					}
 				}
 				else if (mode == CONFIG_CONTROLLER_TEXTSCREEN)
@@ -96,6 +104,7 @@ public:
 					if (buttonCount>0 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 0))
 					{
 						ClientManager::getAudio()->getOutput(0)->play();
+						handled=true;
 					}
 					else if (buttonCount>1 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 1))
 					{
@@ -107,27 +116,51 @@ public:
 						{
 							loadNextTrack(0);
 						}
+						handled=true;
 					}
 					else if (buttonCount>2 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 2))
 					{
 						Command cmd = BAPSNET_SYSTEM | BAPSNET_TEXTSIZE | 1;
 						ClientManager::broadcast(cmd);
+						handled=true;
 					}
 					else if (buttonCount>3 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 3))
 					{
 						Command cmd = BAPSNET_SYSTEM | BAPSNET_TEXTSIZE | 0;
 						ClientManager::broadcast(cmd);
+						handled=true;
 					}
 					else if (buttonCount>4 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 4))
 					{
 						Command cmd = BAPSNET_SYSTEM | BAPSNET_SCROLLTEXT | 1;
 						ClientManager::broadcast(cmd);
+						handled=true;
 					}
 					else if (buttonCount>5 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 5))
 					{
 						Command cmd = BAPSNET_SYSTEM | BAPSNET_SCROLLTEXT | 0;
 						ClientManager::broadcast(cmd);
+						handled=true;
 					}
+				}
+				if (buttonCount>6 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 6))
+				{
+					ClientManager::getAudio()->getOutput(0)->play();
+						handled=true;
+				}
+				else if (buttonCount>7 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 7))
+				{
+					ClientManager::getAudio()->getOutput(1)->play();
+						handled=true;
+				}
+				else if (buttonCount>8 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 8))
+				{
+					ClientManager::getAudio()->getOutput(2)->play();
+						handled=true;
+				}
+				if (!handled)
+				{
+					LogManager::write(System::String::Concat("Received unrecognised BAPS Controller Code: ", data.ToString()), LOG_INFO, LOG_COMMS);
 				}
 			}
 		}

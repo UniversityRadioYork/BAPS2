@@ -83,3 +83,23 @@ Guarded the serial port close statement to ensure a port is open before being cl
 Mutex releases removed from error states as they were causing double releases due to finally blocks
 No Close for audiowall
 --
+
+##
+Release 2.1 v4
+--
+Features
+--
+Implementation of 'fader/button start' code
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+Deleting a loaded track no longer causes config flags to be reset
+Possibly found the config system bug server side and client side
+Stopped the about window from being able to open another about window
+Stopped the load show windows from being able to open another load show window
+Disallow use of ctrl+a in text window
+--

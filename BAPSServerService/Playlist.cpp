@@ -115,7 +115,7 @@ bool Playlist::removeEntry(int entryNumber)
 	    let the client know there is no loaded track	**/
 	if (removedEntry==ClientManager::getAudio()->getOutput(channel)->getLoadedTrack())
 	{
-		ClientManager::getAudio()->getOutput(channel)->resetChannel();
+		ClientManager::getAudio()->getOutput(channel)->resetChannel(false);
 	}
 
 	/** Success **/
@@ -234,5 +234,5 @@ void Playlist::clean(int newLength)
 	/** Tell all clients what has happened **/
 	Command cmd = BAPSNET_PLAYLIST | BAPSNET_RESETPLAYLIST | channel;
 	ClientManager::broadcast( cmd );
-	ClientManager::getAudio()->getOutput(channel)->resetChannel();
+	ClientManager::getAudio()->getOutput(channel)->resetChannel(true);
 }

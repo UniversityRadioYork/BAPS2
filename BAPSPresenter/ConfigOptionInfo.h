@@ -10,7 +10,7 @@ public:
 		int _type)
 		: optionid(_optionid), 
 		description(_description),
-		type((ConfigType)_type),
+		type(_type),
 		indexed(false),
 		tbControl(nullptr),
 		lblControl(nullptr),
@@ -36,7 +36,7 @@ public:
 		int _groupid)
 		: optionid(_optionid), 
 		description(_description), 
-		type((ConfigType)_type), 
+		type(_type), 
 		indexed(true), 
 		groupid(_groupid),
 		tbControl(nullptr),
@@ -72,7 +72,7 @@ public:
 	{
 		return description;
 	}
-	inline ConfigType getType()
+	inline int getType()
 	{
 		return type;
 	}
@@ -245,7 +245,7 @@ private:
 	int choicesToFill;
 	int optionid;
 	System::String^ description;
-	ConfigType type;
+	int type;
 	bool indexed;
 	int groupid;
 	System::Windows::Forms::ComboBox^ cbControl;

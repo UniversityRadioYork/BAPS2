@@ -225,7 +225,7 @@ void PlayoutObject::setFilePosition(unsigned int position)
 	/** WORK NEEDED: else case **/
 }
 
-void PlayoutObject::resetChannel()
+void PlayoutObject::resetChannel(bool setDefaultConfig)
 {
 	stop();
 	setNotLoaded();
@@ -260,10 +260,13 @@ void PlayoutObject::resetChannel()
 	ClientManager::broadcast(BAPSNET_PLAYBACK | BAPSNET_VOLUME | (channelNumber & 0x3f),
 							 getChannelVolume());
 
-	CONFIG_SETn(CONFIG_AUTOADVANCE,channelNumber,CONFIG_YES_VALUE);
-	CONFIG_SETn(CONFIG_AUTOPLAY,channelNumber,CONFIG_NO_VALUE);
-	CONFIG_SETn(CONFIG_REPEAT,channelNumber,CONFIG_REPEAT_NONE_VALUE);
-	ClientInstance::sendOptionConfigSettings(CONFIG_AUTOADVANCE, true,nullptr);
-	ClientInstance::sendOptionConfigSettings(CONFIG_AUTOPLAY, true,nullptr);
-	ClientInstance::sendOptionConfigSettings(CONFIG_REPEAT, true,nullptr);
+	if (setDefaultConfig)
+	{
+		CONFIG_SETn(CONFIG_AUTOADVANCE,channelNumber,CONFIG_YES_VALUE);
+		CONFIG_SETn(CONFIG_AUTOPLAY,channelNumber,CONFIG_NO_VALUE);
+		CONFIG_SETn(CONFIG_REPEAT,channelNumber,CONFIG_REPEAT_NONE_VALUE);
+		ClientInstance::sendOptionConfigSettings(CONFIG_AUTOADVANCE, true,nullptr);
+		ClientInstance::sendOptionConfigSettings(CONFIG_AUTOPLAY, true,nullptr);
+		ClientInstance::sendOptionConfigSettings(CONFIG_REPEAT, true,nullptr);
+	}
 }

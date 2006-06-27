@@ -22,7 +22,19 @@ System::Void LocalConfigDialog::cancelButton_Click(System::Object^  sender, Syst
 
 System::Void LocalConfigDialog::LocalConfigDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
 {
-	MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
-	array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
-	this->Invoke(mi, dd);
+	bool ignore = false;
+	switch (e->KeyCode)
+	{
+	case 'O' : /** Ctrl+o opens this window, we don't want another **/
+		if (e->Control & e->Shift)
+		{
+			ignore = true;
+		}
+	}
+	if (!ignore)
+	{
+		MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
+		array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
+		this->Invoke(mi, dd);
+	}
 }

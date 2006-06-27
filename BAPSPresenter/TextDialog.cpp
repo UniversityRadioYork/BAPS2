@@ -7,9 +7,21 @@ using namespace BAPSPresenter;
 
 System::Void TextDialog::TextDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
 {
-	MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
-	array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
-	this->Invoke(mi, dd);
+	bool ignore = false;
+	switch (e->KeyCode)
+	{
+	case 'A' : /** Ctrl+s opens this window, we don't want another **/
+		if (e->Control)
+		{
+			ignore = true;
+		}
+	}
+	if (!ignore)
+	{
+		MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
+		array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
+		this->Invoke(mi, dd);
+	}
 }
 void TextDialog::scroll(System::Object^ _updown)
 {

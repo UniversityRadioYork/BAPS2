@@ -50,6 +50,8 @@ namespace BAPSPresenter {
 				to be sent to
 			**/
 			saveButton->Enabled = false;
+			/** A mutex to stop the form closing while it is being updated **/
+			closeMutex = gcnew System::Threading::Mutex();
 		}
 		/** When the form has received all the options it was told it will receive,
 			it can start to generate the UI, this is used by the main client so that
@@ -75,7 +77,8 @@ namespace BAPSPresenter {
 		void setValue(System::Object^ id,System::Object^ index, System::String^ str);
 		void setValue(System::Object^ id,System::Object^ index, System::Object^ value);
 		void setResult(System::Object^ optionid, System::Object^ result);
-
+		/** A mutex to ensure the config dialog cannot close while an update is occuring **/
+		System::Threading::Mutex^ closeMutex;
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -94,6 +97,7 @@ namespace BAPSPresenter {
 		/** A handle to the main window **/
 		BAPSPresenterMain^ bapsPresenterMain;
 
+
 		System::Collections::Hashtable^ options;
 		System::Collections::Hashtable^ indexControls;
 
@@ -101,6 +105,7 @@ namespace BAPSPresenter {
 
 		System::Void saveButton_Click(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void ConfigDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+		System::Void cancelButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Windows::Forms::StatusStrip^  status;
 	protected: 
 	private: System::Windows::Forms::ToolStripStatusLabel^  statusLabel;
@@ -149,12 +154,12 @@ namespace BAPSPresenter {
 			// 
 			// cancelButton
 			// 
-			this->cancelButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->cancelButton->Location = System::Drawing::Point(336, 320);
 			this->cancelButton->Name = L"cancelButton";
 			this->cancelButton->Size = System::Drawing::Size(88, 24);
 			this->cancelButton->TabIndex = 904;
 			this->cancelButton->Text = L"Cancel";
+			this->cancelButton->Click += gcnew System::EventHandler(this, &ConfigDialog::cancelButton_Click);
 			// 
 			// saveButton
 			// 

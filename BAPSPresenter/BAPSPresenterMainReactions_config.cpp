@@ -14,22 +14,46 @@ void BAPSPresenterMain::processChoice(int optionid, int choiceIndex, System::Str
 	/** Cache this info **/
 	ConfigCache::addOptionChoice(optionid, choiceIndex, choiceDescription);
 	/** Ignore if the config dialog is closed **/
-	if (configDialog != nullptr)
+	ConfigDialog^ cd = configDialog;
+	if (cd != nullptr)
 	{
-		MethodInvokerObjObjStr^ mi = gcnew MethodInvokerObjObjStr(configDialog, &ConfigDialog::addChoice);
-		array<System::Object^>^ dd = gcnew array<System::Object^>(3) {optionid, choiceIndex, choiceDescription};
-		configDialog->Invoke(mi, dd);
+		try
+		{
+			cd->closeMutex->WaitOne();
+			if (cd->Visible)
+			{
+				MethodInvokerObjObjStr^ mi = gcnew MethodInvokerObjObjStr(configDialog, &ConfigDialog::addChoice);
+				array<System::Object^>^ dd = gcnew array<System::Object^>(3) {optionid, choiceIndex, choiceDescription};
+				configDialog->Invoke(mi, dd);
+			}
+		}
+		finally
+		{
+			cd->closeMutex->ReleaseMutex();
+		}
 	}
 }
 
 void BAPSPresenterMain::processChoiceCount(int optionid, int count)
 {
 	/** Ignore if the config dialog is closed **/
-	if (configDialog != nullptr)
+	ConfigDialog^ cd = configDialog;
+	if (cd != nullptr)
 	{
-		MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(configDialog, &ConfigDialog::setChoiceCount);
-		array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, count};
-		configDialog->Invoke(mi,dd);
+		try
+		{
+			cd->closeMutex->WaitOne();
+			if (cd->Visible)
+			{
+				MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(configDialog, &ConfigDialog::setChoiceCount);
+				array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, count};
+				configDialog->Invoke(mi,dd);
+			}
+		}
+		finally
+		{
+			cd->closeMutex->ReleaseMutex();
+		}
 	}
 }
 
@@ -38,29 +62,41 @@ void BAPSPresenterMain::processOption(Command cmdReceived, int optionid, System:
 	/** Cache this info **/
 	ConfigCache::addOptionDescription(optionid, type, description, ((cmdReceived & BAPSNET_CONFIG_USEVALUEMASK) != 0));
 	/** Pass onto the config dialog if available **/
-	if (configDialog != nullptr)
+	ConfigDialog^ cd = configDialog;
+	if (cd != nullptr)
 	{
-		/** Check for an indexed option **/
-		if (ISFLAGSET(cmdReceived,BAPSNET_CONFIG_USEVALUEMASK))
+		try
 		{
-			/** Indexed option - does not update the form UI just data **/
-			int indexid = (cmdReceived&BAPSNET_CONFIG_VALUEMASK);
-			configDialog->addOption(gcnew ConfigOptionInfo(optionid, description, type, indexid));
+			cd->closeMutex->WaitOne();
+			if (cd->Visible)
+			{
+				/** Check for an indexed option **/
+				if (ISFLAGSET(cmdReceived,BAPSNET_CONFIG_USEVALUEMASK))
+				{
+					/** Indexed option - does not update the form UI just data **/
+					int indexid = (cmdReceived&BAPSNET_CONFIG_VALUEMASK);
+					configDialog->addOption(gcnew ConfigOptionInfo(optionid, description, type, indexid));
+				}
+				else
+				{
+					/** Non indexed option - does not update the form ui just data **/
+					configDialog->addOption(gcnew ConfigOptionInfo(optionid, description, type));
+				}
+				/** The configDialog form knows how many options it is expecting and
+					will report true when it has them all, at this point it is able to
+					draw itself
+				**/
+				if (configDialog->isReadyToShow())
+				{
+					/** Tell the form to draw its controls **/
+					System::Windows::Forms::MethodInvoker^ mi = gcnew System::Windows::Forms::MethodInvoker(configDialog, &ConfigDialog::updateUI);
+					configDialog->Invoke(mi);
+				}
+			}
 		}
-		else
+		finally
 		{
-			/** Non indexed option - does not update the form ui just data **/
-			configDialog->addOption(gcnew ConfigOptionInfo(optionid, description, type));
-		}
-		/** The configDialog form knows how many options it is expecting and
-			will report true when it has them all, at this point it is able to
-			draw itself
-		**/
-		if (configDialog->isReadyToShow())
-		{
-			/** Tell the form to draw its controls **/
-			System::Windows::Forms::MethodInvoker^ mi = gcnew System::Windows::Forms::MethodInvoker(configDialog, &ConfigDialog::updateUI);
-			configDialog->Invoke(mi);
+			cd->closeMutex->ReleaseMutex();
 		}
 	}
 }
@@ -68,9 +104,21 @@ void BAPSPresenterMain::processOption(Command cmdReceived, int optionid, System:
 void BAPSPresenterMain::processOptionCount(int count)
 {
 	/** Let the config dialog know how many options to expect **/
-	if (configDialog != nullptr)
+	ConfigDialog^ cd = configDialog;
+	if (cd != nullptr)
 	{
-		configDialog->setNumberOfOptions(count);
+		try
+		{
+			cd->closeMutex->WaitOne();
+			if (cd->Visible)
+			{
+				configDialog->setNumberOfOptions(count);
+			}
+		}
+		finally
+		{
+			cd->closeMutex->ReleaseMutex();
+		}
 	}
 }
 
@@ -118,58 +166,72 @@ void BAPSPresenterMain::processConfigSetting(Command cmdReceived, int optionid, 
 		We test if the configDialog handle is null, if it is we assume the
 		config setting is intended for the cache.
 	**/
-	if (configDialog != nullptr)
+	ConfigDialog^ cd = configDialog;
+	if (cd != nullptr)
 	{
-		/** If the value mask is used it means that the setting is for an indexed
-			option and the specified index is in the value
-		**/
-		if (ISFLAGSET(cmdReceived,BAPSNET_CONFIG_USEVALUEMASK))
+		try
 		{
-			/** Extract the index from the command **/
-			int index = (cmdReceived&BAPSNET_CONFIG_VALUEMASK);
-			switch (type)
+			cd->closeMutex->WaitOne();
+			if (cd->Visible)
 			{
-			case CONFIG_TYPE_INT:
-			case CONFIG_TYPE_CHOICE:
+				/** If Config Dialog is visible at this point then it cannot close as we hold the closeMutex
+				    this means we no longer have to use our copy of the objects handle (cd) **/
+				/** If the value mask is used it means that the setting is for an indexed
+					option and the specified index is in the value
+				**/
+				if (ISFLAGSET(cmdReceived,BAPSNET_CONFIG_USEVALUEMASK))
 				{
-					/** Box it up and send it off, choices can be treated as
-						just ints because that is the underlying datatype
-					**/
-					MethodInvokerObjObjObj^ mi = gcnew MethodInvokerObjObjObj(configDialog, &ConfigDialog::setValue);
-					array<System::Object^>^ dd = gcnew array<System::Object^>(3) {optionid, index, valueInt};
-					configDialog->Invoke(mi, dd);
+					/** Extract the index from the command **/
+					int index = (cmdReceived&BAPSNET_CONFIG_VALUEMASK);
+					switch (type)
+					{
+					case CONFIG_TYPE_INT:
+					case CONFIG_TYPE_CHOICE:
+						{
+							/** Box it up and send it off, choices can be treated as
+								just ints because that is the underlying datatype
+							**/
+							MethodInvokerObjObjObj^ mi = gcnew MethodInvokerObjObjObj(configDialog, &ConfigDialog::setValue);
+							array<System::Object^>^ dd = gcnew array<System::Object^>(3) {optionid, index, valueInt};
+							configDialog->Invoke(mi, dd);
+						}
+						break;
+					case CONFIG_TYPE_STR:
+						{
+							MethodInvokerObjObjStr^ mi = gcnew MethodInvokerObjObjStr(configDialog, &ConfigDialog::setValue);
+							array<System::Object^>^ dd = gcnew array<System::Object^>(3) {optionid, index, valueStr};
+							configDialog->Invoke(mi, dd);
+						}
+						break;
+					}
 				}
-				break;
-			case CONFIG_TYPE_STR:
+				else
 				{
-					MethodInvokerObjObjStr^ mi = gcnew MethodInvokerObjObjStr(configDialog, &ConfigDialog::setValue);
-					array<System::Object^>^ dd = gcnew array<System::Object^>(3) {optionid, index, valueStr};
-					configDialog->Invoke(mi, dd);
+					/** Non indexed settings, just box them up and send them off **/
+					switch (type)
+					{
+					case CONFIG_TYPE_INT:
+					case CONFIG_TYPE_CHOICE:
+						{
+							MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(configDialog, &ConfigDialog::setValue);
+							array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, valueInt};
+							configDialog->Invoke(mi, dd);
+						}
+						break;
+					case CONFIG_TYPE_STR:
+						{
+							MethodInvokerObjStr^ mi = gcnew MethodInvokerObjStr(configDialog, &ConfigDialog::setValue);
+							array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, valueStr};
+							configDialog->Invoke(mi, dd);
+						}
+						break;
+					}
 				}
-				break;
 			}
 		}
-		else
+		finally
 		{
-			/** Non indexed settings, just box them up and send them off **/
-			switch (type)
-			{
-			case CONFIG_TYPE_INT:
-			case CONFIG_TYPE_CHOICE:
-				{
-					MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(configDialog, &ConfigDialog::setValue);
-					array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, valueInt};
-					configDialog->Invoke(mi, dd);
-				}
-				break;
-			case CONFIG_TYPE_STR:
-				{
-					MethodInvokerObjStr^ mi = gcnew MethodInvokerObjStr(configDialog, &ConfigDialog::setValue);
-					array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, valueStr};
-					configDialog->Invoke(mi, dd);
-				}
-				break;
-			}
+			cd->closeMutex->ReleaseMutex();
 		}
 	}
 }
@@ -177,7 +239,8 @@ void BAPSPresenterMain::processConfigSetting(Command cmdReceived, int optionid, 
 void BAPSPresenterMain::processConfigResult(Command cmdReceived, int optionid, int result)
 {
 	/** We receive a result for every config setting we try to update **/
-	/** Only report these if the form is still open **/
+	/** Only report these if the form is still open, it is a serious error, if
+	    we receive one of these when the form is closing **/
 	if (configDialog != nullptr)
 	{
 		/** Check for an indexed option and deal with appropriately **/

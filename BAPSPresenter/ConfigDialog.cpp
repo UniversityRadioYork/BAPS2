@@ -432,7 +432,9 @@ void ConfigDialog::setResult(System::Object^ optionid, System::Object^ result)
 	}
 	if ( allReceived&&allSucceeded)
 	{
+		closeMutex->WaitOne();
 		this->Close();
+		closeMutex->ReleaseMutex();
 	}
 	else if (allReceived)
 	{
@@ -503,7 +505,25 @@ void ConfigDialog::enableSaveButtonIfReady()
 }
 System::Void ConfigDialog::ConfigDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
 {
-	MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
-	array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
-	this->Invoke(mi, dd);
+	bool ignore = false;
+	switch (e->KeyCode)
+	{
+	case 'O' : /** Ctrl+o opens this window, we don't want another **/
+		if (e->Control)
+		{
+			ignore = true;
+		}
+	}
+	if (!ignore)
+	{
+		MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
+		array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
+		this->Invoke(mi, dd);
+	}
+}
+System::Void ConfigDialog::cancelButton_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	closeMutex->WaitOne();
+	this->Close();
+	closeMutex->ReleaseMutex();
 }

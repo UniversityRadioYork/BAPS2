@@ -39,7 +39,7 @@ ref class PlayoutObject
 		}
 
 		/** Make the channel look as though it were newly created **/
-		void resetChannel();
+		void resetChannel(bool setDefaultConfig);
 
 		/** Read only accessors **/
 		inline unsigned int getFileDuration()
