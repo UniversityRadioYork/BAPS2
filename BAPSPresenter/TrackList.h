@@ -196,6 +196,10 @@ namespace BAPSPresenter
 			showHideScrollBar();
 			this->Invalidate();
 		}
+		void clearPendingLoadRequest()
+		{
+			pendingLoadRequest = false;
+		}
 		/** What index did the mouse last click over (for use in the context menu **/
 		property int LastIndexClicked
 		{
@@ -347,6 +351,7 @@ namespace BAPSPresenter
             }
         }
 
+
 		virtual void OnResize(System::EventArgs^ e)override
         {
 
@@ -356,6 +361,7 @@ namespace BAPSPresenter
                 this->ClientSize.Height);
 			showHideScrollBar();
         }
+
 		private:
 			int findAudioItem(int startIndex, bool goingUp);
 			void showHideScrollBar()

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ClientSocket.h"
-#include <Winsock2.h>
+
 
 using namespace BAPSPresenter;
 
@@ -110,7 +110,7 @@ void ClientSocket::send(array<System::Byte>^ bytes)
 		}
 		catch (System::Net::Sockets::SocketException^ e)
 		{
-			if (static_cast<int>(e->ErrorCode) != WSAEWOULDBLOCK)
+			if (static_cast<System::Net::Sockets::SocketError>(e->ErrorCode) != System::Net::Sockets::SocketError::WouldBlock)
 			{
 				/** Connection error must have occurred, rethrow exception **/
 				throw e;
@@ -146,7 +146,7 @@ array<System::Byte>^ ClientSocket::receive(int count)
 		}
 		catch (System::Net::Sockets::SocketException^ e)
 		{
-			if (static_cast<int>(e->ErrorCode) != WSAEWOULDBLOCK)
+			if (static_cast<System::Net::Sockets::SocketError>(e->ErrorCode) != System::Net::Sockets::SocketError::WouldBlock)
 			{
 				/** Re-throw exception if it is not just notifying the socket would have blocked
 				 *  if it were in blocking mode

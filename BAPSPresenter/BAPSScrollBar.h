@@ -34,6 +34,9 @@ namespace BAPSPresenter
 			this->TabStop = false;
 			backBrush = gcnew System::Drawing::Drawing2D::LinearGradientBrush(System::Drawing::Rectangle(0,0,10,10), System::Drawing::Color::Snow, System::Drawing::Color::AntiqueWhite,System::Drawing::Drawing2D::LinearGradientMode::Vertical );
 			slideBrush = gcnew System::Drawing::Drawing2D::LinearGradientBrush(System::Drawing::Rectangle(0,0,10,10), System::Drawing::Color::Snow, System::Drawing::Color::RoyalBlue,System::Drawing::Drawing2D::LinearGradientMode::Horizontal );
+			timer = gcnew System::Windows::Forms::Timer();
+			timer->Tick += gcnew System::EventHandler(this, &BAPSScrollBar::doScrollTick);
+			timer->Interval = 100;
 		}
 		property int TotalItems
 		{
@@ -77,6 +80,24 @@ namespace BAPSPresenter
 			this->Parent->Focus();
 		}
 	private:
+		void doScrollTick(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (goingUp && indexAtTop > 0)
+			{
+				indexAtTop -= 1;
+				TopIndexChanged(this, System::EventArgs::Empty);
+			}
+			else if (!goingUp && totalItems-viewableItems>indexAtTop)
+			{
+				indexAtTop += 1;
+				TopIndexChanged(this, System::EventArgs::Empty);
+			}
+			else
+			{
+				timer->Enabled = false;
+			}
+			resizeSlider();
+		}
 		void resizeSlider()
 		{
 			if (totalItems == 0)
@@ -103,5 +124,7 @@ namespace BAPSPresenter
 		System::Drawing::Bitmap^ offScreen;
 		System::Drawing::Drawing2D::LinearGradientBrush^ backBrush;
 		System::Drawing::Drawing2D::LinearGradientBrush^ slideBrush;
+		System::Windows::Forms::Timer^ timer;
+		bool goingUp;
 	};
 };

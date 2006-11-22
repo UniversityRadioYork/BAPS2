@@ -231,6 +231,33 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	trackTime[1]->IntroPositionChanged += gcnew System::EventHandler(this, &BAPSPresenterMain::introPositionChanged);
 	trackTime[2]->IntroPositionChanged += gcnew System::EventHandler(this, &BAPSPresenterMain::introPositionChanged);
 	
+	loadImpossibleTimer = gcnew array<System::Windows::Forms::Timer^>(3);
+	loadImpossibleTimer[0] = gcnew System::Windows::Forms::Timer();
+	loadImpossibleTimer[0]->Interval=70;
+	loadImpossibleTimer[0]->Tag = gcnew ChannelTimeoutStruct(0, 10);
+	loadImpossibleTimer[0]->Tick += gcnew System::EventHandler(this, &BAPSPresenterMain::loadImpossibleFlicker);
+	loadImpossibleTimer[1] = gcnew System::Windows::Forms::Timer();
+	loadImpossibleTimer[1]->Interval=70;
+	loadImpossibleTimer[1]->Tag = gcnew ChannelTimeoutStruct(1, 10);
+	loadImpossibleTimer[1]->Tick += gcnew System::EventHandler(this, &BAPSPresenterMain::loadImpossibleFlicker);
+	loadImpossibleTimer[2] = gcnew System::Windows::Forms::Timer();
+	loadImpossibleTimer[2]->Interval=70;
+	loadImpossibleTimer[2]->Tag = gcnew ChannelTimeoutStruct(2, 10);
+	loadImpossibleTimer[2]->Tick += gcnew System::EventHandler(this, &BAPSPresenterMain::loadImpossibleFlicker);
+	nearEndTimer = gcnew array<System::Windows::Forms::Timer^>(3);
+	nearEndTimer[0] = gcnew System::Windows::Forms::Timer();
+	nearEndTimer[0]->Interval=100;
+	nearEndTimer[0]->Tag = safe_cast<System::Object^>(0);
+	nearEndTimer[0]->Tick += gcnew System::EventHandler(this, &BAPSPresenterMain::nearEndFlash);
+	nearEndTimer[1] = gcnew System::Windows::Forms::Timer();
+	nearEndTimer[1]->Interval=100;
+	nearEndTimer[1]->Tag = 1;
+	nearEndTimer[1]->Tick += gcnew System::EventHandler(this, &BAPSPresenterMain::nearEndFlash);
+	nearEndTimer[2] = gcnew System::Windows::Forms::Timer();
+	nearEndTimer[2]->Interval=100;
+	nearEndTimer[2]->Tag = 2;
+	nearEndTimer[2]->Tick += gcnew System::EventHandler(this, &BAPSPresenterMain::nearEndFlash);
+	
 	/** We are not dead yet **/
 	dead = false;
 	/** Set the form handles to null **/

@@ -11,16 +11,19 @@ void BAPSPresenterMain::showChannelOperation(System::Object^ _channel, System::O
 	{
 	case BAPSNET_PLAY:
 		channelPlay[channel]->Highlighted = true;
+		channelPlay[channel]->Enabled = false;
 		channelPause[channel]->Highlighted = false;
 		channelStop[channel]->Highlighted = false;
 		break;
 	case BAPSNET_PAUSE:
 		channelPlay[channel]->Highlighted = false;
+		channelPlay[channel]->Enabled = true;
 		channelPause[channel]->Highlighted = true;
 		channelStop[channel]->Highlighted = false;
 		break;
 	case BAPSNET_STOP:
 		channelPlay[channel]->Highlighted = false;
+		channelPlay[channel]->Enabled = true;
 		channelPause[channel]->Highlighted = false;
 		channelStop[channel]->Highlighted = true;
 		break;
@@ -42,7 +45,18 @@ void BAPSPresenterMain::showPosition(System::Object^ _channel, System::Object^ _
 			/** Set the amount of time gone **/
 			timeGoneText[channel]->Text = MillisecondsToTimeString(value);
 			/** Set the time left **/
-			timeLeftText[channel]->Text = MillisecondsToTimeString(trackTime[channel]->Duration - value);
+			int timeleft = trackTime[channel]->Duration - value;
+			timeLeftText[channel]->Text = MillisecondsToTimeString(timeleft);
+			if (channelPlay[channel]->Enabled || timeleft > 10000 || timeleft < 500)
+			{
+				nearEndTimer[channel]->Enabled = false;
+				timeLeftText[channel]->Highlighted = false;
+			}
+			else if (!channelPlay[channel]->Enabled)
+			{
+				nearEndTimer[channel]->Interval = 100;
+				nearEndTimer[channel]->Enabled = true;
+			}
 		}
 		else
 		{
@@ -89,6 +103,8 @@ void BAPSPresenterMain::showLoadedItem(System::Object^ _channel, System::Object^
 			trackLengthText[channel]->Text = MillisecondsToTimeString(0);
 			timeLeftText[channel]->Text = MillisecondsToTimeString(0);
 			timeGoneText[channel]->Text = MillisecondsToTimeString(0);
+			nearEndTimer[channel]->Enabled = false;
+			timeLeftText[channel]->Highlighted = false;
 		}
 		refreshAudioWall();
 	}

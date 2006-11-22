@@ -61,6 +61,11 @@
 				<param name="Local" value="BAPSPresenter\manageEntries.htm#delete">
 				<param name="ImageNumber" value="11">
 				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Reset Channel">
+				<param name="Local" value="BAPSPresenter\manageEntries.htm#resetchannel">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
 		</UL>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="Playing Audio">

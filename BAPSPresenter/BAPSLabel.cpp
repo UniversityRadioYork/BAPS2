@@ -6,7 +6,7 @@ using namespace BAPSPresenter;
 void BAPSLabel::OnResize(System::EventArgs^ e)
 {
 	backBrush = gcnew System::Drawing::Drawing2D::LinearGradientBrush(this->ClientRectangle,
-							System::Drawing::Color::Snow,
+							((isHighlighted)?highlightColor:System::Drawing::Color::Snow),
 							System::Drawing::Color::AntiqueWhite,
 							System::Drawing::Drawing2D::LinearGradientMode::Vertical );
 	backBrush->SetBlendTriangularShape(0.5);
@@ -52,4 +52,17 @@ void BAPSLabel::OnPaintBackground(System::Windows::Forms::PaintEventArgs^ e)
 	gp->CloseFigure();
 	e->Graphics->DrawPath(System::Drawing::Pens::LightGray, gp);
 
+}
+
+void BAPSLabel::HighlightChanged()
+{
+	if (this->ClientRectangle.Width >0 && this->ClientRectangle.Height>0)
+	{
+		backBrush = gcnew System::Drawing::Drawing2D::LinearGradientBrush(this->ClientRectangle, 
+								((isHighlighted)?highlightColor:System::Drawing::Color::Snow),
+								System::Drawing::Color::AntiqueWhite,
+								System::Drawing::Drawing2D::LinearGradientMode::Vertical );
+		backBrush->SetBlendTriangularShape(0.5);
+		this->Invalidate();
+	}
 }

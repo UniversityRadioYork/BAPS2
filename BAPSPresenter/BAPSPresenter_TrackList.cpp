@@ -11,12 +11,23 @@ System::Void BAPSPresenterMain::TrackList_RequestChange(System::Object^  o, BAPS
 	{
 	case CHANGE_SELECTEDINDEX:
 		{
-			Command cmd = BAPSNET_PLAYBACK | BAPSNET_LOAD;
-			/** Channel number is in the sender's tag **/
-			cmd |= (e->channel & 0x3f);
-			/** Get the selected index as above **/
-			u32int intArg  = e->index;
-			msgQueue->Enqueue(gcnew ActionMessageU32int(cmd, intArg));
+			if (channelPlay[e->channel]->Enabled)
+			{
+				Command cmd = BAPSNET_PLAYBACK | BAPSNET_LOAD;
+				/** Channel number is in the sender's tag **/
+				cmd |= (e->channel & 0x3f);
+				/** Get the selected index as above **/
+				u32int intArg  = e->index;
+				msgQueue->Enqueue(gcnew ActionMessageU32int(cmd, intArg));
+				
+				loadImpossibleTimer[e->channel]->Enabled = false;
+				loadedText[e->channel]->Highlighted = false;
+			}
+			else
+			{
+				safe_cast<ChannelTimeoutStruct^>(loadImpossibleTimer[e->channel]->Tag)->timeout = 10;
+				loadImpossibleTimer[e->channel]->Enabled = true;
+			}
 		}
 		break;
 	case CHANGE_MOVEINDEX:
@@ -37,5 +48,21 @@ System::Void BAPSPresenterMain::TrackList_RequestChange(System::Object^  o, BAPS
 			msgQueue->Enqueue(gcnew ActionMessageU32intU32intString(cmd, (u32int)BAPSNET_FILEITEM, e->index, directoryList[e->index]->getItem(e->index2)->ToString()));
 		}
 		break;
+	}
+}
+
+System::Void BAPSPresenterMain::loadImpossibleFlicker(System::Object ^  sender, System::EventArgs ^  e)
+{
+	System::Windows::Forms::Timer^ timer = safe_cast<System::Windows::Forms::Timer^>(sender);
+	ChannelTimeoutStruct^ cts = safe_cast<ChannelTimeoutStruct^>(timer->Tag);
+	cts->timeout--;
+	if (cts->timeout == 0)
+	{
+		timer->Enabled = false;
+		loadedText[cts->channel]->Highlighted = false;
+	}
+	else
+	{
+		loadedText[cts->channel]->Highlighted = !loadedText[cts->channel]->Highlighted;
 	}
 }

@@ -200,6 +200,8 @@ namespace BAPSPresenter {
 		array<BAPSButton^>^		channelPause;
 		array<BAPSButton^>^		channelStop;
 		array<BAPSPresenter::TrackTime^>^ trackTime;
+		array<System::Windows::Forms::Timer^>^ loadImpossibleTimer;
+		array<System::Windows::Forms::Timer^>^ nearEndTimer;
 private: System::Windows::Forms::ContextMenuStrip^  trackListContextMenuStrip;
 
 private: System::Windows::Forms::ToolStripMenuItem^  resetChannelStripMenuItem;
@@ -256,6 +258,8 @@ private:
 		System::Void TrackList_RequestChange(System::Object^  o, BAPSPresenter::RequestChangeEventArgs^  e);
 		System::Void trackListContextMenuStrip_Opening(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e);
 		System::Void trackListContextMenuStrip_ItemClicked(System::Object^  sender, System::Windows::Forms::ToolStripItemClickedEventArgs^  e);
+		System::Void loadImpossibleFlicker(System::Object ^  sender, System::EventArgs ^  e);
+		System::Void nearEndFlash(System::Object ^  sender, System::EventArgs ^  e);
 		/** ### END DESIGNER PRIVATE EVENT HANDLERS ### **/
 		/** ### DESIGNER PRIVATE VARIABLES ### **/
 
@@ -438,7 +442,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2VolumeBar->Maximum = 100;
 			this->Channel2VolumeBar->Name = L"Channel2VolumeBar";
 			this->Channel2VolumeBar->Orientation = System::Windows::Forms::Orientation::Vertical;
-			this->Channel2VolumeBar->Size = System::Drawing::Size(42, 286);
+			this->Channel2VolumeBar->Size = System::Drawing::Size(45, 286);
 			this->Channel2VolumeBar->TabIndex = 211;
 			this->Channel2VolumeBar->TickFrequency = 10;
 			this->Channel2VolumeBar->TickStyle = System::Windows::Forms::TickStyle::TopLeft;
@@ -452,7 +456,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1VolumeBar->Maximum = 100;
 			this->Channel1VolumeBar->Name = L"Channel1VolumeBar";
 			this->Channel1VolumeBar->Orientation = System::Windows::Forms::Orientation::Vertical;
-			this->Channel1VolumeBar->Size = System::Drawing::Size(42, 286);
+			this->Channel1VolumeBar->Size = System::Drawing::Size(45, 286);
 			this->Channel1VolumeBar->TabIndex = 13;
 			this->Channel1VolumeBar->TickFrequency = 10;
 			this->Channel1VolumeBar->TickStyle = System::Windows::Forms::TickStyle::TopLeft;
@@ -466,7 +470,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0VolumeBar->Maximum = 100;
 			this->Channel0VolumeBar->Name = L"Channel0VolumeBar";
 			this->Channel0VolumeBar->Orientation = System::Windows::Forms::Orientation::Vertical;
-			this->Channel0VolumeBar->Size = System::Drawing::Size(42, 286);
+			this->Channel0VolumeBar->Size = System::Drawing::Size(45, 286);
 			this->Channel0VolumeBar->TabIndex = 11;
 			this->Channel0VolumeBar->TickFrequency = 10;
 			this->Channel0VolumeBar->TickStyle = System::Windows::Forms::TickStyle::TopLeft;
@@ -649,6 +653,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->newMessageLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->newMessageLabel->ForeColor = System::Drawing::Color::MidnightBlue;
+			this->newMessageLabel->HighlightColor = System::Drawing::Color::Red;
+			this->newMessageLabel->Highlighted = false;
 			this->newMessageLabel->InfoText = L"";
 			this->newMessageLabel->Location = System::Drawing::Point(7, 615);
 			this->newMessageLabel->Name = L"newMessageLabel";
@@ -663,39 +669,45 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Label->BackColor = System::Drawing::Color::Transparent;
 			this->Channel2Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel2Label->HighlightColor = System::Drawing::Color::Red;
+			this->Channel2Label->Highlighted = false;
 			this->Channel2Label->InfoText = L"";
 			this->Channel2Label->Location = System::Drawing::Point(675, 108);
 			this->Channel2Label->Name = L"Channel2Label";
 			this->Channel2Label->Size = System::Drawing::Size(256, 28);
 			this->Channel2Label->TabIndex = 212;
 			this->Channel2Label->TabStop = false;
-			this->Channel2Label->Text = L"Channel C";
+			this->Channel2Label->Text = L"Channel 3";
 			// 
 			// Channel1Label
 			// 
 			this->Channel1Label->BackColor = System::Drawing::Color::Transparent;
 			this->Channel1Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel1Label->HighlightColor = System::Drawing::Color::Red;
+			this->Channel1Label->Highlighted = false;
 			this->Channel1Label->InfoText = L"";
 			this->Channel1Label->Location = System::Drawing::Point(379, 108);
 			this->Channel1Label->Name = L"Channel1Label";
 			this->Channel1Label->Size = System::Drawing::Size(256, 28);
 			this->Channel1Label->TabIndex = 212;
 			this->Channel1Label->TabStop = false;
-			this->Channel1Label->Text = L"Channel B";
+			this->Channel1Label->Text = L"Channel 2";
 			// 
 			// Channel0Label
 			// 
 			this->Channel0Label->BackColor = System::Drawing::Color::Transparent;
 			this->Channel0Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel0Label->HighlightColor = System::Drawing::Color::Red;
+			this->Channel0Label->Highlighted = false;
 			this->Channel0Label->InfoText = L"";
 			this->Channel0Label->Location = System::Drawing::Point(83, 108);
 			this->Channel0Label->Name = L"Channel0Label";
 			this->Channel0Label->Size = System::Drawing::Size(256, 28);
 			this->Channel0Label->TabIndex = 212;
 			this->Channel0Label->TabStop = false;
-			this->Channel0Label->Text = L"Channel A";
+			this->Channel0Label->Text = L"Channel 1";
 			// 
 			// Directory2
 			// 
@@ -732,6 +744,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Length->BackColor = System::Drawing::Color::Transparent;
 			this->Channel2Length->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel2Length->HighlightColor = System::Drawing::Color::Red;
+			this->Channel2Length->Highlighted = false;
 			this->Channel2Length->InfoText = L"Total:";
 			this->Channel2Length->Location = System::Drawing::Point(859, 579);
 			this->Channel2Length->Name = L"Channel2Length";
@@ -745,6 +759,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Length->BackColor = System::Drawing::Color::Transparent;
 			this->Channel1Length->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel1Length->HighlightColor = System::Drawing::Color::Red;
+			this->Channel1Length->Highlighted = false;
 			this->Channel1Length->InfoText = L"Total:";
 			this->Channel1Length->Location = System::Drawing::Point(563, 579);
 			this->Channel1Length->Name = L"Channel1Length";
@@ -758,6 +774,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0Length->BackColor = System::Drawing::Color::Transparent;
 			this->Channel0Length->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel0Length->HighlightColor = System::Drawing::Color::Red;
+			this->Channel0Length->Highlighted = false;
 			this->Channel0Length->InfoText = L"Total:";
 			this->Channel0Length->Location = System::Drawing::Point(267, 579);
 			this->Channel0Length->Name = L"Channel0Length";
@@ -771,6 +789,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2TimeLeft->BackColor = System::Drawing::Color::Transparent;
 			this->Channel2TimeLeft->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel2TimeLeft->HighlightColor = System::Drawing::Color::HotPink;
+			this->Channel2TimeLeft->Highlighted = false;
 			this->Channel2TimeLeft->InfoText = L"Remaining:";
 			this->Channel2TimeLeft->Location = System::Drawing::Point(767, 579);
 			this->Channel2TimeLeft->Name = L"Channel2TimeLeft";
@@ -784,6 +804,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1TimeLeft->BackColor = System::Drawing::Color::Transparent;
 			this->Channel1TimeLeft->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel1TimeLeft->HighlightColor = System::Drawing::Color::HotPink;
+			this->Channel1TimeLeft->Highlighted = false;
 			this->Channel1TimeLeft->InfoText = L"Remaining:";
 			this->Channel1TimeLeft->Location = System::Drawing::Point(471, 579);
 			this->Channel1TimeLeft->Name = L"Channel1TimeLeft";
@@ -797,6 +819,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0TimeLeft->BackColor = System::Drawing::Color::Transparent;
 			this->Channel0TimeLeft->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel0TimeLeft->HighlightColor = System::Drawing::Color::HotPink;
+			this->Channel0TimeLeft->Highlighted = false;
 			this->Channel0TimeLeft->InfoText = L"Remaining:";
 			this->Channel0TimeLeft->Location = System::Drawing::Point(175, 579);
 			this->Channel0TimeLeft->Name = L"Channel0TimeLeft";
@@ -810,6 +834,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2TimeGone->BackColor = System::Drawing::Color::Transparent;
 			this->Channel2TimeGone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel2TimeGone->HighlightColor = System::Drawing::Color::Red;
+			this->Channel2TimeGone->Highlighted = false;
 			this->Channel2TimeGone->InfoText = L"Elapsed:";
 			this->Channel2TimeGone->Location = System::Drawing::Point(675, 579);
 			this->Channel2TimeGone->Name = L"Channel2TimeGone";
@@ -823,6 +849,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1TimeGone->BackColor = System::Drawing::Color::Transparent;
 			this->Channel1TimeGone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel1TimeGone->HighlightColor = System::Drawing::Color::Red;
+			this->Channel1TimeGone->Highlighted = false;
 			this->Channel1TimeGone->InfoText = L"Elapsed:";
 			this->Channel1TimeGone->Location = System::Drawing::Point(379, 579);
 			this->Channel1TimeGone->Name = L"Channel1TimeGone";
@@ -836,6 +864,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0TimeGone->BackColor = System::Drawing::Color::Transparent;
 			this->Channel0TimeGone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->Channel0TimeGone->HighlightColor = System::Drawing::Color::Red;
+			this->Channel0TimeGone->Highlighted = false;
 			this->Channel0TimeGone->InfoText = L"Elapsed:";
 			this->Channel0TimeGone->Location = System::Drawing::Point(83, 579);
 			this->Channel0TimeGone->Name = L"Channel0TimeGone";
@@ -850,6 +880,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2LoadedText->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->Channel2LoadedText->ForeColor = System::Drawing::Color::MidnightBlue;
+			this->Channel2LoadedText->HighlightColor = System::Drawing::Color::MediumTurquoise;
+			this->Channel2LoadedText->Highlighted = false;
 			this->Channel2LoadedText->InfoText = L"";
 			this->Channel2LoadedText->Location = System::Drawing::Point(675, 458);
 			this->Channel2LoadedText->Name = L"Channel2LoadedText";
@@ -864,6 +896,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1LoadedText->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->Channel1LoadedText->ForeColor = System::Drawing::Color::MidnightBlue;
+			this->Channel1LoadedText->HighlightColor = System::Drawing::Color::MediumTurquoise;
+			this->Channel1LoadedText->Highlighted = false;
 			this->Channel1LoadedText->InfoText = L"";
 			this->Channel1LoadedText->Location = System::Drawing::Point(379, 458);
 			this->Channel1LoadedText->Name = L"Channel1LoadedText";
@@ -878,6 +912,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0LoadedText->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->Channel0LoadedText->ForeColor = System::Drawing::Color::MidnightBlue;
+			this->Channel0LoadedText->HighlightColor = System::Drawing::Color::MediumTurquoise;
+			this->Channel0LoadedText->Highlighted = false;
 			this->Channel0LoadedText->InfoText = L"";
 			this->Channel0LoadedText->Location = System::Drawing::Point(83, 459);
 			this->Channel0LoadedText->Name = L"Channel0LoadedText";

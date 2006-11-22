@@ -137,7 +137,7 @@ private:
 	void synchronizeChatters();
 
 	/** DATABASE actions **/
-	bool searchMusicLib(System::String^ artist, System::String^ title, int trackid);
+	bool searchMusicLib(System::String^ artist, System::String^ title, int trackid, int page);
 	LibraryTrack^ getLibraryTrack(int index);
 	void setupDatabaseConnection();
 	bool executeQuery(System::String^ sql);
@@ -193,5 +193,8 @@ private:
 	System::Threading::Mutex^ sendMutex;
 	/** Current user security info **/
 	UserManager^ userInfo;
+	/** Flags to indicate how record library results should be ordered **/
+	int libraryOrderBy;
+	int libraryAscDes;
 
 };

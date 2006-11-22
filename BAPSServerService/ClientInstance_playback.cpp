@@ -150,7 +150,7 @@ BEGIN_ACTION_BLOCKED2(loadFile, System::Byte channel, u32int index)
 										  te->getText());
 				ClientManager::getAudio()->getPlaylist(channel)->setLoadedTextEntry(index);
 			}
-			else
+			else if (!ClientManager::getAudio()->getOutput(channel)->isPlaying())
 			{
 				if (ClientManager::getAudio()->getOutput(channel)->loadTrack(safe_cast<Track^>(thisEntry)))
 				{

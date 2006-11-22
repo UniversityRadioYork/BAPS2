@@ -270,6 +270,10 @@ System::Void BAPSPresenterMain::ChannelOperation_Click(System::Object ^  sender,
 {
 	System::Windows::Forms::Label ^ lbl = static_cast<System::Windows::Forms::Label^>(sender);
 	ChannelOperationLookup^ col = static_cast<ChannelOperationLookup^>(lbl->Tag);
+	if (col->co != BAPSNET_PLAY)
+	{
+		trackList[col->channel]->clearPendingLoadRequest();
+	}
 	Command cmd = BAPSNET_PLAYBACK | col->co | (col->channel & 0x3f);
 	msgQueue->Enqueue(gcnew ActionMessage(cmd));
 }
@@ -407,4 +411,12 @@ System::Void BAPSPresenterMain::newChatMessage_TextChanged(System::Object^  send
 	{
 		this->AcceptButton = nullptr;
 	}
+}
+
+System::Void BAPSPresenterMain::nearEndFlash(System::Object ^  sender, System::EventArgs ^  e)
+{
+	System::Windows::Forms::Timer^ timer = safe_cast<System::Windows::Forms::Timer^>(sender);
+	int channel = safe_cast<int>(timer->Tag);
+
+	timeLeftText[channel]->Highlighted = !timeLeftText[channel]->Highlighted ;
 }

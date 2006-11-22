@@ -172,9 +172,9 @@ namespace BAPSPresenter {
 			this->otherUser->ForeColor = System::Drawing::SystemColors::WindowText;
 			this->otherUser->Location = System::Drawing::Point(150, 102);
 			this->otherUser->Name = L"otherUser";
-			this->otherUser->Size = System::Drawing::Size(114, 20);
+			this->otherUser->Size = System::Drawing::Size(131, 20);
 			this->otherUser->TabIndex = 3;
-			this->otherUser->Text = L"<Your e-mail address>";
+			this->otherUser->Text = L"<E-mail / BAPS showid>";
 			this->otherUser->Enter += gcnew System::EventHandler(this, &LoadShowDialog::otherUser_Enter);
 			// 
 			// currentUserRadio

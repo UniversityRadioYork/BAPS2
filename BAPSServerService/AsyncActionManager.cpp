@@ -45,14 +45,12 @@ void AsyncActionManager::doActions(System::Object^)
 				try
 				{
 					recordlibDataAdapter->Fill(updateDataset);
-				}/*
-				catch (System::ApplicationException^ e)
+				}
+				catch (System::IO::IOException^ e)
 				{
-					LogManager::write(System::String::Concat("Application Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
-					Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYERROR | 2;
-					ClientManager::send(this, cmd, "Error: Check Database Server Name?");
+					LogManager::write(System::String::Concat("IO Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
 					return;
-				}*/
+				}
 				catch (NpgsqlException^ e)
 				{
 					/** Normally this will be a cannot connect as we should be able to guarantee a correct
@@ -217,14 +215,11 @@ void AsyncActionManager::doActions(System::Object^)
 																  "('",ServerID, "','",AudioID,"')"); 
 					bapsDataAdapter->Fill(updateDataset);
 				}
-			}/*
-			catch (System::ApplicationException^ e)
+			}
+			catch (System::IO::IOException^ e)
 			{
-				LogManager::write(System::String::Concat("Application Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
-				Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYERROR | 2;
-				ClientManager::send(this, cmd, "Error: Check Database Server Name?");
-				return;
-			}*/
+				LogManager::write(System::String::Concat("IO Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
+			}
 			catch (NpgsqlException^ e)
 			{
 				/** Normally this will be a cannot connect as we should be able to guarantee a correct

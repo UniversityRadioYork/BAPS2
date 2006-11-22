@@ -27,7 +27,8 @@ ClientInstance::ClientInstance()
 	userInfo = gcnew UserManager();
 
 	recordlibDB = nullptr;
-
+	libraryOrderBy = BAPSNET_ORDER_BYARTIST;
+	libraryAscDes = BAPSNET_ORDER_ASCENDING;
 	/** Create the controlLoop thread so that the current thread can go on doing what it wants to do **/
 	clientControlThread = gcnew System::Threading::Thread(gcnew System::Threading::ThreadStart(this,&ClientInstance::clientControlLoop));
 	try
@@ -353,7 +354,14 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 			{
 				System::String^ artist = connection->receiveS();
 				System::String^ title = connection->receiveS();
-				searchMusicLib(artist, title, -1);
+				int pageNum = connection->receiveI();
+				searchMusicLib(artist, title, -1, pageNum);
+			}
+			break;
+		case BAPSNET_LIBRARYORDERING:
+			{
+				libraryOrderBy = connection->receiveI();
+				libraryAscDes = connection->receiveI();
 			}
 			break;
 		case BAPSNET_GETSHOWS:

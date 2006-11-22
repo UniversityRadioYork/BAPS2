@@ -124,7 +124,7 @@ void ServerSocket::send(array<System::Byte>^ bytes)
 		}
 		catch (System::Net::Sockets::SocketException^ e)
 		{
-			if (static_cast<int>(e->ErrorCode) != WSAEWOULDBLOCK)
+			if (static_cast<System::Net::Sockets::SocketError>(e->ErrorCode) != System::Net::Sockets::SocketError::WouldBlock)
 			{
 				/** Connection error must have occurred, rethrow exception **/
 				throw e;
@@ -160,7 +160,7 @@ array<System::Byte>^ ServerSocket::receive(int count)
 		}
 		catch (System::Net::Sockets::SocketException^ e)
 		{
-			if (static_cast<int>(e->ErrorCode) != WSAEWOULDBLOCK)
+			if (static_cast<System::Net::Sockets::SocketError>(e->ErrorCode) != System::Net::Sockets::SocketError::WouldBlock)
 			{
 				/** Re-throw exception if it is not just notifying the socket would have blocked
 				 *  if it were in blocking mode
@@ -190,7 +190,7 @@ System::Net::IPAddress^ ServerSocket::accept ( ServerSocket^ sock )
 		catch (System::Net::Sockets::SocketException^ e)
 		{
 			/** Only ignore the notification of would block **/
-			if (static_cast<int>(e->ErrorCode) != WSAEWOULDBLOCK)
+			if (static_cast<System::Net::Sockets::SocketError>(e->ErrorCode) != System::Net::Sockets::SocketError::WouldBlock)
 			{
 				/** Re-throw to allow the caller to deal with the issue **/
 				throw e;

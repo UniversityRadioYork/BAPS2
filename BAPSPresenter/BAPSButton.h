@@ -54,6 +54,18 @@ namespace BAPSPresenter
 				HighlightChanged();
 			}
 		}
+		virtual property System::String^ Text
+		{
+			System::String^ get() override
+			{
+				return __super::Text;
+			}
+			void set(System::String^ value) override
+			{
+				__super::Text = value;
+				this->Invalidate();
+			}
+		}
 		property System::Windows::Forms::DialogResult DialogResult 
 		{
 			// Add implementation to the IButtonControl.DialogResult property.

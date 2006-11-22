@@ -6,3 +6,4 @@
 // TODO: reference additional headers your program requires here
 
 delegate void MethodInvokerObjKeyEventArgs(System::Object^, System::Windows::Forms::KeyEventArgs^);
+#include "RecordLibrarySearch.h"

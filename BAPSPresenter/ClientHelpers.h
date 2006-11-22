@@ -54,4 +54,13 @@ namespace BAPSPresenter
 			:fromIndex(_fromIndex), fromFolder(_fromFolder)
 		{}
 	};
+
+	ref struct ChannelTimeoutStruct
+	{
+		int channel;
+		int timeout;
+		ChannelTimeoutStruct(int _channel, int _timeout)
+			:channel(_channel), timeout(_timeout)
+		{}
+	};
 };

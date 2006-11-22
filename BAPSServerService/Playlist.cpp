@@ -234,5 +234,27 @@ void Playlist::clean(int newLength)
 	/** Tell all clients what has happened **/
 	Command cmd = BAPSNET_PLAYLIST | BAPSNET_RESETPLAYLIST | channel;
 	ClientManager::broadcast( cmd );
-	ClientManager::getAudio()->getOutput(channel)->resetChannel(true);
+	if (ClientManager::getAudio()->getOutput(channel)->isPlaying())
+	{
+		Track^ t = ClientManager::getAudio()->getOutput(channel)->getLoadedTrack();
+		addEntry(t);
+		/** Fill the client in with details of the (still) loaded track **/
+		cmd = BAPSNET_PLAYBACK | BAPSNET_LOAD | (channel & 0x3f);
+		ClientManager::broadcast( cmd,
+								(u32int)t->getPosition(),
+								(u32int)t->getType(),
+								t->ToString(),
+								ClientManager::getAudio()->getOutput(channel)->getFileDuration());
+		Command cmd = BAPSNET_PLAYBACK | BAPSNET_POSITION | (channel & 0x3f);
+		ClientManager::broadcast( cmd, (u32int)ClientManager::getAudio()->getOutput(channel)->getFilePosition());
+		ClientManager::broadcast(BAPSNET_PLAYBACK | BAPSNET_CUEPOSITION | (channel & 0x3f),
+								 (u32int)t->CuePosition);
+
+		ClientManager::broadcast(BAPSNET_PLAYBACK | BAPSNET_INTROPOSITION | (channel & 0x3f),
+							 (u32int)t->IntroPosition);
+	}
+	else
+	{
+		ClientManager::getAudio()->getOutput(channel)->resetChannel(true);
+	}
 }

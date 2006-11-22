@@ -10,6 +10,7 @@
 #include "ActionMessageString.h"
 #include "ActionMessageStringU32int.h"
 #include "ActionMessageStringString.h"
+#include "ActionMessageStringStringU32int.h"
 #include "ActionMessageStringStringString.h"
 #include "ActionMessageFloat.h"
 

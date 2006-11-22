@@ -60,7 +60,7 @@ bool PlayoutObject::play()
 {
 	/** Play succeeds iff channel is loaded and the channel accepts the play command **/
 	bool returnValue = false;
-	if (isLoaded() && isPlayable())
+	if (isLoaded() && isPlayable() && !isPlaying())
 	{
 		pChannel->Pause();
 		pChannel->SetPosition(loadedTrack->CuePosition);
@@ -72,7 +72,7 @@ bool PlayoutObject::play()
 			ClientManager::broadcast(cmd);
 		}
 	}
-	if (!returnValue)
+	if (!returnValue && !isPlaying())
 	{
 		Command cmd = BAPSNET_SYSTEM | BAPSNET_SENDLOGMESSAGE;
 		System::String^ message = System::String::Concat("Channel: ", channelNumber.ToString(), ", Play failed: No file loaded\n");

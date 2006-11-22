@@ -59,7 +59,6 @@ namespace BAPSPresenter
             ItemHeight = (int)(g->MeasureString("A", this->Font).Height * 1.3);
             delete g;
         }
-
 		void addItem(System::Object^ descr)
 		{
 			items->Add(descr);
@@ -249,6 +248,7 @@ namespace BAPSPresenter
 			System::Drawing::Bitmap^ offScreen;
 			System::Collections::ArrayList^ items;
 			BAPSScrollBar^ scroll;
+
     };
 
 };

@@ -174,7 +174,14 @@ System::Void LoadShowDialog::goButton_Click(System::Object ^  sender, System::Ev
 					{
 						/** If we find a selected option get the value out of its tag **/
 						MatrixLookup^ matrixLookup = static_cast<MatrixLookup^>(radioButton->Tag);
-						/** updare the server **/
+
+						System::Windows::Forms::CheckBox^ cb = static_cast<System::Windows::Forms::CheckBox^>(panel->Controls[totalChannels+1]);
+						if (cb->Checked)
+						{
+							Command cmd = BAPSNET_PLAYLIST | BAPSNET_RESETPLAYLIST | matrixLookup->channel;
+							msgQueue->Enqueue(gcnew ActionMessage(cmd));
+						}
+						/** update the server **/
 						Command cmd = BAPSNET_DATABASE | BAPSNET_ASSIGNLISTING | matrixLookup->channel;
 						msgQueue->Enqueue(gcnew ActionMessageU32int(cmd, matrixLookup->listingid));
 					}
@@ -281,13 +288,13 @@ void LoadShowDialog::addListing(System::Object^ _listingid, System::Object^ _cha
 			if (i < totalChannels)
 			{
 				/** just a channel number for the read channels **/
-				label->Text = i.ToString();
+				label->Text = (i+1).ToString();
 			}
 			else
 			{
-				label->Size = System::Drawing::Size(64, 16);
+				label->Size = System::Drawing::Size(16, 16);
 				/** The last one is none e.g. not assigned **/
-				label->Text = "None";
+				label->Text = "-";
 			}
 			/** add it onto the form **/
 			this->Controls->Add(label);
@@ -328,6 +335,25 @@ void LoadShowDialog::addListing(System::Object^ _listingid, System::Object^ _cha
 		/** Add the button onto the PANEL **/
 		panel->Controls->Add(radioButton);
 	}
+	if (listingResultCountLeft == 0)
+	{
+		/** When we get to the last listing we add the channel labels **/
+		System::Windows::Forms::Label^ label = gcnew System::Windows::Forms::Label();
+		label->Location = System::Drawing::Point(125+((totalChannels+1)*24), 48);
+		label->Size = System::Drawing::Size(100, 16);
+		label->TabStop = false;
+		label->BackColor = System::Drawing::Color::Transparent;
+		label->Text = "Clear on load";
+		this->Controls->Add(label);
+	}
+	System::Windows::Forms::CheckBox^ checkbox = gcnew System::Windows::Forms::CheckBox();
+	checkbox->BackColor = System::Drawing::Color::Transparent;
+	checkbox->Location = System::Drawing::Point(155+((totalChannels+1)*24), 0);
+	checkbox->Text = "";
+	checkbox->Size = System::Drawing::Size(16, 16);
+	checkbox->Checked = true;
+	panel->Controls->Add(checkbox);
+
 	/** Add the listing description **/
 	System::Windows::Forms::Label^ label = gcnew System::Windows::Forms::Label();
 	label->Location = System::Drawing::Point(16, 0);

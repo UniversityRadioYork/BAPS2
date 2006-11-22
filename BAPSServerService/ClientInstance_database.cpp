@@ -7,7 +7,7 @@
  *  This file contains the implementations of all the MUSICLIB functionality
 **/
 
-bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ title, int trackid)
+bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ title, int trackid, int page)
 {
 	bool byTrackid = (trackid != -1);
 	System::String^ connStr = System::String::Concat("Server=", CONFIG_GETSTR(CONFIG_DBSERVER), ";");
@@ -31,11 +31,11 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 		/** Basic select statement WORK NEEDED: update this sql to be restricted to the correct level **/
 		if (attempt == 0)
 		{
-			sql = "SELECT recordid, trackid, title, artist, extract(epoch from intro) as intro, location FROM track WHERE ";
+			sql = "SELECT track.recordid, trackid, track.title, track.artist, extract(epoch from intro) as intro, track.location FROM track INNER JOIN record USING (recordid) WHERE ";
 		}
 		else
 		{
-			sql = "SELECT recordid, trackid, title, artist, extract(epoch from intro) as intro FROM track WHERE ";
+			sql = "SELECT track.recordid, trackid, track.title, track.artist, extract(epoch from intro) as intro FROM track INNER JOIN record USING (recordid) WHERE ";
 		}
 
 		NpgsqlCommand^ command = gcnew NpgsqlCommand(sql, recordlibDB);
@@ -47,7 +47,7 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 		{
 			if (artist->Length !=0)
 			{
-				sql = System::String::Concat(sql, "LOWER(artist) LIKE LOWER('%'||:artist||'%')");
+				sql = System::String::Concat(sql, "LOWER(track.artist) LIKE LOWER('%'||:artist||'%')");
 				command->Parameters->Add(gcnew NpgsqlParameter("artist", System::Data::DbType::AnsiString));
 				command->Parameters["artist"]->Value = artist;
 			}
@@ -57,12 +57,31 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 			}
 			if (title->Length !=0)
 			{
-				sql = System::String::Concat(sql, "LOWER(title) LIKE LOWER('%'||:title||'%')");
+				sql = System::String::Concat(sql, "LOWER(track.title) LIKE LOWER('%'||:title||'%')");
 				command->Parameters->Add(gcnew NpgsqlParameter("title", System::Data::DbType::AnsiString));
 				command->Parameters["title"]->Value = title;
 			}
 		}
-		sql = System::String::Concat(sql, "AND digitised='t'  ORDER BY artist, title LIMIT 200");
+		sql = sql + "AND digitised='t' ORDER BY ";
+		System::String^ desasc = "";
+		if (libraryAscDes == BAPSNET_ORDER_DESCENDING)
+		{
+			desasc = "DESC";
+		}
+
+		switch (libraryOrderBy)
+		{
+		case BAPSNET_ORDER_BYARTIST:
+			sql = sql + "track.artist " + desasc + ", track.title";
+			break;
+		case BAPSNET_ORDER_BYTITLE:
+			sql = sql + "track.title " + desasc + ", track.artist";
+			break;
+		case BAPSNET_ORDER_BYDATEADDED:
+			sql = sql + "dateadded " + desasc;
+			break;
+		}
+		sql = sql + " OFFSET "+(page*200).ToString()+" LIMIT 200";
 		command->CommandText = sql;
 		
 		NpgsqlDataAdapter^ recordlibDataAdapter = gcnew NpgsqlDataAdapter();
@@ -72,14 +91,14 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 		try
 		{
 			recordlibDataAdapter->Fill(recordlibDataset);
-		}/*
-		catch (System::ApplicationException^ e)
+		}
+		catch (System::IO::IOException^ e)
 		{
-			LogManager::write(System::String::Concat("Application Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
+			LogManager::write(System::String::Concat("IO Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
 			Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYERROR | 2;
 			ClientManager::send(this, cmd, "Error: Check Database Server Name?");
-			return;
-		}*/
+			return false;
+		}
 		catch (NpgsqlException^ e)
 		{
 			/** Normally this will be a cannot connect as we should be able to guarantee a correct
@@ -288,6 +307,7 @@ void ClientInstance::setupDatabaseConnection()
 
 	/** Connect to the baps database **/
 	bapsDB = gcnew NpgsqlConnection(connStr);
+
 	bapsDataset = gcnew System::Data::DataSet();
 }
 
@@ -299,14 +319,14 @@ bool ClientInstance::executeQuery(System::String^ sql)
 	try
 	{
 		bapsDataAdapter->Fill(bapsDataset);
-	}/*
-	catch (System::ApplicationException^ e)
+	}
+	catch (System::IO::IOException^ e)
 	{
-		LogManager::write(System::String::Concat("Application Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
-		Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYERROR | 2;
+		LogManager::write(System::String::Concat("IO Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
+		Command cmd = BAPSNET_DATABASE | BAPSNET_BAPSDBERROR | 3;
 		ClientManager::send(this, cmd, "Error: Check Database Server Name?");
-		return;
-	}*/
+		return false;
+	}
 	catch (NpgsqlException^ e)
     {
 		/** Normally this will be a cannot connect as we should be able to guarantee a correct
@@ -334,7 +354,7 @@ bool ClientInstance::executeQuery(System::String^ sql)
 		 *  Send/Log an error and quit the function
 		**/
 		LogManager::write(System::String::Concat("Possible: bapsdb connection already open, program error:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
-		Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYERROR | 2;
+		Command cmd = BAPSNET_DATABASE | BAPSNET_BAPSDBERROR | 2;
 		ClientManager::send(this, cmd, "Program error - seek technical advice");
 		return false;
 	}
@@ -555,7 +575,6 @@ void ClientInstance::assignListing(int channel, int listingid)
 			}
 
 		} 
-		ClientManager::getAudio()->getPlaylist(channel)->clean();
 		try
 		{
 			/** Iterate through the rows pulling out data as we need it. **/
@@ -573,7 +592,7 @@ void ClientInstance::assignListing(int channel, int listingid)
 				else if (!myRow->IsNull(trackid))
 				{
 					/** Will return false if an error occurred **/
-					if (searchMusicLib(nullptr, nullptr, System::Convert::ToInt32(myRow[trackid])))
+					if (searchMusicLib(nullptr, nullptr, System::Convert::ToInt32(myRow[trackid]), 0))
 					{
 						/** Will return null if the track is not in the library or no longer digitised **/
 						LibraryTrack^ tempTrack = getLibraryTrack(0);

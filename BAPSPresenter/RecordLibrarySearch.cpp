@@ -25,6 +25,7 @@ System::Void RecordLibrarySearch::SearchButton_Click(System::Object ^  sender, S
 {
 	/** Starting a new search means getting rid of the old one **/
 	ResultsBox->clearList();
+	ResultsBox->Enabled = true;
 	connectionStatus->Text = "Connected";
 	/** Set the artist to a wildcard **/
 	System::String^ _artist = "%";
@@ -42,9 +43,11 @@ System::Void RecordLibrarySearch::SearchButton_Click(System::Object ^  sender, S
 	}
 	/** If neither box has anything in it is rejected otherwise the entire DB is returned **/
 	/** WORK NEEDED: server or client side rejection of % % for artist and title **/
-	if (Artist->Tag == nullptr && Title->Tag == nullptr)
+	if (Artist->Tag == nullptr && Title->Tag == nullptr && !dateAddedRadioButton->Checked)
 	{
 		resultsInfo->Text = "Empty Artist/Title";
+		ResultsBox->addItem("Empty Artist/Title");
+		ResultsBox->Enabled = false;
 	}
 	else
 	{
@@ -58,8 +61,29 @@ System::Void RecordLibrarySearch::SearchButton_Click(System::Object ^  sender, S
 		ResultsBox->Enabled = false;
 		numberOfResults = 0;
 		/** Submit the request **/
-		Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYSEARCH;
-		msgQueue->Enqueue(gcnew ActionMessageStringString(cmd, _artist, _title));
+		u32int orderby = BAPSNET_ORDER_BYARTIST;
+		if (artistRadioButton->Checked)
+		{
+			orderby = BAPSNET_ORDER_BYARTIST;
+		}
+		else if (titleRadioButton->Checked)
+		{
+			orderby = BAPSNET_ORDER_BYTITLE;
+		}
+		else if (dateAddedRadioButton->Checked)
+		{
+			orderby = BAPSNET_ORDER_BYDATEADDED;
+		}
+		u32int ascdes = BAPSNET_ORDER_ASCENDING;
+		if (reverseOrderCheckBox->Checked)
+		{
+			ascdes = BAPSNET_ORDER_DESCENDING;
+		}
+		Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYORDERING;
+		msgQueue->Enqueue(gcnew ActionMessageU32intU32int(cmd, orderby, ascdes));
+
+		cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYSEARCH;
+		msgQueue->Enqueue(gcnew ActionMessageStringStringU32int(cmd, _artist, _title, pageNum));
 	}
 }
 
@@ -138,6 +162,10 @@ void RecordLibrarySearch::add(System::Object^ _index, System::String^ descriptio
 		progressBar->Maximum = 0;
 		/** Enable all the buttons again **/
 		SearchButton->Enabled = true;
+		pageNum++;
+		SearchButton->Text = "Search Again";
+	SearchButton->Font = gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0));
 		AddToChannel0->Enabled = true;
 		AddToChannel1->Enabled = true;
 		AddToChannel2->Enabled = true;
@@ -165,4 +193,26 @@ System::Void RecordLibrarySearch::RecordLibrarySearch_KeyDown(System::Object^  s
 	MethodInvokerObjKeyEventArgs^ mi = gcnew MethodInvokerObjKeyEventArgs(bapsPresenterMain, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
 	array<System::Object^>^ dd = gcnew array<System::Object^>(2) {bapsPresenterMain, e};
 	this->Invoke(mi, dd);
+}
+System::Void RecordLibrarySearch::Some_TextChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	pageNum = 0;
+
+	SearchButton->Font = gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0));
+	SearchButton->Text = "Search";
+}
+
+System::Void RecordLibrarySearch::RadioButton_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Some_TextChanged(sender, e);
+
+	if (sender == dateAddedRadioButton)
+	{
+		reverseOrderCheckBox->Checked = true;
+	}
+	else
+	{
+		reverseOrderCheckBox->Checked = false;
+	}
 }

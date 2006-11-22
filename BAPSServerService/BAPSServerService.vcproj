@@ -199,12 +199,12 @@
 			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
 		/>
 		<AssemblyReference
-			RelativePath="..\Common\Npgsql1.0RC1\Npgsql\bin\ms2.0\Mono.Security.dll"
-			AssemblyName="Mono.Security, Version=2.0.0.0, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL"
+			RelativePath="..\Common\Npgsql1.0\Npgsql\bin\ms2.0\Npgsql.dll"
+			AssemblyName="Npgsql, Version=1.0.0.0, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL"
 		/>
 		<AssemblyReference
-			RelativePath="..\Common\Npgsql1.0RC1\Npgsql\bin\ms2.0\Npgsql.dll"
-			AssemblyName="Npgsql, Version=0.99.1.0, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL"
+			RelativePath="..\Common\Npgsql1.0\Npgsql\bin\ms2.0\Mono.Security.dll"
+			AssemblyName="Mono.Security, Version=2.0.0.0, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL"
 		/>
 	</References>
 	<Files>
@@ -460,6 +460,7 @@
 					>
 					<File
 						RelativePath=".\BAPSServerServiceWinService.resX"
+						SubType="Designer"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -486,6 +487,7 @@
 					>
 					<File
 						RelativePath=".\ProjectInstaller.resX"
+						SubType="Designer"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"

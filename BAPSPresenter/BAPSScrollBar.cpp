@@ -65,6 +65,9 @@ void BAPSScrollBar::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
 		// clicked in top button
 		indexAtTop -= 1;
 		TopIndexChanged(this, System::EventArgs::Empty);
+		goingUp = true;
+		timer->Interval = 100;
+		timer->Enabled=true;
 	}
 	rect.Y = this->ClientRectangle.Height-scrollButtonHeight;
 	if (rect.Contains(e->X, e->Y) && totalItems-viewableItems>indexAtTop)
@@ -72,6 +75,9 @@ void BAPSScrollBar::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
 		// clicked in bottom button
 		indexAtTop += 1;
 		TopIndexChanged(this, System::EventArgs::Empty);
+		goingUp = false;
+		timer->Interval = 100;
+		timer->Enabled=true;
 	}
 	rect.Y = sliderPosition+scrollButtonHeight;
 	rect.Height = sliderHeight;
@@ -85,10 +91,8 @@ void BAPSScrollBar::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
 void BAPSScrollBar::OnMouseUp(System::Windows::Forms::MouseEventArgs^ e)
 {
 	__super::OnMouseUp(e);
-	if (scrolling)
-	{
-		scrolling = false;
-	}
+	scrolling = false;
+	timer->Enabled = false;
 }
 void BAPSScrollBar::OnMouseMove(System::Windows::Forms::MouseEventArgs^ e)
 {

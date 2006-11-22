@@ -4,8 +4,6 @@
 
 using namespace BAPSPresenter;
 
-
-
 void TrackList::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 {
 	opLock->WaitOne();
@@ -188,18 +186,15 @@ void TrackList::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
 		result = this->DoDragDrop(tldd, System::Windows::Forms::DragDropEffects::Move);
 		if (result == System::Windows::Forms::DragDropEffects::Move)
 		{
-			if (!tldd->moved && index != selectedIndex && !pendingLoadRequest)
+			if (!tldd->moved && index != selectedIndex)
 			{
-				if (items[index]->type != BAPSNET_TEXTITEM)
-				{
-					pendingLoadRequest = true;
-				}
 				RequestChange(this, gcnew RequestChangeEventArgs(channel, CHANGE_SELECTEDINDEX, index));
 				this->Invalidate();
 			}
 		}
 		hoverIndex = -1;
 		fromIndex = -1;
+		this->Invalidate();
 	}
 	opLock->ReleaseMutex();
 }
@@ -274,10 +269,23 @@ void TrackList::OnDragOver(System::Windows::Forms::DragEventArgs ^  e)
 		TrackListDragDrop^ tldd =static_cast<TrackListDragDrop^>(e->Data->GetData(TrackListDragDrop::typeid));
 		if (channel == tldd->fromChannel)
 		{
-			int hi = indexFromY(this->PointToClient(System::Drawing::Point(e->X, e->Y)).Y);
+			int yValue = this->PointToClient(System::Drawing::Point(e->X, e->Y)).Y;
+			int hi = indexFromY(yValue);
 			if (hi != fromIndex)
 			{
 				tldd->moved = true;
+			}
+			if (yValue < 8 && scroll->IndexAtTop != 0)
+			{
+				System::Threading::Thread::Sleep(40);
+				scroll->IndexAtTop = scroll->IndexAtTop - 1;
+				this->Invalidate();
+			}
+			else if (yValue > this->ClientRectangle.Height-8 && scroll->IndexAtTop != scroll->TotalItems-scroll->ViewableItems)
+			{
+				System::Threading::Thread::Sleep(40);
+				scroll->IndexAtTop = scroll->IndexAtTop + 1;
+				this->Invalidate();
 			}
 			if (hi == -1)
 			{

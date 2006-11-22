@@ -429,6 +429,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\ActionMessageStringStringU32int.h"
+					>
+				</File>
+				<File
 					RelativePath=".\ActionMessageStringU32int.h"
 					>
 				</File>
@@ -626,6 +630,7 @@
 					>
 					<File
 						RelativePath=".\AudioWall.resx"
+						SubType="Designer"
 						>
 					</File>
 				</File>

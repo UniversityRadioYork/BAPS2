@@ -1,0 +1,186 @@
+<html dir="LTR">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5" />
+    <title>Npgsql</title>
+    <xml>
+    </xml>
+    <link rel="stylesheet" type="text/css" href="MSDN.css" />
+  </head>
+  <body id="bodyID" class="dtBODY">
+    <div id="nsbanner">
+      <div id="bannerrow1">
+        <table class="bannerparthead" cellspacing="0">
+          <tr id="hdr">
+            <td class="runninghead">Npgsql Api Docs</td>
+            <td class="product">
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="TitleRow">
+        <h1 class="dtH1">Npgsql Namespace</h1>
+      </div>
+    </div>
+    <div id="nstext">
+      <p>
+        <a href="NpgsqlHierarchy.html">Namespace hierarchy</a>
+      </p>
+      <h3 class="dtH3">Classes</h3>
+      <div class="tablediv">
+        <table class="dtTABLE" cellspacing="0">
+          <tr valign="top">
+            <th width="50%">Class</th>
+            <th width="50%">Description</th>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlCommand.html">NpgsqlCommand</a>
+            </td>
+            <td width="50%"> Represents a SQL statement or function (stored procedure) to execute against a PostgreSQL database. This class cannot be inherited. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlCommandBuilder.html">NpgsqlCommandBuilder</a>
+            </td>
+            <td width="50%"> This class is responsible to create database commands for automatic insert, update and delete operations. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlConnection.html">NpgsqlConnection</a>
+            </td>
+            <td width="50%"> This class represents a connection to a PostgreSQL server. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlDataAdapter.html">NpgsqlDataAdapter</a>
+            </td>
+            <td width="50%"> This class represents an adapter from many commands: select, update, insert and delete to fill <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemDataDataSetClassTopic.htm">Datasets.</a></td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlDataReader.html">NpgsqlDataReader</a>
+            </td>
+            <td width="50%"> Provides a means of reading a forward-only stream of rows from a PostgreSQL backend. This class cannot be inherited. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlError.html">NpgsqlError</a>
+            </td>
+            <td width="50%"> This class represents the ErrorResponse and NoticeResponse message sent from PostgreSQL server. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlEventLog.html">NpgsqlEventLog</a>
+            </td>
+            <td width="50%"> This class handles all the Npgsql event and debug logging </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlException.html">NpgsqlException</a>
+            </td>
+            <td width="50%"> The exception that is thrown when the PostgreSQL backend reports errors. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlNoticeEventArgs.html">NpgsqlNoticeEventArgs</a>
+            </td>
+            <td width="50%"> EventArgs class to send Notice parameters, which are just NpgsqlError's in a lighter context. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlNotificationEventArgs.html">NpgsqlNotificationEventArgs</a>
+            </td>
+            <td width="50%"> EventArgs class to send Notification parameters. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlParameter.html">NpgsqlParameter</a>
+            </td>
+            <td width="50%"> This class represents a parameter to a command that will be sent to server </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlParameterCollection.html">NpgsqlParameterCollection</a>
+            </td>
+            <td width="50%"> Represents a collection of parameters relevant to a <a href="Npgsql.NpgsqlCommand.html">NpgsqlCommand</a> as well as their respective mappings to columns in a <a href="ms-help://MS.NETFrameworkSDKv1.1/cpref/html/frlrfSystemDataDataSetClassTopic.htm">DataSet</a>. This class cannot be inherited. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlTransaction.html">NpgsqlTransaction</a>
+            </td>
+            <td width="50%"> Represents a transaction to be made in a PostgreSQL database. This class cannot be inherited. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.ServerVersion.html">ServerVersion</a>
+            </td>
+            <td width="50%"> Represent the backend server version. </td>
+          </tr>
+        </table>
+      </div>
+      <h3 class="dtH3">Delegates</h3>
+      <div class="tablediv">
+        <table class="dtTABLE" cellspacing="0">
+          <tr valign="top">
+            <th width="50%">Delegate</th>
+            <th width="50%">Description</th>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NoticeEventHandler.html">NoticeEventHandler</a>
+            </td>
+            <td width="50%"> Represents the method that handles the <a href="Npgsql.NpgsqlConnection.Notification.html">Notice</a> events. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NotificationEventHandler.html">NotificationEventHandler</a>
+            </td>
+            <td width="50%"> Represents the method that handles the <a href="Npgsql.NpgsqlConnection.Notification.html">Notification</a> events. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlRowUpdatedEventHandler.html">NpgsqlRowUpdatedEventHandler</a>
+            </td>
+            <td width="50%"> Represents the method that handles the <a href="Npgsql.NpgsqlDataAdapter.RowUpdated.html">RowUpdated</a> events. </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.NpgsqlRowUpdatingEventHandler.html">NpgsqlRowUpdatingEventHandler</a>
+            </td>
+            <td width="50%"> Represents the method that handles the <a href="Npgsql.NpgsqlDataAdapter.RowUpdating.html">RowUpdating</a> events. </td>
+          </tr>
+        </table>
+      </div>
+      <h3 class="dtH3">Enumerations</h3>
+      <div class="tablediv">
+        <table class="dtTABLE" cellspacing="0">
+          <tr valign="top">
+            <th width="50%">Enumeration</th>
+            <th width="50%">Description</th>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.LogLevel.html">LogLevel</a>
+            </td>
+            <td width="50%"> The level of verbosity of the NpgsqlEventLog </td>
+          </tr>
+          <tr valign="top">
+            <td width="50%">
+              <a href="Npgsql.ProtocolVersion.html">ProtocolVersion</a>
+            </td>
+            <td width="50%"> Represent the frontend/backend protocol version. </td>
+          </tr>
+        </table>
+      </div>
+      <hr />
+      <div id="footer">
+        <p>
+          <a>Npgsql Development Team 2002-2006</a>
+        </p>
+        <p>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

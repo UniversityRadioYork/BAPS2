@@ -103,3 +103,29 @@ Stopped the about window from being able to open another about window
 Stopped the load show windows from being able to open another load show window
 Disallow use of ctrl+a in text window
 --
+
+##
+Release 2.2 v1
+--
+Features
+<<
+1) Channels renamed to 1, 2, 3
+2) load show message changed to 'E-mail / BAPS showid'
+3) autoscroll on track list
+4) Optional channel clearing when loading show
+5) No loading audio while channel is busy playing
+6) 'Search again' option in record library
+7) order by functionality in record library
+8) Scroll on hold up down scrollbar button
+9) no play while playing
+10) flashing warning when attempting to load when playing
+11) countdown to track end flasher
+
+>>
+Known Issues
+<<
+epilepsy warning required
+>>
+Bug Fixes
+<<
+>>
