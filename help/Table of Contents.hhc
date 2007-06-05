@@ -6,6 +6,11 @@
 </HEAD><BODY>
 <UL>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Release Notes">
+		<param name="Local" value="ReleaseNotes.htm">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Broadcasting And Presenting Suite">
 		<param name="Local" value="Introduction.htm">
 		</OBJECT>

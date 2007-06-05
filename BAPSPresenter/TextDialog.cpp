@@ -14,6 +14,7 @@ System::Void TextDialog::TextDialog_KeyDown(System::Object^  sender, System::Win
 		if (e->Control)
 		{
 			ignore = true;
+			textText->SelectAll();
 		}
 	}
 	if (!ignore)

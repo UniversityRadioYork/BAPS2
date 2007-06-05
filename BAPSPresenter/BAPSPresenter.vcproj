@@ -304,6 +304,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TimeLine.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TrackList.cpp"
 				>
 			</File>
@@ -388,6 +392,10 @@
 					SubType="Designer"
 					>
 				</File>
+			</File>
+			<File
+				RelativePath=".\TimeLine.h"
+				>
 			</File>
 			<File
 				RelativePath=".\TrackList.h"

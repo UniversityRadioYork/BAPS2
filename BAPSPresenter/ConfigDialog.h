@@ -106,6 +106,7 @@ namespace BAPSPresenter {
 		System::Void saveButton_Click(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void ConfigDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 		System::Void cancelButton_Click(System::Object^  sender, System::EventArgs^  e);
+		System::Void ConfigDialog_Load(System::Object^  sender, System::EventArgs^  e);
 	private: System::Windows::Forms::StatusStrip^  status;
 	protected: 
 	private: System::Windows::Forms::ToolStripStatusLabel^  statusLabel;
@@ -154,6 +155,7 @@ namespace BAPSPresenter {
 			// 
 			// cancelButton
 			// 
+			this->cancelButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->cancelButton->Location = System::Drawing::Point(336, 320);
 			this->cancelButton->Name = L"cancelButton";
 			this->cancelButton->Size = System::Drawing::Size(88, 24);
@@ -188,6 +190,7 @@ namespace BAPSPresenter {
 			this->Name = L"ConfigDialog";
 			this->Text = L"Configuration Settings";
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &ConfigDialog::ConfigDialog_KeyDown);
+			this->Load += gcnew System::EventHandler(this, &ConfigDialog::ConfigDialog_Load);
 			this->status->ResumeLayout(false);
 			this->status->PerformLayout();
 			this->ResumeLayout(false);

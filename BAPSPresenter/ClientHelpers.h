@@ -63,4 +63,14 @@ namespace BAPSPresenter
 			:channel(_channel), timeout(_timeout)
 		{}
 	};
+	ref struct CountDownState
+	{
+		int channel;
+		bool startAt;
+		bool running;
+		int theTime;
+		CountDownState(int _channel)
+			:channel(_channel), startAt(false), running(false), theTime(3590)
+		{}
+	};
 };

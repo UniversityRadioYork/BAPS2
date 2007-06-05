@@ -22,137 +22,127 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 	 *  WORK NEEDED: extend this to allow for exact matching, matching of singles/albums, album titles
 	**/
 
-	int attempt = 0;
-	bool success = false;
+	System::String^ sql;
+	/** Basic select statement WORK NEEDED: update this sql to be restricted to the correct level **/
+	sql = "SELECT track.recordid, track.trackid, track.title, track.artist, extract(epoch from track.intro) as intro FROM track INNER JOIN record USING (recordid) WHERE ";
 
-	while (!success)
+	NpgsqlCommand^ command = gcnew NpgsqlCommand(sql, recordlibDB);
+	if (byTrackid)
 	{
-		System::String^ sql;
-		/** Basic select statement WORK NEEDED: update this sql to be restricted to the correct level **/
-		if (attempt == 0)
+		sql = System::String::Concat(sql, " track.trackid='",trackid.ToString(),"' ");
+	}
+	else
+	{
+		if (artist->Length !=0)
 		{
-			sql = "SELECT track.recordid, trackid, track.title, track.artist, extract(epoch from intro) as intro, track.location FROM track INNER JOIN record USING (recordid) WHERE ";
+			sql = System::String::Concat(sql, "LOWER(track.artist) LIKE LOWER('%'||:artist||'%')");
+			command->Parameters->Add(gcnew NpgsqlParameter("artist", System::Data::DbType::AnsiString));
+			command->Parameters["artist"]->Value = artist;
 		}
-		else
+		if (artist->Length !=0 && title->Length !=0)
 		{
-			sql = "SELECT track.recordid, trackid, track.title, track.artist, extract(epoch from intro) as intro FROM track INNER JOIN record USING (recordid) WHERE ";
+			sql = System::String::Concat(sql, " AND ");
 		}
+		if (title->Length !=0)
+		{
+			sql = System::String::Concat(sql, "LOWER(track.title) LIKE LOWER('%'||:title||'%')");
+			command->Parameters->Add(gcnew NpgsqlParameter("title", System::Data::DbType::AnsiString));
+			command->Parameters["title"]->Value = title;
+		}
+	}
+	sql = sql + "AND track.digitised='t' ";
+	if (CONFIG_GETINT(CONFIG_CLEANMUSICONLY) == CONFIG_YES_VALUE)
+	{
+		sql = sql + "AND track.clean='y' ";
+	}
 
-		NpgsqlCommand^ command = gcnew NpgsqlCommand(sql, recordlibDB);
+	sql = sql + "ORDER BY ";
+	System::String^ desasc = "";
+	if (libraryAscDes == BAPSNET_ORDER_DESCENDING)
+	{
+		desasc = "DESC";
+	}
+
+	switch (libraryOrderBy)
+	{
+	case BAPSNET_ORDER_BYARTIST:
+		sql = sql + "track.artist " + desasc + ", track.title";
+		break;
+	case BAPSNET_ORDER_BYTITLE:
+		sql = sql + "track.title " + desasc + ", track.artist";
+		break;
+	case BAPSNET_ORDER_BYDATEADDED:
+		sql = sql + "record.dateadded " + desasc;
+		break;
+	case BAPSNET_ORDER_BYDATERELEASED:
+		sql = sql + "record.datereleased IS NULL, record.datereleased " + desasc;
+		break;
+	}
+	sql = sql + " OFFSET "+(page*200).ToString()+" LIMIT 200";
+	command->CommandText = sql;
+	
+	NpgsqlDataAdapter^ recordlibDataAdapter = gcnew NpgsqlDataAdapter();
+	recordlibDataAdapter->SelectCommand = command;
+	recordlibDataset = gcnew System::Data::DataSet();
+
+	try
+	{
+		recordlibDataAdapter->Fill(recordlibDataset);
+	}
+	catch (System::IO::IOException^ e)
+	{
+		LogManager::write(System::String::Concat("IO Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
+		Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYERROR | 2;
+		ClientManager::send(this, cmd, "Error: Check Database Server Name?");
+		return false;
+	}
+	catch (NpgsqlException^ e)
+	{
+		/** Normally this will be a cannot connect as we should be able to guarantee a correct
+		 *  sql command
+		**/
+		System::String^ errorMessages = "PGSQL ERROR:\n";
+		/** Get all the errors returned from the db server **/
+		errorMessages = System::String::Concat(
+						errorMessages,
+						"Message: \n", e->Message, "\n",
+						"Error SQL: \n", e->ErrorSql, "\n",
+						"Error Position: \n", e->Position, "\n",
+						"Detail: \n", e->Detail, "\n",
+						"Hint: \n", e->Hint, "\n",
+						"Stack Trace: \n", e->StackTrace);
+
+		/** Send/Log an error and quit the function - **/
+		LogManager::write(errorMessages, LOG_ERROR, LOG_DATABASE);
+		Command cmd = BAPSNET_DATABASE | 1;
 		if (byTrackid)
 		{
-			sql = System::String::Concat(sql, " trackid='",trackid.ToString(),"' ");
+			cmd |= BAPSNET_BAPSDBERROR;
 		}
 		else
 		{
-			if (artist->Length !=0)
-			{
-				sql = System::String::Concat(sql, "LOWER(track.artist) LIKE LOWER('%'||:artist||'%')");
-				command->Parameters->Add(gcnew NpgsqlParameter("artist", System::Data::DbType::AnsiString));
-				command->Parameters["artist"]->Value = artist;
-			}
-			if (artist->Length !=0 && title->Length !=0)
-			{
-				sql = System::String::Concat(sql, " AND ");
-			}
-			if (title->Length !=0)
-			{
-				sql = System::String::Concat(sql, "LOWER(track.title) LIKE LOWER('%'||:title||'%')");
-				command->Parameters->Add(gcnew NpgsqlParameter("title", System::Data::DbType::AnsiString));
-				command->Parameters["title"]->Value = title;
-			}
+			cmd |= BAPSNET_LIBRARYERROR;
 		}
-		sql = sql + "AND digitised='t' ORDER BY ";
-		System::String^ desasc = "";
-		if (libraryAscDes == BAPSNET_ORDER_DESCENDING)
+		ClientManager::send(this, cmd, "Database connection failure");
+		return false;
+	}
+	catch (System::InvalidOperationException^ e)
+	{
+		/** Bad programming is the only thing that gets us here,
+		 *  Send/Log an error and quit the function
+		**/
+		LogManager::write(System::String::Concat("RecordLibrary connection already open, program error:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
+		Command cmd = BAPSNET_DATABASE | 2;
+		if (byTrackid)
 		{
-			desasc = "DESC";
+			cmd |= BAPSNET_BAPSDBERROR;
 		}
-
-		switch (libraryOrderBy)
+		else
 		{
-		case BAPSNET_ORDER_BYARTIST:
-			sql = sql + "track.artist " + desasc + ", track.title";
-			break;
-		case BAPSNET_ORDER_BYTITLE:
-			sql = sql + "track.title " + desasc + ", track.artist";
-			break;
-		case BAPSNET_ORDER_BYDATEADDED:
-			sql = sql + "dateadded " + desasc;
-			break;
+			cmd |= BAPSNET_LIBRARYERROR;
 		}
-		sql = sql + " OFFSET "+(page*200).ToString()+" LIMIT 200";
-		command->CommandText = sql;
-		
-		NpgsqlDataAdapter^ recordlibDataAdapter = gcnew NpgsqlDataAdapter();
-		recordlibDataAdapter->SelectCommand = command;
-		recordlibDataset = gcnew System::Data::DataSet();
-
-		try
-		{
-			recordlibDataAdapter->Fill(recordlibDataset);
-		}
-		catch (System::IO::IOException^ e)
-		{
-			LogManager::write(System::String::Concat("IO Exception in npgsql:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
-			Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYERROR | 2;
-			ClientManager::send(this, cmd, "Error: Check Database Server Name?");
-			return false;
-		}
-		catch (NpgsqlException^ e)
-		{
-			/** Normally this will be a cannot connect as we should be able to guarantee a correct
-			 *  sql command
-			**/
-			System::String^ errorMessages = "PGSQL ERROR:\n";
-			/** Get all the errors returned from the db server **/
-			errorMessages = System::String::Concat(
-							errorMessages,
-							"Message: \n", e->Message, "\n",
-							"Error SQL: \n", e->ErrorSql, "\n",
-							"Error Position: \n", e->Position, "\n",
-							"Detail: \n", e->Detail, "\n",
-							"Hint: \n", e->Hint, "\n",
-							"Stack Trace: \n", e->StackTrace);
-
-			if (attempt == 0)
-			{
-				attempt++;
-				continue;
-			}
-			/** Send/Log an error and quit the function - **/
-			LogManager::write(errorMessages, LOG_ERROR, LOG_DATABASE);
-			Command cmd = BAPSNET_DATABASE | 1;
-			if (byTrackid)
-			{
-				cmd |= BAPSNET_BAPSDBERROR;
-			}
-			else
-			{
-				cmd |= BAPSNET_LIBRARYERROR;
-			}
-			ClientManager::send(this, cmd, "Database connection failure");
-			return false;
-		}
-		catch (System::InvalidOperationException^ e)
-		{
-			/** Bad programming is the only thing that gets us here,
-			 *  Send/Log an error and quit the function
-			**/
-			LogManager::write(System::String::Concat("RecordLibrary connection already open, program error:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_DATABASE);
-			Command cmd = BAPSNET_DATABASE | 2;
-			if (byTrackid)
-			{
-				cmd |= BAPSNET_BAPSDBERROR;
-			}
-			else
-			{
-				cmd |= BAPSNET_LIBRARYERROR;
-			}
-			ClientManager::send(this, cmd, "Program error - seek technical advice");
-			return false;
-		}
-		success=true;
+		ClientManager::send(this, cmd, "Program error - seek technical advice");
+		return false;
 	}
 
 	if (!byTrackid)
@@ -364,20 +354,31 @@ bool ClientInstance::executeQuery(System::String^ sql)
 void ClientInstance::getShows(System::String^ username, bool newShowsOnly)
 {
 	setupDatabaseConnection();
-	System::String^ sql = System::String::Concat(
-						  "SELECT baps_show.* "
-						  "FROM baps_user, baps_show "
-						  "WHERE baps_user.username='",
-						   username,
-						  "' "
-						  "AND baps_user.userid=baps_show.userid ");
-	if (newShowsOnly)
+	System::String^ sql;
+	if (!username->Equals("TODAYS_SHOWS"))
 	{
-		sql = System::String::Concat(sql,
-									 "AND baps_show.broadcastdate > now()-interval '3 hour' ");
+		sql = System::String::Concat(
+							  "SELECT baps_show.* "
+							  "FROM baps_user, baps_show "
+							  "WHERE baps_user.username='",
+							   username,
+							  "' "
+							  "AND baps_user.userid=baps_show.userid ");
+		if (newShowsOnly)
+		{
+			sql = System::String::Concat(sql,
+										 "AND baps_show.broadcastdate > now()-interval '3 hour' ");
+		}
+		sql = System::String::Concat(sql, "ORDER BY baps_show.broadcastdate, baps_show.name");
 	}
-	sql = System::String::Concat(sql, "ORDER BY broadcastdate, name");
-
+	else
+	{
+		sql = "SELECT baps_show.* "
+			  "FROM baps_show "
+			  "WHERE baps_show.broadcastdate >= now()-interval '3 hour' "
+			  "AND baps_show.broadcastdate <= now()+interval '3 hour' "
+			  "ORDER BY baps_show.broadcastdate";
+	}
 	if (!executeQuery(sql))
 	{
 		// Escape if the query fails 
@@ -449,7 +450,7 @@ void ClientInstance::getListings(int showid)
 						  "WHERE baps_listing.showid='",
 						   showid.ToString(),
 						  "' "
-						  "ORDER BY channel");
+						  "ORDER BY baps_listing.channel");
 
 	if (!executeQuery(sql))
 	{
@@ -532,7 +533,7 @@ void ClientInstance::assignListing(int channel, int listingid)
 								"WHERE baps_item.listingid='",
 								listingid.ToString(),
 								"' "
-								"ORDER BY position");
+								"ORDER BY baps_item.position");
 
 		if (!executeQuery(sql))
 		{

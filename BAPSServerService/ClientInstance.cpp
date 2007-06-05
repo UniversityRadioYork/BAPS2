@@ -371,7 +371,7 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 				switch (cmdReceived & 0x3)
 				{
 				case 0:
-					getShows(userInfo->getUsername(), newShowsOnly);
+					getShows("TODAYS_SHOWS", newShowsOnly);
 					break;
 				case 1:
 					getShows("system", newShowsOnly);

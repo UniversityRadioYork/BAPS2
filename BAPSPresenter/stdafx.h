@@ -7,3 +7,5 @@
 
 delegate void MethodInvokerObjKeyEventArgs(System::Object^, System::Windows::Forms::KeyEventArgs^);
 #include "RecordLibrarySearch.h"
+
+#include "LoadShowDialog.h"

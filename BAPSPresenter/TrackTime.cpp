@@ -6,17 +6,8 @@ using namespace BAPSPresenter;
 void TrackTime::OnPaint(System::Windows::Forms::PaintEventArgs^ e) 
 {
 	__super::OnPaint(e);
-	int curveWidth = 20;
 	e->Graphics->SmoothingMode = System::Drawing::Drawing2D::SmoothingMode::AntiAlias;
-	System::Drawing::Drawing2D::GraphicsPath^ gp = gcnew System::Drawing::Drawing2D::GraphicsPath();
-	gp->AddArc(ClientRectangle.Width - (curveWidth+1), 0, curveWidth, curveWidth, 270, 90);
-	gp->AddArc(ClientRectangle.Width - (curveWidth+1), ClientRectangle.Height - (curveWidth+1), curveWidth, curveWidth, 0, 90);
-	gp->AddArc(0, ClientRectangle.Height - (curveWidth+1), curveWidth, curveWidth, 90, 90);
-	gp->AddArc(0, 0, curveWidth, curveWidth, 180, 90);
-	gp->CloseFigure();
-	e->Graphics->FillPath(backBrush, gp);
-	System::Drawing::Drawing2D::GraphicsPath^ gp2 = gp;
-	
+	e->Graphics->FillPath(backBrush, backgroundPath);
 	//Paint the Text property on the control
 	
 	if (duration != 0)
@@ -33,13 +24,7 @@ void TrackTime::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 		}
 		else
 		{
-			gp = gcnew System::Drawing::Drawing2D::GraphicsPath();
-			gp->AddArc(introPoint - curveWidth, curveWidth/2, curveWidth, curveWidth, 270, 90);
-			gp->AddArc(introPoint - curveWidth, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 0, 90);
-			gp->AddArc(0, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 90, 90);
-			gp->AddArc(0, curveWidth/2, curveWidth, curveWidth, 180, 90);
-			gp->CloseFigure();
-			e->Graphics->FillPath(introBrush, gp);
+			e->Graphics->FillPath(introBrush, introPath);
 		}
 		if (cuePoint < curveWidth/2)
 		{
@@ -47,13 +32,7 @@ void TrackTime::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 		}
 		else
 		{
-			gp = gcnew System::Drawing::Drawing2D::GraphicsPath();
-			gp->AddArc(cuePoint - curveWidth, curveWidth, curveWidth, curveWidth, 270, 90);
-			gp->AddArc(cuePoint - curveWidth, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 0, 90);
-			gp->AddArc(0, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 90, 90);
-			gp->AddArc(0, curveWidth, curveWidth, curveWidth, 180, 90);
-			gp->CloseFigure();
-			e->Graphics->FillPath(cueBrush, gp);
+			e->Graphics->FillPath(cueBrush, cuePath);
 		}
 
 		if (silencePoint < curveWidth/2)
@@ -62,13 +41,7 @@ void TrackTime::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 		}
 		else
 		{
-			gp = gcnew System::Drawing::Drawing2D::GraphicsPath();
-			gp->AddArc(silencePoint - curveWidth, 0, curveWidth, curveWidth, 270, 90);
-			gp->AddArc(silencePoint - curveWidth, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 0, 90);
-			gp->AddArc(0, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 90, 90);
-			gp->AddArc(0, 0, curveWidth, curveWidth, 180, 90);
-			gp->CloseFigure();
-			e->Graphics->FillPath(System::Drawing::Brushes::Black, gp);
+			e->Graphics->FillPath(System::Drawing::Brushes::Black, silencePath);
 		}
 
 		e->Graphics->FillRectangle(System::Drawing::Brushes::Red, System::Drawing::Rectangle(0, BASE_Y_LINE-2, positionPoint, 2));
@@ -125,7 +98,7 @@ void TrackTime::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 	{
 		myPen = System::Drawing::Pens::Red;
 	}
-	e->Graphics->DrawPath(myPen, gp2);
+	e->Graphics->DrawPath(myPen, backgroundPath);
 }
 
 void TrackTime::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
@@ -164,7 +137,14 @@ void TrackTime::OnMouseMove(System::Windows::Forms::MouseEventArgs^ e)
 		case TTMT_POSITION:
 			if (position != newPosition)
 			{
-				position = newPosition;
+				if (newPosition >= cuePosition)
+				{
+					position = newPosition;
+				}
+				else
+				{
+					position = cuePosition;
+				}
 				//this->Invalidate();
 				PositionChanged(this, nullptr);
 			}
@@ -175,6 +155,11 @@ void TrackTime::OnMouseMove(System::Windows::Forms::MouseEventArgs^ e)
 				cuePosition = newPosition;
 				//this->Invalidate();
 				CuePositionChanged(this, nullptr);
+				if (cuePosition > position)
+				{
+					position = cuePosition;
+					PositionChanged(this, nullptr);
+				}
 			}
 			break;
 		case TTMT_INTROPOSITION:

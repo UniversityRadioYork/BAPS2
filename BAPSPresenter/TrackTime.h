@@ -66,6 +66,7 @@ namespace BAPSPresenter
 			backBrush = gcnew System::Drawing::Drawing2D::LinearGradientBrush(System::Drawing::Rectangle(0,0,10,10), System::Drawing::Color::Snow, System::Drawing::Color::AntiqueWhite,System::Drawing::Drawing2D::LinearGradientMode::Vertical );
 			cueBrush = gcnew System::Drawing::Drawing2D::LinearGradientBrush(System::Drawing::Rectangle(0,0,10,10), System::Drawing::Color::Snow, System::Drawing::Color::DarkOrchid,System::Drawing::Drawing2D::LinearGradientMode::Vertical );
 			introBrush = gcnew System::Drawing::Drawing2D::LinearGradientBrush(System::Drawing::Rectangle(0,0,10,10), System::Drawing::Color::Snow, System::Drawing::Color::DarkOrchid,System::Drawing::Drawing2D::LinearGradientMode::Vertical );
+			curveWidth = 20;
 		}
 		virtual void OnResize(System::EventArgs ^e) override
 		{
@@ -76,6 +77,12 @@ namespace BAPSPresenter
 			cueBrush->SetBlendTriangularShape(0.5);
 			introBrush = gcnew System::Drawing::Drawing2D::LinearGradientBrush(this->ClientRectangle, System::Drawing::Color::Snow, System::Drawing::Color::ForestGreen,System::Drawing::Drawing2D::LinearGradientMode::Vertical );
 			introBrush->SetBlendTriangularShape(0.5);
+			backgroundPath = gcnew System::Drawing::Drawing2D::GraphicsPath();
+			backgroundPath->AddArc(ClientRectangle.Width - (curveWidth+1), 0, curveWidth, curveWidth, 270, 90);
+			backgroundPath->AddArc(ClientRectangle.Width - (curveWidth+1), ClientRectangle.Height - (curveWidth+1), curveWidth, curveWidth, 0, 90);
+			backgroundPath->AddArc(0, ClientRectangle.Height - (curveWidth+1), curveWidth, curveWidth, 90, 90);
+			backgroundPath->AddArc(0, 0, curveWidth, curveWidth, 180, 90);
+			backgroundPath->CloseFigure();
 		}
 		event System::EventHandler^ PositionChanged;
 		event System::EventHandler^ IntroPositionChanged;
@@ -129,6 +136,13 @@ namespace BAPSPresenter
 			void set(int _cuePosition)
 			{
 				cuePosition = _cuePosition;
+				int cuePoint =(int)(division*(float)cuePosition);
+				cuePath = gcnew System::Drawing::Drawing2D::GraphicsPath();
+				cuePath->AddArc(cuePoint - curveWidth, curveWidth, curveWidth, curveWidth, 270, 90);
+				cuePath->AddArc(cuePoint - curveWidth, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 0, 90);
+				cuePath->AddArc(0, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 90, 90);
+				cuePath->AddArc(0, curveWidth, curveWidth, curveWidth, 180, 90);
+				cuePath->CloseFigure();
 				this->Invalidate();
 			}
 		}
@@ -141,6 +155,13 @@ namespace BAPSPresenter
 			void set(int _silencePosition)
 			{
 				silencePosition = _silencePosition;
+				int silencePoint = (int)(division*(float)silencePosition);
+				silencePath = gcnew System::Drawing::Drawing2D::GraphicsPath();
+				silencePath->AddArc(silencePoint - curveWidth, 0, curveWidth, curveWidth, 270, 90);
+				silencePath->AddArc(silencePoint - curveWidth, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 0, 90);
+				silencePath->AddArc(0, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 90, 90);
+				silencePath->AddArc(0, 0, curveWidth, curveWidth, 180, 90);
+				silencePath->CloseFigure();
 				this->Invalidate();
 			}
 		}
@@ -153,6 +174,13 @@ namespace BAPSPresenter
 			void set(int _introPosition)
 			{
 				introPosition = _introPosition;
+				int introPoint =(int)(division*(float)introPosition);
+				introPath = gcnew System::Drawing::Drawing2D::GraphicsPath();
+				introPath->AddArc(introPoint - curveWidth, curveWidth/2, curveWidth, curveWidth, 270, 90);
+				introPath->AddArc(introPoint - curveWidth, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 0, 90);
+				introPath->AddArc(0, ClientRectangle.Height - curveWidth, curveWidth, curveWidth, 90, 90);
+				introPath->AddArc(0, curveWidth/2, curveWidth, curveWidth, 180, 90);
+				introPath->CloseFigure();
 				this->Invalidate();
 			}
 		}
@@ -172,6 +200,7 @@ namespace BAPSPresenter
 			__super::OnLostFocus(e);
 			this->Invalidate();
 		}
+
 	private:
 
 		inline bool intersectsWithPositionMarker(System::Drawing::Point p)
@@ -205,6 +234,12 @@ namespace BAPSPresenter
 		System::Drawing::Drawing2D::LinearGradientBrush^ backBrush;
 		System::Drawing::Drawing2D::LinearGradientBrush^ introBrush;
 		System::Drawing::Drawing2D::LinearGradientBrush^ cueBrush;
+		System::Drawing::Drawing2D::GraphicsPath^ backgroundPath;
+		System::Drawing::Drawing2D::GraphicsPath^ introPath;
+		System::Drawing::Drawing2D::GraphicsPath^ cuePath;
+		System::Drawing::Drawing2D::GraphicsPath^ silencePath;
+
 		System::Windows::Forms::ToolTip^ tooltip;
+		int curveWidth;
 	};
 };

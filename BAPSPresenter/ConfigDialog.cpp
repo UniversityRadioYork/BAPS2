@@ -527,3 +527,8 @@ System::Void ConfigDialog::cancelButton_Click(System::Object^  sender, System::E
 	this->Close();
 	closeMutex->ReleaseMutex();
 }
+System::Void ConfigDialog::ConfigDialog_Load(System::Object^  sender, System::EventArgs^  e)
+{
+	Command cmd = BAPSNET_CONFIG | BAPSNET_GETOPTIONS;
+	msgQueue->Enqueue(gcnew ActionMessage(cmd));
+}

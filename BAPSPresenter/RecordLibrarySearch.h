@@ -85,6 +85,8 @@ namespace BAPSPresenter {
 		int numberOfResults;
 		/** A handle to the main window **/
 		BAPSPresenterMain^ bapsPresenterMain;
+	private: System::Windows::Forms::RadioButton^  dateReleasedRadioButton;
+
 
 
 			 /** handle to the global message queue **/
@@ -153,6 +155,7 @@ namespace BAPSPresenter {
 			this->dateAddedRadioButton = (gcnew System::Windows::Forms::RadioButton());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->reverseOrderCheckBox = (gcnew System::Windows::Forms::CheckBox());
+			this->dateReleasedRadioButton = (gcnew System::Windows::Forms::RadioButton());
 			this->statusStrip->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -256,7 +259,7 @@ namespace BAPSPresenter {
 			this->AddToChannel2->Name = L"AddToChannel2";
 			this->AddToChannel2->Size = System::Drawing::Size(130, 36);
 			this->AddToChannel2->TabIndex = 6;
-			this->AddToChannel2->Text = L"Add to List C";
+			this->AddToChannel2->Text = L"Add to List 3";
 			this->AddToChannel2->Click += gcnew System::EventHandler(this, &RecordLibrarySearch::AddToChannel_Click);
 			// 
 			// AddToChannel1
@@ -271,7 +274,7 @@ namespace BAPSPresenter {
 			this->AddToChannel1->Name = L"AddToChannel1";
 			this->AddToChannel1->Size = System::Drawing::Size(130, 36);
 			this->AddToChannel1->TabIndex = 5;
-			this->AddToChannel1->Text = L"Add to List B";
+			this->AddToChannel1->Text = L"Add to List 2";
 			this->AddToChannel1->Click += gcnew System::EventHandler(this, &RecordLibrarySearch::AddToChannel_Click);
 			// 
 			// AddToChannel0
@@ -286,7 +289,7 @@ namespace BAPSPresenter {
 			this->AddToChannel0->Name = L"AddToChannel0";
 			this->AddToChannel0->Size = System::Drawing::Size(130, 36);
 			this->AddToChannel0->TabIndex = 4;
-			this->AddToChannel0->Text = L"Add to List A";
+			this->AddToChannel0->Text = L"Add to List 1";
 			this->AddToChannel0->Click += gcnew System::EventHandler(this, &RecordLibrarySearch::AddToChannel_Click);
 			// 
 			// SearchButton
@@ -371,13 +374,25 @@ namespace BAPSPresenter {
 			// 
 			this->reverseOrderCheckBox->AutoSize = true;
 			this->reverseOrderCheckBox->BackColor = System::Drawing::Color::Transparent;
-			this->reverseOrderCheckBox->Location = System::Drawing::Point(275, 72);
+			this->reverseOrderCheckBox->Location = System::Drawing::Point(358, 72);
 			this->reverseOrderCheckBox->Name = L"reverseOrderCheckBox";
 			this->reverseOrderCheckBox->Size = System::Drawing::Size(95, 17);
 			this->reverseOrderCheckBox->TabIndex = 20;
 			this->reverseOrderCheckBox->Text = L"Reverse Order";
 			this->reverseOrderCheckBox->UseVisualStyleBackColor = false;
 			this->reverseOrderCheckBox->CheckedChanged += gcnew System::EventHandler(this, &RecordLibrarySearch::Some_TextChanged);
+			// 
+			// dateReleasedRadioButton
+			// 
+			this->dateReleasedRadioButton->AutoSize = true;
+			this->dateReleasedRadioButton->BackColor = System::Drawing::Color::Transparent;
+			this->dateReleasedRadioButton->Location = System::Drawing::Point(257, 72);
+			this->dateReleasedRadioButton->Name = L"dateReleasedRadioButton";
+			this->dateReleasedRadioButton->Size = System::Drawing::Size(96, 17);
+			this->dateReleasedRadioButton->TabIndex = 19;
+			this->dateReleasedRadioButton->Text = L"Date Released";
+			this->dateReleasedRadioButton->UseVisualStyleBackColor = false;
+			this->dateReleasedRadioButton->CheckedChanged += gcnew System::EventHandler(this, &RecordLibrarySearch::RadioButton_CheckedChanged);
 			// 
 			// RecordLibrarySearch
 			// 
@@ -402,6 +417,7 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->Artist);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->reverseOrderCheckBox);
+			this->Controls->Add(this->dateReleasedRadioButton);
 			this->Controls->Add(this->dateAddedRadioButton);
 			this->Controls->Add(this->artistRadioButton);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;

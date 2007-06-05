@@ -12,18 +12,21 @@ void BAPSPresenterMain::showChannelOperation(System::Object^ _channel, System::O
 	case BAPSNET_PLAY:
 		channelPlay[channel]->Highlighted = true;
 		channelPlay[channel]->Enabled = false;
+		timeLine->locked[channel] = true;
 		channelPause[channel]->Highlighted = false;
 		channelStop[channel]->Highlighted = false;
 		break;
 	case BAPSNET_PAUSE:
 		channelPlay[channel]->Highlighted = false;
 		channelPlay[channel]->Enabled = true;
+		timeLine->locked[channel] = false;
 		channelPause[channel]->Highlighted = true;
 		channelStop[channel]->Highlighted = false;
 		break;
 	case BAPSNET_STOP:
 		channelPlay[channel]->Highlighted = false;
 		channelPlay[channel]->Enabled = true;
+		timeLine->locked[channel] = false;
 		channelPause[channel]->Highlighted = false;
 		channelStop[channel]->Highlighted = true;
 		break;
@@ -41,6 +44,8 @@ void BAPSPresenterMain::showPosition(System::Object^ _channel, System::Object^ _
 		{
 			/** Set the trackbar position **/
 			trackTime[channel]->Position = value;
+			timeLine->UpdatePosition(channel, value-trackTime[channel]->CuePosition);
+
 			value = (u32int)System::Math::Round(value/1000)*1000;
 			/** Set the amount of time gone **/
 			timeGoneText[channel]->Text = MillisecondsToTimeString(value);
@@ -97,7 +102,9 @@ void BAPSPresenterMain::showLoadedItem(System::Object^ _channel, System::Object^
 		if (itemType == BAPSNET_VOIDITEM)
 		{
 			trackTime[channel]->Position = 0;
+			timeLine->UpdatePosition(channel,0);
 			trackTime[channel]->Duration = 0;
+			timeLine->UpdateDuration(channel,0);
 			trackTime[channel]->CuePosition = 0;
 			trackTime[channel]->IntroPosition = 0;
 			trackLengthText[channel]->Text = MillisecondsToTimeString(0);
@@ -119,6 +126,7 @@ void BAPSPresenterMain::showDuration(System::Object^ _channel, System::Object^ _
 		/** Set up the min and max for the trackbar **/
 		trackTime[channel]->Position = 0;
 		trackTime[channel]->Duration = value;
+		timeLine->UpdateDuration(channel,value-trackTime[channel]->CuePosition);
 		/** Set the track length box **/
 		trackLengthText[channel]->Text = MillisecondsToTimeString(value);
 	}
@@ -152,6 +160,7 @@ void BAPSPresenterMain::showCuePosition(System::Object^ _channel, System::Object
 	if (channel < 3)
 	{
 		trackTime[channel]->CuePosition = cuePosition;
+		timeLine->UpdateDuration(channel,trackTime[channel]->Duration-trackTime[channel]->CuePosition);
 	}
 }
 

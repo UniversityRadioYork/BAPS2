@@ -16,6 +16,7 @@
 #include "BAPSButton.h"
 #include "BAPSLabel.h"
 #include "BAPSListBox.h"
+#include "TimeLine.h"
 
 #define DISABLE_INDEX_CHANGE() 	channelList[channel]->Enabled=false;\
 								channelList[channel]->remove_SelectedIndexChanged( gcnew System::EventHandler(this, &BAPSPresenterMain::LoadNewIndex_Event));
@@ -202,6 +203,7 @@ namespace BAPSPresenter {
 		array<BAPSPresenter::TrackTime^>^ trackTime;
 		array<System::Windows::Forms::Timer^>^ loadImpossibleTimer;
 		array<System::Windows::Forms::Timer^>^ nearEndTimer;
+		System::Windows::Forms::Timer^ countdownTimer;
 private: System::Windows::Forms::ContextMenuStrip^  trackListContextMenuStrip;
 
 private: System::Windows::Forms::ToolStripMenuItem^  resetChannelStripMenuItem;
@@ -231,6 +233,8 @@ private: BAPSPresenter::BAPSButton^  sendMessage;
 private: BAPSPresenter::BAPSButton^  chatOnOff;
 private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator4;
 private: System::Windows::Forms::ToolStripMenuItem^  showAudioWallToolStripMenuItem;
+private: BAPSPresenter::TimeLine^  timeLine;
+
 
 
 
@@ -260,6 +264,9 @@ private:
 		System::Void trackListContextMenuStrip_ItemClicked(System::Object^  sender, System::Windows::Forms::ToolStripItemClickedEventArgs^  e);
 		System::Void loadImpossibleFlicker(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void nearEndFlash(System::Object ^  sender, System::EventArgs ^  e);
+		System::Void ChannelLength_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+		System::Void countdownTick(System::Object ^  sender, System::EventArgs ^  e);
+		System::Void timeLine_StartTimeChanged(System::Object^  sender, BAPSPresenter::TimeLineEventArgs^  e);
 		/** ### END DESIGNER PRIVATE EVENT HANDLERS ### **/
 		/** ### DESIGNER PRIVATE VARIABLES ### **/
 
@@ -356,6 +363,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->chatText = (gcnew System::Windows::Forms::TextBox());
 			this->newChatMessage = (gcnew System::Windows::Forms::TextBox());
 			this->chatTo = (gcnew System::Windows::Forms::ComboBox());
+			this->timeLine = (gcnew BAPSPresenter::TimeLine());
 			this->chatOnOff = (gcnew BAPSPresenter::BAPSButton());
 			this->sendMessage = (gcnew BAPSPresenter::BAPSButton());
 			this->newMessageLabel = (gcnew BAPSPresenter::BAPSLabel());
@@ -379,12 +387,12 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0LoadedText = (gcnew BAPSPresenter::BAPSLabel());
 			this->Directory2Refresh = (gcnew BAPSPresenter::BAPSButton());
 			this->Directory1Refresh = (gcnew BAPSPresenter::BAPSButton());
-			this->Directory0Refresh = (gcnew BAPSPresenter::BAPSButton());
 			this->feedbackButton = (gcnew BAPSPresenter::BAPSButton());
+			this->Directory0Refresh = (gcnew BAPSPresenter::BAPSButton());
 			this->helpButton = (gcnew BAPSPresenter::BAPSButton());
 			this->bapsButton1 = (gcnew BAPSPresenter::BAPSButton());
-			this->loadShowButton = (gcnew BAPSPresenter::BAPSButton());
 			this->Channel2Play = (gcnew BAPSPresenter::BAPSButton());
+			this->loadShowButton = (gcnew BAPSPresenter::BAPSButton());
 			this->Channel1Play = (gcnew BAPSPresenter::BAPSButton());
 			this->Channel2Stop = (gcnew BAPSPresenter::BAPSButton());
 			this->Channel1Stop = (gcnew BAPSPresenter::BAPSButton());
@@ -419,7 +427,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->Channel1VolLabel->AutoSize = true;
 			this->Channel1VolLabel->BackColor = System::Drawing::Color::Transparent;
-			this->Channel1VolLabel->Location = System::Drawing::Point(638, 135);
+			this->Channel1VolLabel->Location = System::Drawing::Point(638, 113);
 			this->Channel1VolLabel->Name = L"Channel1VolLabel";
 			this->Channel1VolLabel->Size = System::Drawing::Size(22, 13);
 			this->Channel1VolLabel->TabIndex = 104;
@@ -429,7 +437,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->Channel0VolLabel->AutoSize = true;
 			this->Channel0VolLabel->BackColor = System::Drawing::Color::Transparent;
-			this->Channel0VolLabel->Location = System::Drawing::Point(342, 134);
+			this->Channel0VolLabel->Location = System::Drawing::Point(342, 112);
 			this->Channel0VolLabel->Name = L"Channel0VolLabel";
 			this->Channel0VolLabel->Size = System::Drawing::Size(22, 13);
 			this->Channel0VolLabel->TabIndex = 103;
@@ -438,7 +446,7 @@ private: System::ComponentModel::IContainer^  components;
 			// Channel2VolumeBar
 			// 
 			this->Channel2VolumeBar->LargeChange = 10;
-			this->Channel2VolumeBar->Location = System::Drawing::Point(899, 146);
+			this->Channel2VolumeBar->Location = System::Drawing::Point(899, 140);
 			this->Channel2VolumeBar->Maximum = 100;
 			this->Channel2VolumeBar->Name = L"Channel2VolumeBar";
 			this->Channel2VolumeBar->Orientation = System::Windows::Forms::Orientation::Vertical;
@@ -452,7 +460,7 @@ private: System::ComponentModel::IContainer^  components;
 			// Channel1VolumeBar
 			// 
 			this->Channel1VolumeBar->LargeChange = 10;
-			this->Channel1VolumeBar->Location = System::Drawing::Point(603, 146);
+			this->Channel1VolumeBar->Location = System::Drawing::Point(603, 118);
 			this->Channel1VolumeBar->Maximum = 100;
 			this->Channel1VolumeBar->Name = L"Channel1VolumeBar";
 			this->Channel1VolumeBar->Orientation = System::Windows::Forms::Orientation::Vertical;
@@ -466,7 +474,7 @@ private: System::ComponentModel::IContainer^  components;
 			// Channel0VolumeBar
 			// 
 			this->Channel0VolumeBar->LargeChange = 10;
-			this->Channel0VolumeBar->Location = System::Drawing::Point(307, 146);
+			this->Channel0VolumeBar->Location = System::Drawing::Point(307, 118);
 			this->Channel0VolumeBar->Maximum = 100;
 			this->Channel0VolumeBar->Name = L"Channel0VolumeBar";
 			this->Channel0VolumeBar->Orientation = System::Windows::Forms::Orientation::Vertical;
@@ -566,11 +574,11 @@ private: System::ComponentModel::IContainer^  components;
 			this->MainTextDisplay->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->MainTextDisplay->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->MainTextDisplay->Location = System::Drawing::Point(8, 622);
+			this->MainTextDisplay->Location = System::Drawing::Point(8, 639);
 			this->MainTextDisplay->Multiline = true;
 			this->MainTextDisplay->Name = L"MainTextDisplay";
 			this->MainTextDisplay->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->MainTextDisplay->Size = System::Drawing::Size(1005, 100);
+			this->MainTextDisplay->Size = System::Drawing::Size(1005, 83);
 			this->MainTextDisplay->TabIndex = 29;
 			this->MainTextDisplay->Text = L"<You can type notes here>";
 			// 
@@ -581,12 +589,12 @@ private: System::ComponentModel::IContainer^  components;
 			this->chatText->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->chatText->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->chatText->Location = System::Drawing::Point(7, 647);
+			this->chatText->Location = System::Drawing::Point(7, 664);
 			this->chatText->Multiline = true;
 			this->chatText->Name = L"chatText";
 			this->chatText->ReadOnly = true;
 			this->chatText->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->chatText->Size = System::Drawing::Size(1005, 75);
+			this->chatText->Size = System::Drawing::Size(1005, 62);
 			this->chatText->TabIndex = 213;
 			this->chatText->TabStop = false;
 			this->chatText->Text = L"<CHAT>";
@@ -598,7 +606,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->newChatMessage->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->newChatMessage->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->newChatMessage->Location = System::Drawing::Point(83, 615);
+			this->newChatMessage->Location = System::Drawing::Point(83, 635);
 			this->newChatMessage->Name = L"newChatMessage";
 			this->newChatMessage->Size = System::Drawing::Size(756, 26);
 			this->newChatMessage->TabIndex = 29;
@@ -612,12 +620,25 @@ private: System::ComponentModel::IContainer^  components;
 			this->chatTo->BackColor = System::Drawing::Color::SeaShell;
 			this->chatTo->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->chatTo->FormattingEnabled = true;
-			this->chatTo->Location = System::Drawing::Point(845, 618);
+			this->chatTo->Location = System::Drawing::Point(845, 639);
 			this->chatTo->Name = L"chatTo";
 			this->chatTo->Size = System::Drawing::Size(96, 21);
 			this->chatTo->Sorted = true;
 			this->chatTo->TabIndex = 30;
 			this->chatTo->Visible = false;
+			// 
+			// timeLine
+			// 
+			this->timeLine->BackColor = System::Drawing::Color::Transparent;
+			this->timeLine->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->timeLine->Location = System::Drawing::Point(83, 579);
+			this->timeLine->Name = L"timeLine";
+			this->timeLine->Size = System::Drawing::Size(848, 52);
+			this->timeLine->TabIndex = 214;
+			this->timeLine->TabStop = false;
+			this->timeLine->Text = L"timeLine1";
+			this->timeLine->StartTimeChanged += gcnew BAPSPresenter::TimeLineEventHandler(this, &BAPSPresenterMain::timeLine_StartTimeChanged);
 			// 
 			// chatOnOff
 			// 
@@ -625,7 +646,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->chatOnOff->DialogResult = System::Windows::Forms::DialogResult::None;
 			this->chatOnOff->HighlightColor = System::Drawing::Color::Red;
 			this->chatOnOff->Highlighted = false;
-			this->chatOnOff->Location = System::Drawing::Point(7, 583);
+			this->chatOnOff->Location = System::Drawing::Point(7, 600);
 			this->chatOnOff->Name = L"chatOnOff";
 			this->chatOnOff->Size = System::Drawing::Size(66, 26);
 			this->chatOnOff->TabIndex = 28;
@@ -639,7 +660,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->sendMessage->Enabled = false;
 			this->sendMessage->HighlightColor = System::Drawing::Color::Red;
 			this->sendMessage->Highlighted = false;
-			this->sendMessage->Location = System::Drawing::Point(947, 615);
+			this->sendMessage->Location = System::Drawing::Point(947, 636);
 			this->sendMessage->Name = L"sendMessage";
 			this->sendMessage->Size = System::Drawing::Size(66, 26);
 			this->sendMessage->TabIndex = 31;
@@ -656,7 +677,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->newMessageLabel->HighlightColor = System::Drawing::Color::Red;
 			this->newMessageLabel->Highlighted = false;
 			this->newMessageLabel->InfoText = L"";
-			this->newMessageLabel->Location = System::Drawing::Point(7, 615);
+			this->newMessageLabel->Location = System::Drawing::Point(7, 635);
 			this->newMessageLabel->Name = L"newMessageLabel";
 			this->newMessageLabel->Size = System::Drawing::Size(70, 26);
 			this->newMessageLabel->TabIndex = 106;
@@ -667,14 +688,14 @@ private: System::ComponentModel::IContainer^  components;
 			// Channel2Label
 			// 
 			this->Channel2Label->BackColor = System::Drawing::Color::Transparent;
-			this->Channel2Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->Channel2Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->Channel2Label->HighlightColor = System::Drawing::Color::Red;
 			this->Channel2Label->Highlighted = false;
 			this->Channel2Label->InfoText = L"";
-			this->Channel2Label->Location = System::Drawing::Point(675, 108);
+			this->Channel2Label->Location = System::Drawing::Point(675, 98);
 			this->Channel2Label->Name = L"Channel2Label";
-			this->Channel2Label->Size = System::Drawing::Size(256, 28);
+			this->Channel2Label->Size = System::Drawing::Size(256, 16);
 			this->Channel2Label->TabIndex = 212;
 			this->Channel2Label->TabStop = false;
 			this->Channel2Label->Text = L"Channel 3";
@@ -682,14 +703,14 @@ private: System::ComponentModel::IContainer^  components;
 			// Channel1Label
 			// 
 			this->Channel1Label->BackColor = System::Drawing::Color::Transparent;
-			this->Channel1Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->Channel1Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->Channel1Label->HighlightColor = System::Drawing::Color::Red;
 			this->Channel1Label->Highlighted = false;
 			this->Channel1Label->InfoText = L"";
-			this->Channel1Label->Location = System::Drawing::Point(379, 108);
+			this->Channel1Label->Location = System::Drawing::Point(379, 98);
 			this->Channel1Label->Name = L"Channel1Label";
-			this->Channel1Label->Size = System::Drawing::Size(256, 28);
+			this->Channel1Label->Size = System::Drawing::Size(256, 16);
 			this->Channel1Label->TabIndex = 212;
 			this->Channel1Label->TabStop = false;
 			this->Channel1Label->Text = L"Channel 2";
@@ -697,14 +718,14 @@ private: System::ComponentModel::IContainer^  components;
 			// Channel0Label
 			// 
 			this->Channel0Label->BackColor = System::Drawing::Color::Transparent;
-			this->Channel0Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->Channel0Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->Channel0Label->HighlightColor = System::Drawing::Color::Red;
 			this->Channel0Label->Highlighted = false;
 			this->Channel0Label->InfoText = L"";
-			this->Channel0Label->Location = System::Drawing::Point(83, 108);
+			this->Channel0Label->Location = System::Drawing::Point(83, 98);
 			this->Channel0Label->Name = L"Channel0Label";
-			this->Channel0Label->Size = System::Drawing::Size(256, 28);
+			this->Channel0Label->Size = System::Drawing::Size(256, 16);
 			this->Channel0Label->TabIndex = 212;
 			this->Channel0Label->TabStop = false;
 			this->Channel0Label->Text = L"Channel 1";
@@ -714,7 +735,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory2->Location = System::Drawing::Point(619, 22);
 			this->Directory2->Name = L"Directory0";
 			this->Directory2->SelectedIndexEnabled = false;
-			this->Directory2->Size = System::Drawing::Size(200, 80);
+			this->Directory2->Size = System::Drawing::Size(200, 69);
 			this->Directory2->TabIndex = 6;
 			this->Directory2->Text = L"bapsListBox1";
 			this->Directory2->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::Directory_MouseDown);
@@ -724,7 +745,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory1->Location = System::Drawing::Point(411, 22);
 			this->Directory1->Name = L"Directory0";
 			this->Directory1->SelectedIndexEnabled = false;
-			this->Directory1->Size = System::Drawing::Size(200, 80);
+			this->Directory1->Size = System::Drawing::Size(200, 69);
 			this->Directory1->TabIndex = 5;
 			this->Directory1->Text = L"bapsListBox1";
 			this->Directory1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::Directory_MouseDown);
@@ -734,7 +755,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory0->Location = System::Drawing::Point(205, 22);
 			this->Directory0->Name = L"Directory0";
 			this->Directory0->SelectedIndexEnabled = false;
-			this->Directory0->Size = System::Drawing::Size(200, 80);
+			this->Directory0->Size = System::Drawing::Size(200, 69);
 			this->Directory0->TabIndex = 4;
 			this->Directory0->Text = L"bapsListBox1";
 			this->Directory0->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::Directory_MouseDown);
@@ -746,13 +767,15 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel2Length->HighlightColor = System::Drawing::Color::Red;
 			this->Channel2Length->Highlighted = false;
-			this->Channel2Length->InfoText = L"Total:";
-			this->Channel2Length->Location = System::Drawing::Point(859, 579);
+			this->Channel2Length->InfoText = L"End At: 59:50";
+			this->Channel2Length->Location = System::Drawing::Point(849, 536);
 			this->Channel2Length->Name = L"Channel2Length";
-			this->Channel2Length->Size = System::Drawing::Size(72, 32);
+			this->Channel2Length->Size = System::Drawing::Size(82, 32);
 			this->Channel2Length->TabIndex = 117;
 			this->Channel2Length->TabStop = false;
-			this->Channel2Length->Text = L"0:00:00";
+			this->Channel2Length->Tag = L"";
+			this->Channel2Length->Text = L"--:--";
+			this->Channel2Length->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::ChannelLength_MouseDown);
 			// 
 			// Channel1Length
 			// 
@@ -761,13 +784,15 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel1Length->HighlightColor = System::Drawing::Color::Red;
 			this->Channel1Length->Highlighted = false;
-			this->Channel1Length->InfoText = L"Total:";
-			this->Channel1Length->Location = System::Drawing::Point(563, 579);
+			this->Channel1Length->InfoText = L"End At: 59:50";
+			this->Channel1Length->Location = System::Drawing::Point(553, 536);
 			this->Channel1Length->Name = L"Channel1Length";
-			this->Channel1Length->Size = System::Drawing::Size(72, 32);
+			this->Channel1Length->Size = System::Drawing::Size(82, 32);
 			this->Channel1Length->TabIndex = 114;
 			this->Channel1Length->TabStop = false;
-			this->Channel1Length->Text = L"0:00:00";
+			this->Channel1Length->Tag = L"";
+			this->Channel1Length->Text = L"--:--";
+			this->Channel1Length->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::ChannelLength_MouseDown);
 			// 
 			// Channel0Length
 			// 
@@ -776,13 +801,15 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel0Length->HighlightColor = System::Drawing::Color::Red;
 			this->Channel0Length->Highlighted = false;
-			this->Channel0Length->InfoText = L"Total:";
-			this->Channel0Length->Location = System::Drawing::Point(267, 579);
+			this->Channel0Length->InfoText = L"End At: 59:50";
+			this->Channel0Length->Location = System::Drawing::Point(257, 536);
 			this->Channel0Length->Name = L"Channel0Length";
-			this->Channel0Length->Size = System::Drawing::Size(72, 32);
+			this->Channel0Length->Size = System::Drawing::Size(82, 32);
 			this->Channel0Length->TabIndex = 111;
 			this->Channel0Length->TabStop = false;
-			this->Channel0Length->Text = L"0:00:00";
+			this->Channel0Length->Tag = L"";
+			this->Channel0Length->Text = L"--:--";
+			this->Channel0Length->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::ChannelLength_MouseDown);
 			// 
 			// Channel2TimeLeft
 			// 
@@ -792,9 +819,9 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2TimeLeft->HighlightColor = System::Drawing::Color::HotPink;
 			this->Channel2TimeLeft->Highlighted = false;
 			this->Channel2TimeLeft->InfoText = L"Remaining:";
-			this->Channel2TimeLeft->Location = System::Drawing::Point(767, 579);
+			this->Channel2TimeLeft->Location = System::Drawing::Point(762, 536);
 			this->Channel2TimeLeft->Name = L"Channel2TimeLeft";
-			this->Channel2TimeLeft->Size = System::Drawing::Size(72, 32);
+			this->Channel2TimeLeft->Size = System::Drawing::Size(82, 32);
 			this->Channel2TimeLeft->TabIndex = 116;
 			this->Channel2TimeLeft->TabStop = false;
 			this->Channel2TimeLeft->Text = L"0:00:00";
@@ -807,9 +834,9 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1TimeLeft->HighlightColor = System::Drawing::Color::HotPink;
 			this->Channel1TimeLeft->Highlighted = false;
 			this->Channel1TimeLeft->InfoText = L"Remaining:";
-			this->Channel1TimeLeft->Location = System::Drawing::Point(471, 579);
+			this->Channel1TimeLeft->Location = System::Drawing::Point(466, 536);
 			this->Channel1TimeLeft->Name = L"Channel1TimeLeft";
-			this->Channel1TimeLeft->Size = System::Drawing::Size(72, 32);
+			this->Channel1TimeLeft->Size = System::Drawing::Size(82, 32);
 			this->Channel1TimeLeft->TabIndex = 113;
 			this->Channel1TimeLeft->TabStop = false;
 			this->Channel1TimeLeft->Text = L"0:00:00";
@@ -822,9 +849,9 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0TimeLeft->HighlightColor = System::Drawing::Color::HotPink;
 			this->Channel0TimeLeft->Highlighted = false;
 			this->Channel0TimeLeft->InfoText = L"Remaining:";
-			this->Channel0TimeLeft->Location = System::Drawing::Point(175, 579);
+			this->Channel0TimeLeft->Location = System::Drawing::Point(170, 536);
 			this->Channel0TimeLeft->Name = L"Channel0TimeLeft";
-			this->Channel0TimeLeft->Size = System::Drawing::Size(72, 32);
+			this->Channel0TimeLeft->Size = System::Drawing::Size(82, 32);
 			this->Channel0TimeLeft->TabIndex = 110;
 			this->Channel0TimeLeft->TabStop = false;
 			this->Channel0TimeLeft->Text = L"0:00:00";
@@ -837,9 +864,9 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2TimeGone->HighlightColor = System::Drawing::Color::Red;
 			this->Channel2TimeGone->Highlighted = false;
 			this->Channel2TimeGone->InfoText = L"Elapsed:";
-			this->Channel2TimeGone->Location = System::Drawing::Point(675, 579);
+			this->Channel2TimeGone->Location = System::Drawing::Point(675, 536);
 			this->Channel2TimeGone->Name = L"Channel2TimeGone";
-			this->Channel2TimeGone->Size = System::Drawing::Size(72, 32);
+			this->Channel2TimeGone->Size = System::Drawing::Size(82, 32);
 			this->Channel2TimeGone->TabIndex = 115;
 			this->Channel2TimeGone->TabStop = false;
 			this->Channel2TimeGone->Text = L"0:00:00";
@@ -852,9 +879,9 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1TimeGone->HighlightColor = System::Drawing::Color::Red;
 			this->Channel1TimeGone->Highlighted = false;
 			this->Channel1TimeGone->InfoText = L"Elapsed:";
-			this->Channel1TimeGone->Location = System::Drawing::Point(379, 579);
+			this->Channel1TimeGone->Location = System::Drawing::Point(379, 536);
 			this->Channel1TimeGone->Name = L"Channel1TimeGone";
-			this->Channel1TimeGone->Size = System::Drawing::Size(72, 32);
+			this->Channel1TimeGone->Size = System::Drawing::Size(82, 32);
 			this->Channel1TimeGone->TabIndex = 112;
 			this->Channel1TimeGone->TabStop = false;
 			this->Channel1TimeGone->Text = L"0:00:00";
@@ -867,9 +894,9 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0TimeGone->HighlightColor = System::Drawing::Color::Red;
 			this->Channel0TimeGone->Highlighted = false;
 			this->Channel0TimeGone->InfoText = L"Elapsed:";
-			this->Channel0TimeGone->Location = System::Drawing::Point(83, 579);
+			this->Channel0TimeGone->Location = System::Drawing::Point(83, 536);
 			this->Channel0TimeGone->Name = L"Channel0TimeGone";
-			this->Channel0TimeGone->Size = System::Drawing::Size(72, 32);
+			this->Channel0TimeGone->Size = System::Drawing::Size(82, 32);
 			this->Channel0TimeGone->TabIndex = 109;
 			this->Channel0TimeGone->TabStop = false;
 			this->Channel0TimeGone->Text = L"0:00:00";
@@ -883,7 +910,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2LoadedText->HighlightColor = System::Drawing::Color::MediumTurquoise;
 			this->Channel2LoadedText->Highlighted = false;
 			this->Channel2LoadedText->InfoText = L"";
-			this->Channel2LoadedText->Location = System::Drawing::Point(675, 458);
+			this->Channel2LoadedText->Location = System::Drawing::Point(675, 425);
 			this->Channel2LoadedText->Name = L"Channel2LoadedText";
 			this->Channel2LoadedText->Size = System::Drawing::Size(256, 30);
 			this->Channel2LoadedText->TabIndex = 108;
@@ -899,7 +926,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1LoadedText->HighlightColor = System::Drawing::Color::MediumTurquoise;
 			this->Channel1LoadedText->Highlighted = false;
 			this->Channel1LoadedText->InfoText = L"";
-			this->Channel1LoadedText->Location = System::Drawing::Point(379, 458);
+			this->Channel1LoadedText->Location = System::Drawing::Point(379, 425);
 			this->Channel1LoadedText->Name = L"Channel1LoadedText";
 			this->Channel1LoadedText->Size = System::Drawing::Size(256, 30);
 			this->Channel1LoadedText->TabIndex = 107;
@@ -915,7 +942,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0LoadedText->HighlightColor = System::Drawing::Color::MediumTurquoise;
 			this->Channel0LoadedText->Highlighted = false;
 			this->Channel0LoadedText->InfoText = L"";
-			this->Channel0LoadedText->Location = System::Drawing::Point(83, 459);
+			this->Channel0LoadedText->Location = System::Drawing::Point(83, 426);
 			this->Channel0LoadedText->Name = L"Channel0LoadedText";
 			this->Channel0LoadedText->Size = System::Drawing::Size(256, 30);
 			this->Channel0LoadedText->TabIndex = 106;
@@ -952,6 +979,21 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory1Refresh->Text = L"Beds - Beds - Beds";
 			this->Directory1Refresh->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::RefreshDirectory_Click);
 			// 
+			// feedbackButton
+			// 
+			this->feedbackButton->BackColor = System::Drawing::Color::Transparent;
+			this->feedbackButton->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->feedbackButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->feedbackButton->HighlightColor = System::Drawing::Color::Red;
+			this->feedbackButton->Highlighted = false;
+			this->feedbackButton->Location = System::Drawing::Point(899, 5);
+			this->feedbackButton->Name = L"feedbackButton";
+			this->feedbackButton->Size = System::Drawing::Size(57, 18);
+			this->feedbackButton->TabIndex = 8;
+			this->feedbackButton->Text = L"Support";
+			this->feedbackButton->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::feedbackButton_Click);
+			// 
 			// Directory0Refresh
 			// 
 			this->Directory0Refresh->BackColor = System::Drawing::Color::Transparent;
@@ -967,21 +1009,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory0Refresh->Text = L"Jingles - Jingles - Jingles";
 			this->Directory0Refresh->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::RefreshDirectory_Click);
 			// 
-			// feedbackButton
-			// 
-			this->feedbackButton->BackColor = System::Drawing::Color::Transparent;
-			this->feedbackButton->DialogResult = System::Windows::Forms::DialogResult::None;
-			this->feedbackButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(0)));
-			this->feedbackButton->HighlightColor = System::Drawing::Color::Red;
-			this->feedbackButton->Highlighted = false;
-			this->feedbackButton->Location = System::Drawing::Point(899, 8);
-			this->feedbackButton->Name = L"feedbackButton";
-			this->feedbackButton->Size = System::Drawing::Size(57, 18);
-			this->feedbackButton->TabIndex = 8;
-			this->feedbackButton->Text = L"Support";
-			this->feedbackButton->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::feedbackButton_Click);
-			// 
 			// helpButton
 			// 
 			this->helpButton->BackColor = System::Drawing::Color::Transparent;
@@ -990,7 +1017,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->helpButton->HighlightColor = System::Drawing::Color::Red;
 			this->helpButton->Highlighted = false;
-			this->helpButton->Location = System::Drawing::Point(847, 8);
+			this->helpButton->Location = System::Drawing::Point(847, 5);
 			this->helpButton->Name = L"helpButton";
 			this->helpButton->Size = System::Drawing::Size(42, 18);
 			this->helpButton->TabIndex = 7;
@@ -1005,27 +1032,12 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->bapsButton1->HighlightColor = System::Drawing::Color::Red;
 			this->bapsButton1->Highlighted = false;
-			this->bapsButton1->Location = System::Drawing::Point(847, 32);
+			this->bapsButton1->Location = System::Drawing::Point(847, 27);
 			this->bapsButton1->Name = L"bapsButton1";
-			this->bapsButton1->Size = System::Drawing::Size(109, 70);
+			this->bapsButton1->Size = System::Drawing::Size(109, 64);
 			this->bapsButton1->TabIndex = 9;
 			this->bapsButton1->Text = L"Search Record Library";
 			this->bapsButton1->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::SearchRecordLib_Click);
-			// 
-			// loadShowButton
-			// 
-			this->loadShowButton->BackColor = System::Drawing::Color::Transparent;
-			this->loadShowButton->DialogResult = System::Windows::Forms::DialogResult::None;
-			this->loadShowButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(0)));
-			this->loadShowButton->HighlightColor = System::Drawing::Color::Red;
-			this->loadShowButton->Highlighted = false;
-			this->loadShowButton->Location = System::Drawing::Point(63, 32);
-			this->loadShowButton->Name = L"loadShowButton";
-			this->loadShowButton->Size = System::Drawing::Size(109, 70);
-			this->loadShowButton->TabIndex = 0;
-			this->loadShowButton->Text = L"Load Show";
-			this->loadShowButton->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::loadShow_Click);
 			// 
 			// Channel2Play
 			// 
@@ -1035,12 +1047,27 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel2Play->HighlightColor = System::Drawing::Color::DarkGreen;
 			this->Channel2Play->Highlighted = false;
-			this->Channel2Play->Location = System::Drawing::Point(675, 435);
+			this->Channel2Play->Location = System::Drawing::Point(675, 402);
 			this->Channel2Play->Name = L"Channel2Play";
 			this->Channel2Play->Size = System::Drawing::Size(72, 19);
 			this->Channel2Play->TabIndex = 22;
 			this->Channel2Play->Text = L"F9 - Play";
 			this->Channel2Play->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
+			// 
+			// loadShowButton
+			// 
+			this->loadShowButton->BackColor = System::Drawing::Color::Transparent;
+			this->loadShowButton->DialogResult = System::Windows::Forms::DialogResult::None;
+			this->loadShowButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->loadShowButton->HighlightColor = System::Drawing::Color::Red;
+			this->loadShowButton->Highlighted = false;
+			this->loadShowButton->Location = System::Drawing::Point(63, 22);
+			this->loadShowButton->Name = L"loadShowButton";
+			this->loadShowButton->Size = System::Drawing::Size(109, 69);
+			this->loadShowButton->TabIndex = 0;
+			this->loadShowButton->Text = L"Load Show";
+			this->loadShowButton->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::loadShow_Click);
 			// 
 			// Channel1Play
 			// 
@@ -1050,7 +1077,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel1Play->HighlightColor = System::Drawing::Color::DarkGreen;
 			this->Channel1Play->Highlighted = false;
-			this->Channel1Play->Location = System::Drawing::Point(379, 435);
+			this->Channel1Play->Location = System::Drawing::Point(379, 402);
 			this->Channel1Play->Name = L"Channel1Play";
 			this->Channel1Play->Size = System::Drawing::Size(72, 19);
 			this->Channel1Play->TabIndex = 19;
@@ -1065,7 +1092,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel2Stop->HighlightColor = System::Drawing::Color::Firebrick;
 			this->Channel2Stop->Highlighted = false;
-			this->Channel2Stop->Location = System::Drawing::Point(859, 435);
+			this->Channel2Stop->Location = System::Drawing::Point(859, 402);
 			this->Channel2Stop->Name = L"Channel2Stop";
 			this->Channel2Stop->Size = System::Drawing::Size(72, 19);
 			this->Channel2Stop->TabIndex = 24;
@@ -1080,7 +1107,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel1Stop->HighlightColor = System::Drawing::Color::Firebrick;
 			this->Channel1Stop->Highlighted = false;
-			this->Channel1Stop->Location = System::Drawing::Point(563, 435);
+			this->Channel1Stop->Location = System::Drawing::Point(563, 402);
 			this->Channel1Stop->Name = L"Channel1Stop";
 			this->Channel1Stop->Size = System::Drawing::Size(72, 19);
 			this->Channel1Stop->TabIndex = 21;
@@ -1095,7 +1122,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel2Pause->HighlightColor = System::Drawing::Color::DarkOrange;
 			this->Channel2Pause->Highlighted = false;
-			this->Channel2Pause->Location = System::Drawing::Point(767, 435);
+			this->Channel2Pause->Location = System::Drawing::Point(767, 402);
 			this->Channel2Pause->Name = L"Channel2Pause";
 			this->Channel2Pause->Size = System::Drawing::Size(72, 19);
 			this->Channel2Pause->TabIndex = 23;
@@ -1110,7 +1137,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel1Pause->HighlightColor = System::Drawing::Color::DarkOrange;
 			this->Channel1Pause->Highlighted = false;
-			this->Channel1Pause->Location = System::Drawing::Point(471, 435);
+			this->Channel1Pause->Location = System::Drawing::Point(471, 402);
 			this->Channel1Pause->Name = L"Channel1Pause";
 			this->Channel1Pause->Size = System::Drawing::Size(72, 19);
 			this->Channel1Pause->TabIndex = 20;
@@ -1125,7 +1152,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel0Pause->HighlightColor = System::Drawing::Color::DarkOrange;
 			this->Channel0Pause->Highlighted = false;
-			this->Channel0Pause->Location = System::Drawing::Point(175, 435);
+			this->Channel0Pause->Location = System::Drawing::Point(175, 402);
 			this->Channel0Pause->Name = L"Channel0Pause";
 			this->Channel0Pause->Size = System::Drawing::Size(72, 19);
 			this->Channel0Pause->TabIndex = 17;
@@ -1140,7 +1167,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel0Stop->HighlightColor = System::Drawing::Color::Firebrick;
 			this->Channel0Stop->Highlighted = false;
-			this->Channel0Stop->Location = System::Drawing::Point(267, 435);
+			this->Channel0Stop->Location = System::Drawing::Point(267, 402);
 			this->Channel0Stop->Name = L"Channel0Stop";
 			this->Channel0Stop->Size = System::Drawing::Size(72, 19);
 			this->Channel0Stop->TabIndex = 18;
@@ -1155,7 +1182,7 @@ private: System::ComponentModel::IContainer^  components;
 				static_cast<System::Byte>(0)));
 			this->Channel0Play->HighlightColor = System::Drawing::Color::DarkGreen;
 			this->Channel0Play->Highlighted = false;
-			this->Channel0Play->Location = System::Drawing::Point(83, 435);
+			this->Channel0Play->Location = System::Drawing::Point(83, 402);
 			this->Channel0Play->Name = L"Channel0Play";
 			this->Channel0Play->Size = System::Drawing::Size(72, 19);
 			this->Channel0Play->TabIndex = 16;
@@ -1169,7 +1196,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackList2->ContextMenuStrip = this->trackListContextMenuStrip;
 			this->trackList2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->trackList2->Location = System::Drawing::Point(675, 146);
+			this->trackList2->Location = System::Drawing::Point(675, 118);
 			this->trackList2->Name = L"trackList2";
 			this->trackList2->Size = System::Drawing::Size(256, 280);
 			this->trackList2->TabIndex = 14;
@@ -1183,7 +1210,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackList1->ContextMenuStrip = this->trackListContextMenuStrip;
 			this->trackList1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->trackList1->Location = System::Drawing::Point(377, 146);
+			this->trackList1->Location = System::Drawing::Point(377, 118);
 			this->trackList1->Name = L"trackList1";
 			this->trackList1->Size = System::Drawing::Size(256, 280);
 			this->trackList1->TabIndex = 12;
@@ -1198,7 +1225,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackList0->ContextMenuStrip = this->trackListContextMenuStrip;
 			this->trackList0->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->trackList0->Location = System::Drawing::Point(83, 146);
+			this->trackList0->Location = System::Drawing::Point(83, 118);
 			this->trackList0->Name = L"trackList0";
 			this->trackList0->Size = System::Drawing::Size(256, 280);
 			this->trackList0->TabIndex = 10;
@@ -1212,7 +1239,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackTime2->CuePosition = 0;
 			this->trackTime2->Duration = 0;
 			this->trackTime2->IntroPosition = 0;
-			this->trackTime2->Location = System::Drawing::Point(675, 495);
+			this->trackTime2->Location = System::Drawing::Point(675, 459);
 			this->trackTime2->Name = L"trackTime2";
 			this->trackTime2->Position = 0;
 			this->trackTime2->SilencePosition = 0;
@@ -1227,7 +1254,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackTime1->CuePosition = 0;
 			this->trackTime1->Duration = 0;
 			this->trackTime1->IntroPosition = 0;
-			this->trackTime1->Location = System::Drawing::Point(379, 495);
+			this->trackTime1->Location = System::Drawing::Point(379, 459);
 			this->trackTime1->Name = L"trackTime1";
 			this->trackTime1->Position = 0;
 			this->trackTime1->SilencePosition = 0;
@@ -1242,7 +1269,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackTime0->CuePosition = 0;
 			this->trackTime0->Duration = 0;
 			this->trackTime0->IntroPosition = 0;
-			this->trackTime0->Location = System::Drawing::Point(83, 495);
+			this->trackTime0->Location = System::Drawing::Point(83, 459);
 			this->trackTime0->Name = L"trackTime0";
 			this->trackTime0->Position = 0;
 			this->trackTime0->SilencePosition = 0;
@@ -1260,6 +1287,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->ClientSize = System::Drawing::Size(1024, 733);
 			this->ControlBox = false;
 			this->Controls->Add(this->chatOnOff);
+			this->Controls->Add(this->timeLine);
 			this->Controls->Add(this->sendMessage);
 			this->Controls->Add(this->chatTo);
 			this->Controls->Add(this->newMessageLabel);
@@ -1290,8 +1318,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->Controls->Add(this->Directory0Refresh);
 			this->Controls->Add(this->helpButton);
 			this->Controls->Add(this->bapsButton1);
-			this->Controls->Add(this->loadShowButton);
 			this->Controls->Add(this->Channel2Play);
+			this->Controls->Add(this->loadShowButton);
 			this->Controls->Add(this->Channel1Play);
 			this->Controls->Add(this->Channel2Stop);
 			this->Controls->Add(this->Channel1Stop);
@@ -1330,7 +1358,6 @@ private: System::ComponentModel::IContainer^  components;
 
 		}
 #pragma endregion
-
 };
 }
 

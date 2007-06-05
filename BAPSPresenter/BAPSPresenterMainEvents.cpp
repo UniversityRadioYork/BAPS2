@@ -140,8 +140,6 @@ System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  send
 			else
 			{
 				configDialog = gcnew ConfigDialog(this,msgQueue);
-				Command cmd = BAPSNET_CONFIG | BAPSNET_GETOPTIONS;
-				msgQueue->Enqueue(gcnew ActionMessage(cmd));
 				configDialog->ShowDialog();
 				delete configDialog;
 				configDialog = nullptr;
@@ -186,7 +184,7 @@ System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  send
 		}
 		break;
 	case 'A':
-		if (e->Control)
+		if (e->Control && e->Alt)
 		{
 			about = gcnew About(this);
 			msgQueue->Enqueue(gcnew ActionMessage(BAPSNET_SYSTEM|BAPSNET_VERSION));
@@ -419,4 +417,136 @@ System::Void BAPSPresenterMain::nearEndFlash(System::Object ^  sender, System::E
 	int channel = safe_cast<int>(timer->Tag);
 
 	timeLeftText[channel]->Highlighted = !timeLeftText[channel]->Highlighted ;
+}
+System::Void BAPSPresenterMain::ChannelLength_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
+{
+	BAPSLabel^ label = safe_cast<BAPSLabel^>(sender);
+	CountDownState^ cds = safe_cast<CountDownState^>(label->Tag);
+
+	if (e->Y > 15)
+	{
+		cds->running = !cds->running;
+	}
+	else if (e->X > 3*(label->ClientRectangle.Width/4))
+	{
+		if (e->Button == System::Windows::Forms::MouseButtons::Left)
+		{
+			cds->theTime++;
+			cds->theTime = cds->theTime%3600;
+		}
+		else if (e->Button == System::Windows::Forms::MouseButtons::Right)
+		{
+			cds->theTime--;
+			if (cds->theTime < 0)
+			{
+				cds->theTime+=3600;
+			}
+		}
+	}
+	else if (e->X > label->ClientRectangle.Width/2)
+	{
+		if (e->Button == System::Windows::Forms::MouseButtons::Left)
+		{
+			cds->theTime+=60;
+			cds->theTime = cds->theTime%3600;
+		}
+		else if (e->Button == System::Windows::Forms::MouseButtons::Right)
+		{
+			cds->theTime-=60;
+			if (cds->theTime < 0)
+			{
+				cds->theTime+=3600;
+			}
+		}
+	}
+	else
+	{
+		if (cds->running)
+		{
+			if (cds->startAt)
+			{
+				cds->theTime += (trackTime[cds->channel]->Duration - trackTime[cds->channel]->CuePosition)/1000;
+			}
+			else
+			{
+				cds->theTime += 3600;
+				cds->theTime -= (trackTime[cds->channel]->Duration - trackTime[cds->channel]->CuePosition)/1000;
+			}
+			cds->theTime = cds->theTime%3600;
+		}
+		cds->startAt = !cds->startAt;
+	}
+	if (cds->startAt)
+	{
+		label->InfoText = "Start At: ";
+	}
+	else
+	{
+		label->InfoText = "End At: ";
+	}
+	label->InfoText = String::Concat(label->InfoText,(cds->theTime/60).ToString("00"),":",(cds->theTime%60).ToString("00"));
+
+}
+System::Void BAPSPresenterMain::countdownTick(System::Object ^  sender, System::EventArgs ^  e)
+{
+	int i = 0;
+	for (i = 0 ; i < 3 ; i++)
+	{
+		CountDownState^ cds = safe_cast<CountDownState^>(trackLengthText[i]->Tag);
+
+		if (channelPlay[i]->Enabled && cds->running)
+		{
+			System::DateTime dt = System::DateTime::Now;
+			if (!cds->startAt)
+			{
+				dt = dt.AddMilliseconds(trackTime[i]->Duration-trackTime[i]->CuePosition);
+			}
+			int millisecsPastHour = (((dt.Minute*60)+dt.Second)*1000)+dt.Millisecond;
+			int value = cds->theTime*1000;
+			if (value < millisecsPastHour)
+			{
+				value += 3600000;
+			}
+			value -= millisecsPastHour;
+			int valuesecs = value /1000;
+			/** WORK NEEDED: This allows 5 seconds grace in case of heavy system load
+			 *               It would be better if there were guaranteed start if it didnt kick in.
+			 **/
+			if (valuesecs > 3595)
+			{
+				cds->running = false;
+				Command cmd = BAPSNET_PLAYBACK | BAPSNET_PLAY | i;
+				msgQueue->Enqueue(gcnew ActionMessage(cmd));
+			}
+			trackLengthText[i]->Text = System::String::Concat((valuesecs/60).ToString("00"),":", (valuesecs%60).ToString("00"));
+			
+			timeLine->UpdateStartTime(i, value);
+		}
+		else
+		{
+			cds->running = false;
+			timeLine->UpdateStartTime(i, -1);
+			trackLengthText[i]->Text = "--:--";
+		}
+		if (cds->startAt)
+		{
+			trackLengthText[i]->InfoText = "Start At: ";
+		}
+		else
+		{
+			trackLengthText[i]->InfoText = "End At: ";
+		}
+		trackLengthText[i]->InfoText = String::Concat(trackLengthText[i]->InfoText,(cds->theTime/60).ToString("00"),":",(cds->theTime%60).ToString("00"));
+
+	}
+
+	timeLine->tick();
+}
+
+System::Void BAPSPresenterMain::timeLine_StartTimeChanged(System::Object^  sender, BAPSPresenter::TimeLineEventArgs^  e)
+{
+	CountDownState^ cds = safe_cast<CountDownState^>(trackLengthText[e->channel]->Tag);
+	cds->startAt = true;
+	cds->theTime = (e->startTime/1000)%3600;
+	cds->running = true;
 }

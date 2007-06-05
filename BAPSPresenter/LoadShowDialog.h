@@ -42,7 +42,7 @@ namespace BAPSPresenter {
 			/** Each of the radio buttons needs an id so that they can be told apart
 				at runtime
 			**/
-			this->currentUserRadio->Tag = safe_cast<System::Object^>(0);
+			this->todaysShowsRadio->Tag = safe_cast<System::Object^>(0);
 			this->systemUserRadio->Tag = 1;
 			this->otherUserRadio->Tag = 2;
 			/** stage 0 is selecting a user **/
@@ -110,8 +110,7 @@ namespace BAPSPresenter {
 
 	private: System::Windows::Forms::CheckBox^  newShowsOnly;
 	private: System::Windows::Forms::TextBox^  otherUser;
-	private: System::Windows::Forms::RadioButton^  currentUserRadio;
-
+	private: System::Windows::Forms::RadioButton^  todaysShowsRadio;
 
 	private: System::Windows::Forms::RadioButton^  otherUserRadio;
 	private: System::Windows::Forms::RadioButton^  systemUserRadio;
@@ -134,7 +133,7 @@ namespace BAPSPresenter {
 			this->errorLabel = (gcnew System::Windows::Forms::Label());
 			this->newShowsOnly = (gcnew System::Windows::Forms::CheckBox());
 			this->otherUser = (gcnew System::Windows::Forms::TextBox());
-			this->currentUserRadio = (gcnew System::Windows::Forms::RadioButton());
+			this->todaysShowsRadio = (gcnew System::Windows::Forms::RadioButton());
 			this->otherUserRadio = (gcnew System::Windows::Forms::RadioButton());
 			this->systemUserRadio = (gcnew System::Windows::Forms::RadioButton());
 			this->dialogTitle = (gcnew BAPSPresenter::BAPSLabel());
@@ -177,18 +176,18 @@ namespace BAPSPresenter {
 			this->otherUser->Text = L"<E-mail / BAPS showid>";
 			this->otherUser->Enter += gcnew System::EventHandler(this, &LoadShowDialog::otherUser_Enter);
 			// 
-			// currentUserRadio
+			// todaysShowsRadio
 			// 
-			this->currentUserRadio->BackColor = System::Drawing::Color::Transparent;
-			this->currentUserRadio->FlatAppearance->CheckedBackColor = System::Drawing::Color::SeaShell;
-			this->currentUserRadio->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->currentUserRadio->Location = System::Drawing::Point(51, 56);
-			this->currentUserRadio->Name = L"currentUserRadio";
-			this->currentUserRadio->Size = System::Drawing::Size(104, 16);
-			this->currentUserRadio->TabIndex = 0;
-			this->currentUserRadio->Text = L"Current User";
-			this->currentUserRadio->UseVisualStyleBackColor = false;
-			this->currentUserRadio->CheckedChanged += gcnew System::EventHandler(this, &LoadShowDialog::check_Changed);
+			this->todaysShowsRadio->BackColor = System::Drawing::Color::Transparent;
+			this->todaysShowsRadio->FlatAppearance->CheckedBackColor = System::Drawing::Color::SeaShell;
+			this->todaysShowsRadio->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->todaysShowsRadio->Location = System::Drawing::Point(51, 51);
+			this->todaysShowsRadio->Name = L"todaysShowsRadio";
+			this->todaysShowsRadio->Size = System::Drawing::Size(104, 24);
+			this->todaysShowsRadio->TabIndex = 0;
+			this->todaysShowsRadio->Text = L"Today\'s shows";
+			this->todaysShowsRadio->UseVisualStyleBackColor = false;
+			this->todaysShowsRadio->CheckedChanged += gcnew System::EventHandler(this, &LoadShowDialog::check_Changed);
 			// 
 			// otherUserRadio
 			// 
@@ -211,9 +210,9 @@ namespace BAPSPresenter {
 			this->systemUserRadio->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->systemUserRadio->Location = System::Drawing::Point(51, 80);
 			this->systemUserRadio->Name = L"systemUserRadio";
-			this->systemUserRadio->Size = System::Drawing::Size(104, 16);
+			this->systemUserRadio->Size = System::Drawing::Size(168, 16);
 			this->systemUserRadio->TabIndex = 1;
-			this->systemUserRadio->Text = L"Audio Wall";
+			this->systemUserRadio->Text = L"Recommended Audio";
 			this->systemUserRadio->UseVisualStyleBackColor = false;
 			this->systemUserRadio->CheckedChanged += gcnew System::EventHandler(this, &LoadShowDialog::check_Changed);
 			// 
@@ -222,6 +221,8 @@ namespace BAPSPresenter {
 			this->dialogTitle->BackColor = System::Drawing::Color::Transparent;
 			this->dialogTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
+			this->dialogTitle->HighlightColor = System::Drawing::Color::Red;
+			this->dialogTitle->Highlighted = false;
 			this->dialogTitle->InfoText = L"";
 			this->dialogTitle->Location = System::Drawing::Point(10, 19);
 			this->dialogTitle->Name = L"dialogTitle";
@@ -288,7 +289,7 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->errorLabel);
 			this->Controls->Add(this->newShowsOnly);
 			this->Controls->Add(this->otherUser);
-			this->Controls->Add(this->currentUserRadio);
+			this->Controls->Add(this->todaysShowsRadio);
 			this->Controls->Add(this->otherUserRadio);
 			this->Controls->Add(this->systemUserRadio);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;

@@ -129,7 +129,8 @@ void ConfigManager::initConfigManager()
 	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSControllerButtonCount", "BAPS Controller Button Count", 6, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCODE] = gcnew ConfigDescriptorInt("BAPSControllerButtonCode", CONFIG_BAPSCONTROLLERBUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSPADDLEMODE] = gcnew ConfigDescriptorIntChoice("BAPSPaddleMode", "BAPS Paddle Mode", paddleChoices ,CA_ANY);
-	
+	configDescriptions[CONFIG_CLEANMUSICONLY] = gcnew ConfigDescriptorIntChoice("OnlyAllowCleanMusic", "Only Allow Clean Music", noYesChoices ,CA_SU_ONLY);
+
 	configErrors = gcnew array<System::String^>(CE_LASTERROR);
 	configErrors[CE_NOERROR] = "No error";
 	configErrors[CE_PERMISSIONDENIED] = "Insufficient Privilidge";

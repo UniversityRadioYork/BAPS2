@@ -67,7 +67,7 @@ System::Void LoadShowDialog::goButton_Click(System::Object ^  sender, System::Ev
 				this->SuspendLayout();
 
 				/** Disable aspects of stage 0 ui **/
-				currentUserRadio->Visible = false;
+				todaysShowsRadio->Visible = false;
 				systemUserRadio->Visible = false;
 				otherUserRadio->Visible = false;
 				otherUser->Visible = false;
@@ -143,7 +143,7 @@ System::Void LoadShowDialog::goButton_Click(System::Object ^  sender, System::Ev
 				listBox->clearList();
 				listBox->Visible = false;
 				/** enable the stage 1 ui **/
-				currentUserRadio->Visible = true;
+				todaysShowsRadio->Visible = true;
 				systemUserRadio->Visible = true;
 				otherUserRadio->Visible = true;
 				otherUser->Visible = true;

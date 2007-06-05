@@ -74,6 +74,10 @@ System::Void RecordLibrarySearch::SearchButton_Click(System::Object ^  sender, S
 		{
 			orderby = BAPSNET_ORDER_BYDATEADDED;
 		}
+		else if (dateReleasedRadioButton->Checked)
+		{
+			orderby = BAPSNET_ORDER_BYDATERELEASED;
+		}
 		u32int ascdes = BAPSNET_ORDER_ASCENDING;
 		if (reverseOrderCheckBox->Checked)
 		{
@@ -207,7 +211,7 @@ System::Void RecordLibrarySearch::RadioButton_CheckedChanged(System::Object^  se
 {
 	Some_TextChanged(sender, e);
 
-	if (sender == dateAddedRadioButton)
+	if (sender == dateAddedRadioButton || sender == dateReleasedRadioButton)
 	{
 		reverseOrderCheckBox->Checked = true;
 	}

@@ -150,6 +150,10 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	trackLengthText[0] = Channel0Length;
 	trackLengthText[1] = Channel1Length;
 	trackLengthText[2] = Channel2Length;
+	Channel0Length->Tag = gcnew CountDownState(0);
+	Channel1Length->Tag = gcnew CountDownState(1);
+	Channel2Length->Tag = gcnew CountDownState(2);
+
 	timeLeftText	   = gcnew array<BAPSLabel^>(3);
 	timeLeftText[0]    = Channel0TimeLeft;
 	timeLeftText[1]    = Channel1TimeLeft;
@@ -258,6 +262,11 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	nearEndTimer[2]->Tag = 2;
 	nearEndTimer[2]->Tick += gcnew System::EventHandler(this, &BAPSPresenterMain::nearEndFlash);
 	
+	countdownTimer = gcnew System::Windows::Forms::Timer();
+	countdownTimer->Interval = 200;
+	countdownTimer->Tick += gcnew System::EventHandler(this, &BAPSPresenterMain::countdownTick);
+	countdownTimer->Start();
+
 	/** We are not dead yet **/
 	dead = false;
 	/** Set the form handles to null **/

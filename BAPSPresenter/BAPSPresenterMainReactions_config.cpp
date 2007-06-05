@@ -27,6 +27,11 @@ void BAPSPresenterMain::processChoice(int optionid, int choiceIndex, System::Str
 				configDialog->Invoke(mi, dd);
 			}
 		}
+		catch (System::Exception^ e)
+		{
+			System::String^ error = System::String::Concat("Failed to process choice:\n", e->Message, "\nStack Trace:\n", e->StackTrace);
+			logError(error);
+		}
 		finally
 		{
 			cd->closeMutex->ReleaseMutex();
@@ -49,6 +54,11 @@ void BAPSPresenterMain::processChoiceCount(int optionid, int count)
 				array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, count};
 				configDialog->Invoke(mi,dd);
 			}
+		}
+		catch (System::Exception^ e)
+		{
+			System::String^ error = System::String::Concat("Failed to process choice count:\n", e->Message, "\nStack Trace:\n", e->StackTrace);
+			logError(error);
 		}
 		finally
 		{
@@ -94,6 +104,11 @@ void BAPSPresenterMain::processOption(Command cmdReceived, int optionid, System:
 				}
 			}
 		}
+		catch (System::Exception^ e)
+		{
+			System::String^ error = System::String::Concat("Failed to process option:\n", e->Message, "\nStack Trace:\n", e->StackTrace);
+			logError(error);
+		}
 		finally
 		{
 			cd->closeMutex->ReleaseMutex();
@@ -114,6 +129,11 @@ void BAPSPresenterMain::processOptionCount(int count)
 			{
 				configDialog->setNumberOfOptions(count);
 			}
+		}
+		catch (System::Exception^ e)
+		{
+			System::String^ error = System::String::Concat("Failed to process option count:\n", e->Message, "\nStack Trace:\n", e->StackTrace);
+			logError(error);
 		}
 		finally
 		{
@@ -176,6 +196,9 @@ void BAPSPresenterMain::processConfigSetting(Command cmdReceived, int optionid, 
 			{
 				/** If Config Dialog is visible at this point then it cannot close as we hold the closeMutex
 				    this means we no longer have to use our copy of the objects handle (cd) **/
+				/** THE ABOVE STATEMENT IS NOT TRUE! We may receive a value after the form has closed
+				    but not yet know it is closed. We just catch the exception and continue! nasty
+				**/
 				/** If the value mask is used it means that the setting is for an indexed
 					option and the specified index is in the value
 				**/
@@ -229,6 +252,11 @@ void BAPSPresenterMain::processConfigSetting(Command cmdReceived, int optionid, 
 				}
 			}
 		}
+		catch (System::Exception^ e)
+		{
+			System::String^ error = System::String::Concat("Failed to process config setting: ",optionid.ToString(), ":\n", e->Message, "\nStack Trace:\n", e->StackTrace);
+			logError(error);
+		}
 		finally
 		{
 			cd->closeMutex->ReleaseMutex();
@@ -243,21 +271,29 @@ void BAPSPresenterMain::processConfigResult(Command cmdReceived, int optionid, i
 	    we receive one of these when the form is closing **/
 	if (configDialog != nullptr)
 	{
-		/** Check for an indexed option and deal with appropriately **/
-		if (ISFLAGSET(cmdReceived,BAPSNET_CONFIG_USEVALUEMASK))
+		try
 		{
-			/** Indexed results **/
-			int index = cmdReceived & BAPSNET_CONFIG_VALUEMASK;
-			MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(configDialog, &ConfigDialog::setResult);
-			array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, result};
-			configDialog->Invoke(mi, dd);
+			/** Check for an indexed option and deal with appropriately **/
+			if (ISFLAGSET(cmdReceived,BAPSNET_CONFIG_USEVALUEMASK))
+			{
+				/** Indexed results **/
+				int index = cmdReceived & BAPSNET_CONFIG_VALUEMASK;
+				MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(configDialog, &ConfigDialog::setResult);
+				array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, result};
+				configDialog->Invoke(mi, dd);
+			}
+			else
+			{
+				/** Non indexed results **/
+				MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(configDialog, &ConfigDialog::setResult);
+				array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, result};
+				configDialog->Invoke(mi, dd);
+			}
 		}
-		else
+		catch (System::Exception^ e)
 		{
-			/** Non indexed results **/
-			MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(configDialog, &ConfigDialog::setResult);
-			array<System::Object^>^ dd = gcnew array<System::Object^>(2) {optionid, result};
-			configDialog->Invoke(mi, dd);
+			System::String^ error = System::String::Concat("Failed to process config result:\n", e->Message, "\nStack Trace:\n", e->StackTrace);
+			logError(error);
 		}
 	}
 }
