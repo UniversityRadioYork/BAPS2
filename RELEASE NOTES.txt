@@ -1,4 +1,20 @@
 ##
+Release 2.4 v2
+--
+Features
+--
+None
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+Searching by release date now allows blank artist and title
+timeline dragging cant go past 'now'
+--
+##
 Release 2.4 v1
 --
 Features

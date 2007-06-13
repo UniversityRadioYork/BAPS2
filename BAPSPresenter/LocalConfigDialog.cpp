@@ -11,6 +11,7 @@ System::Void LocalConfigDialog::saveButton_Click(System::Object ^  sender, Syste
 	ConfigManager::setConfigValue("DefaultUsername", usernameText->Text);
 	ConfigManager::setConfigValue("DefaultPassword", passwordText->Text);
 	ConfigManager::setConfigValue("ShowVolume", static_cast<System::String^>(showVolumeList->SelectedItem) );
+	ConfigManager::setConfigValue("EnableTimers", static_cast<System::String^>(enableTimersList->SelectedItem) );
 	this->Close();
 }
 

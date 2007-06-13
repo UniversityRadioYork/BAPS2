@@ -91,12 +91,12 @@ namespace BAPSPresenter
 			boundingBox[1] = System::Drawing::Rectangle(0,0,0,0);
 			boundingBox[2] = System::Drawing::Rectangle(0,0,0,0);
 
-			colours = gcnew array<System::Drawing::Brush^,1>(3);
-			colours[0] = System::Drawing::Brushes::DeepSkyBlue;
-			colours[1] = System::Drawing::Brushes::PaleGreen;
-			colours[2] = System::Drawing::Brushes::Orchid;
+			stoppedColour = System::Drawing::Brushes::DeepSkyBlue;
+			runningColour = System::Drawing::Brushes::Orchid;
 
 			cachedTime = System::DateTime::Now;
+
+			dragEnabled = true;
 
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 	
@@ -125,6 +125,16 @@ namespace BAPSPresenter
 				startTime[channel] = newStartTime;
 			}
 		}
+		property bool DragEnabled
+		{
+			void set(bool value)
+			{
+				dragEnabled = value;
+				UpdateStartTime(0,0);
+				UpdateStartTime(1,0);
+				UpdateStartTime(2,0);
+			}
+		}
 	event TimeLineEventHandler^ StartTimeChanged;
 
 	virtual void OnResize(System::EventArgs^ e) override;
@@ -145,6 +155,7 @@ namespace BAPSPresenter
 		array<bool, 1>^ locked;
 	private:
 		int currentTime;
+		bool dragEnabled;
 		array<int, 1>^ trackDuration;
 		array<int, 1>^ trackPosition;
 		array<int, 1>^ startTime;
@@ -154,7 +165,8 @@ namespace BAPSPresenter
 		array<int, 1>^ moveOffset;
 		array<System::Drawing::Rectangle, 1>^ boundingBox;
 		System::DateTime cachedTime;
-		array<System::Drawing::Brush^,1>^ colours;
+		System::Drawing::Brush^ runningColour;
+		System::Drawing::Brush^ stoppedColour;
 		TimeLineMoveStatus moveStatus;
 		int startMoveAtX;
 		static const int thirtySecondPixels = 60;

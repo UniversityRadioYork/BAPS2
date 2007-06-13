@@ -36,6 +36,7 @@ namespace BAPSPresenter {
 			usernameText->Text = ConfigManager::getConfigValueString("DefaultUsername", "");
 			passwordText->Text = ConfigManager::getConfigValueString("DefaultPassword", "");
 			showVolumeList->SelectedItem = ConfigManager::getConfigValueString("ShowVolume", "No");
+			enableTimersList->SelectedItem = ConfigManager::getConfigValueString("EnableTimers", "No");
 		}
 
 	protected:
@@ -49,6 +50,9 @@ namespace BAPSPresenter {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Label^  enableTimersLabel;
+	protected: 
+	private: System::Windows::Forms::ListBox^  enableTimersList;
 	private:
 		/** A handle to the main window **/
 		BAPSPresenterMain^ bapsPresenterMain;
@@ -99,6 +103,8 @@ namespace BAPSPresenter {
 			this->usernameText = (gcnew System::Windows::Forms::TextBox());
 			this->passwordText = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->enableTimersLabel = (gcnew System::Windows::Forms::Label());
+			this->enableTimersList = (gcnew System::Windows::Forms::ListBox());
 			this->SuspendLayout();
 			// 
 			// showVolumeList
@@ -107,7 +113,7 @@ namespace BAPSPresenter {
 			this->showVolumeList->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->showVolumeList->FormattingEnabled = true;
 			this->showVolumeList->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"Yes", L"No"});
-			this->showVolumeList->Location = System::Drawing::Point(114, 121);
+			this->showVolumeList->Location = System::Drawing::Point(114, 111);
 			this->showVolumeList->Name = L"showVolumeList";
 			this->showVolumeList->Size = System::Drawing::Size(160, 28);
 			this->showVolumeList->TabIndex = 4;
@@ -156,7 +162,7 @@ namespace BAPSPresenter {
 			// label3
 			// 
 			this->label3->BackColor = System::Drawing::Color::Transparent;
-			this->label3->Location = System::Drawing::Point(6, 117);
+			this->label3->Location = System::Drawing::Point(6, 107);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(88, 20);
 			this->label3->TabIndex = 9;
@@ -171,7 +177,7 @@ namespace BAPSPresenter {
 				static_cast<System::Byte>(0)));
 			this->saveButton->HighlightColor = System::Drawing::Color::Red;
 			this->saveButton->Highlighted = false;
-			this->saveButton->Location = System::Drawing::Point(121, 156);
+			this->saveButton->Location = System::Drawing::Point(121, 177);
 			this->saveButton->Name = L"saveButton";
 			this->saveButton->Size = System::Drawing::Size(68, 22);
 			this->saveButton->TabIndex = 5;
@@ -186,7 +192,7 @@ namespace BAPSPresenter {
 				static_cast<System::Byte>(0)));
 			this->cancelButton->HighlightColor = System::Drawing::Color::Red;
 			this->cancelButton->Highlighted = false;
-			this->cancelButton->Location = System::Drawing::Point(194, 156);
+			this->cancelButton->Location = System::Drawing::Point(194, 177);
 			this->cancelButton->Name = L"cancelButton";
 			this->cancelButton->Size = System::Drawing::Size(68, 22);
 			this->cancelButton->TabIndex = 6;
@@ -234,6 +240,27 @@ namespace BAPSPresenter {
 			this->label5->Text = L"Default Username:";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
+			// enableTimersLabel
+			// 
+			this->enableTimersLabel->BackColor = System::Drawing::Color::Transparent;
+			this->enableTimersLabel->Location = System::Drawing::Point(6, 141);
+			this->enableTimersLabel->Name = L"enableTimersLabel";
+			this->enableTimersLabel->Size = System::Drawing::Size(88, 20);
+			this->enableTimersLabel->TabIndex = 9;
+			this->enableTimersLabel->Text = L"Enable Timers:";
+			this->enableTimersLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// enableTimersList
+			// 
+			this->enableTimersList->BackColor = System::Drawing::Color::SeaShell;
+			this->enableTimersList->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->enableTimersList->FormattingEnabled = true;
+			this->enableTimersList->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"Yes", L"No"});
+			this->enableTimersList->Location = System::Drawing::Point(114, 145);
+			this->enableTimersList->Name = L"enableTimersList";
+			this->enableTimersList->Size = System::Drawing::Size(160, 28);
+			this->enableTimersList->TabIndex = 4;
+			// 
 			// LocalConfigDialog
 			// 
 			this->AcceptButton = this->saveButton;
@@ -241,10 +268,11 @@ namespace BAPSPresenter {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"$this.BackgroundImage")));
 			this->CancelButton = this->cancelButton;
-			this->ClientSize = System::Drawing::Size(287, 200);
+			this->ClientSize = System::Drawing::Size(287, 222);
 			this->ControlBox = false;
 			this->Controls->Add(this->cancelButton);
 			this->Controls->Add(this->saveButton);
+			this->Controls->Add(this->enableTimersList);
 			this->Controls->Add(this->showVolumeList);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label1);
@@ -253,6 +281,7 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->usernameText);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->serverText);
+			this->Controls->Add(this->enableTimersLabel);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label3);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;

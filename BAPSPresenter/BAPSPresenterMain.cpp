@@ -299,6 +299,10 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
 	showVolumeControls(showVolume);
 
+	/** Enable or disable the timers depending on the config setting **/
+	bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "No"),"Yes") == 0);
+	enableTimerControls(enableTimers);
+
 	/** Start the receive thread so we are ready for the autoupdate messages **/ 
 	receiverThread = gcnew System::Threading::Thread(gcnew System::Threading::ThreadStart(this, &BAPSPresenterMain::receiverFunc));
 	receiverThread->Start();
@@ -916,6 +920,23 @@ void BAPSPresenterMain::showVolumeControls(bool shouldShow)
 		trackList[1]->Width = 256;
 		trackList[2]->Width = 256;
 	}
+}
+void BAPSPresenterMain::enableTimerControls(bool shouldEnable)
+{
+	this->timersEnabled = shouldEnable;
+	this->Channel0Length->Visible = shouldEnable;
+	this->Channel1Length->Visible = shouldEnable;
+	this->Channel2Length->Visible = shouldEnable;
+	this->Channel0Length->Enabled = shouldEnable;
+	this->Channel1Length->Enabled = shouldEnable;
+	this->Channel2Length->Enabled = shouldEnable;
+	this->timeLine->DragEnabled = shouldEnable;
+	CountDownState^ cds = safe_cast<CountDownState^>(trackLengthText[0]->Tag);
+    cds->running = false;
+	cds = safe_cast<CountDownState^>(trackLengthText[1]->Tag);
+    cds->running = false;
+	cds = safe_cast<CountDownState^>(trackLengthText[2]->Tag);
+    cds->running = false;
 }
 
 void BAPSPresenterMain::refreshAudioWall()

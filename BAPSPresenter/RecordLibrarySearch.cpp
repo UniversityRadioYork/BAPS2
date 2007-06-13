@@ -43,7 +43,7 @@ System::Void RecordLibrarySearch::SearchButton_Click(System::Object ^  sender, S
 	}
 	/** If neither box has anything in it is rejected otherwise the entire DB is returned **/
 	/** WORK NEEDED: server or client side rejection of % % for artist and title **/
-	if (Artist->Tag == nullptr && Title->Tag == nullptr && !dateAddedRadioButton->Checked)
+	if (Artist->Tag == nullptr && Title->Tag == nullptr && !dateAddedRadioButton->Checked && !dateReleasedRadioButton->Checked)
 	{
 		resultsInfo->Text = "Empty Artist/Title";
 		ResultsBox->addItem("Empty Artist/Title");

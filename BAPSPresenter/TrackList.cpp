@@ -181,12 +181,12 @@ void TrackList::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
 	if(index >= 0) 
 	{
 		TrackListDragDrop^ tldd = gcnew TrackListDragDrop(index, channel);
-		fromIndex = index;
+		savedFromIndex = index;
 		System::Windows::Forms::DragDropEffects result;
-		result = this->DoDragDrop(tldd, System::Windows::Forms::DragDropEffects::Move);
+		result = this->DoDragDrop(tldd, System::Windows::Forms::DragDropEffects::Move|System::Windows::Forms::DragDropEffects::Copy);
 		if (result == System::Windows::Forms::DragDropEffects::Move)
 		{
-			if (!tldd->moved && index != selectedIndex)
+			if (!tldd->moved && index != selectedIndex && channel == tldd->toChannel)
 			{
 				RequestChange(this, gcnew RequestChangeEventArgs(channel, CHANGE_SELECTEDINDEX, index));
 				this->Invalidate();
@@ -194,6 +194,7 @@ void TrackList::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
 		}
 		hoverIndex = -1;
 		fromIndex = -1;
+		savedFromIndex = -1;
 		this->Invalidate();
 	}
 	opLock->ReleaseMutex();
@@ -222,10 +223,7 @@ void TrackList::OnDragEnter(System::Windows::Forms::DragEventArgs ^  e)
 	if(e->Data->GetDataPresent(TrackListDragDrop::typeid))
 	{
 		TrackListDragDrop^ tldd =static_cast<TrackListDragDrop^>(e->Data->GetData(TrackListDragDrop::typeid));
-		if (tldd->fromChannel == channel)
-		{
-			e->Effect = System::Windows::Forms::DragDropEffects::Move;
-		}
+		e->Effect = System::Windows::Forms::DragDropEffects::Move;
 	}
 	else if(e->Data->GetDataPresent(FolderTempStruct::typeid))
 	{
@@ -240,7 +238,7 @@ void TrackList::OnDragDrop(System::Windows::Forms::DragEventArgs ^  e)
 	if(e->Data->GetDataPresent(TrackListDragDrop::typeid))
 	{
 		TrackListDragDrop^ tldd =static_cast<TrackListDragDrop^>(e->Data->GetData(TrackListDragDrop::typeid));
-		if (channel == tldd->fromChannel)
+		if (channel == tldd->fromChannel && !addTo)
 		{
 			if (index != -1 && index != tldd->fromIndex)
 			{
@@ -249,16 +247,20 @@ void TrackList::OnDragDrop(System::Windows::Forms::DragEventArgs ^  e)
 		}
 		else
 		{
-			e->Effect = System::Windows::Forms::DragDropEffects::None;
+			RequestChange(this, gcnew RequestChangeEventArgs(tldd->fromChannel, CHANGE_COPY, tldd->fromIndex, tldd->toChannel));
+			if ((e->KeyState & 8) == 0)
+			{
+				RequestChange(this, gcnew RequestChangeEventArgs(tldd->fromChannel, CHANGE_DELETEINDEX, tldd->fromIndex));
+			}
 		}
 	}
 	else if (e->Data->GetDataPresent(FolderTempStruct::typeid))
 	{
 		FolderTempStruct^ fts =static_cast<FolderTempStruct^>(e->Data->GetData(FolderTempStruct::typeid));
 		RequestChange(this, gcnew RequestChangeEventArgs(channel, CHANGE_ADD, fts->fromFolder, fts->fromIndex));
-		addTo = false;
-		this->Invalidate();
 	}
+	addTo = false;
+	this->Invalidate();
 }
 
 void TrackList::OnDragOver(System::Windows::Forms::DragEventArgs ^  e)
@@ -266,9 +268,19 @@ void TrackList::OnDragOver(System::Windows::Forms::DragEventArgs ^  e)
 	__super::OnDragOver(e);
 	if(e->Data->GetDataPresent(TrackListDragDrop::typeid))
 	{
-		TrackListDragDrop^ tldd =static_cast<TrackListDragDrop^>(e->Data->GetData(TrackListDragDrop::typeid));
-		if (channel == tldd->fromChannel)
+		if ((e->KeyState & 8) == 0)
 		{
+			e->Effect = System::Windows::Forms::DragDropEffects::Move;
+		}
+		else
+		{
+			e->Effect = System::Windows::Forms::DragDropEffects::Copy;
+		}
+		TrackListDragDrop^ tldd =static_cast<TrackListDragDrop^>(e->Data->GetData(TrackListDragDrop::typeid));
+		tldd->toChannel = channel;
+		if (channel == tldd->fromChannel && (e->KeyState & 8) == 0)
+		{
+			fromIndex = savedFromIndex;
 			int yValue = this->PointToClient(System::Drawing::Point(e->X, e->Y)).Y;
 			int hi = indexFromY(yValue);
 			if (hi != fromIndex)
@@ -294,6 +306,18 @@ void TrackList::OnDragOver(System::Windows::Forms::DragEventArgs ^  e)
 			if (hi != hoverIndex)
 			{
 				hoverIndex = hi;
+				this->Invalidate();
+			}
+			addTo = false;
+		}
+		else
+		{
+			hoverIndex = -1;
+			fromIndex = -1;
+			/** item has been moved between channels **/
+			if (!addTo)
+			{
+				addTo = true;
 				this->Invalidate();
 			}
 		}

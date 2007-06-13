@@ -19,15 +19,18 @@ namespace BAPSPresenter
 		CHANGE_SELECTEDINDEX,
 		CHANGE_MOVEINDEX,
 		CHANGE_DELETEINDEX,
-		CHANGE_ADD
+		CHANGE_ADD,
+		CHANGE_COPY
 	};
+
 	ref struct TrackListDragDrop
 	{
 		int fromIndex;
 		int fromChannel;
+		int toChannel;
 		bool moved;
 		TrackListDragDrop(int _fromIndex, int _fromChannel)
-			:fromIndex(_fromIndex), fromChannel(_fromChannel), moved(false)
+			:fromIndex(_fromIndex), fromChannel(_fromChannel), moved(false), toChannel(_fromChannel)
 		{}
 	};
 
@@ -405,6 +408,7 @@ namespace BAPSPresenter
 			int channel;
 			int hoverIndex;
 			int fromIndex;
+			int savedFromIndex;
 			bool addTo;
 			System::Drawing::Bitmap^ offScreen;
 			System::Collections::Generic::List<EntryInfo^>^ items;

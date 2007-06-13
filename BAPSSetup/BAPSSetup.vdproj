@@ -15,14 +15,8 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_23F6F57C7F8785FEBFE391796F6CF0CA"
-        "OwnerKey" = "8:_7EC36F4F47574ECCB952BE8A98D8F66C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_23F6F57C7F8785FEBFE391796F6CF0CA"
-        "OwnerKey" = "8:_E6D81E0C541DE64C52E12244EC793C24"
+        "MsmKey" = "8:_1D53BA8CA6AC42E2AA193DE0B4E063F0"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -33,44 +27,74 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_52B947090ECD41F690D5FA60B61EB0DD"
-        "OwnerKey" = "8:_793C7FBC45024148AC83F158F683586E"
+        "MsmKey" = "8:_3CA4DC49E1F2699833F88EE3B5BBADE4"
+        "OwnerKey" = "8:_45919BAD213B84A6CE92E4645679E2D8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_52B947090ECD41F690D5FA60B61EB0DD"
+        "MsmKey" = "8:_3CA4DC49E1F2699833F88EE3B5BBADE4"
+        "OwnerKey" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_45919BAD213B84A6CE92E4645679E2D8"
+        "OwnerKey" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4F849550200649388FC0461BD547A6E9"
+        "OwnerKey" = "8:_68AB27CC258C46F2B0E0FAF2280BA9CD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_68AB27CC258C46F2B0E0FAF2280BA9CD"
         "OwnerKey" = "8:_DA46EC67B4444D0A856F25E44C66CC1C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_52B947090ECD41F690D5FA60B61EB0DD"
-        "OwnerKey" = "8:_7EC36F4F47574ECCB952BE8A98D8F66C"
+        "MsmKey" = "8:_6D63851AB337954884CCF8FECC5916E6"
+        "OwnerKey" = "8:_97FA2BBE9651DC013D0B72816F9BA70A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_793C7FBC45024148AC83F158F683586E"
+        "MsmKey" = "8:_97FA2BBE9651DC013D0B72816F9BA70A"
+        "OwnerKey" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AD2BECBEAEF48DD7242F004926470AFD"
+        "OwnerKey" = "8:_45919BAD213B84A6CE92E4645679E2D8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AD2BECBEAEF48DD7242F004926470AFD"
+        "OwnerKey" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AD2BECBEAEF48DD7242F004926470AFD"
+        "OwnerKey" = "8:_3CA4DC49E1F2699833F88EE3B5BBADE4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7EC36F4F47574ECCB952BE8A98D8F66C"
+        "MsmKey" = "8:_C7734AB8C6E94C4CB85E9ECD8960DEDC"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A58FEC4A5F25467C901124D587952E1F"
-        "OwnerKey" = "8:_52B947090ECD41F690D5FA60B61EB0DD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CB7DAB9111C197667D749CC442419383"
-        "OwnerKey" = "8:_7EC36F4F47574ECCB952BE8A98D8F66C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -81,24 +105,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E6D81E0C541DE64C52E12244EC793C24"
-        "OwnerKey" = "8:_7EC36F4F47574ECCB952BE8A98D8F66C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7EC36F4F47574ECCB952BE8A98D8F66C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E6D81E0C541DE64C52E12244EC793C24"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DA46EC67B4444D0A856F25E44C66CC1C"
         "MsmSig" = "8:_UNDEFINED"
@@ -106,13 +112,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_23F6F57C7F8785FEBFE391796F6CF0CA"
+        "OwnerKey" = "8:_97FA2BBE9651DC013D0B72816F9BA70A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_793C7FBC45024148AC83F158F683586E"
+        "OwnerKey" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_45919BAD213B84A6CE92E4645679E2D8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3CA4DC49E1F2699833F88EE3B5BBADE4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AD2BECBEAEF48DD7242F004926470AFD"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -187,101 +211,59 @@
     {
         "CustomAction"
         {
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_31BB0E6E8F5C425D9378C79DBFAF2E42"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_0503FCB145594373A50D999851DA4D9B"
             {
-            "Name" = "8:Primary Output from BAPSWatchdogService (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_793C7FBC45024148AC83F158F683586E"
+            "Name" = "8:Primary output from BAPSServerService (Active)"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
+            "Object" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_D8C3A2B2_B069_48E9_B3E4_3C526114F3B2"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_6217FB0953D94239982A9B895C34ED4D"
+            {
+            "Name" = "8:Primary output from BAPSServerService (Active)"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
+            "Object" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
             "FileType" = "3:2"
             "InstallAction" = "3:3"
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_E8362ABE_7CC8_4891_ACBE_EB00DACD140E"
+            "Identifier" = "8:_15B2AF8C_C328_40CB_B0E8_C7D75C608178"
             "InstallerClass" = "11:TRUE"
             "CustomActionData" = "8:"
             }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_3AF8C4F49EC14D17A7A3B4F3D19CBD9D"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_74E8CEA6F1944EFDAB544FED5EC8957C"
             {
-            "Name" = "8:Primary Output from BAPSServerService (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_7EC36F4F47574ECCB952BE8A98D8F66C"
+            "Name" = "8:Primary output from BAPSServerService (Active)"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
+            "Object" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
             "FileType" = "3:2"
             "InstallAction" = "3:1"
-            "Arguments" = "8:-Install"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:1"
-            "Identifier" = "8:_842AD300_5549_4475_8463_288279ACE0C5"
-            "InstallerClass" = "11:FALSE"
-            "CustomActionData" = "8:"
-            }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_3B7F8D7B649A4D77B396587BA4B1242A"
-            {
-            "Name" = "8:Primary Output from BAPSServerService (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_7EC36F4F47574ECCB952BE8A98D8F66C"
-            "FileType" = "3:2"
-            "InstallAction" = "3:4"
-            "Arguments" = "8:-Uninstall"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:2"
-            "Identifier" = "8:_62B2A6A0_6CF0_4403_B803_0EE07A4C76F2"
-            "InstallerClass" = "11:FALSE"
-            "CustomActionData" = "8:"
-            }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_5068F94738294080A19C0AF863C94568"
-            {
-            "Name" = "8:Primary Output from BAPSWatchdogService (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_793C7FBC45024148AC83F158F683586E"
-            "FileType" = "3:2"
-            "InstallAction" = "3:4"
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_8E2CAC06_E00F_4C97_BB3E_1F540DC868FD"
+            "Identifier" = "8:_64A97E3F_4D24_4187_ACD0_15B3AF43F565"
             "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:"
+            "CustomActionData" = "8:/CredentialType=\"[SRVCREDA_TYPE]\" /Uname=[SRVCREDA_USR] /Passwd=\"[SRVCREDA_PWD]\" /PasswdConf=\"[SRVCREDA_PWD2]\" /PredefinedAccount=\"[SRVCREDA_PREDEFINED]\""
             }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_555E8E1593864D158DD7CF538864800F"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_B43135F11926437AB9C99624A2AE69CA"
             {
-            "Name" = "8:Primary Output from BAPSServerService (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_7EC36F4F47574ECCB952BE8A98D8F66C"
-            "FileType" = "3:2"
-            "InstallAction" = "3:3"
-            "Arguments" = "8:-Uninstall"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:2"
-            "Identifier" = "8:_CF269187_63C3_4F53_8A6D_84BF87DC1C3A"
-            "InstallerClass" = "11:FALSE"
-            "CustomActionData" = "8:"
-            }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_A96A7066018A45A1B585DB1951FED5B3"
-            {
-            "Name" = "8:Primary Output from BAPSWatchdogService (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_793C7FBC45024148AC83F158F683586E"
+            "Name" = "8:Primary output from BAPSServerService (Active)"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
+            "Object" = "8:_ADD65BC79AF9482490EF7BFA908A9EBB"
             "FileType" = "3:2"
             "InstallAction" = "3:2"
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_4A3EE545_2631_44E2_99AB_8CF58EF97E30"
-            "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:"
-            }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_FE8F67FC541745D4AC8EAC24595ED3E6"
-            {
-            "Name" = "8:Primary Output from BAPSWatchdogService (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_793C7FBC45024148AC83F158F683586E"
-            "FileType" = "3:2"
-            "InstallAction" = "3:1"
-            "Arguments" = "8:"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:2"
-            "Identifier" = "8:_2C85FCAF_510C_4F3D_BAD3_5884928B8535"
+            "Identifier" = "8:_34F25E09_657E_429D_B9DA_FCA8766E3A9A"
             "InstallerClass" = "11:TRUE"
             "CustomActionData" = "8:"
             }
@@ -301,7 +283,7 @@
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
                 "Version" = "8:2.0.50727"
-                "AllowLaterVersions" = "11:TRUE"
+                "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=9832"
                 "SupportedRuntimes" = "8:1.1.4322"
                 }
@@ -309,24 +291,13 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_23F6F57C7F8785FEBFE391796F6CF0CA"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1D53BA8CA6AC42E2AA193DE0B4E063F0"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_23F6F57C7F8785FEBFE391796F6CF0CA"
-                    {
-                    "Name" = "8:mono.security.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:mono.security.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\release\\BAPS.dll"
+            "TargetName" = "8:BAPS.dll"
             "Tag" = "8:"
             "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
-            "Condition" = "8:"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -337,7 +308,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2CB662F0AE0B4EF8B4E9744823D5337C"
@@ -360,16 +331,27 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB7DAB9111C197667D749CC442419383"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3CA4DC49E1F2699833F88EE3B5BBADE4"
             {
-            "SourcePath" = "8:BAPS.dll"
-            "TargetName" = "8:BAPS.dll"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Npgsql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_3CA4DC49E1F2699833F88EE3B5BBADE4"
+                    {
+                    "Name" = "8:Npgsql.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Npgsql.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
-            "Condition" = "8:"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
-            "ReadOnly" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
             "Hidden" = "11:FALSE"
             "System" = "11:FALSE"
             "Permanent" = "11:FALSE"
@@ -380,20 +362,71 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E6D81E0C541DE64C52E12244EC793C24"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_45919BAD213B84A6CE92E4645679E2D8"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Npgsql, Version=0.99.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:BAPSServerAssembly, Version=2.5.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_E6D81E0C541DE64C52E12244EC793C24"
+                    "_45919BAD213B84A6CE92E4645679E2D8"
                     {
-                    "Name" = "8:npgsql.dll"
+                    "Name" = "8:BAPSServerAssembly.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:npgsql.dll"
+            "SourcePath" = "8:BAPSServerAssembly.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D63851AB337954884CCF8FECC5916E6"
+            {
+            "SourcePath" = "8:sapi.dll"
+            "TargetName" = "8:sapi.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_97FA2BBE9651DC013D0B72816F9BA70A"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Interop.SpeechLib, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_97FA2BBE9651DC013D0B72816F9BA70A"
+                    {
+                    "Name" = "8:Interop.SpeechLib.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Interop.SpeechLib.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
@@ -409,6 +442,57 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AD2BECBEAEF48DD7242F004926470AFD"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_AD2BECBEAEF48DD7242F004926470AFD"
+                    {
+                    "Name" = "8:Mono.Security.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Mono.Security.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C7734AB8C6E94C4CB85E9ECD8960DEDC"
+            {
+            "SourcePath" = "8:..\\BAPSServerAssembly\\serverstate.xml"
+            "TargetName" = "8:serverstate.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -451,9 +535,9 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_7F7E740BD4D14FB2A7672C975FF07A31"
                     {
-                    "Name" = "8:URY"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:(COMPONENTCHOICE & 2) == 2"
+                    "Name" = "8:BAPS"
+                    "AlwaysCreate" = "11:TRUE"
+                    "Condition" = "8:"
                     "Transitive" = "11:FALSE"
                     "Property" = "8:_748289B482954A0586A204AA36E8471A"
                         "Folders"
@@ -478,7 +562,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BAPS"
         "ProductCode" = "8:{561FDBB1-E2A4-4B1A-9BA9-63AEE9C990FF}"
-        "PackageCode" = "8:{37AD4BE6-B5E7-4092-9FE7-D9A867C6B998}"
+        "PackageCode" = "8:{11D4E5B3-60E0-4BEB-BBFC-6DFB0F017C8D}"
         "UpgradeCode" = "8:{581AB9A5-545A-4C88-9E62-3AA85F8939BF}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -855,7 +939,7 @@
                 {
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_0C61B9008018423E9617D2ABFDA779D2"
                     {
-                    "Sequence" = "3:110"
+                    "Sequence" = "3:200"
                     "DisplayName" = "8:RadioButtons   (2 buttons)"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
@@ -908,7 +992,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:Server Only"
+                            "Value" = "8:Client Only"
                             "DefaultValue" = "8:#1222"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -1014,28 +1098,6 @@
                             }
                         }
                     }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_1FB67AD8546D4F27BC7D0AFDEBB85537"
-                    {
-                    "Sequence" = "3:400"
-                    "DisplayName" = "8:Confirm Installation"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_689D61617B3849FB93E842C76EA41BE0"
                     {
                     "Sequence" = "3:100"
@@ -1080,6 +1142,271 @@
                             "Setting" = "3:2"
                             "Value" = "8:The installer will guide you through the steps required to install [ProductName] on your computer. Current pre-requisits:, frauenhofer MP3 directfilter, .NET V2.0"
                             "DefaultValue" = "8:#1203"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_F277577F8DED448D91CF79B4FD5ABCDF"
+                    {
+                    "Sequence" = "3:210"
+                    "DisplayName" = "8:Supply Credentials   (A)"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdServiceCredentials1Dlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "BannerText"
+                            {
+                            "Name" = "8:BannerText"
+                            "DisplayName" = "8:#1014"
+                            "Description" = "8:#1114"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:Enter credentials for BAPS Server"
+                            "DefaultValue" = "8:#1214"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "BodyText"
+                            {
+                            "Name" = "8:BodyText"
+                            "DisplayName" = "8:#1015"
+                            "Description" = "8:#1115"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:If installing the server, please enter the account details for the BAPS Server Process.  This account must be able to access all resources used by the BAPS Server."
+                            "DefaultValue" = "8:#1215"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ComboBoxProperty"
+                            {
+                            "Name" = "8:ComboBoxProperty"
+                            "DisplayName" = "8:PreconfiguredAccountProperty"
+                            "Description" = "8:The name of the property that will indicate the type of preconfigured account selected."
+                            "Type" = "3:14"
+                            "ContextData" = "8:Public"
+                            "Attributes" = "3:2"
+                            "Setting" = "3:2"
+                            "Value" = "8:SRVCREDA_PREDEFINED"
+                            "DefaultValue" = "8:SRVCREDA_PREDEFINED"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ComboBoxValue"
+                            {
+                            "Name" = "8:ComboBoxValue"
+                            "DisplayName" = "8:PreconfiguredAccountValue"
+                            "Description" = "8:Select the default account that will be presented."
+                            "Type" = "3:5"
+                            "ContextData" = "8:2;Local System=2;Local Service=1;Network Service=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:0"
+                            "DefaultValue" = "3:0"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit2Label"
+                            {
+                            "Name" = "8:Edit2Label"
+                            "DisplayName" = "8:#1047"
+                            "Description" = "8:#1147"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:Username:"
+                            "DefaultValue" = "8:#1247"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit2Property"
+                            {
+                            "Name" = "8:Edit2Property"
+                            "DisplayName" = "8:#1051"
+                            "Description" = "8:#1151"
+                            "Type" = "3:14"
+                            "ContextData" = "8:Public"
+                            "Attributes" = "3:2"
+                            "Setting" = "3:2"
+                            "Value" = "8:SRVCREDA_USR"
+                            "DefaultValue" = "8:SRVCREDA_USR"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit2Value"
+                            {
+                            "Name" = "8:Edit2Value"
+                            "DisplayName" = "8:#1055"
+                            "Description" = "8:#1155"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:"
+                            "DefaultValue" = "8:"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit3Label"
+                            {
+                            "Name" = "8:Edit3Label"
+                            "DisplayName" = "8:#1048"
+                            "Description" = "8:#1148"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:Password:"
+                            "DefaultValue" = "8:#1248"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit3Property"
+                            {
+                            "Name" = "8:Edit3Property"
+                            "DisplayName" = "8:#1052"
+                            "Description" = "8:#1152"
+                            "Type" = "3:14"
+                            "ContextData" = "8:Public"
+                            "Attributes" = "3:2"
+                            "Setting" = "3:2"
+                            "Value" = "8:SRVCREDA_PWD"
+                            "DefaultValue" = "8:SRVCREDA_PWD"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit3Value"
+                            {
+                            "Name" = "8:Edit3Value"
+                            "DisplayName" = "8:#1056"
+                            "Description" = "8:#1156"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:"
+                            "DefaultValue" = "8:"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit3Visible"
+                            {
+                            "Name" = "8:Edit3Visible"
+                            "DisplayName" = "8:#1044"
+                            "Description" = "8:#1144"
+                            "Type" = "3:5"
+                            "ContextData" = "8:1;True=1;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:1"
+                            "DefaultValue" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit4Label"
+                            {
+                            "Name" = "8:Edit4Label"
+                            "DisplayName" = "8:#1049"
+                            "Description" = "8:#1149"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:Confirm Password:"
+                            "DefaultValue" = "8:#1249"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit4Property"
+                            {
+                            "Name" = "8:Edit4Property"
+                            "DisplayName" = "8:#1053"
+                            "Description" = "8:#1153"
+                            "Type" = "3:14"
+                            "ContextData" = "8:Public"
+                            "Attributes" = "3:2"
+                            "Setting" = "3:2"
+                            "Value" = "8:SRVCREDA_PWD2"
+                            "DefaultValue" = "8:SRVCREDA_PWD2"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit4Value"
+                            {
+                            "Name" = "8:Edit4Value"
+                            "DisplayName" = "8:#1057"
+                            "Description" = "8:#1157"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:"
+                            "DefaultValue" = "8:"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Edit4Visible"
+                            {
+                            "Name" = "8:Edit4Visible"
+                            "DisplayName" = "8:#1045"
+                            "Description" = "8:#1145"
+                            "Type" = "3:5"
+                            "ContextData" = "8:1;True=1;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:1"
+                            "DefaultValue" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "RadioButtonProperty"
+                            {
+                            "Name" = "8:RadioButtonProperty"
+                            "DisplayName" = "8:AccountTypeProperty"
+                            "Description" = "8:The name of the property that will contain whether a predefined account or configured account was specified "
+                            "Type" = "3:14"
+                            "ContextData" = "8:Public"
+                            "Attributes" = "3:2"
+                            "Setting" = "3:2"
+                            "Value" = "8:SRVCREDA_TYPE"
+                            "DefaultValue" = "8:SRVCREDA_TYPE"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "RadioButtonValue"
+                            {
+                            "Name" = "8:RadioButtonValue"
+                            "DisplayName" = "8:AccountTypeValue"
+                            "Description" = "8:Select the default account type that will be set."
+                            "Type" = "3:5"
+                            "ContextData" = "8:1;Predefined=0;Configurable=1"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:0"
+                            "DefaultValue" = "3:0"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_FCC0F48D463F4D09B9E381D889FDDBBA"
+                    {
+                    "Sequence" = "3:400"
+                    "DisplayName" = "8:Confirm Installation"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1133,11 +1460,11 @@
         }
         "MergeModule"
         {
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_52B947090ECD41F690D5FA60B61EB0DD"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_4F849550200649388FC0461BD547A6E9"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:Microsoft_VC80_DebugCRT_x86.msm"
+            "SourcePath" = "8:policy_8_0_microsoft_vc80_crt_x86.msm"
                 "Properties"
                 {
                 }
@@ -1147,11 +1474,11 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_A58FEC4A5F25467C901124D587952E1F"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_68AB27CC258C46F2B0E0FAF2280BA9CD"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:policy_8_0_microsoft_vc80_debugcrt_x86.msm"
+            "SourcePath" = "8:Microsoft_VC80_CRT_x86.msm"
                 "Properties"
                 {
                 }
@@ -1164,13 +1491,13 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_793C7FBC45024148AC83F158F683586E"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ADD65BC79AF9482490EF7BFA908A9EBB"
             {
-            "SourcePath" = "8:..\\debug\\BAPSWatchdogService.exe"
+            "SourcePath" = "8:..\\BAPSServerService\\obj\\Release\\BAPSServerService.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
-            "Condition" = "8:"
+            "Condition" = "8:(COMPONENTCHOICE=2)"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -1186,35 +1513,7 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{2B0071DE-C59F-4D21-AA70-B1363629036F}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7EC36F4F47574ECCB952BE8A98D8F66C"
-            {
-            "SourcePath" = "8:..\\debug\\BAPSServerService.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{7FA33D8B-C6CB-4964-BEAF-99E5E1C5B5A6}"
+            "OutputProjectGuid" = "8:{A19900A2-8C8B-416A-8642-7F20CB9CA145}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
@@ -1222,7 +1521,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DA46EC67B4444D0A856F25E44C66CC1C"
             {
-            "SourcePath" = "8:..\\debug\\BAPSPresenter.exe"
+            "SourcePath" = "8:..\\release\\BAPSPresenter.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A170A74907754CA5ADCADFABF483AC77"
@@ -1248,6 +1547,9 @@
                 {
                 }
             }
+        }
+        "VJSharpPlugin"
+        {
         }
     }
 }

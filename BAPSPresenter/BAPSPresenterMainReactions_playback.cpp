@@ -99,6 +99,8 @@ void BAPSPresenterMain::showLoadedItem(System::Object^ _channel, System::Object^
 		trackList[channel]->LoadedIndex = index;
 		/** Set the description text **/
 		loadedText[channel]->Text = description;
+		CountDownState^ cds = safe_cast<CountDownState^>(trackLengthText[channel]->Tag);
+		cds->running = false;
 		if (itemType == BAPSNET_VOIDITEM)
 		{
 			trackTime[channel]->Position = 0;
@@ -107,7 +109,6 @@ void BAPSPresenterMain::showLoadedItem(System::Object^ _channel, System::Object^
 			timeLine->UpdateDuration(channel,0);
 			trackTime[channel]->CuePosition = 0;
 			trackTime[channel]->IntroPosition = 0;
-			trackLengthText[channel]->Text = MillisecondsToTimeString(0);
 			timeLeftText[channel]->Text = MillisecondsToTimeString(0);
 			timeGoneText[channel]->Text = MillisecondsToTimeString(0);
 			nearEndTimer[channel]->Enabled = false;
@@ -127,8 +128,6 @@ void BAPSPresenterMain::showDuration(System::Object^ _channel, System::Object^ _
 		trackTime[channel]->Position = 0;
 		trackTime[channel]->Duration = value;
 		timeLine->UpdateDuration(channel,value-trackTime[channel]->CuePosition);
-		/** Set the track length box **/
-		trackLengthText[channel]->Text = MillisecondsToTimeString(value);
 	}
 }
 

@@ -21,7 +21,7 @@ using namespace System::Security::Permissions;
 									 "consent from the copyright holder")];
 [assembly:AssemblyTrademarkAttribute("Uni-Software")];
 [assembly:AssemblyCultureAttribute("")];
-[assembly:AssemblyInformationalVersionAttribute("2.4.0.0")];
+[assembly:AssemblyInformationalVersionAttribute("2.5.0.0")];
 
 //
 // Version information for an assembly consists of the following four values:
@@ -34,7 +34,7 @@ using namespace System::Security::Permissions;
 // You can specify all the value or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly:AssemblyVersionAttribute("2.4.*")];
+[assembly:AssemblyVersionAttribute("2.5.0.0")];
 
 [assembly:ComVisible(false)];
 

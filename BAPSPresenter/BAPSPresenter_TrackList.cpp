@@ -48,6 +48,13 @@ System::Void BAPSPresenterMain::TrackList_RequestChange(System::Object^  o, BAPS
 			msgQueue->Enqueue(gcnew ActionMessageU32intU32intString(cmd, (u32int)BAPSNET_FILEITEM, e->index, directoryList[e->index]->getItem(e->index2)->ToString()));
 		}
 		break;
+	case CHANGE_COPY:
+		{
+			Command cmd = BAPSNET_PLAYLIST | BAPSNET_COPYITEM | (e->channel & 0x3f);
+			msgQueue->Enqueue(gcnew ActionMessageU32intU32int(cmd, e->index, e->index2));
+		}
+		break;
+
 	}
 }
 

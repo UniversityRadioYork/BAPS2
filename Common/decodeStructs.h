@@ -69,6 +69,7 @@ typedef unsigned short Command;
 											//C-[1](get)	u32int index
 #define BAPSNET_GETPLAYLIST			(4<<7)	//C-none
 #define BAPSNET_RESETPLAYLIST		(5<<7)  //SC-none
+#define BAPSNET_COPYITEM			(6<<7)  //C-u32int fromindex, u32int tochannel
 
 /** PLAYLIST ITEMS **/
 #define BAPSNET_VOIDITEM			0

@@ -135,6 +135,8 @@ namespace BAPSPresenter {
 
 		/** Show or hide the volume controls **/
 		void showVolumeControls(bool shouldShow);
+		/** Enable or diable the timer controls **/
+		void enableTimerControls(bool shouldEnable);
 		/** Notify AudioWall to Update **/
 		void refreshAudioWall();
 		/** Loop to wait for a command and then process it correctly **/
@@ -176,6 +178,8 @@ namespace BAPSPresenter {
 		System::Threading::Thread ^senderThread;
 		/** The receiver thread **/
 		System::Threading::Thread ^receiverThread;
+		/** Whether or not the timers are enabled **/
+		bool timersEnabled;
 
 		/** The outgoing message queue (Should only have ActionMessage objects)**/
 		System::Collections::Queue^ msgQueue;
@@ -417,7 +421,7 @@ private: System::ComponentModel::IContainer^  components;
 			// 
 			this->Channel2VolLabel->AutoSize = true;
 			this->Channel2VolLabel->BackColor = System::Drawing::Color::Transparent;
-			this->Channel2VolLabel->Location = System::Drawing::Point(934, 137);
+			this->Channel2VolLabel->Location = System::Drawing::Point(934, 113);
 			this->Channel2VolLabel->Name = L"Channel2VolLabel";
 			this->Channel2VolLabel->Size = System::Drawing::Size(22, 13);
 			this->Channel2VolLabel->TabIndex = 105;
@@ -446,7 +450,7 @@ private: System::ComponentModel::IContainer^  components;
 			// Channel2VolumeBar
 			// 
 			this->Channel2VolumeBar->LargeChange = 10;
-			this->Channel2VolumeBar->Location = System::Drawing::Point(899, 140);
+			this->Channel2VolumeBar->Location = System::Drawing::Point(899, 118);
 			this->Channel2VolumeBar->Maximum = 100;
 			this->Channel2VolumeBar->Name = L"Channel2VolumeBar";
 			this->Channel2VolumeBar->Orientation = System::Windows::Forms::Orientation::Vertical;
@@ -708,7 +712,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Label->HighlightColor = System::Drawing::Color::Red;
 			this->Channel1Label->Highlighted = false;
 			this->Channel1Label->InfoText = L"";
-			this->Channel1Label->Location = System::Drawing::Point(379, 98);
+			this->Channel1Label->Location = System::Drawing::Point(377, 98);
 			this->Channel1Label->Name = L"Channel1Label";
 			this->Channel1Label->Size = System::Drawing::Size(256, 16);
 			this->Channel1Label->TabIndex = 212;
@@ -991,7 +995,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->feedbackButton->Name = L"feedbackButton";
 			this->feedbackButton->Size = System::Drawing::Size(57, 18);
 			this->feedbackButton->TabIndex = 8;
-			this->feedbackButton->Text = L"Support";
+			this->feedbackButton->Text = L"Feedback";
 			this->feedbackButton->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::feedbackButton_Click);
 			// 
 			// Directory0Refresh

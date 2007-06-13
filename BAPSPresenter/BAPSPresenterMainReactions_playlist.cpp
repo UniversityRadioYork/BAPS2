@@ -47,6 +47,8 @@ void BAPSPresenterMain::cleanPlaylist(System::Object^ _channel)
 	{
 		/** Empty the track list **/
 		trackList[channel]->clearTrackList();
+		CountDownState^ cds = safe_cast<CountDownState^>(trackLengthText[channel]->Tag);
+		cds->running = false;
 		refreshAudioWall();
 	}
 }

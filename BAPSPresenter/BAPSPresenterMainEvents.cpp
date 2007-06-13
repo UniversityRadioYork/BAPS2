@@ -136,6 +136,9 @@ System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  send
 				/** Show or hide the volume controls depending on the config setting **/
 				bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
 				showVolumeControls(showVolume);
+				/** Enable or disable the timers depending on the config setting **/
+				bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "No"),"Yes") == 0);
+				enableTimerControls(enableTimers);
 			}
 			else
 			{
@@ -489,64 +492,69 @@ System::Void BAPSPresenterMain::ChannelLength_MouseDown(System::Object^  sender,
 }
 System::Void BAPSPresenterMain::countdownTick(System::Object ^  sender, System::EventArgs ^  e)
 {
-	int i = 0;
-	for (i = 0 ; i < 3 ; i++)
+	if (timersEnabled)
 	{
-		CountDownState^ cds = safe_cast<CountDownState^>(trackLengthText[i]->Tag);
-
-		if (channelPlay[i]->Enabled && cds->running)
+		int i = 0;
+		for (i = 0 ; i < 3 ; i++)
 		{
-			System::DateTime dt = System::DateTime::Now;
-			if (!cds->startAt)
+			CountDownState^ cds = safe_cast<CountDownState^>(trackLengthText[i]->Tag);
+
+			if (channelPlay[i]->Enabled && cds->running)
 			{
-				dt = dt.AddMilliseconds(trackTime[i]->Duration-trackTime[i]->CuePosition);
+				System::DateTime dt = System::DateTime::Now;
+				if (!cds->startAt)
+				{
+					dt = dt.AddMilliseconds(trackTime[i]->Duration-trackTime[i]->CuePosition);
+				}
+				int millisecsPastHour = (((dt.Minute*60)+dt.Second)*1000)+dt.Millisecond;
+				int value = cds->theTime*1000;
+				if (value < millisecsPastHour)
+				{
+					value += 3600000;
+				}
+				value -= millisecsPastHour;
+				int valuesecs = value /1000;
+				/** WORK NEEDED: This allows 5 seconds grace in case of heavy system load
+				 *               It would be better if there were guaranteed start if it didnt kick in.
+				 **/
+				if (valuesecs > 3595)
+				{
+					cds->running = false;
+					Command cmd = BAPSNET_PLAYBACK | BAPSNET_PLAY | i;
+					msgQueue->Enqueue(gcnew ActionMessage(cmd));
+				}
+				trackLengthText[i]->Text = System::String::Concat((valuesecs/60).ToString("00"),":", (valuesecs%60).ToString("00"));
+				
+				timeLine->UpdateStartTime(i, value);
 			}
-			int millisecsPastHour = (((dt.Minute*60)+dt.Second)*1000)+dt.Millisecond;
-			int value = cds->theTime*1000;
-			if (value < millisecsPastHour)
-			{
-				value += 3600000;
-			}
-			value -= millisecsPastHour;
-			int valuesecs = value /1000;
-			/** WORK NEEDED: This allows 5 seconds grace in case of heavy system load
-			 *               It would be better if there were guaranteed start if it didnt kick in.
-			 **/
-			if (valuesecs > 3595)
+			else
 			{
 				cds->running = false;
-				Command cmd = BAPSNET_PLAYBACK | BAPSNET_PLAY | i;
-				msgQueue->Enqueue(gcnew ActionMessage(cmd));
+				timeLine->UpdateStartTime(i, -1);
+				trackLengthText[i]->Text = "--:--";
 			}
-			trackLengthText[i]->Text = System::String::Concat((valuesecs/60).ToString("00"),":", (valuesecs%60).ToString("00"));
-			
-			timeLine->UpdateStartTime(i, value);
-		}
-		else
-		{
-			cds->running = false;
-			timeLine->UpdateStartTime(i, -1);
-			trackLengthText[i]->Text = "--:--";
-		}
-		if (cds->startAt)
-		{
-			trackLengthText[i]->InfoText = "Start At: ";
-		}
-		else
-		{
-			trackLengthText[i]->InfoText = "End At: ";
-		}
-		trackLengthText[i]->InfoText = String::Concat(trackLengthText[i]->InfoText,(cds->theTime/60).ToString("00"),":",(cds->theTime%60).ToString("00"));
+			if (cds->startAt)
+			{
+				trackLengthText[i]->InfoText = "Start At: ";
+			}
+			else
+			{
+				trackLengthText[i]->InfoText = "End At: ";
+			}
+			trackLengthText[i]->InfoText = String::Concat(trackLengthText[i]->InfoText,(cds->theTime/60).ToString("00"),":",(cds->theTime%60).ToString("00"));
 
+		}
 	}
-
 	timeLine->tick();
 }
 
 System::Void BAPSPresenterMain::timeLine_StartTimeChanged(System::Object^  sender, BAPSPresenter::TimeLineEventArgs^  e)
 {
-	CountDownState^ cds = safe_cast<CountDownState^>(trackLengthText[e->channel]->Tag);
-	cds->startAt = true;
-	cds->theTime = (e->startTime/1000)%3600;
-	cds->running = true;
+	if (timersEnabled)
+	{
+		CountDownState^ cds = safe_cast<CountDownState^>(trackLengthText[e->channel]->Tag);
+		cds->startAt = true;
+		cds->theTime = (e->startTime/1000)%3600;
+		cds->running = true;
+	}
 }
