@@ -1,23 +1,22 @@
 #pragma once
 
+#include "ConfigChoices.h"
+
 namespace BAPSServerAssembly
 {
-	ref struct ConfigStringChoice
+	ref struct ConfigStringChoice : ConfigChoice
 	{
 		ConfigStringChoice(System::String^ _description, System::String^ _choice)
-			: description(_description), choice(_choice)
+			: ConfigChoice(_description), choice(_choice)
 		{}
-		System::String^ description;
 		System::String^ choice;
 	};
 
-	ref class ConfigStringChoices
+	ref class ConfigStringChoices : ConfigChoices
 	{
 	public:
-		ConfigStringChoices()
+		ConfigStringChoices() : ConfigChoices()
 		{
-			defaultIndex = 0;
-			choiceTable = gcnew System::Collections::ArrayList();
 		}
 		void add(System::String^ description, System::String^ choice, bool isDefault)
 		{
@@ -26,10 +25,6 @@ namespace BAPSServerAssembly
 			{
 				defaultIndex = (choiceTable->Count -1);
 			}
-		}
-		int getDefaultIndex()
-		{
-			return defaultIndex;
 		}
 		System::String^ getDefaultChoice()
 		{
@@ -75,28 +70,5 @@ namespace BAPSServerAssembly
 			}
 			return -1;
 		}
-		bool indexExists(int index)
-		{
-			return (choiceTable->Count > index);
-		}
-		int getChoiceCount()
-		{
-			return choiceTable->Count;
-		}
-		System::String^ getChoiceDescription(int _choiceIndex)
-		{
-			if (indexExists(_choiceIndex))
-			{
-				return static_cast<ConfigStringChoice^>(choiceTable->default[_choiceIndex])->description;
-			}
-			else
-			{
-				// WORK NEEDED: throw an exception
-				return "";
-			}
-		}
-	private:
-		System::Collections::ArrayList^ choiceTable;
-		int defaultIndex;
 	};
 };

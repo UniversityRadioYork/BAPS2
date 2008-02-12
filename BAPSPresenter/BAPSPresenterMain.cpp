@@ -564,9 +564,10 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 			{
 				if (ISFLAGSET(cmdReceived,BAPSNET_DATABASE_MODEMASK))
 				{
+					int dirtyStatus = cmdReceived&BAPSNET_DATABASE_VALUEMASK;
 					int resultid = clientSocket->receiveI();
 					System::String^ description = clientSocket->receiveS();
-					addLibraryResult(resultid, description);
+					addLibraryResult(resultid, dirtyStatus, description);
 				}
 				else
 				{

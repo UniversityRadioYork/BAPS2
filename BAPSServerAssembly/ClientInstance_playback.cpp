@@ -16,7 +16,7 @@ BEGIN_ACTION_BLOCKED1(play, unsigned char channel)
 		/** Ignoring true return value as it is implicit
 		 *  Play will return false if there is no valid file loaded
 		**/
-		if (!ClientManager::getAudio()->getOutput(channel)->play())
+		if (!ClientManager::getAudio()->getOutput(channel)->play(false))
 		{
 			// WORK NEEDED: tell non autoupdate clients what just happened
 		}

@@ -357,10 +357,11 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 		{
 		case BAPSNET_LIBRARYSEARCH:
 			{
+				bool mayBeDirty = ISFLAGSET(cmdReceived & BAPSNET_DATABASE_VALUEMASK, BAPSNET_LIBRARY_MAYBEDIRTY);
 				System::String^ artist = connection->receiveS();
 				System::String^ title = connection->receiveS();
 				int pageNum = connection->receiveI();
-				searchMusicLib(artist, title, -1, pageNum);
+				searchMusicLib(artist, title, mayBeDirty, -1, pageNum);
 			}
 			break;
 		case BAPSNET_LIBRARYORDERING:

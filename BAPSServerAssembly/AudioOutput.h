@@ -26,7 +26,7 @@ namespace BAPSServerAssembly
 			~AudioOutput();
 
 			/** Play loaded track **/
-			bool play(); 
+			bool play(bool updateLog); 
 			/** Pause loaded track **/
 			bool pause(); 
 			/** Stop loaded track **/

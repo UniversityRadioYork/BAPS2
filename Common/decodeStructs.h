@@ -90,9 +90,9 @@ typedef unsigned short Command;
  * Database
  **/
 #define BAPSNET_LIBRARYSEARCH	(0<<8)		//C  string artist, string title			MUSICLIBRESULT | BAPSNET_LIBRARYERROR
-#define BAPSNET_LIBRARYORDERING (1<<8)		//C  u32int orderingfield, u32int reverseorder?
+#define BAPSNET_LIBRARYORDERING (1<<8)		//C  [VALUE-maybedirty] u32int orderingfield, u32int reverseorder?
 #define BAPSNET_LIBRARYRESULT	(2<<8)		//S  [0](count) u32int count
-											//   [1](data) u32int index, string description
+											//   [1](data)[VALUE-maybedirty] u32int index, string description
 #define BAPSNET_LIBRARYERROR  	(3<<8)		//S  [-][VALUE-errorCode] string description
 #define BAPSNET_GETSHOWS		(4<<8)		//C  [-][VALUE-0]		{current user's shows)		SHOW
 											//   [-][VALUE-1]		{system shows}				SHOW
@@ -113,9 +113,11 @@ typedef unsigned short Command;
 #define BAPSNET_ORDER_BYDATEADDED		2
 #define BAPSNET_ORDER_BYDATERELEASED	3
 
-#define BAPSNET_ORDER_ASCENDING		0
-#define BAPSNET_ORDER_DESCENDING	1
+#define BAPSNET_ORDER_ASCENDING			0
+#define BAPSNET_ORDER_DESCENDING		1
 
+#define BAPSNET_LIBRARY_MAYBEDIRTY		1
+#define BAPSNET_LIBRARY_DIRTY			2
 
 /**
  * Config 

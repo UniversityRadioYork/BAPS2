@@ -140,7 +140,7 @@ namespace BAPSServerAssembly
 		void synchronizeChatters();
 
 		/** DATABASE actions **/
-		bool searchMusicLib(System::String^ artist, System::String^ title, int trackid, int page);
+		bool searchMusicLib(System::String^ artist, System::String^ title, bool mayBeDirty, int trackid, int page);
 		LibraryTrack^ getLibraryTrack(int index);
 		void setupDatabaseConnection();
 		bool executeQuery(System::String^ sql);

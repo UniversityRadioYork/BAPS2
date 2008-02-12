@@ -56,6 +56,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -68,20 +69,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BAPSServerAssembly\BAPSServerAssembly.vcproj">
-      <Project>{B93BB821-0BB3-466C-9D53-7FECF8722F1D}</Project>
-      <Name>BAPSServerAssembly</Name>
-    </ProjectReference>
+    <None Include="Resources\marble2.gif" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="SpeechLib">
-      <Guid>{C866CA3A-32F7-11D2-9602-00C04F8EE628}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
+    <ProjectReference Include="..\BAPSFormControls\BAPSFormControls.csproj">
+      <Project>{4C3D1722-7B93-4081-8D61-572F8F088CED}</Project>
+      <Name>BAPSFormControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

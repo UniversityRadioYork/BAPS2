@@ -16,12 +16,10 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("Private")];
 [assembly:AssemblyCompanyAttribute("Uni-Software")];
 [assembly:AssemblyProductAttribute("BAPS Presenter - User Interface")];
-[assembly:AssemblyCopyrightAttribute("This software remains the property of Matthew Fortune. All rights reserved.\n"
-									 "You are not permitted to install, copy, or use this software without explicit "
-									 "consent from the copyright holder")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c)  2008")];
 [assembly:AssemblyTrademarkAttribute("Uni-Software")];
 [assembly:AssemblyCultureAttribute("")];
-[assembly:AssemblyInformationalVersionAttribute("2.5.0.0")];
+[assembly:AssemblyInformationalVersionAttribute("2.6.2.0")];
 
 //
 // Version information for an assembly consists of the following four values:
@@ -34,7 +32,7 @@ using namespace System::Security::Permissions;
 // You can specify all the value or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly:AssemblyVersionAttribute("2.5.0.0")];
+[assembly:AssemblyVersionAttribute("2.6.2.0")];
 
 [assembly:ComVisible(false)];
 

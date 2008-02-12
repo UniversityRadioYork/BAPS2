@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "RecordLibrarySearch.h"
 #include "Messages.h"
+#include "UtilityMacros.h"
 
 using namespace BAPSPresenter;
 
@@ -87,6 +88,10 @@ System::Void RecordLibrarySearch::SearchButton_Click(System::Object ^  sender, S
 		msgQueue->Enqueue(gcnew ActionMessageU32intU32int(cmd, orderby, ascdes));
 
 		cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYSEARCH;
+		if (noncleanCheckbox->Checked)
+		{
+			cmd |= BAPSNET_LIBRARY_MAYBEDIRTY;
+		}
 		msgQueue->Enqueue(gcnew ActionMessageStringStringU32int(cmd, _artist, _title, pageNum));
 	}
 }
@@ -140,9 +145,19 @@ void RecordLibrarySearch::setResultCount(System::Object^ _count)
 	}
 
 }
-void RecordLibrarySearch::add(System::Object^ _index, System::String^ description)
+void RecordLibrarySearch::add(System::Object^ _index, System::Object^ _dirtyStatus, System::String^ description)
 {
 	int index = safe_cast<int>(_index);
+	int dirtyStatus = safe_cast<int>(_dirtyStatus);
+	/* Mark possible dirty tracks with asterisks */
+	if (ISFLAGSET(dirtyStatus, BAPSNET_LIBRARY_DIRTY))
+	{
+		description = "** "+description;
+	}
+	else if (ISFLAGSET(dirtyStatus, BAPSNET_LIBRARY_MAYBEDIRTY))
+	{
+		description = "* "+description;
+	}
 	/** Move the progress bar on **/
 	progressBar->Value = index;
 	/** Place the string into the array **/

@@ -30,6 +30,7 @@ namespace TinkerInCSharp
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.bapsLabel1 = new BAPSFormControls.BAPSLabel();
             this.SuspendLayout();
             // 
             // textBox1
@@ -49,11 +50,22 @@ namespace TinkerInCSharp
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // bapsLabel1
+            // 
+            this.bapsLabel1.Location = new System.Drawing.Point(22, 32);
+            this.bapsLabel1.Name = "bapsLabel1";
+            this.bapsLabel1.Size = new System.Drawing.Size(117, 42);
+            this.bapsLabel1.TabIndex = 2;
+            this.bapsLabel1.TabStop = false;
+            this.bapsLabel1.Text = "bapsLabel1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::TinkerInCSharp.Properties.Resources.marble2;
             this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Controls.Add(this.bapsLabel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
@@ -68,6 +80,7 @@ namespace TinkerInCSharp
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
+        private BAPSFormControls.BAPSLabel bapsLabel1;
     }
 }
 

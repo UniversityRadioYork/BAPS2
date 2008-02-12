@@ -94,7 +94,7 @@ namespace BAPSPresenter {
 		/**
 			DATABASE functions
 		**/
-		void addLibraryResult(u32int index, System::String^ result);
+		void addLibraryResult(u32int index, int dirtyStatus, System::String^ result);
 		void setLibraryResultCount(int count);
 		void notifyLibraryError(int errorcode, System::String^ description);
 		
@@ -367,8 +367,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->chatText = (gcnew System::Windows::Forms::TextBox());
 			this->newChatMessage = (gcnew System::Windows::Forms::TextBox());
 			this->chatTo = (gcnew System::Windows::Forms::ComboBox());
-			this->timeLine = (gcnew BAPSPresenter::TimeLine());
 			this->chatOnOff = (gcnew BAPSPresenter::BAPSButton());
+			this->timeLine = (gcnew BAPSPresenter::TimeLine());
 			this->sendMessage = (gcnew BAPSPresenter::BAPSButton());
 			this->newMessageLabel = (gcnew BAPSPresenter::BAPSLabel());
 			this->Channel2Label = (gcnew BAPSPresenter::BAPSLabel());
@@ -631,19 +631,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->chatTo->TabIndex = 30;
 			this->chatTo->Visible = false;
 			// 
-			// timeLine
-			// 
-			this->timeLine->BackColor = System::Drawing::Color::Transparent;
-			this->timeLine->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(0)));
-			this->timeLine->Location = System::Drawing::Point(83, 579);
-			this->timeLine->Name = L"timeLine";
-			this->timeLine->Size = System::Drawing::Size(848, 52);
-			this->timeLine->TabIndex = 214;
-			this->timeLine->TabStop = false;
-			this->timeLine->Text = L"timeLine1";
-			this->timeLine->StartTimeChanged += gcnew BAPSPresenter::TimeLineEventHandler(this, &BAPSPresenterMain::timeLine_StartTimeChanged);
-			// 
 			// chatOnOff
 			// 
 			this->chatOnOff->BackColor = System::Drawing::Color::Transparent;
@@ -656,6 +643,19 @@ private: System::ComponentModel::IContainer^  components;
 			this->chatOnOff->TabIndex = 28;
 			this->chatOnOff->Text = L"Chat ON";
 			this->chatOnOff->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::chatOnOff_Click);
+			// 
+			// timeLine
+			// 
+			this->timeLine->BackColor = System::Drawing::Color::Transparent;
+			this->timeLine->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->timeLine->Location = System::Drawing::Point(83, 579);
+			this->timeLine->Name = L"timeLine";
+			this->timeLine->Size = System::Drawing::Size(848, 52);
+			this->timeLine->TabIndex = 214;
+			this->timeLine->TabStop = false;
+			this->timeLine->Text = L"timeLine1";
+			this->timeLine->StartTimeChanged += gcnew BAPSPresenter::TimeLineEventHandler(this, &BAPSPresenterMain::timeLine_StartTimeChanged);
 			// 
 			// sendMessage
 			// 

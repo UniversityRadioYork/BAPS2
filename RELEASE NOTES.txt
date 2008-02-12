@@ -1,4 +1,55 @@
 ##
+Release 2.6.2 v0
+--
+Features
+--
+New USB based BAPS Controller module
+Updated record library search to allow dirty search
+Dirty items are marked with 2 stars in the results
+Unknown items are marked with 1 star in the results
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+None
+--
+
+##
+Release 2.6 v0
+--
+Features
+--
+Now uses new recordlibrary tables rec_*
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+None
+--
+
+##
+Release 2.5 v0
+--
+Features
+--
+server state now stored to xml config file and restored on startup
+timers in client disabled and hidden by default
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+None
+--
+##
 Release 2.4 v2
 --
 Features

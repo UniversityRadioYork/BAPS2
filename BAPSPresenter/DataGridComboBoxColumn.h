@@ -153,10 +153,6 @@ namespace BAPSPresenter
 						  this->DataGridTableStyle->DataGrid->Font, 
 						  foreBrush, 
 						  rect);
-			/** Draw a little red box! **/
-			rect.Offset(rect.Width-20, 0);
-			rect.Width = 20;
-			g->FillRectangle(System::Drawing::Brushes::Crimson, rect);
 		}
 
 		virtual void SetDataGridInColumn(System::Windows::Forms::DataGrid^ value) override

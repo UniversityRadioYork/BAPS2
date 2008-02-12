@@ -24,7 +24,7 @@ void UserManager::initUserManager()
 	{
 		System::String^ user = "admin";
 		addUserToList(user);
-		SETPASS(user, md5sum("P3bbl35"));
+		SETPASS(user, md5sum("1234"));
 		SETPERM(user,UP_SUPERUSER);
 	}
 }

@@ -94,16 +94,15 @@ void GlobalAudioObject::notifyCallback(int channel)
 		return;
 	}
 	ClientManager::getMessageLock();
-	AudioOutput^ AudioOutput = activeChannels[channel]->audioOutput;
+	AudioOutput^ audioOutput = activeChannels[channel]->audioOutput;
 	Playlist ^currentPlaylist = activeChannels[channel]->currentPlaylist;
-	AudioOutput->stop();
+	audioOutput->stop();
 	
-	AsyncActionManager::incPlayCount(AudioOutput->getLoadedTrack());
-	int advanceTo = currentPlaylist->getNextPlayable(AudioOutput->getLoadedTrack()->getEntryNumber()+1);
+	int advanceTo = currentPlaylist->getNextPlayable(audioOutput->getLoadedTrack()->getEntryNumber()+1);
 	int autoRepeat = CONFIG_GETINTn(CONFIG_REPEAT, channel);
 	if (autoRepeat == 1)
 	{
-		AudioOutput->play();
+		audioOutput->play(false);
 	}
 	else if (autoRepeat == 2)
 	{
@@ -113,17 +112,17 @@ void GlobalAudioObject::notifyCallback(int channel)
 		}
 		if (advanceTo != -1)
 		{
-			AudioOutput->loadTrack(safe_cast<Track^>(currentPlaylist->getEntry(advanceTo)));
+			audioOutput->loadTrack(safe_cast<Track^>(currentPlaylist->getEntry(advanceTo)));
 		}
 		if (CONFIG_GETINTn(CONFIG_AUTOPLAY, channel) == 0)
 		{
-			AudioOutput->play();
+			audioOutput->play(false);
 		}
 	}
 	else if ((advanceTo != -1) &&
 		     (CONFIG_GETINTn(CONFIG_AUTOADVANCE, channel) != 0))
 	{
-		AudioOutput->loadTrack(safe_cast<Track^>(currentPlaylist->getEntry(advanceTo)));
+		audioOutput->loadTrack(safe_cast<Track^>(currentPlaylist->getEntry(advanceTo)));
 	}
 
 	ClientManager::releaseMessageLock();
@@ -150,39 +149,63 @@ void GlobalAudioObject::restoreFromXML(System::Xml::XmlReader^ xr)
 {
 	/** Prevent clients from making requests while restoring state **/
 	ClientManager::getMessageLock();
-	int i;
-	for (i = 0 ; xr->IsStartElement("channel") ; i++)
+	try
 	{
-		xr->ReadStartElement("channel");
-		xr->ReadStartElement("channelnumber");
-		int j = xr->ReadContentAsInt();
-		xr->ReadEndElement();
-		/** Write out the playlist **/
-		activeChannels[j]->currentPlaylist->restoreFromXML(xr);
-		/** Write out the player state **/
-		activeChannels[j]->audioOutput->restoreFromXML(xr);
-		xr->ReadEndElement();
+		int i;
+		for (i = 0 ; xr->IsStartElement("channel") ; i++)
+		{
+			xr->ReadStartElement("channel");
+			xr->ReadStartElement("channelnumber");
+			int j = xr->ReadContentAsInt();
+			xr->ReadEndElement();
+			/** Write out the playlist **/
+			activeChannels[j]->currentPlaylist->restoreFromXML(xr);
+			/** Write out the player state **/
+			activeChannels[j]->audioOutput->restoreFromXML(xr);
+			xr->ReadEndElement();
+		}
 	}
-	ClientManager::releaseMessageLock();
+	finally
+	{
+		ClientManager::releaseMessageLock();
+	}
 }
 
 void GlobalAudioObject::loadStateFromFile(System::String ^filename)
 {
-	System::Xml::XmlReader^ xr = System::Xml::XmlReader::Create(filename);
-	xr->Read();
-	xr->ReadStartElement("bapsserverstate");
-	ClientManager::getAudio()->restoreFromXML(xr);
-	xr->ReadEndElement();
-	xr->Close();
+	try
+	{
+		System::Xml::XmlReader^ xr = System::Xml::XmlReader::Create(filename);
+		xr->Read();
+		xr->ReadStartElement("bapsserverstate");
+		ClientManager::getAudio()->restoreFromXML(xr);
+		xr->ReadEndElement();
+		xr->Close();
+	}
+	catch (System::Exception^ e)
+	{
+		LogManager::write(System::String::Concat("Failed to restore state from XML:\n", e->Message, "Stack Trace:\n",e->StackTrace),
+						  LOG_ERROR,
+						  LOG_SYSTEM);
+	}
 }
 
 void GlobalAudioObject::loadStateFromText(System::String ^xml)
 {
-	System::IO::StringReader^ sr = gcnew System::IO::StringReader(xml);
-	System::Xml::XmlReader^ xr = System::Xml::XmlReader::Create(sr);
-	xr->Read();
-	xr->ReadStartElement("bapsserverstate");
-	ClientManager::getAudio()->restoreFromXML(xr);
-	xr->ReadEndElement();
-	xr->Close();
+	try
+	{
+		System::IO::StringReader^ sr = gcnew System::IO::StringReader(xml);
+		System::Xml::XmlReader^ xr = System::Xml::XmlReader::Create(sr);
+		xr->Read();
+		xr->ReadStartElement("bapsserverstate");
+		ClientManager::getAudio()->restoreFromXML(xr);
+		xr->ReadEndElement();
+		xr->Close();
+	}
+	catch (System::Exception^ e)
+	{
+		LogManager::write(System::String::Concat("Failed to restore state from XML:\n", e->Message, "Stack Trace:\n",e->StackTrace),
+						  LOG_ERROR,
+						  LOG_SYSTEM);
+	}
 }

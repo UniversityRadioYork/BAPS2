@@ -60,7 +60,7 @@ namespace BAPSPresenter {
 			pageNum = 0;
 		}
 		void setResultCount(System::Object^ _count);
-		void add(System::Object^ _index, System::String^ string);
+		void add(System::Object^ _index, System::Object^ _dirtyStatus, System::String^ string);
 		void handleError(System::Object^ _errorcode, System::String^ description);
 
 	protected:
@@ -86,6 +86,7 @@ namespace BAPSPresenter {
 		/** A handle to the main window **/
 		BAPSPresenterMain^ bapsPresenterMain;
 	private: System::Windows::Forms::RadioButton^  dateReleasedRadioButton;
+	private: System::Windows::Forms::CheckBox^  noncleanCheckbox;
 
 
 
@@ -156,6 +157,7 @@ namespace BAPSPresenter {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->reverseOrderCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->dateReleasedRadioButton = (gcnew System::Windows::Forms::RadioButton());
+			this->noncleanCheckbox = (gcnew System::Windows::Forms::CheckBox());
 			this->statusStrip->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -171,7 +173,7 @@ namespace BAPSPresenter {
 			this->statusStrip->BackColor = System::Drawing::Color::AntiqueWhite;
 			this->statusStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->connectionStatus, 
 				this->progressBar, this->resultsInfo});
-			this->statusStrip->Location = System::Drawing::Point(0, 385);
+			this->statusStrip->Location = System::Drawing::Point(0, 401);
 			this->statusStrip->Name = L"statusStrip";
 			this->statusStrip->Size = System::Drawing::Size(465, 22);
 			this->statusStrip->SizingGrip = false;
@@ -219,7 +221,7 @@ namespace BAPSPresenter {
 			this->Title->Location = System::Drawing::Point(68, 13);
 			this->Title->Name = L"Title";
 			this->Title->Size = System::Drawing::Size(256, 20);
-			this->Title->TabIndex = 1;
+			this->Title->TabIndex = 0;
 			this->Title->Text = L"<Enter the Title to search for>";
 			this->Title->Enter += gcnew System::EventHandler(this, &RecordLibrarySearch::Text_Enter);
 			this->Title->Leave += gcnew System::EventHandler(this, &RecordLibrarySearch::Title_Leave);
@@ -232,7 +234,7 @@ namespace BAPSPresenter {
 			this->Artist->Location = System::Drawing::Point(68, 41);
 			this->Artist->Name = L"Artist";
 			this->Artist->Size = System::Drawing::Size(256, 20);
-			this->Artist->TabIndex = 0;
+			this->Artist->TabIndex = 1;
 			this->Artist->Text = L"<Enter the Artist to search for>";
 			this->Artist->Enter += gcnew System::EventHandler(this, &RecordLibrarySearch::Text_Enter);
 			this->Artist->Leave += gcnew System::EventHandler(this, &RecordLibrarySearch::Artist_Leave);
@@ -240,11 +242,11 @@ namespace BAPSPresenter {
 			// 
 			// ResultsBox
 			// 
-			this->ResultsBox->Location = System::Drawing::Point(12, 96);
+			this->ResultsBox->Location = System::Drawing::Point(12, 106);
 			this->ResultsBox->Name = L"ResultsBox";
 			this->ResultsBox->SelectedIndexEnabled = true;
 			this->ResultsBox->Size = System::Drawing::Size(439, 235);
-			this->ResultsBox->TabIndex = 3;
+			this->ResultsBox->TabIndex = 8;
 			this->ResultsBox->Text = L"bapsListBox1";
 			// 
 			// AddToChannel2
@@ -255,10 +257,10 @@ namespace BAPSPresenter {
 				static_cast<System::Byte>(0)));
 			this->AddToChannel2->HighlightColor = System::Drawing::Color::Red;
 			this->AddToChannel2->Highlighted = false;
-			this->AddToChannel2->Location = System::Drawing::Point(322, 341);
+			this->AddToChannel2->Location = System::Drawing::Point(322, 351);
 			this->AddToChannel2->Name = L"AddToChannel2";
 			this->AddToChannel2->Size = System::Drawing::Size(130, 36);
-			this->AddToChannel2->TabIndex = 6;
+			this->AddToChannel2->TabIndex = 11;
 			this->AddToChannel2->Text = L"Add to List 3";
 			this->AddToChannel2->Click += gcnew System::EventHandler(this, &RecordLibrarySearch::AddToChannel_Click);
 			// 
@@ -270,10 +272,10 @@ namespace BAPSPresenter {
 				static_cast<System::Byte>(0)));
 			this->AddToChannel1->HighlightColor = System::Drawing::Color::Red;
 			this->AddToChannel1->Highlighted = false;
-			this->AddToChannel1->Location = System::Drawing::Point(167, 341);
+			this->AddToChannel1->Location = System::Drawing::Point(167, 351);
 			this->AddToChannel1->Name = L"AddToChannel1";
 			this->AddToChannel1->Size = System::Drawing::Size(130, 36);
-			this->AddToChannel1->TabIndex = 5;
+			this->AddToChannel1->TabIndex = 10;
 			this->AddToChannel1->Text = L"Add to List 2";
 			this->AddToChannel1->Click += gcnew System::EventHandler(this, &RecordLibrarySearch::AddToChannel_Click);
 			// 
@@ -285,10 +287,10 @@ namespace BAPSPresenter {
 				static_cast<System::Byte>(0)));
 			this->AddToChannel0->HighlightColor = System::Drawing::Color::Red;
 			this->AddToChannel0->Highlighted = false;
-			this->AddToChannel0->Location = System::Drawing::Point(12, 341);
+			this->AddToChannel0->Location = System::Drawing::Point(12, 351);
 			this->AddToChannel0->Name = L"AddToChannel0";
 			this->AddToChannel0->Size = System::Drawing::Size(130, 36);
-			this->AddToChannel0->TabIndex = 4;
+			this->AddToChannel0->TabIndex = 9;
 			this->AddToChannel0->Text = L"Add to List 1";
 			this->AddToChannel0->Click += gcnew System::EventHandler(this, &RecordLibrarySearch::AddToChannel_Click);
 			// 
@@ -303,7 +305,7 @@ namespace BAPSPresenter {
 			this->SearchButton->Location = System::Drawing::Point(335, 23);
 			this->SearchButton->Name = L"SearchButton";
 			this->SearchButton->Size = System::Drawing::Size(116, 41);
-			this->SearchButton->TabIndex = 2;
+			this->SearchButton->TabIndex = 7;
 			this->SearchButton->Text = L"Search";
 			this->SearchButton->Click += gcnew System::EventHandler(this, &RecordLibrarySearch::SearchButton_Click);
 			// 
@@ -318,7 +320,7 @@ namespace BAPSPresenter {
 			this->closeButton->Location = System::Drawing::Point(416, 6);
 			this->closeButton->Name = L"closeButton";
 			this->closeButton->Size = System::Drawing::Size(43, 11);
-			this->closeButton->TabIndex = 2;
+			this->closeButton->TabIndex = 12;
 			this->closeButton->Text = L"Close";
 			this->closeButton->Click += gcnew System::EventHandler(this, &RecordLibrarySearch::closeButton_Click);
 			// 
@@ -326,10 +328,10 @@ namespace BAPSPresenter {
 			// 
 			this->artistRadioButton->AutoSize = true;
 			this->artistRadioButton->BackColor = System::Drawing::Color::Transparent;
-			this->artistRadioButton->Location = System::Drawing::Point(119, 72);
+			this->artistRadioButton->Location = System::Drawing::Point(112, 77);
 			this->artistRadioButton->Name = L"artistRadioButton";
 			this->artistRadioButton->Size = System::Drawing::Size(48, 17);
-			this->artistRadioButton->TabIndex = 19;
+			this->artistRadioButton->TabIndex = 3;
 			this->artistRadioButton->Text = L"Artist";
 			this->artistRadioButton->UseVisualStyleBackColor = false;
 			this->artistRadioButton->CheckedChanged += gcnew System::EventHandler(this, &RecordLibrarySearch::RadioButton_CheckedChanged);
@@ -339,10 +341,10 @@ namespace BAPSPresenter {
 			this->titleRadioButton->AutoSize = true;
 			this->titleRadioButton->BackColor = System::Drawing::Color::Transparent;
 			this->titleRadioButton->Checked = true;
-			this->titleRadioButton->Location = System::Drawing::Point(68, 72);
+			this->titleRadioButton->Location = System::Drawing::Point(63, 77);
 			this->titleRadioButton->Name = L"titleRadioButton";
 			this->titleRadioButton->Size = System::Drawing::Size(45, 17);
-			this->titleRadioButton->TabIndex = 19;
+			this->titleRadioButton->TabIndex = 2;
 			this->titleRadioButton->TabStop = true;
 			this->titleRadioButton->Text = L"Title";
 			this->titleRadioButton->UseVisualStyleBackColor = false;
@@ -352,10 +354,10 @@ namespace BAPSPresenter {
 			// 
 			this->dateAddedRadioButton->AutoSize = true;
 			this->dateAddedRadioButton->BackColor = System::Drawing::Color::Transparent;
-			this->dateAddedRadioButton->Location = System::Drawing::Point(173, 72);
+			this->dateAddedRadioButton->Location = System::Drawing::Point(163, 77);
 			this->dateAddedRadioButton->Name = L"dateAddedRadioButton";
 			this->dateAddedRadioButton->Size = System::Drawing::Size(82, 17);
-			this->dateAddedRadioButton->TabIndex = 19;
+			this->dateAddedRadioButton->TabIndex = 4;
 			this->dateAddedRadioButton->Text = L"Date Added";
 			this->dateAddedRadioButton->UseVisualStyleBackColor = false;
 			this->dateAddedRadioButton->CheckedChanged += gcnew System::EventHandler(this, &RecordLibrarySearch::RadioButton_CheckedChanged);
@@ -363,7 +365,7 @@ namespace BAPSPresenter {
 			// label1
 			// 
 			this->label1->BackColor = System::Drawing::Color::Transparent;
-			this->label1->Location = System::Drawing::Point(10, 72);
+			this->label1->Location = System::Drawing::Point(10, 77);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(62, 17);
 			this->label1->TabIndex = 18;
@@ -374,10 +376,10 @@ namespace BAPSPresenter {
 			// 
 			this->reverseOrderCheckBox->AutoSize = true;
 			this->reverseOrderCheckBox->BackColor = System::Drawing::Color::Transparent;
-			this->reverseOrderCheckBox->Location = System::Drawing::Point(358, 72);
+			this->reverseOrderCheckBox->Location = System::Drawing::Point(345, 70);
 			this->reverseOrderCheckBox->Name = L"reverseOrderCheckBox";
 			this->reverseOrderCheckBox->Size = System::Drawing::Size(95, 17);
-			this->reverseOrderCheckBox->TabIndex = 20;
+			this->reverseOrderCheckBox->TabIndex = 6;
 			this->reverseOrderCheckBox->Text = L"Reverse Order";
 			this->reverseOrderCheckBox->UseVisualStyleBackColor = false;
 			this->reverseOrderCheckBox->CheckedChanged += gcnew System::EventHandler(this, &RecordLibrarySearch::Some_TextChanged);
@@ -386,13 +388,25 @@ namespace BAPSPresenter {
 			// 
 			this->dateReleasedRadioButton->AutoSize = true;
 			this->dateReleasedRadioButton->BackColor = System::Drawing::Color::Transparent;
-			this->dateReleasedRadioButton->Location = System::Drawing::Point(257, 72);
+			this->dateReleasedRadioButton->Location = System::Drawing::Point(249, 77);
 			this->dateReleasedRadioButton->Name = L"dateReleasedRadioButton";
 			this->dateReleasedRadioButton->Size = System::Drawing::Size(96, 17);
-			this->dateReleasedRadioButton->TabIndex = 19;
+			this->dateReleasedRadioButton->TabIndex = 5;
 			this->dateReleasedRadioButton->Text = L"Date Released";
 			this->dateReleasedRadioButton->UseVisualStyleBackColor = false;
 			this->dateReleasedRadioButton->CheckedChanged += gcnew System::EventHandler(this, &RecordLibrarySearch::RadioButton_CheckedChanged);
+			// 
+			// noncleanCheckbox
+			// 
+			this->noncleanCheckbox->AutoSize = true;
+			this->noncleanCheckbox->BackColor = System::Drawing::Color::Transparent;
+			this->noncleanCheckbox->Location = System::Drawing::Point(345, 87);
+			this->noncleanCheckbox->Name = L"noncleanCheckbox";
+			this->noncleanCheckbox->Size = System::Drawing::Size(112, 17);
+			this->noncleanCheckbox->TabIndex = 6;
+			this->noncleanCheckbox->Text = L"Non-Clean Tracks";
+			this->noncleanCheckbox->UseVisualStyleBackColor = false;
+			this->noncleanCheckbox->CheckedChanged += gcnew System::EventHandler(this, &RecordLibrarySearch::Some_TextChanged);
 			// 
 			// RecordLibrarySearch
 			// 
@@ -401,7 +415,7 @@ namespace BAPSPresenter {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"$this.BackgroundImage")));
 			this->CancelButton = this->closeButton;
-			this->ClientSize = System::Drawing::Size(465, 407);
+			this->ClientSize = System::Drawing::Size(465, 423);
 			this->ControlBox = false;
 			this->Controls->Add(this->titleRadioButton);
 			this->Controls->Add(this->ResultsBox);
@@ -416,6 +430,7 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->Title);
 			this->Controls->Add(this->Artist);
 			this->Controls->Add(this->label1);
+			this->Controls->Add(this->noncleanCheckbox);
 			this->Controls->Add(this->reverseOrderCheckBox);
 			this->Controls->Add(this->dateReleasedRadioButton);
 			this->Controls->Add(this->dateAddedRadioButton);
@@ -437,6 +452,7 @@ namespace BAPSPresenter {
 
 		}
 #pragma endregion
+
 
 };
 }

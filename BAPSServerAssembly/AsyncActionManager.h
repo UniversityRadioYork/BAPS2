@@ -11,16 +11,18 @@ namespace BAPSServerAssembly
 		should have bounded timeouts.
 	**/
 
-	ref struct PlayCountInfo
+	ref struct PlaybackEventInfo
 	{
-		PlayCountInfo(System::String^ _filename)
-			:filename(_filename), trackid(-1)
+		PlaybackEventInfo(System::String^ _filename, int _channel, bool _isStartEvent)
+			:filename(_filename), trackid(-1), isStartEvent(_isStartEvent), channel(_channel)
 		{}
-		PlayCountInfo(System::String^ _filename, int _trackid)
-			: filename(_filename), trackid(_trackid)
+		PlaybackEventInfo(System::String^ _filename, int _channel, bool _isStartEvent, int _trackid)
+			: filename(_filename), trackid(_trackid), isStartEvent(_isStartEvent), channel(_channel)
 		{}
 		System::String^ filename;
 		int trackid;
+		bool isStartEvent;
+		int channel;
 	};
 
 	ref class AsyncActionManager
@@ -29,11 +31,14 @@ namespace BAPSServerAssembly
 		static void initAsyncActionManager()
 		{
 			introPositions = gcnew System::Collections::Generic::Dictionary<int, int>;
-			playCounts = gcnew System::Collections::Generic::List<PlayCountInfo^>;
+			playbackEvents = gcnew System::Collections::Generic::List<PlaybackEventInfo^>;
 			asyncActionMutex = gcnew System::Threading::Mutex();
 			asyncDataMutex = gcnew System::Threading::Mutex();
 			/** In 300ms run updateClients every 300ms **/
 			updateInProgress = false;
+		}
+		static void start()
+		{
 			System::Threading::TimerCallback^ tc = gcnew System::Threading::TimerCallback(&AsyncActionManager::doActions);
 			asyncActionTimer = gcnew System::Threading::Timer(tc,
 													   nullptr,
@@ -54,11 +59,12 @@ namespace BAPSServerAssembly
 		static void doActions(System::Object^ name);
 		static void saveServerState();
 		static void addIntroPosition(int trackid, int introPosition);
-		static void incPlayCount(Track^ track);
+		static void logPlayEvent(int channel, Track^ track);
+		static void logStopEvent(int channel, Track^ track);
 
 	private:
 		static System::Collections::Generic::Dictionary<int, int>^ introPositions;
-		static System::Collections::Generic::List<PlayCountInfo^>^ playCounts;
+		static System::Collections::Generic::List<PlaybackEventInfo^>^ playbackEvents;
 		static System::Threading::Mutex^ asyncActionMutex;
 		static System::Threading::Mutex^ asyncDataMutex;
 		static System::Threading::Timer^ asyncActionTimer;

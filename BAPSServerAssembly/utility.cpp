@@ -81,6 +81,7 @@ void BAPSServerAssembly::Utility::start()
 		AsyncActionManager::initAsyncActionManager();
 		ClientManager::initClientManager();
 		BAPSController::initBAPSController();
+		AsyncActionManager::start();
 	}
 	catch (BAPSTerminateException^ bte)
 	{

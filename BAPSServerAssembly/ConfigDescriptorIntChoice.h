@@ -47,6 +47,11 @@ namespace BAPSServerAssembly
 		{
 			return choices->getChoiceCount();
 		}
+		
+		virtual void setChoices(ConfigChoices^ _choices) override
+		{
+			choices=safe_cast<ConfigIntChoices^>(_choices);
+		}
 	protected:
 		virtual int getValueAsChoice(System::String^ regKey) sealed override;	
 		virtual bool setValueUsingChoice(System::String^ regKey, int _choiceIndex) sealed override;

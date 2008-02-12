@@ -1,5 +1,6 @@
 #pragma once
 #include "ConfigDescriptor.h"
+#include "ConfigChoices.h"
 
 namespace BAPSServerAssembly
 {
@@ -30,6 +31,7 @@ namespace BAPSServerAssembly
 		virtual int getValueAsChoice(int index) abstract;
 		virtual System::String^ getChoiceDescription(int _choiceIndex) abstract;
 		virtual int getChoiceCount() abstract;
+		virtual void setChoices(ConfigChoices^ _choices) abstract;
 	protected:
 		virtual int getValueAsChoice(System::String^ regKey) abstract;	
 		virtual bool setValueUsingChoice(System::String^ regKey, int _choiceIndex) abstract;

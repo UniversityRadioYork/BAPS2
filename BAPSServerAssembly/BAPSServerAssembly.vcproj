@@ -189,6 +189,10 @@
 			RelativePath="..\Common\Npgsql1.0\Npgsql\bin\ms2.0\Mono.Security.dll"
 			AssemblyName="Mono.Security, Version=2.0.0.0, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL"
 		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{E1CEEE2E-DF20-4929-80BD-D73E896C5245}"
+			RelativePathToProject=".\BAPSController\BAPSController.vcproj"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -470,6 +474,10 @@
 				Name="Utilities"
 				>
 				<File
+					RelativePath=".\ConfigChoices.h"
+					>
+				</File>
+				<File
 					RelativePath=".\ConfigDescriptor.h"
 					>
 				</File>
@@ -530,6 +538,11 @@
 			</File>
 			<File
 				RelativePath=".\app.rc"
+				>
+			</File>
+			<File
+				RelativePath="..\Common\BAPS.dll"
+				DeploymentContent="true"
 				>
 			</File>
 		</Filter>

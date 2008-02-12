@@ -205,6 +205,11 @@ namespace BAPSServerService
 
         void ProjectInstaller_BeforeInstall(object sender, InstallEventArgs e)
         {
+            if (!Context.Parameters.ContainsKey("CredentialType"))
+            {
+                this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.User;
+                return;
+            }
             if (Context.Parameters["CredentialType"].Equals("Predefined"))
             {
                 switch (Context.Parameters["PredefinedAccount"])

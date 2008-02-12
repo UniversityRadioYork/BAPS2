@@ -4,6 +4,8 @@
 #include "ConfigManager.h"
 #include "Exceptions.h"
 
+using namespace BAPSControllerAssembly;
+
 namespace BAPSServerAssembly
 {
 	ref class BAPSController
@@ -24,6 +26,12 @@ namespace BAPSServerAssembly
 					throw gcnew BAPSTerminateException(System::String::Concat("Failed to start BAPS Controller:\n", e->Message, "Stack Trace:\n",e->StackTrace));
 				}
 			}
+
+			if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2ENABLED) == CONFIG_YES_VALUE)
+			{
+				bapsController2 = gcnew BAPSControllerAssembly::BAPSController();
+				bapsController2->run(gcnew BAPSControllerAssembly::SignalCallback(handleSignal));
+			}
 		}
 		static void closeBAPSController()
 		{
@@ -31,6 +39,157 @@ namespace BAPSServerAssembly
 			{
 				serialPort->Close();
 				serialPort = nullptr;
+			}
+			if (bapsController2 != nullptr)
+			{
+				bapsController2->stop();
+				bapsController2 = nullptr;
+			}
+		}
+		static array<System::String^>^ getBAPSController2Serials()
+		{
+			return bapsController2->getSerialNumbers();
+		}
+		static void handleSignal(System::String^ device, int signal)
+		{
+			ClientManager::getMessageLock();
+			for (int i = 0 ; i < CONFIG_GETINT(CONFIG_BAPSCONTROLLER2DEVICECOUNT) ; i++)
+			{
+				if (device->Equals(CONFIG_GETSTRn(CONFIG_BAPSCONTROLLER2SERIAL, i)))
+				{
+					signal += CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2OFFSET, i);
+					break;
+				}
+			}
+			try
+			{
+				int mode = CONFIG_GETINT(CONFIG_BAPSPADDLEMODE);
+				int buttonCount = CONFIG_GETINT(CONFIG_BAPSCONTROLLER2BUTTONCOUNT);
+				int channelCount = ConfigManager::getChannelCount();
+				int i;
+				bool handled = false;
+
+				if (mode == CONFIG_CONTROLLER_PLAYBACK)
+				{
+					if (buttonCount>0 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 0))
+					{
+						ClientManager::getAudio()->getOutput(0)->play(true);
+						handled=true;
+					}
+					else if (buttonCount>1 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 1))
+					{
+						if (ClientManager::getAudio()->getOutput(0)->isPlaying())
+						{
+							ClientManager::getAudio()->getOutput(0)->stop();
+						}
+						else
+						{
+							loadNextTrack(0);
+						}
+						handled=true;
+					}
+					else if (channelCount > 1 && buttonCount>2 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 2))
+					{
+						ClientManager::getAudio()->getOutput(1)->play(true);
+						handled=true;
+					}
+					else if (channelCount > 1 && buttonCount>3 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 3))
+					{
+						if (ClientManager::getAudio()->getOutput(1)->isPlaying())
+						{
+							ClientManager::getAudio()->getOutput(1)->stop();
+						}
+						else
+						{
+							loadNextTrack(1);
+						}
+						handled=true;
+					}
+					else if (channelCount > 2 && buttonCount>4 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 4))
+					{
+						ClientManager::getAudio()->getOutput(2)->play(true);
+						handled=true;
+					}
+					else if (channelCount > 2 && buttonCount>5 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 5))
+					{
+						if (ClientManager::getAudio()->getOutput(2)->isPlaying())
+						{
+							ClientManager::getAudio()->getOutput(2)->stop();
+						}
+						else
+						{
+							loadNextTrack(2);
+						}
+						handled=true;
+					}
+				}
+				else if (mode == CONFIG_CONTROLLER_TEXTSCREEN)
+				{
+					if (buttonCount>0 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 0))
+					{
+						ClientManager::getAudio()->getOutput(0)->play(true);
+						handled=true;
+					}
+					else if (buttonCount>1 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 1))
+					{
+						if (ClientManager::getAudio()->getOutput(0)->isPlaying())
+						{
+							ClientManager::getAudio()->getOutput(0)->stop();
+						}
+						else
+						{
+							loadNextTrack(0);
+						}
+						handled=true;
+					}
+					else if (buttonCount>2 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 2))
+					{
+						Command cmd = BAPSNET_SYSTEM | BAPSNET_TEXTSIZE | 1;
+						ClientManager::broadcast(cmd);
+						handled=true;
+					}
+					else if (buttonCount>3 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 3))
+					{
+						Command cmd = BAPSNET_SYSTEM | BAPSNET_TEXTSIZE | 0;
+						ClientManager::broadcast(cmd);
+						handled=true;
+					}
+					else if (buttonCount>4 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 4))
+					{
+						Command cmd = BAPSNET_SYSTEM | BAPSNET_SCROLLTEXT | 1;
+						ClientManager::broadcast(cmd);
+						handled=true;
+					}
+					else if (buttonCount>5 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 5))
+					{
+						Command cmd = BAPSNET_SYSTEM | BAPSNET_SCROLLTEXT | 0;
+						ClientManager::broadcast(cmd);
+						handled=true;
+					}
+				}
+				if (buttonCount>6 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 6))
+				{
+					ClientManager::getAudio()->getOutput(0)->play(true);
+					handled=true;
+				}
+				else if (buttonCount>7 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 7))
+				{
+					ClientManager::getAudio()->getOutput(1)->play(true);
+					handled=true;
+				}
+				else if (buttonCount>8 && signal == CONFIG_GETINTn(CONFIG_BAPSCONTROLLER2BUTTONCODE, 8))
+				{
+					ClientManager::getAudio()->getOutput(2)->play(true);
+					handled=true;
+				}
+				if (!handled)
+				{
+					LogManager::write(System::String::Concat("Received unrecognised BAPS 2 Controller Code: ", signal.ToString()), LOG_INFO, LOG_COMMS);
+				}
+			}
+			finally
+			{
+				ClientManager::releaseMessageLock();
 			}
 		}
 		static void handleData(System::Object^ sender, System::IO::Ports::SerialDataReceivedEventArgs^ e)
@@ -51,7 +210,7 @@ namespace BAPSServerAssembly
 					{
 						if (buttonCount>0 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 0))
 						{
-							ClientManager::getAudio()->getOutput(0)->play();
+							ClientManager::getAudio()->getOutput(0)->play(true);
 							handled=true;
 						}
 						else if (buttonCount>1 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 1))
@@ -68,7 +227,7 @@ namespace BAPSServerAssembly
 						}
 						else if (channelCount > 1 && buttonCount>2 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 2))
 						{
-							ClientManager::getAudio()->getOutput(1)->play();
+							ClientManager::getAudio()->getOutput(1)->play(true);
 							handled=true;
 						}
 						else if (channelCount > 1 && buttonCount>3 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 3))
@@ -85,7 +244,7 @@ namespace BAPSServerAssembly
 						}
 						else if (channelCount > 2 && buttonCount>4 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 4))
 						{
-							ClientManager::getAudio()->getOutput(2)->play();
+							ClientManager::getAudio()->getOutput(2)->play(true);
 							handled=true;
 						}
 						else if (channelCount > 2 && buttonCount>5 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 5))
@@ -105,7 +264,7 @@ namespace BAPSServerAssembly
 					{
 						if (buttonCount>0 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 0))
 						{
-							ClientManager::getAudio()->getOutput(0)->play();
+							ClientManager::getAudio()->getOutput(0)->play(true);
 							handled=true;
 						}
 						else if (buttonCount>1 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 1))
@@ -147,18 +306,18 @@ namespace BAPSServerAssembly
 					}
 					if (buttonCount>6 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 6))
 					{
-						ClientManager::getAudio()->getOutput(0)->play();
-							handled=true;
+						ClientManager::getAudio()->getOutput(0)->play(true);
+						handled=true;
 					}
 					else if (buttonCount>7 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 7))
 					{
-						ClientManager::getAudio()->getOutput(1)->play();
-							handled=true;
+						ClientManager::getAudio()->getOutput(1)->play(true);
+						handled=true;
 					}
 					else if (buttonCount>8 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 8))
 					{
-						ClientManager::getAudio()->getOutput(2)->play();
-							handled=true;
+						ClientManager::getAudio()->getOutput(2)->play(true);
+						handled=true;
 					}
 					if (!handled)
 					{
@@ -186,5 +345,6 @@ namespace BAPSServerAssembly
 			}
 		}
 		static System::IO::Ports::SerialPort^ serialPort;
+		static BAPSControllerAssembly::BAPSController^ bapsController2;
 	};
 };

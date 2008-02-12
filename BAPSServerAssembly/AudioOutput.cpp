@@ -5,6 +5,7 @@
 #include "LibraryTrack.h"
 #include "TextEntry.h"
 #include "ClientInstance.h"
+#include "AsyncActionManager.h"
 
 using namespace BAPSServerAssembly;
 
@@ -58,7 +59,7 @@ AudioOutput::~AudioOutput()
 	notLoadedTrack = nullptr;
 }
 
-bool AudioOutput::play()
+bool AudioOutput::play(bool updateLog)
 {
 	/** Play succeeds iff channel is loaded and the channel accepts the play command **/
 	bool returnValue = false;
@@ -68,6 +69,11 @@ bool AudioOutput::play()
 		pChannel->SetPosition(loadedTrack->CuePosition);
 		if (pChannel->Play() == TRUE)
 		{
+			if (updateLog ||
+				CONFIG_GETINT(CONFIG_STOREPLAYBACKEVENTS) == CONFIG_PLAYBACKEVENT_STORE_ALL)
+			{
+				AsyncActionManager::logPlayEvent(channelNumber,loadedTrack);
+			}
 			setPlaying();
 			returnValue = true;
 			Command cmd = BAPSNET_PLAYBACK | BAPSNET_PLAY | (channelNumber & 0x3f);
@@ -126,6 +132,7 @@ bool AudioOutput::stop()
 			returnValue = true;
 			Command cmd = BAPSNET_PLAYBACK | BAPSNET_STOP | (channelNumber & 0x3f);
 			ClientManager::broadcast(cmd);
+			AsyncActionManager::logStopEvent(this->channelNumber, loadedTrack);
 		}
 	}
 	if (!returnValue)
@@ -187,13 +194,14 @@ bool AudioOutput::loadTrack(Track^ entry)
 
 		if (CONFIG_GETINTn(CONFIG_AUTOPLAY, channelNumber) != 0)
 		{
-			play();
+			play(false);
 		}
 		return true;
 	}
 	else
 	{
 		setNotLoaded();
+		notLoadedTrack->setEntryNumber(entry->getEntryNumber());
 		/** Make the client aware that loading failed **/
 		cmd = BAPSNET_PLAYBACK | BAPSNET_LOAD | (channelNumber & 0x3f);
 		ClientManager::broadcast( cmd,

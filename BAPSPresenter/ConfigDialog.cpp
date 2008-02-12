@@ -86,8 +86,10 @@ void ConfigDialog::updateUI()
 		current column.
 	**/
 	int yMultiplier = 0;
-	/** Are we generating the second column **/
-	bool secondColumn = false;
+	/** Which column are we generating **/
+	int columnNumber = 1;
+	/** The total number of columns **/
+	const int totalColumns = 3;
 	/** Lets save some time and wait until the end to draw all this! **/
 	this->SuspendLayout();
 	/** Increment the index and the multiplier each iteration (so that the multiplier
@@ -99,7 +101,7 @@ void ConfigDialog::updateUI()
 			WORK NEEDED: a better method of splitting controls into 2 columns, half
 			the options != half space on screen due to indexed options.
 		**/
-		if (!secondColumn && i-1 >= ops->Count/2)
+		if (columnNumber < (totalColumns+1) && i-1 >= columnNumber*(ops->Count/totalColumns))
 		{
 			/** Set the form height to the height of the first column **/
 			this->Height = (28+yOffset+(24*(yMultiplier)) + status->Height + 32);
@@ -108,12 +110,12 @@ void ConfigDialog::updateUI()
 			/** Move the save and cancel buttons to a sensible place **/
 			saveButton->Top = yOffset+(24*(yMultiplier))+4;
 			cancelButton->Top = yOffset+(24*(yMultiplier))+4;
-			/** New horizontal offset to represent column 2 **/
-			xOffset = 328;
+			/** New horizontal offset to represent next column **/
+			xOffset = columnNumber*328;
 			/** Back to the top row **/
 			yMultiplier = 0;
-			/** We are now on the second column **/
-			secondColumn = true;
+			/** We are now on the next **/
+			columnNumber++;
 			/** Set the offset to the same value as originally **/
 			yOffset = 16;
 		}
@@ -340,6 +342,7 @@ void ConfigDialog::updateUI()
 		saveButton->Top = yOffset+(24*(yMultiplier))+4;
 		cancelButton->Top = yOffset+(24*(yMultiplier))+4;
 	}
+	this->Width = totalColumns*328;
 	/** Show all the controls that have just been made **/
 	this->ResumeLayout(false);
 	this->PerformLayout();

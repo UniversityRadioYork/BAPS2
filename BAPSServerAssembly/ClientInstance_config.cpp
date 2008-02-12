@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "ClientInstance.h"
 #include "Exceptions.h"
+#include "BAPSController.h"
+#include "ConfigDescriptorString.h"
 
 using namespace BAPSServerAssembly;
 
@@ -71,6 +73,24 @@ END_ACTION_UNBLOCK();
 
 BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 {
+	/* Some configuration options have choices that change over time
+	 * and some have defaults. Update them here */
+	if (optionid == CONFIG_BAPSCONTROLLER2SERIAL)
+	{
+		ConfigStringChoices^ bapsController2Choices = gcnew ConfigStringChoices();
+		array<System::String^>^ serials = BAPSController::getBAPSController2Serials();
+		for (int i = 0 ; i < serials->Length ; i++)
+		{
+			bapsController2Choices->add(serials[i], serials[i], (i==0));
+		}
+		bapsController2Choices->add("none","none", (serials->Length==0));
+		safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_BAPSCONTROLLER2SERIAL])->setChoices(bapsController2Choices);
+		if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2DEVICECOUNT) < (serials->Length==0)?1:serials->Length)
+		{
+			CONFIG_SET(CONFIG_BAPSCONTROLLER2DEVICECOUNT, (serials->Length==0)?1:serials->Length);
+		}
+	}
+
 	/** 
 	 *  Should be called for any CONFIG_TYPE_CHOICE option
 	 *  returns all the possible choices the option can be.

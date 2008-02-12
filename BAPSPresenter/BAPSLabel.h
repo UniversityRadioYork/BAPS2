@@ -15,19 +15,16 @@ namespace BAPSPresenter
 		BAPSLabel()
 		{
 			this->SetStyle((System::Windows::Forms::ControlStyles)
-						   (System::Windows::Forms::ControlStyles::UserPaint |
-						   System::Windows::Forms::ControlStyles::AllPaintingInWmPaint |
-						   System::Windows::Forms::ControlStyles::DoubleBuffer |
-						   System::Windows::Forms::ControlStyles::Selectable |
-						   System::Windows::Forms::ControlStyles::StandardClick |
-						   System::Windows::Forms::ControlStyles::SupportsTransparentBackColor |
-						   System::Windows::Forms::ControlStyles::UserMouse),
+						  (System::Windows::Forms::ControlStyles::UserPaint|
+						  System::Windows::Forms::ControlStyles::SupportsTransparentBackColor|
+						   System::Windows::Forms::ControlStyles::OptimizedDoubleBuffer),
 						   true);
 			infoText = "";
 			this->TabStop = false;
 			highlightColor = System::Drawing::Color::Red;
 			isHighlighted = false;
 			backBrush = gcnew System::Drawing::Drawing2D::LinearGradientBrush(System::Drawing::Rectangle(0,0,10,10), System::Drawing::Color::Tan, System::Drawing::Color::Snow,System::Drawing::Drawing2D::LinearGradientMode::Vertical );
+			offScreen = gcnew System::Drawing::Bitmap(1,1);
 		}
 		property bool Highlighted
 		{
@@ -62,6 +59,7 @@ namespace BAPSPresenter
 			virtual void set(System::String^ value) override
 			{
 				__super::Text = value;
+				prepareGraphics();
 				this->Invalidate();
 			}
 		}
@@ -74,17 +72,21 @@ namespace BAPSPresenter
 			void set(System::String^ value)
 			{
 				infoText = value;
+				prepareGraphics();
 				this->Invalidate();
 			}
 		}
+
 	virtual void OnResize(System::EventArgs^ e) override;
 	virtual void OnPaint(System::Windows::Forms::PaintEventArgs^ e) override;
 	virtual void OnPaintBackground(System::Windows::Forms::PaintEventArgs^ e) override;
 	private:
+		void prepareGraphics();
 		void HighlightChanged();
 		System::Drawing::Drawing2D::LinearGradientBrush^ backBrush;
 		System::String^ infoText;
 		bool isHighlighted;
 		System::Drawing::Color highlightColor;
+		System::Drawing::Bitmap^ offScreen;
 	};
 }

@@ -1,39 +1,26 @@
 // Tinker.cpp : main project file.
 
 #include "stdafx.h"
-#include "fred.h"
-#include "BAPSParallelController.h"
 
 using namespace System;
+using namespace BAPSControllerAssembly;
 
-
-void handleData(System::Object^ sender, System::IO::Ports::SerialDataReceivedEventArgs^ e)
+void notify(System::String^ s, int number)
 {
-	int i;
-	for (i = 0 ; i < fred::serialPort->BytesToRead ; i++)
-	{
-		System::Byte data = fred::serialPort->ReadByte();
-		Console::WriteLine(System::String::Concat("Serial Data received: ", data.ToString()));
-	}
-	Console::WriteLine("");
+	Console::WriteLine("Down: "+s+" "+number.ToString());
 }
 
 int main(array<System::String ^> ^args)
 {
 	
-	try
-	{
-		fred::serialPort = gcnew System::IO::Ports::SerialPort("COM1", 2400, System::IO::Ports::Parity::None,8,System::IO::Ports::StopBits::One);
-		fred::serialPort->Open();
-		fred::serialPort->DataReceived += gcnew System::IO::Ports::SerialDataReceivedEventHandler(&handleData);
-	}
-	catch (System::IO::IOException^ e)
-	{
-	}
-	System::Threading::Thread::Sleep(60000);
-	fred::serialPort->Close();
-    
+	BAPSControllerAssembly::BAPSController^ bc = gcnew BAPSControllerAssembly::BAPSController();
+	array<System::String^>^ serialNumbers = bc->getSerialNumbers();
 
+	bc->run(gcnew BAPSControllerAssembly::SignalCallback(notify));
+	for (int i = 0 ; i < 100 ; i++)
+	{
+		System::Threading::Thread::Sleep(3000);
+	}
 	return 0;
 }
 

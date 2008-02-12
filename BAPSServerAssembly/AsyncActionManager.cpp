@@ -37,7 +37,7 @@ void AsyncActionManager::doActions(System::Object^)
 			for each (System::Collections::Generic::KeyValuePair<int,int>^ introInfo in introPositionsCopy)
 			{
 				int introPosition = introInfo->Value/1000;
-				recordlibDataAdapter->SelectCommand->CommandText = System::String::Concat("UPDATE track SET intro=interval '",
+				recordlibDataAdapter->SelectCommand->CommandText = System::String::Concat("UPDATE rec_track SET intro=interval '",
 																		introPosition.ToString(),
 																		"' WHERE trackid=",
 																		introInfo->Key.ToString());
@@ -80,7 +80,7 @@ void AsyncActionManager::doActions(System::Object^)
 				}
 			}
 		}
-		if (playCounts->Count > 0)
+		if (playbackEvents->Count > 0)
 		{
 			System::String^ connStr = System::String::Concat("Server=", CONFIG_GETSTR(CONFIG_DBSERVER), ";");
 			connStr = System::String::Concat(connStr, "Database=", CONFIG_GETSTR(CONFIG_BAPSDBNAME), ";");
@@ -94,8 +94,8 @@ void AsyncActionManager::doActions(System::Object^)
 			System::Data::DataSet^ updateDataset = gcnew System::Data::DataSet();
 			NpgsqlDataAdapter^ bapsDataAdapter = gcnew NpgsqlDataAdapter("",bapsDB);
 			asyncDataMutex->WaitOne();
-			System::Collections::Generic::List<PlayCountInfo^>^ playCountsCopy = playCounts;
-			playCounts = gcnew System::Collections::Generic::List<PlayCountInfo^>();
+			System::Collections::Generic::List<PlaybackEventInfo^>^ playbackEventsCopy = playbackEvents;
+			playbackEvents = gcnew System::Collections::Generic::List<PlaybackEventInfo^>();
 			asyncDataMutex->ReleaseMutex();
 
 			/** Clean up just for safety sake **/
@@ -117,6 +117,7 @@ void AsyncActionManager::doActions(System::Object^)
 				command->Parameters[0]->Value = CONFIG_GETSTR(CONFIG_SERVERID);
 				bapsDataAdapter->SelectCommand = command;
 
+				updateDataset->Reset();
 				bapsDataAdapter->Fill(updateDataset);
 				if (updateDataset->Tables->Count == 1 &&
 					updateDataset->Tables[0]->Rows->Count != 0)
@@ -125,7 +126,6 @@ void AsyncActionManager::doActions(System::Object^)
 				}
 				else
 				{
-					updateDataset->Reset();
 					bapsDataAdapter->SelectCommand->CommandText = System::String::Concat(
 																  "INSERT INTO baps_server "
 																  "(servername) "
@@ -134,29 +134,29 @@ void AsyncActionManager::doActions(System::Object^)
 																  "SELECT serverid "
 																  "FROM baps_server "
 																  "WHERE servername=:sname");
+					updateDataset->Reset();
 					bapsDataAdapter->Fill(updateDataset);
 					ServerID = updateDataset->Tables[0]->Rows[0][0]->ToString();
 				}
 				bapsDataAdapter->SelectCommand = oldCommand;
-				updateDataset->Reset();
-				for each (PlayCountInfo^ playCountUpdate in playCountsCopy)
+
+				for each (PlaybackEventInfo^ playbackEvent in playbackEventsCopy)
 				{
 					System::String^ AudioID = nullptr;
-
-					if (playCountUpdate->trackid != -1)
+					if (playbackEvent->trackid != -1)
 					{
 						bapsDataAdapter->SelectCommand->CommandText = System::String::Concat("SELECT audioid "
 																							 "FROM baps_audio "
 																							  "WHERE trackid='",
-																							  playCountUpdate->trackid.ToString(),
+																							  playbackEvent->trackid.ToString(),
 																							  "'");
+						updateDataset->Reset();
 						bapsDataAdapter->Fill(updateDataset);
 						if (updateDataset->Tables->Count == 1 &&
 							updateDataset->Tables[0]->Rows->Count != 0)
 						{
 							AudioID = updateDataset->Tables[0]->Rows[0][0]->ToString();
 						}
-						updateDataset->Reset();
 					}
 					if (AudioID == nullptr)
 					{
@@ -170,9 +170,10 @@ void AsyncActionManager::doActions(System::Object^)
 						command->Parameters->Add(gcnew NpgsqlParameter("fname", System::Data::DbType::AnsiString));
 
 						// Now, add a value to it and later execute the command as usual.
-						command->Parameters[0]->Value = playCountUpdate->filename;
+						command->Parameters[0]->Value = playbackEvent->filename;
 						bapsDataAdapter->SelectCommand = command;
 
+						updateDataset->Reset();
 						bapsDataAdapter->Fill(updateDataset);
 						if (updateDataset->Tables->Count == 1 &&
 							updateDataset->Tables[0]->Rows->Count != 0)
@@ -181,7 +182,7 @@ void AsyncActionManager::doActions(System::Object^)
 						}
 						else
 						{
-							if (playCountUpdate->trackid == -1)
+							if (playbackEvent->trackid == -1)
 							{
 								bapsDataAdapter->SelectCommand->CommandText = "INSERT INTO baps_audio"
 																			  "(filename) "
@@ -197,25 +198,51 @@ void AsyncActionManager::doActions(System::Object^)
 																			  "INSERT INTO baps_audio "
 																			  "(trackid,filename) "
 																			  "VALUES "
-																			  "('", playCountUpdate->trackid.ToString(),"',"
+																			  "('", playbackEvent->trackid.ToString(),"',"
 																			  ":fname);"
 																			  "SELECT audioid "
 																			  "FROM baps_audio "
-																			  "WHERE trackid='",playCountUpdate->trackid.ToString(),"'");
+																			  "WHERE trackid='",playbackEvent->trackid.ToString(),"'");
 							}
 							
+							updateDataset->Reset();
 							bapsDataAdapter->Fill(updateDataset);
 							System::Object^ fred  = updateDataset->Tables[0]->Rows[0][0];
 							AudioID = updateDataset->Tables[0]->Rows[0][0]->ToString();
 						}
 						bapsDataAdapter->SelectCommand = oldCommand;
 					}
-					bapsDataAdapter->SelectCommand->CommandText = System::String::Concat(
-																  "INSERT INTO baps_audiolog "
-																  "(serverid,audioid) "
-																  "VALUES "
-																  "('",ServerID, "','",AudioID,"')"); 
-					bapsDataAdapter->Fill(updateDataset);
+					if (playbackEvent->isStartEvent)
+					{
+						/** A start event **/
+						bapsDataAdapter->SelectCommand->CommandText = System::String::Concat(
+																	  "INSERT INTO baps_audiolog "
+																	  "(serverid,channel,audioid) "
+																	  "VALUES "
+																	  "('",ServerID, "','",playbackEvent->channel,"','",AudioID,"')"); 
+						
+						updateDataset->Reset();
+						bapsDataAdapter->Fill(updateDataset);
+						LogManager::write("playcommit on channel: "+playbackEvent->channel.ToString()+playbackEvent->filename+"--"+AudioID, LOG_INFO, LOG_DATABASE);
+					}
+					else
+					{
+						/** A stop event **/
+						bapsDataAdapter->SelectCommand->CommandText = System::String::Concat(
+																	  "UPDATE baps_audiolog "
+																	  "SET timestopped=now()"
+																	  "WHERE audiologid=(SELECT audiologid "
+																	  " 				 FROM baps_audiolog "
+																	  "				     WHERE serverid='",ServerID, "' "
+																	  "                  AND channel='",playbackEvent->channel,"' "
+																	  "                  AND audioid='",AudioID,"' "
+																	  "                  ORDER BY timeplayed DESC "
+																	  "                  LIMIT 1)");
+						
+						updateDataset->Reset();
+						bapsDataAdapter->Fill(updateDataset);
+						LogManager::write("stopcommit on channel: "+playbackEvent->channel.ToString()+playbackEvent->filename+"--"+AudioID, LOG_INFO, LOG_DATABASE);
+					}
 				}
 			}
 			catch (System::IO::IOException^ e)
@@ -300,9 +327,9 @@ void AsyncActionManager::addIntroPosition(int trackid, int introPosition)
 		}
 	}
 }
-void AsyncActionManager::incPlayCount(Track^ track)
+void AsyncActionManager::logPlayEvent(int channel, Track^ track)
 {
-	if (CONFIG_GETINT(CONFIG_STOREPLAYCOUNTS) == 1)
+	if (CONFIG_GETINT(CONFIG_STOREPLAYBACKEVENTS) != CONFIG_PLAYBACKEVENT_STORE_NONE)
 	{
 		asyncDataMutex->WaitOne();
 		try
@@ -310,12 +337,39 @@ void AsyncActionManager::incPlayCount(Track^ track)
 			if (track->getType() == BAPSNET_LIBRARYITEM)
 			{
 				LibraryTrack^ ltrack = safe_cast<LibraryTrack^>(track);
-				playCounts->Add(gcnew PlayCountInfo(ltrack->getFileLocation(),ltrack->TrackID));
+				playbackEvents->Add(gcnew PlaybackEventInfo(ltrack->getFileLocation(),channel, true,ltrack->TrackID));
 			}
 			else
 			{
 				
-				playCounts->Add(gcnew PlayCountInfo(track->getFileLocation()));
+			LogManager::write("playevent on channel: "+channel.ToString()+track->getFileLocation(), LOG_INFO, LOG_DATABASE);
+				playbackEvents->Add(gcnew PlaybackEventInfo(track->getFileLocation(), channel,true));
+			}
+		}
+		finally
+		{
+			asyncDataMutex->ReleaseMutex();
+		}
+	}
+}
+
+void AsyncActionManager::logStopEvent(int channel, Track^ track)
+{
+	if (CONFIG_GETINT(CONFIG_STOREPLAYBACKEVENTS) != CONFIG_PLAYBACKEVENT_STORE_NONE)
+	{
+		asyncDataMutex->WaitOne();
+		try
+		{
+			if (track->getType() == BAPSNET_LIBRARYITEM)
+			{
+				LibraryTrack^ ltrack = safe_cast<LibraryTrack^>(track);
+				playbackEvents->Add(gcnew PlaybackEventInfo(ltrack->getFileLocation(), channel, false, ltrack->TrackID));
+			}
+			else
+			{
+							LogManager::write("stopevent on channel: "+channel.ToString()+track->getFileLocation(), LOG_INFO, LOG_DATABASE);
+
+				playbackEvents->Add(gcnew PlaybackEventInfo(track->getFileLocation(), channel, false));
 			}
 		}
 		finally

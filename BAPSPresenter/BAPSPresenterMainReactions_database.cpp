@@ -5,12 +5,12 @@ using namespace BAPSPresenter;
 
 /** Just pass all the data through to the child form (if present) **/
 
-void BAPSPresenterMain::addLibraryResult(u32int index, System::String^ result)
+void BAPSPresenterMain::addLibraryResult(u32int index, int dirtyStatus, System::String^ result)
 {
 	if (recordLibrarySearch != nullptr)
 	{
-		MethodInvokerObjStr^ mi = gcnew MethodInvokerObjStr(recordLibrarySearch, &RecordLibrarySearch::add);
-		array<System::Object^>^ dd = gcnew array<System::Object^>(2) {(int)index, result};
+		MethodInvokerObjObjStr^ mi = gcnew MethodInvokerObjObjStr(recordLibrarySearch, &RecordLibrarySearch::add);
+		array<System::Object^>^ dd = gcnew array<System::Object^>(3) {(int)index, dirtyStatus, result};
 		recordLibrarySearch->Invoke(mi,dd);
 	}
 }

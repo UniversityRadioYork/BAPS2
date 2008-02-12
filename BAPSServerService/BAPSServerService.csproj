@@ -67,12 +67,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BAPSServerAssembly\BAPSServerAssembly.vcproj">
-      <Project>{B93BB821-0BB3-466C-9D53-7FECF8722F1D}</Project>
-      <Name>BAPSServerAssembly</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
@@ -94,6 +88,17 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="serverstate.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BAPSServerAssembly\BAPSServerAssembly.vcproj">
+      <Project>{B93BB821-0BB3-466C-9D53-7FECF8722F1D}</Project>
+      <Name>BAPSServerAssembly</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

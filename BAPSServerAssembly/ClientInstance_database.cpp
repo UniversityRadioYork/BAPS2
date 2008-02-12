@@ -9,7 +9,7 @@ using namespace BAPSServerAssembly;
  *  This file contains the implementations of all the MUSICLIB functionality
 **/
 
-bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ title, int trackid, int page)
+bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ title, bool mayBeDirty, int trackid, int page)
 {
 	bool byTrackid = (trackid != -1);
 	System::String^ connStr = System::String::Concat("Server=", CONFIG_GETSTR(CONFIG_DBSERVER), ";");
@@ -26,18 +26,18 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 
 	System::String^ sql;
 	/** Basic select statement WORK NEEDED: update this sql to be restricted to the correct level **/
-	sql = "SELECT track.recordid, track.trackid, track.title, track.artist, extract(epoch from track.intro) as intro FROM track INNER JOIN record USING (recordid) WHERE ";
+	sql = "SELECT rec_track.recordid, rec_track.trackid, rec_track.title, rec_track.artist, extract(epoch from rec_track.intro) as intro, rec_track.clean FROM rec_track INNER JOIN rec_record USING (recordid) WHERE ";
 
 	NpgsqlCommand^ command = gcnew NpgsqlCommand(sql, recordlibDB);
 	if (byTrackid)
 	{
-		sql = System::String::Concat(sql, " track.trackid='",trackid.ToString(),"' ");
+		sql = System::String::Concat(sql, " rec_track.trackid='",trackid.ToString(),"' ");
 	}
 	else
 	{
 		if (artist->Length !=0)
 		{
-			sql = System::String::Concat(sql, "LOWER(track.artist) LIKE LOWER('%'||:artist||'%')");
+			sql = System::String::Concat(sql, "LOWER(rec_track.artist) LIKE LOWER('%'||:artist||'%')");
 			command->Parameters->Add(gcnew NpgsqlParameter("artist", System::Data::DbType::AnsiString));
 			command->Parameters["artist"]->Value = artist;
 		}
@@ -47,15 +47,15 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 		}
 		if (title->Length !=0)
 		{
-			sql = System::String::Concat(sql, "LOWER(track.title) LIKE LOWER('%'||:title||'%')");
+			sql = System::String::Concat(sql, "LOWER(rec_track.title) LIKE LOWER('%'||:title||'%')");
 			command->Parameters->Add(gcnew NpgsqlParameter("title", System::Data::DbType::AnsiString));
 			command->Parameters["title"]->Value = title;
 		}
 	}
-	sql = sql + "AND track.digitised='t' ";
-	if (CONFIG_GETINT(CONFIG_CLEANMUSICONLY) == CONFIG_YES_VALUE)
+	sql = sql + "AND rec_track.digitised='t' ";
+	if (!mayBeDirty && CONFIG_GETINT(CONFIG_CLEANMUSICONLY) == CONFIG_YES_VALUE)
 	{
-		sql = sql + "AND track.clean='y' ";
+		sql = sql + "AND rec_track.clean='y' ";
 	}
 
 	sql = sql + "ORDER BY ";
@@ -68,16 +68,16 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 	switch (libraryOrderBy)
 	{
 	case BAPSNET_ORDER_BYARTIST:
-		sql = sql + "track.artist " + desasc + ", track.title";
+		sql = sql + "rec_track.artist " + desasc + ", rec_track.title";
 		break;
 	case BAPSNET_ORDER_BYTITLE:
-		sql = sql + "track.title " + desasc + ", track.artist";
+		sql = sql + "rec_track.title " + desasc + ", rec_track.artist";
 		break;
 	case BAPSNET_ORDER_BYDATEADDED:
-		sql = sql + "record.dateadded " + desasc;
+		sql = sql + "rec_record.dateadded " + desasc;
 		break;
 	case BAPSNET_ORDER_BYDATERELEASED:
-		sql = sql + "record.datereleased IS NULL, record.datereleased " + desasc;
+		sql = sql + "rec_record.datereleased IS NULL, rec_record.datereleased " + desasc;
 		break;
 	}
 	sql = sql + " OFFSET "+(page*200).ToString()+" LIMIT 200";
@@ -171,7 +171,7 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 		}
 
 		/** Create placeholders for all the columns that are of interest **/
-		System::Data::DataColumn ^title, ^artist;
+		System::Data::DataColumn ^title, ^artist, ^clean;
 
 		/** Find and assign the identifiers for each of the 'interesting' columns
 		 *  Must ensure that all these columns are included in the select!
@@ -188,6 +188,10 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 			{
 				artist = myTable->Columns[i];
 			}
+			else if (System::String::Compare(columnName, "clean") == 0)
+			{
+				clean = myTable->Columns[i];
+			}
 		}
 
 		try
@@ -202,6 +206,15 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 
 				System::String^ description = System::String::Concat(myRow[title]->ToString(), " - ", myRow[artist]->ToString());
 				Command cmd = BAPSNET_DATABASE | BAPSNET_LIBRARYRESULT | BAPSNET_DATABASE_MODEMASK;
+				System::String^ fo = myRow[clean]->ToString();
+				if (myRow[clean]->ToString()->Equals("n"))
+				{
+					cmd |= BAPSNET_LIBRARY_DIRTY;
+				}
+				else if (myRow[clean]->ToString()->Equals("u"))
+				{
+					cmd |= BAPSNET_LIBRARY_MAYBEDIRTY;
+				}
 				ClientManager::send(this, cmd, (u32int)i, description);
 			}
 		}
@@ -595,7 +608,7 @@ void ClientInstance::assignListing(int channel, int listingid)
 				else if (!myRow->IsNull(trackid))
 				{
 					/** Will return false if an error occurred **/
-					if (searchMusicLib(nullptr, nullptr, System::Convert::ToInt32(myRow[trackid]), 0))
+					if (searchMusicLib(nullptr, nullptr, true, System::Convert::ToInt32(myRow[trackid]), 0))
 					{
 						/** Will return null if the track is not in the library or no longer digitised **/
 						LibraryTrack^ tempTrack = getLibraryTrack(0);

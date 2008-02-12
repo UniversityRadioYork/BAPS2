@@ -8,8 +8,10 @@
 #include "ConfigDescriptorString.h"
 #include "ConfigDescriptorStringChoice.h"
 #include "utility.h"
+#include "BAPSController.h"
 
 using namespace BAPSServerAssembly;
+using namespace BAPSControllerAssembly;
 
 /**
  *  This class provides global configuration variables
@@ -100,6 +102,11 @@ void ConfigManager::initConfigManager()
 	ConfigIntChoices^ paddleChoices = gcnew ConfigIntChoices();
 	paddleChoices->add("Playback Controller", CONFIG_CONTROLLER_PLAYBACK);
 	paddleChoices->add("Text Controller", CONFIG_CONTROLLER_TEXTSCREEN, true);
+	/** The modes for storing play counts **/
+	ConfigIntChoices^ playbackEventChoices = gcnew ConfigIntChoices();
+	playbackEventChoices->add("Do not store", CONFIG_PLAYBACKEVENT_STORE_NONE, true);
+	playbackEventChoices->add("Button start only", CONFIG_PLAYBACKEVENT_STORE_BUTTONSTART);
+	playbackEventChoices->add("All play events", CONFIG_PLAYBACKEVENT_STORE_ALL);
 
 	configDescriptions = gcnew array<ConfigDescriptor^>(CONFIG_LASTOPTION);
 	configDescriptions[CONFIG_CHANNELCOUNT] = gcnew ConfigDescriptorInt("ChannelCount", "Number of Channels", 1, CA_RD_ONLY);
@@ -117,13 +124,13 @@ void ConfigManager::initConfigManager()
 	configDescriptions[CONFIG_CLIENTCONNLIMIT] = gcnew ConfigDescriptorInt("ClientConnectionLimit", "Maximum connected clients", 10, CA_SU_ONLY);
 	configDescriptions[CONFIG_DBSERVER] = gcnew ConfigDescriptorString("LibraryDBServer", "Database server name", "[set-me]", CA_SU_ONLY);
 	configDescriptions[CONFIG_DBPORT] = gcnew ConfigDescriptorString("LibraryDBPort", "Database server port", "5432", CA_SU_ONLY);
-	configDescriptions[CONFIG_LIBRARYDBNAME] = gcnew ConfigDescriptorString("LibraryDBDatabase", "Database name", "recordlib", CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSDBNAME] = gcnew ConfigDescriptorString("BAPSDBDatabase", "BAPS Database name", "baps", CA_SU_ONLY);
-	configDescriptions[CONFIG_DBUSERNAME] = gcnew ConfigDescriptorString("LibraryDBUsername", "Database Username", "web", CA_SU_ONLY);
-	configDescriptions[CONFIG_DBPASSWORD] = gcnew ConfigDescriptorString("LibraryDBPassword", "Database Password", "spider", CA_SU_ONLY);
+	configDescriptions[CONFIG_LIBRARYDBNAME] = gcnew ConfigDescriptorString("LibraryDBDatabase", "Library Database name", "[set-me]", CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSDBNAME] = gcnew ConfigDescriptorString("BAPSDBDatabase", "BAPS Database name", "[set-me]", CA_SU_ONLY);
+	configDescriptions[CONFIG_DBUSERNAME] = gcnew ConfigDescriptorString("LibraryDBUsername", "Database Username", "[set-me]", CA_SU_ONLY);
+	configDescriptions[CONFIG_DBPASSWORD] = gcnew ConfigDescriptorString("LibraryDBPassword", "Database Password", "[set-me]", CA_SU_ONLY);
 	configDescriptions[CONFIG_LIBRARYLOCATION] = gcnew ConfigDescriptorString("LibraryLocation", "Music Library location", "[set-me]", CA_SU_ONLY);
 	configDescriptions[CONFIG_SAVEINTROPOSITIONS] = gcnew ConfigDescriptorIntChoice("SaveIntroPositions", "Save Intro Positions", noYesChoices, CA_SU_ONLY);
-	configDescriptions[CONFIG_STOREPLAYCOUNTS] = gcnew ConfigDescriptorIntChoice("StorePlayCounts", "Store Play Counts", noYesChoices, CA_SU_ONLY);
+	configDescriptions[CONFIG_STOREPLAYBACKEVENTS] = gcnew ConfigDescriptorIntChoice("StorePlaybackEvents", "Store Playback Events", playbackEventChoices, CA_SU_ONLY);
 	configDescriptions[CONFIG_LOGNAME] = gcnew ConfigDescriptorString("LogName", "System Log Name", "BAPS Log", CA_SU_ONLY);
 	configDescriptions[CONFIG_LOGSOURCE] = gcnew ConfigDescriptorString("LogSource", "System Log Source", "BAPS", CA_SU_ONLY);
 	configDescriptions[CONFIG_SUPPORTADDRESS] = gcnew ConfigDescriptorString("SupportAddress", "Support E-mail address", "baps@ury.york.ac.uk", CA_RD_ONLY);
@@ -133,6 +140,27 @@ void ConfigManager::initConfigManager()
 	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCODE] = gcnew ConfigDescriptorInt("BAPSControllerButtonCode", CONFIG_BAPSCONTROLLERBUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSPADDLEMODE] = gcnew ConfigDescriptorIntChoice("BAPSPaddleMode", "BAPS Paddle Mode", paddleChoices ,CA_ANY);
 	configDescriptions[CONFIG_CLEANMUSICONLY] = gcnew ConfigDescriptorIntChoice("OnlyAllowCleanMusic", "Only Allow Clean Music", noYesChoices ,CA_SU_ONLY);
+
+	BAPSControllerAssembly::BAPSController^ bc = gcnew BAPSControllerAssembly::BAPSController();
+
+	ConfigStringChoices^ bapsController2Choices = gcnew ConfigStringChoices();
+	array<System::String^>^ serials = bc->getSerialNumbers();
+	for (int i = 0 ; i < serials->Length ; i++)
+	{
+		bapsController2Choices->add(serials[i], serials[i], (i==0));
+	}
+	bapsController2Choices->add("none","none", (serials->Length==0));
+	delete bc;
+
+	configDescriptions[CONFIG_BAPSCONTROLLER2ENABLED] = gcnew ConfigDescriptorIntChoice("BAPSController2Enabled", "BAPS USB Controller Enabled", noYesChoices, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLER2DEVICECOUNT] = gcnew ConfigDescriptorInt("BAPSController2DeviceCount", "BAPS USB Controller Device Count", (serials->Length==0)?1:serials->Length, CA_SU_ONLY);
+	CONFIG_SET(CONFIG_BAPSCONTROLLER2DEVICECOUNT, (serials->Length==0)?1:serials->Length);
+
+	/* work needed: force the device count */
+	configDescriptions[CONFIG_BAPSCONTROLLER2SERIAL] = gcnew ConfigDescriptorStringChoice("BAPSController2Serial", CONFIG_BAPSCONTROLLER2DEVICECOUNT, "Serial", bapsController2Choices, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLER2OFFSET] = gcnew ConfigDescriptorInt("BAPSController2Offset", CONFIG_BAPSCONTROLLER2DEVICECOUNT, "Signal Offset", 0, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLER2BUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSController2ButtonCount", "BAPS USB Controller Button Count", 6, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLER2BUTTONCODE] = gcnew ConfigDescriptorInt("BAPSController2ButtonCode", CONFIG_BAPSCONTROLLER2BUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
 
 	configErrors = gcnew array<System::String^>(CE_LASTERROR);
 	configErrors[CE_NOERROR] = "No error";
