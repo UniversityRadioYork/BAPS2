@@ -66,7 +66,6 @@ namespace BAPSServerAssembly
 				int mode = CONFIG_GETINT(CONFIG_BAPSPADDLEMODE);
 				int buttonCount = CONFIG_GETINT(CONFIG_BAPSCONTROLLER2BUTTONCOUNT);
 				int channelCount = ConfigManager::getChannelCount();
-				int i;
 				bool handled = false;
 
 				if (mode == CONFIG_CONTROLLER_PLAYBACK)

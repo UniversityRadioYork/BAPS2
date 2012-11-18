@@ -53,6 +53,9 @@ namespace BAPSPresenter {
 	private: System::Windows::Forms::Label^  enableTimersLabel;
 	protected: 
 	private: System::Windows::Forms::ListBox^  enableTimersList;
+	private: System::Windows::Forms::Button^  saveButton;
+	private: System::Windows::Forms::Button^  cancelButton;
+	private: System::Windows::Forms::ComboBox^  serverText;
 	private:
 		/** A handle to the main window **/
 		BAPSPresenterMain^ bapsPresenterMain;
@@ -64,11 +67,11 @@ namespace BAPSPresenter {
 	private: System::Windows::Forms::ListBox^  showVolumeList;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::TextBox^  portText;
-	private: System::Windows::Forms::TextBox^  serverText;
+
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label3;
-	private: BAPSPresenter::BAPSButton^  saveButton;
-	private: BAPSPresenter::BAPSButton^  cancelButton;
+
+
 	private: System::Windows::Forms::Label^  label4;
 	private: System::Windows::Forms::TextBox^  usernameText;
 
@@ -94,28 +97,29 @@ namespace BAPSPresenter {
 			this->showVolumeList = (gcnew System::Windows::Forms::ListBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->portText = (gcnew System::Windows::Forms::TextBox());
-			this->serverText = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->saveButton = (gcnew BAPSPresenter::BAPSButton());
-			this->cancelButton = (gcnew BAPSPresenter::BAPSButton());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->usernameText = (gcnew System::Windows::Forms::TextBox());
 			this->passwordText = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->enableTimersLabel = (gcnew System::Windows::Forms::Label());
 			this->enableTimersList = (gcnew System::Windows::Forms::ListBox());
+			this->saveButton = (gcnew System::Windows::Forms::Button());
+			this->cancelButton = (gcnew System::Windows::Forms::Button());
+			this->serverText = (gcnew System::Windows::Forms::ComboBox());
 			this->SuspendLayout();
 			// 
 			// showVolumeList
 			// 
-			this->showVolumeList->BackColor = System::Drawing::Color::SeaShell;
+			this->showVolumeList->BackColor = System::Drawing::SystemColors::Window;
 			this->showVolumeList->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->showVolumeList->Enabled = false;
 			this->showVolumeList->FormattingEnabled = true;
 			this->showVolumeList->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"Yes", L"No"});
-			this->showVolumeList->Location = System::Drawing::Point(114, 111);
+			this->showVolumeList->Location = System::Drawing::Point(114, 120);
 			this->showVolumeList->Name = L"showVolumeList";
-			this->showVolumeList->Size = System::Drawing::Size(160, 28);
+			this->showVolumeList->Size = System::Drawing::Size(125, 28);
 			this->showVolumeList->TabIndex = 4;
 			// 
 			// label1
@@ -131,28 +135,18 @@ namespace BAPSPresenter {
 			// 
 			// portText
 			// 
-			this->portText->BackColor = System::Drawing::Color::SeaShell;
+			this->portText->BackColor = System::Drawing::SystemColors::Window;
 			this->portText->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->portText->Location = System::Drawing::Point(114, 36);
+			this->portText->Location = System::Drawing::Point(114, 39);
 			this->portText->Name = L"portText";
-			this->portText->Size = System::Drawing::Size(160, 20);
+			this->portText->Size = System::Drawing::Size(125, 21);
 			this->portText->TabIndex = 1;
 			this->portText->Text = L"<not set>";
-			// 
-			// serverText
-			// 
-			this->serverText->BackColor = System::Drawing::Color::SeaShell;
-			this->serverText->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->serverText->Location = System::Drawing::Point(114, 12);
-			this->serverText->Name = L"serverText";
-			this->serverText->Size = System::Drawing::Size(160, 20);
-			this->serverText->TabIndex = 0;
-			this->serverText->Text = L"<not set>";
 			// 
 			// label2
 			// 
 			this->label2->BackColor = System::Drawing::Color::Transparent;
-			this->label2->Location = System::Drawing::Point(6, 36);
+			this->label2->Location = System::Drawing::Point(6, 39);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(88, 20);
 			this->label2->TabIndex = 10;
@@ -162,47 +156,17 @@ namespace BAPSPresenter {
 			// label3
 			// 
 			this->label3->BackColor = System::Drawing::Color::Transparent;
-			this->label3->Location = System::Drawing::Point(6, 107);
+			this->label3->Location = System::Drawing::Point(6, 116);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(88, 20);
 			this->label3->TabIndex = 9;
 			this->label3->Text = L"Show Volume:";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
-			// saveButton
-			// 
-			this->saveButton->BackColor = System::Drawing::Color::Transparent;
-			this->saveButton->DialogResult = System::Windows::Forms::DialogResult::None;
-			this->saveButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(0)));
-			this->saveButton->HighlightColor = System::Drawing::Color::Red;
-			this->saveButton->Highlighted = false;
-			this->saveButton->Location = System::Drawing::Point(121, 177);
-			this->saveButton->Name = L"saveButton";
-			this->saveButton->Size = System::Drawing::Size(68, 22);
-			this->saveButton->TabIndex = 5;
-			this->saveButton->Text = L"Save";
-			this->saveButton->Click += gcnew System::EventHandler(this, &LocalConfigDialog::saveButton_Click);
-			// 
-			// cancelButton
-			// 
-			this->cancelButton->BackColor = System::Drawing::Color::Transparent;
-			this->cancelButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->cancelButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(0)));
-			this->cancelButton->HighlightColor = System::Drawing::Color::Red;
-			this->cancelButton->Highlighted = false;
-			this->cancelButton->Location = System::Drawing::Point(194, 177);
-			this->cancelButton->Name = L"cancelButton";
-			this->cancelButton->Size = System::Drawing::Size(68, 22);
-			this->cancelButton->TabIndex = 6;
-			this->cancelButton->Text = L"Cancel";
-			this->cancelButton->Click += gcnew System::EventHandler(this, &LocalConfigDialog::cancelButton_Click);
-			// 
 			// label4
 			// 
 			this->label4->BackColor = System::Drawing::Color::Transparent;
-			this->label4->Location = System::Drawing::Point(6, 86);
+			this->label4->Location = System::Drawing::Point(6, 93);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(102, 20);
 			this->label4->TabIndex = 10;
@@ -211,21 +175,21 @@ namespace BAPSPresenter {
 			// 
 			// usernameText
 			// 
-			this->usernameText->BackColor = System::Drawing::Color::SeaShell;
+			this->usernameText->BackColor = System::Drawing::SystemColors::Window;
 			this->usernameText->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->usernameText->Location = System::Drawing::Point(114, 62);
+			this->usernameText->Location = System::Drawing::Point(114, 66);
 			this->usernameText->Name = L"usernameText";
-			this->usernameText->Size = System::Drawing::Size(160, 20);
+			this->usernameText->Size = System::Drawing::Size(125, 21);
 			this->usernameText->TabIndex = 2;
 			this->usernameText->Text = L"<not set>";
 			// 
 			// passwordText
 			// 
-			this->passwordText->BackColor = System::Drawing::Color::SeaShell;
+			this->passwordText->BackColor = System::Drawing::SystemColors::Window;
 			this->passwordText->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->passwordText->Location = System::Drawing::Point(114, 86);
+			this->passwordText->Location = System::Drawing::Point(114, 93);
 			this->passwordText->Name = L"passwordText";
-			this->passwordText->Size = System::Drawing::Size(160, 20);
+			this->passwordText->Size = System::Drawing::Size(125, 21);
 			this->passwordText->TabIndex = 3;
 			this->passwordText->Text = L"<not set>";
 			// 
@@ -233,7 +197,7 @@ namespace BAPSPresenter {
 			// 
 			this->label5->BackColor = System::Drawing::Color::Transparent;
 			this->label5->ForeColor = System::Drawing::SystemColors::ControlText;
-			this->label5->Location = System::Drawing::Point(6, 62);
+			this->label5->Location = System::Drawing::Point(6, 66);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(102, 20);
 			this->label5->TabIndex = 11;
@@ -243,7 +207,7 @@ namespace BAPSPresenter {
 			// enableTimersLabel
 			// 
 			this->enableTimersLabel->BackColor = System::Drawing::Color::Transparent;
-			this->enableTimersLabel->Location = System::Drawing::Point(6, 141);
+			this->enableTimersLabel->Location = System::Drawing::Point(6, 150);
 			this->enableTimersLabel->Name = L"enableTimersLabel";
 			this->enableTimersLabel->Size = System::Drawing::Size(88, 20);
 			this->enableTimersLabel->TabIndex = 9;
@@ -252,24 +216,58 @@ namespace BAPSPresenter {
 			// 
 			// enableTimersList
 			// 
-			this->enableTimersList->BackColor = System::Drawing::Color::SeaShell;
+			this->enableTimersList->BackColor = System::Drawing::SystemColors::Window;
 			this->enableTimersList->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->enableTimersList->FormattingEnabled = true;
 			this->enableTimersList->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"Yes", L"No"});
-			this->enableTimersList->Location = System::Drawing::Point(114, 145);
+			this->enableTimersList->Location = System::Drawing::Point(114, 154);
 			this->enableTimersList->Name = L"enableTimersList";
-			this->enableTimersList->Size = System::Drawing::Size(160, 28);
+			this->enableTimersList->Size = System::Drawing::Size(125, 28);
 			this->enableTimersList->TabIndex = 4;
+			// 
+			// saveButton
+			// 
+			this->saveButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->saveButton->Location = System::Drawing::Point(79, 188);
+			this->saveButton->Name = L"saveButton";
+			this->saveButton->Size = System::Drawing::Size(75, 23);
+			this->saveButton->TabIndex = 12;
+			this->saveButton->Text = L"Save";
+			this->saveButton->UseVisualStyleBackColor = true;
+			this->saveButton->Click += gcnew System::EventHandler(this, &LocalConfigDialog::saveButton_Click);
+			// 
+			// cancelButton
+			// 
+			this->cancelButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->cancelButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->cancelButton->Location = System::Drawing::Point(164, 188);
+			this->cancelButton->Name = L"cancelButton";
+			this->cancelButton->Size = System::Drawing::Size(75, 23);
+			this->cancelButton->TabIndex = 13;
+			this->cancelButton->Text = L"Cancel";
+			this->cancelButton->UseVisualStyleBackColor = true;
+			this->cancelButton->Click += gcnew System::EventHandler(this, &LocalConfigDialog::cancelButton_Click);
+			// 
+			// serverText
+			// 
+			this->serverText->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->serverText->FormattingEnabled = true;
+			this->serverText->Items->AddRange(gcnew cli::array< System::Object^  >(4) {L"localhost", L"studio1", L"studio2", L"production"});
+			this->serverText->Location = System::Drawing::Point(114, 12);
+			this->serverText->Name = L"serverText";
+			this->serverText->Size = System::Drawing::Size(125, 21);
+			this->serverText->TabIndex = 21;
+			this->serverText->Text = L"<not set>";
 			// 
 			// LocalConfigDialog
 			// 
 			this->AcceptButton = this->saveButton;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"$this.BackgroundImage")));
 			this->CancelButton = this->cancelButton;
-			this->ClientSize = System::Drawing::Size(287, 222);
+			this->ClientSize = System::Drawing::Size(246, 218);
 			this->ControlBox = false;
+			this->Controls->Add(this->serverText);
 			this->Controls->Add(this->cancelButton);
 			this->Controls->Add(this->saveButton);
 			this->Controls->Add(this->enableTimersList);
@@ -280,10 +278,11 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->portText);
 			this->Controls->Add(this->usernameText);
 			this->Controls->Add(this->label4);
-			this->Controls->Add(this->serverText);
 			this->Controls->Add(this->enableTimersLabel);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label3);
+			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->KeyPreview = true;

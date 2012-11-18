@@ -301,7 +301,7 @@ void ConfigDialog::updateUI()
 					tb->Tag = option;
 					/** Inform the option what control it is hosted in **/
 					option->setTextBoxControl(tb);
-					tb->Enabled = false;
+					tb->Enabled = true;
 					/** Show the control on the form **/
 					this->Controls->Add(tb);
 				}
@@ -324,7 +324,7 @@ void ConfigDialog::updateUI()
 					/** Disable the control to start with (so it cannot be set until the server
 						has sent its current value
 					**/
-					cb->Enabled = false;
+					cb->Enabled = true;
 					/** Show the control on the form **/
 					this->Controls->Add(cb);
 				}

@@ -168,7 +168,6 @@ namespace BAPSPresenter {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(1026, 735);
 			this->ControlBox = false;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;

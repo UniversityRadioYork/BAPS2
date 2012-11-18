@@ -10,9 +10,10 @@ void BAPSListBox::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
     // This technique prevents flicker.
 	System::Drawing::Graphics^ gOffScreen = System::Drawing::Graphics::FromImage(offScreen);
 	System::Drawing::Rectangle rect = this->ClientRectangle;
-	rect.Width-=2;
+	if (rect.Width > 2) {rect.Width-=2;} //If added 270412 By lpw
 	rect.Height = ((items->Count<scroll->IndexAtTop+DrawCount)?items->Count:scroll->IndexAtTop+DrawCount);
 	gOffScreen->FillRectangle(System::Drawing::Brushes::LightGray, rect);
+	if (rect.Height < 0) rect.Height = 0; //Line added 270412 By lpw
 	rect.Y = rect.Height;
 	rect.Height = this->ClientRectangle.Height-rect.Height;
 	if (rect.Height > 0)
@@ -39,11 +40,14 @@ void BAPSListBox::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 		{
 			brush = System::Drawing::Brushes::AntiqueWhite;
 		}
+		//Altered clientWidth specification 270412 By lpw
+		int clientWidth = this->ClientSize.Width - (scroll->Visible ? scroll->Width : 2)-1;
+		if (clientWidth < 0) clientWidth = 0;
 		rect = System::Drawing::Rectangle(0,
 										  itemTop,
 										  // If the scroll bar is visible, subtract the scrollbar width
 										  // otherwise subtract 2 for the width of the rectangle
-										  this->ClientSize.Width - (scroll->Visible ? scroll->Width : 2)-1,
+										  clientWidth,
 										  ItemHeight-1);
 		gOffScreen->FillRectangle(brush,rect);
 
@@ -56,9 +60,12 @@ void BAPSListBox::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 	if (this->Focused)
 	{
 		System::Drawing::Rectangle rect = this->ClientRectangle;
-		rect.Height-=3;
+		//If added 270412 By lpw
+		if (rect.Height > 3) {
+			rect.Height-=3;
+		}
 		
-		rect.Width-= (scroll->Visible)?2:3;
+		if (rect.Width > 2) rect.Width-= (scroll->Visible)?2:3; //If added 270412 By lpw
 		if (scroll->Visible)
 		{
 			rect.Width -= scroll->Width;
@@ -66,8 +73,8 @@ void BAPSListBox::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 		gOffScreen->DrawRectangle(System::Drawing::Pens::DarkOrange, rect);
 		rect.X++;
 		rect.Y++;
-		rect.Height-=2;
-		rect.Width-=2;
+		if (rect.Height > 2) rect.Height-=2; //If added 270412 By lpw
+		if (rect.Width > 2) rect.Width-=2; //If added 270412 By lpw
 		gOffScreen->DrawRectangle(System::Drawing::Pens::DarkOrange, rect);
 	}
 

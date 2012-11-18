@@ -151,7 +151,7 @@ array<System::Byte>^ ClientSocket::receive(int count)
 				/** Re-throw exception if it is not just notifying the socket would have blocked
 				 *  if it were in blocking mode
 				**/
-				throw e;
+				//throw e;
 			}
 			/** We are too fast or there is no data waiting **/
 			System::Threading::Thread::Sleep(1);

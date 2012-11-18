@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BAPSScrollBar.h"
+//#include "BAPSScrollBar.h"
 #include "decodeStructs.h"
 
 using namespace System;
@@ -77,10 +77,10 @@ namespace BAPSPresenter
 		[ReflectionPermission(SecurityAction::Demand, Flags=ReflectionPermissionFlag::MemberAccess)]
 		virtual void PreFilterProperties( System::Collections::IDictionary^ properties ) override
 		{
-			properties->Remove("LoadedIndex");
-			properties->Remove("LoadedTextIndex");
-			properties->Remove("OpLock");
-			properties->Remove("LastIndexClicked");
+			//properties->Remove("LoadedIndex");
+			//properties->Remove("LoadedTextIndex");
+			//properties->Remove("OpLock");
+			//properties->Remove("LastIndexClicked");
 		}
 	};
 
@@ -88,6 +88,7 @@ namespace BAPSPresenter
 	ref class TrackList : System::Windows::Forms::Control
     {
 	public:
+		System::Collections::Generic::List<EntryInfo^>^ items;
         TrackList()
         {
 			this->SetStyle((System::Windows::Forms::ControlStyles)
@@ -97,8 +98,8 @@ namespace BAPSPresenter
 						   System::Windows::Forms::ControlStyles::UserMouse),
 						   true);
 
-			opLock = gcnew System::Threading::Mutex();
-			itemHeight         = -1;
+			//opLock = gcnew System::Threading::Mutex();
+			itemHeight = -1;
 			hoverIndex = -1;
 			fromIndex = -1;
 			selectedIndex = -1;
@@ -106,10 +107,17 @@ namespace BAPSPresenter
 			lastIndexClicked = -1;
 			selectedTextEntry = nullptr;
 			addTo = false;
-			scroll = gcnew BAPSScrollBar();
+			
+			/*scroll = gcnew BAPSScrollBar();
 			scroll->Parent = this;
             scroll->Visible     = false;
-			scroll->TopIndexChanged += gcnew System::EventHandler(this, &TrackList::ScrollValueChanged);
+			scroll->TopIndexChanged += gcnew System::EventHandler(this, &TrackList::ScrollValueChanged);*/
+			
+			scroll = gcnew System::Windows::Forms::VScrollBar();
+			scroll->Parent = this;
+            scroll->Visible = false;
+			scroll->Scroll += gcnew System::Windows::Forms::ScrollEventHandler(this, &TrackList::ScrollValueChanged);
+			
 			this->Controls->Add(scroll);
 			items = gcnew System::Collections::Generic::List<EntryInfo^>();
 			this->AllowDrop = true;
@@ -133,24 +141,26 @@ namespace BAPSPresenter
 		}
 		void addTrack(int type, System::String^ descr)
 		{
-			opLock->WaitOne();
+			//opLock->WaitOne();
 			items->Add(gcnew EntryInfo(type,descr));
-			opLock->ReleaseMutex();
+			//opLock->ReleaseMutex();
 			showHideScrollBar();
 			this->Invalidate();
 		}
 		void removeTrack(int _index)
 		{
-			opLock->WaitOne();
+			//opLock->WaitOne();
 			if (_index == items->IndexOf(selectedTextEntry))
 			{
 				selectedTextEntry = nullptr;
 			}
 			int viewableItemCount = this->ClientSize.Height / ItemHeight;
 			// fix the scroll bar 
-			if (items->Count-_index < viewableItemCount && scroll->IndexAtTop != 0)
+			//if (items->Count-_index < viewableItemCount && scroll->IndexAtTop != 0)
+			if (items->Count-_index < viewableItemCount && scroll->Value != 0)
 			{
-				scroll->IndexAtTop -=1;
+				//scroll->IndexAtTop -=1;
+				scroll->Value -= 1;
 			}
 			items->RemoveAt(_index);
 			if (LoadedIndex == _index)
@@ -161,13 +171,13 @@ namespace BAPSPresenter
 			{
 				LoadedIndex -=1;
 			}
-			opLock->ReleaseMutex();
+			//opLock->ReleaseMutex();
 			showHideScrollBar();
 			this->Invalidate();
 		}
 		void moveTrack(int oldIndex, int newIndex)
 		{
-			opLock->WaitOne();
+			//opLock->WaitOne();
 			EntryInfo^ temp = items[oldIndex];
 			items->RemoveAt(oldIndex);
 			items->Insert(newIndex,temp);
@@ -185,17 +195,17 @@ namespace BAPSPresenter
 			{
 				LoadedIndex +=1;
 			}
-			opLock->ReleaseMutex();
+			//opLock->ReleaseMutex();
 			this->Invalidate();
 		}
 		void clearTrackList()
 		{
-			opLock->WaitOne();
+			//opLock->WaitOne();
 			items->Clear();
 			selectedIndex = -1;
 			pendingLoadRequest = false;
 			selectedTextEntry = nullptr;
-			opLock->ReleaseMutex();
+			//opLock->ReleaseMutex();
 			showHideScrollBar();
 			this->Invalidate();
 		}
@@ -236,7 +246,7 @@ namespace BAPSPresenter
 
             void set(int value)
             {
-				opLock->WaitOne();
+				//opLock->WaitOne();
 				if (value < items->Count && value >= 0)
 				{
 					if (items[value]->type != BAPSNET_TEXTITEM)
@@ -247,14 +257,14 @@ namespace BAPSPresenter
 						this->Invalidate();
 					}
 				}
-				opLock->ReleaseMutex();
+				//opLock->ReleaseMutex();
 			}
         }
         property int LoadedTextIndex
         {
             void set(int value)
             {
-				opLock->WaitOne();
+				//opLock->WaitOne();
 				if (selectedTextEntry!=nullptr)
 				{
 					selectedTextEntry->isSelectedTextItem = false;
@@ -266,16 +276,16 @@ namespace BAPSPresenter
 					items[value]->isSelectedTextItem = true;
 				}
 				this->Invalidate();
-				opLock->ReleaseMutex();
+				//opLock->ReleaseMutex();
 			}
         }
-		property System::Threading::Mutex^ OpLock
+		/*property System::Threading::Mutex^ OpLock
 		{
 			System::Threading::Mutex^ get()
 			{
 				return opLock;
 			}
-		}
+		}*/
 		property int TrackCount
 		{
 			int get()
@@ -289,15 +299,19 @@ namespace BAPSPresenter
         // index, then set the last visible index to be the requested index.
         void EnsureVisible(int index)
         {
-            if(index < scroll->IndexAtTop)
+            //if(index < scroll->IndexAtTop)
+            if(index < scroll->Value)
             {
-                scroll->IndexAtTop = index;
-				this->Refresh();
+                //scroll->IndexAtTop = index;
+				scroll->Value = index;
+				this->Invalidate();
             }
-            else if(index >= scroll->IndexAtTop + DrawCount)
+            //else if(index >= scroll->IndexAtTop + DrawCount)
+            else if(index >= scroll->Value + DrawCount)
             {
-                scroll->IndexAtTop = index - DrawCount+1;
-                this->Refresh();
+                //scroll->IndexAtTop = index - DrawCount+1;
+                scroll->Value = index - DrawCount+1;
+                this->Invalidate();
             }
         }
 
@@ -313,13 +327,13 @@ namespace BAPSPresenter
 		virtual void OnMouseWheel(System::Windows::Forms::MouseEventArgs^ e) override;
 		virtual void OnGotFocus(System::EventArgs^e)override
 		{
-			this->Invalidate();
+			//this->Invalidate();
 		}
 		virtual bool ProcessDialogKey(System::Windows::Forms::Keys keyData) override;
 		bool HandleKey(System::Windows::Forms::Keys keyData);
 		virtual void OnLostFocus(System::EventArgs^ e)override
 		{
-			this->Invalidate();
+			//this->Invalidate();
 		}
 		// Draws the external border around the control.
 		virtual void OnPaintBackground(System::Windows::Forms::PaintEventArgs^ e) override
@@ -327,9 +341,9 @@ namespace BAPSPresenter
 			e->Graphics->DrawRectangle(System::Drawing::Pens::LightGray, 0, 0, ClientSize.Width-1, ClientSize.Height - 1);
         }
 
-		void ScrollValueChanged(System::Object^ o, System::EventArgs^ e)
+		void ScrollValueChanged(System::Object^ o, System::Windows::Forms::ScrollEventArgs^ e)
         {
-            this->Refresh();
+            this->Invalidate();
         }
 
         property int ItemHeight
@@ -375,21 +389,25 @@ namespace BAPSPresenter
 				if(items->Count > viewableItemCount)
 				{
 					scroll->Visible = true;
-					scroll->ViewableItems = viewableItemCount;
+					//scroll->ViewableItems = viewableItemCount;
+					//scroll->Maximum = viewableItemCount-;
 					offScreen = gcnew System::Drawing::Bitmap(this->ClientSize.Width - SCROLL_WIDTH - 1, this->ClientSize.Height - 2);
 				}
 				else
 				{
 					scroll->Visible = false;
-					scroll->IndexAtTop = 0;
-					scroll->ViewableItems = items->Count;
+					//scroll->IndexAtTop = 0;
+					//scroll->ViewableItems = items->Count;
+					scroll->Value = 0;
 					offScreen = gcnew System::Drawing::Bitmap(this->ClientSize.Width - 1, this->ClientSize.Height - 2);
 				}
-				scroll->TotalItems = items->Count;
+				//scroll->TotalItems = items->Count;
+				scroll->Maximum = (items->Count - 14 > 0) ? items->Count - 14 : items->Count;
 			}
 			int indexFromY(int y)
 			{
-				int index = scroll->IndexAtTop + (y / ItemHeight);
+				//int index = scroll->IndexAtTop + (y / ItemHeight);
+				int index = scroll->Value + (y / ItemHeight);
 				if (index >= items->Count)
 				{
 					return -1;
@@ -411,9 +429,9 @@ namespace BAPSPresenter
 			int savedFromIndex;
 			bool addTo;
 			System::Drawing::Bitmap^ offScreen;
-			System::Collections::Generic::List<EntryInfo^>^ items;
-			BAPSScrollBar^ scroll;
-			System::Threading::Mutex^ opLock;
+			//BAPSScrollBar^ scroll;
+			System::Windows::Forms::VScrollBar^ scroll;
+			//System::Threading::Mutex^ opLock;
     };
 
 };

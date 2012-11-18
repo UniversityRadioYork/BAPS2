@@ -32,7 +32,7 @@ namespace BAPSPresenter {
 			pCompileDateText->Text = __DATE__;
 			pCompileTimeText->Text = __TIME__;
 			pVersionText->Text = System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version->ToString();
-			pAuthorText->Text = L"Matthew Fortune\nUI based on work by:\nMark Fenton";
+			pAuthorText->Text = L"Matthew Fortune\nUI based on work by:\nMark Fenton\nSimplifications by:\nAlex Williams";
 
 		}
 		void serverVersion(System::String^ version, System::String^ date, System::String^ time, System::String^ author)
@@ -287,7 +287,6 @@ namespace BAPSPresenter {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(284, 384);
 			this->Controls->Add(this->presenterGroup);
 			this->Controls->Add(this->mailTitle);

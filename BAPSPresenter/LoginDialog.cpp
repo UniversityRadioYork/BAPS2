@@ -13,6 +13,11 @@ System::Void LoginDialog::loginButton_Click(System::Object ^  sender, System::Ev
 	}
 	else
 	{
+	if (serverText->Text->Equals("studio1")) serverText->Text = "10.0.0.50";
+	else if (serverText->Text->Equals("studio2")) serverText->Text = "10.0.0.40";
+	else if (serverText->Text->Equals("production")) serverText->Text = "10.0.0.14";
+	else if (serverText->Text->Equals("localhost")) serverText->Text = "127.0.0.1";
+
 		/** Increment the attempt counter so the first attempt is the only
 			one that causes a connection to the server to be made, (unless
 			the server details are altered
@@ -63,15 +68,3 @@ System::Void LoginDialog::Textbox_Enter(System::Object^  sender, System::EventAr
 	tb->SelectAll();
 }
 
-System::Void LoginDialog::expandButton_Click(System::Object^  sender, System::EventArgs^  e)
-{
-	serverDetails->Visible = !serverDetails->Visible;
-	if (serverDetails->Visible)
-	{
-		expandButton->Text = "-";
-	}
-	else
-	{
-		expandButton->Text = "+";
-	}
-}

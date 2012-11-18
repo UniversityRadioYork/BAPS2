@@ -93,7 +93,7 @@ namespace BAPSPresenter {
 			// 
 			// textText
 			// 
-			this->textText->BackColor = System::Drawing::Color::SeaShell;
+			this->textText->BackColor = System::Drawing::SystemColors::Window;
 			this->textText->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->textText->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));

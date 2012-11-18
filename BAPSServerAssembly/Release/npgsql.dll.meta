@@ -1,0 +1,647 @@
+  Npgsql.Design.ConnectionStringEditorForm.resources - Embedded, ContainedInManifestFile, 
+  NpgsqlTypes.NpgsqlTypesHelper.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlClosedState.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlCommand.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlCommandBuilder.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlConnectedState.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlConnection.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlConnectionString.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlEventLog.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlException.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlParameter.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlParameterCollection.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlReadyState.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlState.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlTransaction.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.PGUtil.resources - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlCommand.bmp - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlConnection.bmp - Embedded, ContainedInManifestFile, 
+  Npgsql.NpgsqlDataAdapter.bmp - Embedded, ContainedInManifestFile, 
+Assembly Npgsql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7: 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=SHA1, flags=None
+Assembly System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=SHA1, flags=None
+Assembly Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756: 
+	hash=SHA1, flags=None
+Class Npgsql.NpgsqlCommand: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.ComponentModel.Component
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, Npgsql.NpgsqlConnection): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, Npgsql.NpgsqlConnection, Npgsql.NpgsqlTransaction): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Data.IDbCommand
+    System.ICloneable
+  Properties:
+    System.String CommandText 'get set' : 
+    Int32 CommandTimeout 'get set' : 
+    System.Data.CommandType CommandType 'get set' : 
+    Npgsql.NpgsqlConnection Connection 'get set' : 
+    Npgsql.NpgsqlParameterCollection Parameters 'get ' : 
+    Npgsql.NpgsqlTransaction Transaction 'get set' : 
+    System.Data.UpdateRowSource UpdatedRowSource 'get set' : 
+    Int64 LastInsertedOID 'get ' : 
+  Methods:
+    get_CommandText(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_CommandText(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_CommandTimeout(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_CommandTimeout(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_CommandType(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_CommandType(CommandType): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Connection(): PrivateScope, Public, HideBySig, SpecialName
+    set_Connection(NpgsqlConnection): PrivateScope, Public, HideBySig, SpecialName
+    get_Parameters(): PrivateScope, Public, HideBySig, SpecialName
+    get_Transaction(): PrivateScope, Public, HideBySig, SpecialName
+    set_Transaction(NpgsqlTransaction): PrivateScope, Public, HideBySig, SpecialName
+    get_UpdatedRowSource(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_UpdatedRowSource(UpdateRowSource): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_LastInsertedOID(): PrivateScope, Public, HideBySig, SpecialName
+    Cancel(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Clone(): PrivateScope, Public, HideBySig
+    CreateParameter(): PrivateScope, Public, HideBySig
+    ExecuteNonQuery(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    ExecuteReader(): PrivateScope, Public, HideBySig
+    ExecuteReader(CommandBehavior): PrivateScope, Public, HideBySig
+    ExecuteScalar(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Prepare(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class Npgsql.NpgsqlCommandBuilder: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.ComponentModel.Component
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Npgsql.NpgsqlDataAdapter): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Npgsql.NpgsqlDataAdapter DataAdapter 'get set' : 
+    System.String QuotePrefix 'get set' : 
+    System.String QuoteSuffix 'get set' : 
+  Methods:
+    get_DataAdapter(): PrivateScope, Public, HideBySig, SpecialName
+    set_DataAdapter(NpgsqlDataAdapter): PrivateScope, Public, HideBySig, SpecialName
+    get_QuotePrefix(): PrivateScope, Public, HideBySig, SpecialName
+    set_QuotePrefix(String): PrivateScope, Public, HideBySig, SpecialName
+    get_QuoteSuffix(): PrivateScope, Public, HideBySig, SpecialName
+    set_QuoteSuffix(String): PrivateScope, Public, HideBySig, SpecialName
+    DeriveParameters(NpgsqlCommand): PrivateScope, Public, Static, HideBySig
+    GetInsertCommand(DataRow): PrivateScope, Public, HideBySig
+    GetUpdateCommand(DataRow): PrivateScope, Public, HideBySig
+    GetDeleteCommand(DataRow): PrivateScope, Public, HideBySig
+    RefreshSchema(): PrivateScope, Public, HideBySig
+Class Npgsql.NoticeEventHandler: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Object, NpgsqlNoticeEventArgs): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    BeginInvoke(Object, NpgsqlNoticeEventArgs, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Npgsql.NotificationEventHandler: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Object, NpgsqlNotificationEventArgs): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    BeginInvoke(Object, NpgsqlNotificationEventArgs, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Npgsql.NpgsqlConnection: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.ComponentModel.Component
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Data.IDbConnection
+    System.ICloneable
+  Properties:
+    System.String ConnectionString 'get set' : 
+    System.String Host 'get ' : 
+    Int32 Port 'get ' : 
+    Boolean SSL 'get ' : 
+    Int32 ConnectionTimeout 'get ' : 
+    Int32 ConnectionLifeTime 'get ' : 
+    System.String Database 'get ' : 
+    Boolean SyncNotification 'get ' : 
+    System.Data.ConnectionState State 'get ' : 
+    Npgsql.ServerVersion ServerVersion 'get ' : 
+    Npgsql.ProtocolVersion BackendProtocolVersion 'get ' : 
+  Events:
+    Npgsql.NoticeEventHandler Notice: 
+    Npgsql.NotificationEventHandler Notification: 
+    Mono.Security.Protocol.Tls.CertificateSelectionCallback CertificateSelectionCallback: 
+    Mono.Security.Protocol.Tls.CertificateValidationCallback CertificateValidationCallback: 
+    Mono.Security.Protocol.Tls.PrivateKeySelectionCallback PrivateKeySelectionCallback: 
+  Methods:
+    add_Notice(NoticeEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_Notice(NoticeEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    add_Notification(NotificationEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_Notification(NotificationEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    add_CertificateSelectionCallback(CertificateSelectionCallback): PrivateScope, Public, HideBySig, SpecialName
+    remove_CertificateSelectionCallback(CertificateSelectionCallback): PrivateScope, Public, HideBySig, SpecialName
+    add_CertificateValidationCallback(CertificateValidationCallback): PrivateScope, Public, HideBySig, SpecialName
+    remove_CertificateValidationCallback(CertificateValidationCallback): PrivateScope, Public, HideBySig, SpecialName
+    add_PrivateKeySelectionCallback(PrivateKeySelectionCallback): PrivateScope, Public, HideBySig, SpecialName
+    remove_PrivateKeySelectionCallback(PrivateKeySelectionCallback): PrivateScope, Public, HideBySig, SpecialName
+    get_ConnectionString(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_ConnectionString(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Host(): PrivateScope, Public, HideBySig, SpecialName
+    get_Port(): PrivateScope, Public, HideBySig, SpecialName
+    get_SSL(): PrivateScope, Public, HideBySig, SpecialName
+    get_ConnectionTimeout(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_ConnectionLifeTime(): PrivateScope, Public, HideBySig, SpecialName
+    get_Database(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_SyncNotification(): PrivateScope, Public, HideBySig, SpecialName
+    get_State(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_ServerVersion(): PrivateScope, Public, HideBySig, SpecialName
+    get_BackendProtocolVersion(): PrivateScope, Public, HideBySig, SpecialName
+    BeginTransaction(): PrivateScope, Public, HideBySig
+    BeginTransaction(IsolationLevel): PrivateScope, Public, HideBySig
+    Open(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    ChangeDatabase(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Close(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    CreateCommand(): PrivateScope, Public, HideBySig
+    Clone(): PrivateScope, Public, HideBySig
+    GetSchema(): PrivateScope, Public, HideBySig
+    GetSchema(String): PrivateScope, Public, HideBySig
+    GetSchema(String, String[]): PrivateScope, Public, HideBySig
+    ClearPool(): PrivateScope, Public, HideBySig
+    ClearAllPools(): PrivateScope, Public, HideBySig
+Class Npgsql.NpgsqlRowUpdatedEventHandler: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Object, NpgsqlRowUpdatedEventArgs): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    BeginInvoke(Object, NpgsqlRowUpdatedEventArgs, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Npgsql.NpgsqlRowUpdatingEventHandler: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Object, NpgsqlRowUpdatingEventArgs): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    BeginInvoke(Object, NpgsqlRowUpdatingEventArgs, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Npgsql.NpgsqlDataAdapter: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Data.Common.DbDataAdapter
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Npgsql.NpgsqlCommand): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, Npgsql.NpgsqlConnection): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Npgsql.NpgsqlCommand DeleteCommand 'get set' : 
+    Npgsql.NpgsqlCommand SelectCommand 'get set' : 
+    Npgsql.NpgsqlCommand UpdateCommand 'get set' : 
+    Npgsql.NpgsqlCommand InsertCommand 'get set' : 
+  Events:
+    Npgsql.NpgsqlRowUpdatedEventHandler RowUpdated: 
+    Npgsql.NpgsqlRowUpdatingEventHandler RowUpdating: 
+  Methods:
+    add_RowUpdated(NpgsqlRowUpdatedEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_RowUpdated(NpgsqlRowUpdatedEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    add_RowUpdating(NpgsqlRowUpdatingEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_RowUpdating(NpgsqlRowUpdatingEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    get_DeleteCommand(): PrivateScope, Public, HideBySig, SpecialName
+    set_DeleteCommand(NpgsqlCommand): PrivateScope, Public, HideBySig, SpecialName
+    get_SelectCommand(): PrivateScope, Public, HideBySig, SpecialName
+    set_SelectCommand(NpgsqlCommand): PrivateScope, Public, HideBySig, SpecialName
+    get_UpdateCommand(): PrivateScope, Public, HideBySig, SpecialName
+    set_UpdateCommand(NpgsqlCommand): PrivateScope, Public, HideBySig, SpecialName
+    get_InsertCommand(): PrivateScope, Public, HideBySig, SpecialName
+    set_InsertCommand(NpgsqlCommand): PrivateScope, Public, HideBySig, SpecialName
+Class NpgsqlRowUpdatingEventArgs: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Data.Common.RowUpdatingEventArgs
+    Void .ctor(System.Data.DataRow, System.Data.IDbCommand, System.Data.StatementType, System.Data.Common.DataTableMapping): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class NpgsqlRowUpdatedEventArgs: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Data.Common.RowUpdatedEventArgs
+    Void .ctor(System.Data.DataRow, System.Data.IDbCommand, System.Data.StatementType, System.Data.Common.DataTableMapping): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Npgsql.NpgsqlDataReader: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Interfaces:
+    System.Data.IDataReader
+    System.IDisposable
+    System.Data.IDataRecord
+    System.Collections.IEnumerable
+  Properties:
+    Int32 Depth 'get ' : 
+    Boolean IsClosed 'get ' : 
+    Int32 RecordsAffected 'get ' : 
+    Boolean HasRows 'get ' : 
+    Int32 FieldCount 'get ' : 
+    System.Object Item [Int32] 'get ' : 
+    System.Object Item [System.String] 'get ' : 
+  Events:
+    System.EventHandler ReaderClosed: 
+  Methods:
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    get_Depth(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_IsClosed(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_RecordsAffected(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_HasRows(): PrivateScope, Public, HideBySig, SpecialName
+    Close(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    add_ReaderClosed(EventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_ReaderClosed(EventHandler): PrivateScope, Public, HideBySig, SpecialName
+    NextResult(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Read(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetSchemaTable(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    get_FieldCount(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    GetName(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetDataTypeOID(Int32): PrivateScope, Public, HideBySig
+    GetDataTypeName(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetFieldType(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetFieldDbType(Int32): PrivateScope, Public, HideBySig
+    GetFieldNpgsqlDbType(Int32): PrivateScope, Public, HideBySig
+    GetValue(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetValues(Object[]): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetOrdinal(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    get_Item(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Item(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    GetBoolean(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetByte(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetBytes(Int32, Int64, Byte[], Int32, Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetChar(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetChars(Int32, Int64, Char[], Int32, Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetGuid(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetInt16(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetInt32(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetInt64(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetFloat(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetDouble(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetString(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetDecimal(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetDateTime(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetData(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    IsDBNull(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class Npgsql.NpgsqlNoticeEventArgs: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.EventArgs
+  Fields:
+    Npgsql.NpgsqlError Notice : Public
+Class Npgsql.NpgsqlError: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable, BeforeFieldInit
+  Properties:
+    System.String Severity 'get ' : 
+    System.String Code 'get ' : 
+    System.String Message 'get ' : 
+    System.String Detail 'get ' : 
+    System.String Hint 'get ' : 
+    System.String Position 'get ' : 
+    System.String Where 'get ' : 
+    System.String File 'get ' : 
+    System.String Line 'get ' : 
+    System.String Routine 'get ' : 
+    System.String ErrorSql 'get set' : 
+  Methods:
+    get_Severity(): PrivateScope, Public, HideBySig, SpecialName
+    get_Code(): PrivateScope, Public, HideBySig, SpecialName
+    get_Message(): PrivateScope, Public, HideBySig, SpecialName
+    get_Detail(): PrivateScope, Public, HideBySig, SpecialName
+    get_Hint(): PrivateScope, Public, HideBySig, SpecialName
+    get_Position(): PrivateScope, Public, HideBySig, SpecialName
+    get_Where(): PrivateScope, Public, HideBySig, SpecialName
+    get_File(): PrivateScope, Public, HideBySig, SpecialName
+    get_Line(): PrivateScope, Public, HideBySig, SpecialName
+    get_Routine(): PrivateScope, Public, HideBySig, SpecialName
+    set_ErrorSql(String): PrivateScope, Public, HideBySig, SpecialName
+    get_ErrorSql(): PrivateScope, Public, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Struct Npgsql.LogLevel: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Npgsql.LogLevel None = 0 : Public, Static, Literal, HasDefault
+    Npgsql.LogLevel Normal = 1 : Public, Static, Literal, HasDefault
+    Npgsql.LogLevel Debug = 2 : Public, Static, Literal, HasDefault
+Class Npgsql.NpgsqlEventLog: AutoLayout, AnsiClass, Class, Public
+  Properties:
+    Npgsql.LogLevel Level 'get set' : 
+    System.String LogName 'get set' : 
+    Boolean EchoMessages 'get set' : 
+  Methods:
+    get_Level(): PrivateScope, Public, Static, HideBySig, SpecialName
+    set_Level(LogLevel): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_LogName(): PrivateScope, Public, Static, HideBySig, SpecialName
+    set_LogName(String): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_EchoMessages(): PrivateScope, Public, Static, HideBySig, SpecialName
+    set_EchoMessages(Boolean): PrivateScope, Public, Static, HideBySig, SpecialName
+Class Npgsql.NpgsqlException: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable, BeforeFieldInit
+  :System.ApplicationException
+  Properties:
+    Npgsql.NpgsqlError Item [Int32] 'get ' : 
+    System.String Severity 'get ' : 
+    System.String Code 'get ' : 
+    System.String BaseMessage 'get ' : 
+    System.String Detail 'get ' : 
+    System.String Hint 'get ' : 
+    System.String Position 'get ' : 
+    System.String Where 'get ' : 
+    System.String File 'get ' : 
+    System.String Line 'get ' : 
+    System.String Routine 'get ' : 
+    System.String ErrorSql 'get ' : 
+    System.Collections.IList Errors 'get ' : 
+  Methods:
+    GetObjectData(SerializationInfo, StreamingContext): PrivateScope, Public, Virtual, HideBySig
+    get_Item(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Severity(): PrivateScope, Public, HideBySig, SpecialName
+    get_Code(): PrivateScope, Public, HideBySig, SpecialName
+    get_BaseMessage(): PrivateScope, Public, HideBySig, SpecialName
+    get_Detail(): PrivateScope, Public, HideBySig, SpecialName
+    get_Hint(): PrivateScope, Public, HideBySig, SpecialName
+    get_Position(): PrivateScope, Public, HideBySig, SpecialName
+    get_Where(): PrivateScope, Public, HideBySig, SpecialName
+    get_File(): PrivateScope, Public, HideBySig, SpecialName
+    get_Line(): PrivateScope, Public, HideBySig, SpecialName
+    get_Routine(): PrivateScope, Public, HideBySig, SpecialName
+    get_ErrorSql(): PrivateScope, Public, HideBySig, SpecialName
+    get_Errors(): PrivateScope, Public, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Npgsql.NpgsqlNotificationEventArgs: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.EventArgs
+  Fields:
+    Int32 PID : Public
+    System.String Condition : Public
+Class Npgsql.NpgsqlParameter: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MarshalByRefObject
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.Object): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, NpgsqlTypes.NpgsqlDbType): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.Data.DbType): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, NpgsqlTypes.NpgsqlDbType, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.Data.DbType, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, NpgsqlTypes.NpgsqlDbType, Int32, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.Data.DbType, Int32, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, NpgsqlTypes.NpgsqlDbType, Int32, System.String, System.Data.ParameterDirection, Boolean, Byte, Byte, System.Data.DataRowVersion, System.Object): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.Data.DbType, Int32, System.String, System.Data.ParameterDirection, Boolean, Byte, Byte, System.Data.DataRowVersion, System.Object): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Data.IDbDataParameter
+    System.Data.IDataParameter
+    System.ICloneable
+  Properties:
+    Byte Precision 'get set' : 
+    Byte Scale 'get set' : 
+    Int32 Size 'get set' : 
+    System.Data.DbType DbType 'get set' : 
+    NpgsqlTypes.NpgsqlDbType NpgsqlDbType 'get set' : 
+    System.Data.ParameterDirection Direction 'get set' : 
+    Boolean IsNullable 'get set' : 
+    System.String ParameterName 'get set' : 
+    System.String SourceColumn 'get set' : 
+    System.Data.DataRowVersion SourceVersion 'get set' : 
+    System.Object Value 'get set' : 
+  Methods:
+    get_Precision(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_Precision(Byte): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Scale(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_Scale(Byte): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Size(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_Size(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_DbType(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_DbType(DbType): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_NpgsqlDbType(): PrivateScope, Public, HideBySig, SpecialName
+    set_NpgsqlDbType(NpgsqlDbType): PrivateScope, Public, HideBySig, SpecialName
+    get_Direction(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_Direction(ParameterDirection): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_IsNullable(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_IsNullable(Boolean): PrivateScope, Public, HideBySig, SpecialName
+    get_ParameterName(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_ParameterName(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_SourceColumn(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_SourceColumn(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_SourceVersion(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_SourceVersion(DataRowVersion): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Value(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_Value(Object): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+Class Npgsql.NpgsqlParameterCollection: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MarshalByRefObject
+  Interfaces:
+    System.Data.IDataParameterCollection
+    System.Collections.IList
+    System.Collections.ICollection
+    System.Collections.IEnumerable
+  Properties:
+    Npgsql.NpgsqlParameter Item [System.String] 'get set' : 
+    Npgsql.NpgsqlParameter Item [Int32] 'get set' : 
+    Int32 Count 'get ' : 
+  Methods:
+    get_Item(String): PrivateScope, Public, HideBySig, SpecialName
+    set_Item(String, NpgsqlParameter): PrivateScope, Public, HideBySig, SpecialName
+    get_Item(Int32): PrivateScope, Public, HideBySig, SpecialName
+    set_Item(Int32, NpgsqlParameter): PrivateScope, Public, HideBySig, SpecialName
+    Add(NpgsqlParameter): PrivateScope, Public, HideBySig
+    Add(String, Object): PrivateScope, Public, HideBySig
+    Add(String, NpgsqlDbType): PrivateScope, Public, HideBySig
+    Add(String, NpgsqlDbType, Int32): PrivateScope, Public, HideBySig
+    Add(String, NpgsqlDbType, Int32, String): PrivateScope, Public, HideBySig
+    RemoveAt(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Contains(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    IndexOf(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    RemoveAt(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Insert(Int32, Object): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Remove(Object): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Contains(Object): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    TryGetValue(String, NpgsqlParameter&(Out)): PrivateScope, Public, HideBySig
+    Clear(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    IndexOf(Object): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Add(Object): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    get_Count(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    CopyTo(Array, Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class Npgsql.NpgsqlTransaction: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MarshalByRefObject
+  Interfaces:
+    System.Data.IDbTransaction
+    System.IDisposable
+  Properties:
+    Npgsql.NpgsqlConnection Connection 'get ' : 
+    System.Data.IsolationLevel IsolationLevel 'get ' : 
+  Methods:
+    get_Connection(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsolationLevel(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Commit(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Rollback(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Struct Npgsql.ProtocolVersion: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Npgsql.ProtocolVersion Unknown = 0 : Public, Static, Literal, HasDefault
+    Npgsql.ProtocolVersion Version2 = 1 : Public, Static, Literal, HasDefault
+    Npgsql.ProtocolVersion Version3 = 2 : Public, Static, Literal, HasDefault
+Class Npgsql.ServerVersion: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Fields:
+    Int32 ProtocolVersion2 : Public, Static, InitOnly
+    Int32 ProtocolVersion3 : Public, Static, InitOnly
+  Properties:
+    Int32 Major 'get ' : 
+    Int32 Minor 'get ' : 
+    Int32 Patch 'get ' : 
+  Methods:
+    get_Major(): PrivateScope, Public, HideBySig, SpecialName
+    get_Minor(): PrivateScope, Public, HideBySig, SpecialName
+    get_Patch(): PrivateScope, Public, HideBySig, SpecialName
+    op_Equality(ServerVersion, ServerVersion): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Inequality(ServerVersion, ServerVersion): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_GreaterThan(ServerVersion, ServerVersion): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_GreaterThanOrEqual(ServerVersion, ServerVersion): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_LessThan(ServerVersion, ServerVersion): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_LessThanOrEqual(ServerVersion, ServerVersion): PrivateScope, Public, Static, HideBySig, SpecialName
+    Equals(Object): PrivateScope, Public, Virtual, HideBySig
+    GetHashCode(): PrivateScope, Public, Virtual, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class NpgsqlTypes.Fastpath: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Npgsql.NpgsqlConnection, System.IO.Stream): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Npgsql.NpgsqlConnection): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    FastpathCall(Int32, Boolean, FastpathArg[]): PrivateScope, Public, HideBySig
+    FastpathCall(String, Boolean, FastpathArg[]): PrivateScope, Public, HideBySig
+    GetInteger(String, FastpathArg[]): PrivateScope, Public, HideBySig
+    GetData(String, FastpathArg[]): PrivateScope, Public, HideBySig
+    AddFunction(String, Int32): PrivateScope, Public, HideBySig
+    AddFunctions(IDataReader): PrivateScope, Public, HideBySig
+    GetID(String): PrivateScope, Public, HideBySig
+Class NpgsqlTypes.FastpathArg: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[], Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Boolean type : Public
+    Int32 value : Public
+    Byte[] bytes : Public
+  Methods:
+    Send(Stream): PrivateScope, Public, HideBySig
+    SendSize(): PrivateScope, Public, HideBySig
+Class NpgsqlTypes.LargeObject: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(NpgsqlTypes.Fastpath, Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 SEEK_SET = 0 : Public, Static, Literal, HasDefault
+    Int32 SEEK_CUR = 1 : Public, Static, Literal, HasDefault
+    Int32 SEEK_END = 2 : Public, Static, Literal, HasDefault
+  Methods:
+    GetOID(): PrivateScope, Public, HideBySig
+    Close(): PrivateScope, Public, HideBySig
+    Read(Int32): PrivateScope, Public, HideBySig
+    Read(Byte[], Int32, Int32): PrivateScope, Public, HideBySig
+    Write(Byte[]): PrivateScope, Public, HideBySig
+    Write(Byte[], Int32, Int32): PrivateScope, Public, HideBySig
+    Seek(Int32, Int32): PrivateScope, Public, HideBySig
+    Seek(Int32): PrivateScope, Public, HideBySig
+    Tell(): PrivateScope, Public, HideBySig
+    Size(): PrivateScope, Public, HideBySig
+Class NpgsqlTypes.LargeObjectManager: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Npgsql.NpgsqlConnection): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 READ : Public, Static
+    Int32 READWRITE : Public, Static
+    Int32 WRITE = 131072 : Public, Static, Literal, HasDefault
+  Methods:
+    Open(Int32): PrivateScope, Public, HideBySig
+    Open(Int32, Int32): PrivateScope, Public, HideBySig
+    Create(): PrivateScope, Public, HideBySig
+    Create(Int32): PrivateScope, Public, HideBySig
+    Delete(Int32): PrivateScope, Public, HideBySig
+    Unlink(Int32): PrivateScope, Public, HideBySig
+Struct NpgsqlTypes.NpgsqlDbType: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    NpgsqlTypes.NpgsqlDbType Bigint = 0 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Boolean = 1 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Box = 2 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Bytea = 3 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Circle = 4 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Char = 5 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Date = 6 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Double = 7 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Integer = 8 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Line = 9 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType LSeg = 10 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Money = 11 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Numeric = 12 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Path = 13 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Point = 14 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Polygon = 15 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Real = 16 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Smallint = 17 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Text = 18 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Time = 19 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Timestamp = 20 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Varchar = 21 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Refcursor = 22 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Inet = 23 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType Bit = 24 : Public, Static, Literal, HasDefault
+    NpgsqlTypes.NpgsqlDbType TimestampTZ = 25 : Public, Static, Literal, HasDefault
+Struct NpgsqlTypes.NpgsqlPoint: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+    Void .ctor(Single, Single): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Single X   'get set' : 
+    Single Y   'get set' : 
+  Methods:
+    get_X(): PrivateScope, Public, HideBySig, SpecialName
+    set_X(Single): PrivateScope, Public, HideBySig, SpecialName
+    get_Y(): PrivateScope, Public, HideBySig, SpecialName
+    set_Y(Single): PrivateScope, Public, HideBySig, SpecialName
+Struct NpgsqlTypes.NpgsqlBox: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+    Void .ctor(NpgsqlTypes.NpgsqlPoint, NpgsqlTypes.NpgsqlPoint): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    NpgsqlTypes.NpgsqlPoint UpperRight 'get set' : 
+    NpgsqlTypes.NpgsqlPoint LowerLeft 'get set' : 
+  Methods:
+    get_UpperRight(): PrivateScope, Public, HideBySig, SpecialName
+    set_UpperRight(NpgsqlPoint): PrivateScope, Public, HideBySig, SpecialName
+    get_LowerLeft(): PrivateScope, Public, HideBySig, SpecialName
+    set_LowerLeft(NpgsqlPoint): PrivateScope, Public, HideBySig, SpecialName
+Struct NpgsqlTypes.NpgsqlLSeg: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+    Void .ctor(NpgsqlTypes.NpgsqlPoint, NpgsqlTypes.NpgsqlPoint): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    NpgsqlTypes.NpgsqlPoint Start : Public
+    NpgsqlTypes.NpgsqlPoint End : Public
+  Methods:
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Struct NpgsqlTypes.NpgsqlPath: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+    Void .ctor(NpgsqlTypes.NpgsqlPoint[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Int32 Count 'get ' : 
+    NpgsqlTypes.NpgsqlPoint Item [Int32] 'get ' : 
+    Boolean Open 'get ' : 
+  Methods:
+    get_Count(): PrivateScope, Public, HideBySig, SpecialName
+    get_Item(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Open(): PrivateScope, Public, HideBySig, SpecialName
+Struct NpgsqlTypes.NpgsqlPolygon: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+    Void .ctor(NpgsqlTypes.NpgsqlPoint[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Int32 Count 'get ' : 
+    NpgsqlTypes.NpgsqlPoint Item [Int32] 'get ' : 
+  Methods:
+    get_Count(): PrivateScope, Public, HideBySig, SpecialName
+    get_Item(Int32): PrivateScope, Public, HideBySig, SpecialName
+Struct NpgsqlTypes.NpgsqlCircle: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+    Void .ctor(NpgsqlTypes.NpgsqlPoint, Double): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    NpgsqlTypes.NpgsqlPoint Center : Public
+    Double Radius : Public
+  Methods:
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Struct NpgsqlTypes.NpgsqlInet: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+    Void .ctor(System.Net.IPAddress, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Net.IPAddress): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Net.IPAddress addr : Public
+    Int32 mask : Public
+  Methods:
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+    op_Implicit(NpgsqlInet): PrivateScope, Public, Static, HideBySig, SpecialName
+Class Npgsql.Design.ConnectionStringEditorForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String ConnectionString 'get ' : 
+  Methods:
+    get_ConnectionString(): PrivateScope, Public, HideBySig, SpecialName

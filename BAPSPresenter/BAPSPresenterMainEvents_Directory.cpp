@@ -6,10 +6,10 @@ using namespace BAPSPresenter;
 
 System::Void BAPSPresenterMain::Directory_MouseDown(System::Object ^  sender, System::Windows::Forms::MouseEventArgs ^  e)
 {
-	BAPSListBox^ lb =( dynamic_cast<BAPSListBox^>(sender));
+	System::Windows::Forms::ListBox^ lb =( dynamic_cast<System::Windows::Forms::ListBox^>(sender));
 	int folder = safe_cast<int>(lb->Tag);
 	//Retrieve the item at the specified location within the ListBox.
-	int index = lb->indexFromY(e->Y);
+	int index = lb->SelectedIndex;
 
 	// Starts a drag-and-drop operation.
 	if(index >= 0) 

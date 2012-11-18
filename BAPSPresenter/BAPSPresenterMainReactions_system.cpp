@@ -10,7 +10,7 @@ void BAPSPresenterMain::addFileToDirectoryList(System::Object^ _directoryIndex, 
 	if (directoryIndex < 3)
 	{
 		/** Add the new entry to the bottom of the listbox **/
-		directoryList[directoryIndex]->addItem(entry);
+		directoryList[directoryIndex]->Items->Add(entry);
 	}
 }
 
@@ -20,7 +20,7 @@ void BAPSPresenterMain::clearFiles(System::Object^ _directoryIndex)
 	if (directoryIndex < 3)
 	{
 		/** Empty the list box ready for new entries (required due to implicit indexing) **/
-		directoryList[directoryIndex]->clearList();
+		directoryList[directoryIndex]->Items->Clear();
 	}
 }
 
@@ -33,7 +33,7 @@ void BAPSPresenterMain::displayVersion(System::String^ version, System::String^ 
 		about->Invoke(mi,dd);
 	}
 }
-void BAPSPresenterMain::processFeedbackResult(int resultCode)
+/*void BAPSPresenterMain::processFeedbackResult(int resultCode)
 {
 	if (feedbackDialog != nullptr)
 	{
@@ -41,9 +41,9 @@ void BAPSPresenterMain::processFeedbackResult(int resultCode)
 		array<System::Object^>^ dd = gcnew array<System::Object^>(1) {resultCode};
 		feedbackDialog->Invoke(mi,dd);
 	}
-}
+}*/
 
-void BAPSPresenterMain::addToChatList(System::String^ username)
+/*void BAPSPresenterMain::addToChatList(System::String^ username)
 {
 	if (!chatTo->Items->Contains(username))
 	{
@@ -96,4 +96,4 @@ void BAPSPresenterMain::processChatMessage(System::String^ from, System::String^
 	{
 		chatOnOff->Highlighted = true;
 	}
-}
+}*/

@@ -12,7 +12,7 @@ System::Void RecordLibrarySearch::AddToChannel_Click(System::Object ^  sender, S
 	{
 		/** update the server **/
 		Command cmd = BAPSNET_PLAYLIST | BAPSNET_ADDITEM;
-		cmd |= (safe_cast<int>(dynamic_cast<BAPSButton^>(sender)->Tag) & 0x3f);
+		cmd |= (safe_cast<int>(dynamic_cast<System::Windows::Forms::Button^>(sender)->Tag) & 0x3f);
 		msgQueue->Enqueue(gcnew ActionMessageU32intU32int(cmd, (u32int)BAPSNET_LIBRARYITEM, ResultsBox->SelectedIndex));
 	}
 }
@@ -25,7 +25,7 @@ System::Void RecordLibrarySearch::closeButton_Click(System::Object^  sender, Sys
 System::Void RecordLibrarySearch::SearchButton_Click(System::Object ^  sender, System::EventArgs ^  e)
 {
 	/** Starting a new search means getting rid of the old one **/
-	ResultsBox->clearList();
+	ResultsBox->Items->Clear();
 	ResultsBox->Enabled = true;
 	connectionStatus->Text = "Connected";
 	/** Set the artist to a wildcard **/
@@ -47,7 +47,7 @@ System::Void RecordLibrarySearch::SearchButton_Click(System::Object ^  sender, S
 	if (Artist->Tag == nullptr && Title->Tag == nullptr && !dateAddedRadioButton->Checked && !dateReleasedRadioButton->Checked)
 	{
 		resultsInfo->Text = "Empty Artist/Title";
-		ResultsBox->addItem("Empty Artist/Title");
+		ResultsBox->Items->Add("Empty Artist/Title");
 		ResultsBox->Enabled = false;
 	}
 	else
@@ -161,7 +161,7 @@ void RecordLibrarySearch::add(System::Object^ _index, System::Object^ _dirtyStat
 	/** Move the progress bar on **/
 	progressBar->Value = index;
 	/** Place the string into the array **/
-	ResultsBox->addItem(description);
+	ResultsBox->Items->Add(description);
 	/** The index is 0 based so the last item is numberofresults-1 **/
 	if (numberOfResults == index+1)
 	{
@@ -183,8 +183,6 @@ void RecordLibrarySearch::add(System::Object^ _index, System::Object^ _dirtyStat
 		SearchButton->Enabled = true;
 		pageNum++;
 		SearchButton->Text = "Search Again";
-	SearchButton->Font = gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(0));
 		AddToChannel0->Enabled = true;
 		AddToChannel1->Enabled = true;
 		AddToChannel2->Enabled = true;
@@ -217,8 +215,6 @@ System::Void RecordLibrarySearch::Some_TextChanged(System::Object^  sender, Syst
 {
 	pageNum = 0;
 
-	SearchButton->Font = gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(0));
 	SearchButton->Text = "Search";
 }
 

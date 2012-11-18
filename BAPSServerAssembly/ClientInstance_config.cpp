@@ -85,7 +85,7 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 		}
 		bapsController2Choices->add("none","none", (serials->Length==0));
 		safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_BAPSCONTROLLER2SERIAL])->setChoices(bapsController2Choices);
-		if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2DEVICECOUNT) < (serials->Length==0)?1:serials->Length)
+		if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2DEVICECOUNT) < ((serials->Length==0)?1:serials->Length))
 		{
 			CONFIG_SET(CONFIG_BAPSCONTROLLER2DEVICECOUNT, (serials->Length==0)?1:serials->Length);
 		}

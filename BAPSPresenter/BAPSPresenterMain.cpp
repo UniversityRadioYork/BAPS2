@@ -162,15 +162,15 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	timeGoneText[0]    = Channel0TimeGone;
 	timeGoneText[1]    = Channel1TimeGone;
 	timeGoneText[2]    = Channel2TimeGone;
-	volumeBar		   = gcnew array<System::Windows::Forms::TrackBar^>(3);
+	/*volumeBar		   = gcnew array<System::Windows::Forms::TrackBar^>(3);
 	volumeBar[0]       = Channel0VolumeBar;
 	Channel0VolumeBar->Tag = number0;
 	volumeBar[1]       = Channel1VolumeBar;
 	Channel1VolumeBar->Tag = number1;
 	volumeBar[2]       = Channel2VolumeBar;
-	Channel2VolumeBar->Tag = number2;
+	Channel2VolumeBar->Tag = number2;*/
 
-	channelPlay			= gcnew array<BAPSButton^>(3);
+	channelPlay			= gcnew array<Windows::Forms::Button^>(3);
 	channelPlay[0]		= Channel0Play;
 	channelPlay[0]->Tag	= gcnew ChannelOperationLookup(0, BAPSNET_PLAY);
 	channelPlay[1]		= Channel1Play;
@@ -178,7 +178,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	channelPlay[2]		= Channel2Play;
 	channelPlay[2]->Tag	= gcnew ChannelOperationLookup(2, BAPSNET_PLAY);
 
-	channelPause		= gcnew array<BAPSButton^>(3);
+	channelPause		= gcnew array<Windows::Forms::Button^>(3);
 	channelPause[0]		= Channel0Pause;
 	channelPause[0]->Tag	= gcnew ChannelOperationLookup(0, BAPSNET_PAUSE);
 	channelPause[1]		= Channel1Pause;
@@ -186,7 +186,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	channelPause[2]		= Channel2Pause;
 	channelPause[2]->Tag	= gcnew ChannelOperationLookup(2, BAPSNET_PAUSE);
 
-	channelStop			= gcnew array<BAPSButton^>(3);
+	channelStop			= gcnew array<Windows::Forms::Button^>(3);
 	channelStop[0]		= Channel0Stop;
 	channelStop[0]->Tag	= gcnew ChannelOperationLookup(0, BAPSNET_STOP);
 	channelStop[1]		= Channel1Stop;
@@ -199,7 +199,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	trackList[1]	   = trackList1;
 	trackList[2]	   = trackList2;
 
-	directoryList	   = gcnew array<BAPSListBox^>(3);
+	directoryList	   = gcnew array<System::Windows::Forms::ListBox^>(3);
 	directoryList[0]   = Directory0;
 	directoryList[1]   = Directory1;
 	directoryList[2]   = Directory2;
@@ -209,7 +209,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	Directory0Refresh->Tag = number0;
 	Directory1Refresh->Tag = number1;
 	Directory2Refresh->Tag = number2;
-	loadedText		   = gcnew array<BAPSLabel^>(3);
+	loadedText		   = gcnew array<System::Windows::Forms::Label^>(3);
 	loadedText[0]	   = Channel0LoadedText;
 	loadedText[1]	   = Channel1LoadedText;
 	loadedText[2]	   = Channel2LoadedText;
@@ -275,7 +275,6 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	loadShowDialog = nullptr;
 	securityDialog = nullptr;
 	about = nullptr;
-	feedbackDialog = nullptr;
 	textDialog = gcnew TextDialog(this,"Write on me");
 
 	/** Initialize the config cache **/
@@ -296,8 +295,8 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	}
 
 	/** Show or hide the volume controls depending on the config setting **/
-	bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
-	showVolumeControls(showVolume);
+	/*bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
+	showVolumeControls(showVolume);*/
 
 	/** Enable or disable the timers depending on the config setting **/
 	bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "No"),"Yes") == 0);
@@ -433,9 +432,9 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		case BAPSNET_VOLUME:
 			{
 				float value = clientSocket->receiveF();
-				MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(this, &BAPSPresenterMain::showVolume);
-				array<System::Object^>^ dd = gcnew array<System::Object^>(2) {cmdReceived & BAPSNET_PLAYBACK_CHANNELMASK, value};
-				this->Invoke(mi, dd);
+				//MethodInvokerObjObj^ mi = gcnew MethodInvokerObjObj(this, &BAPSPresenterMain::showVolume);
+				//array<System::Object^>^ dd = gcnew array<System::Object^>(2) {cmdReceived & BAPSNET_PLAYBACK_CHANNELMASK, value};
+				//this->Invoke(mi, dd);
 			}
 			break;
 		case BAPSNET_LOAD:
@@ -779,7 +778,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		case BAPSNET_FEEDBACK:
 			{
 				int result = clientSocket->receiveI();
-				processFeedbackResult(result);
+				//processFeedbackResult(result);
 			}
 			break;
 		case BAPSNET_SENDMESSAGE:
@@ -787,15 +786,15 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 				System::String^ from = clientSocket->receiveS();
 				System::String^ to = clientSocket->receiveS();
 				System::String^ message = clientSocket->receiveS();
-				MethodInvokerStrStrStr^ mi = gcnew MethodInvokerStrStrStr(this, &BAPSPresenterMain::processChatMessage);
-				array<System::Object^>^ dd = gcnew array<System::Object^>(3) {from,to,message};
-				this->Invoke(mi, dd);
+				//MethodInvokerStrStrStr^ mi = gcnew MethodInvokerStrStrStr(this, &BAPSPresenterMain::processChatMessage);
+				//array<System::Object^>^ dd = gcnew array<System::Object^>(3) {from,to,message};
+				//this->Invoke(mi, dd);
 			}
 			break;
 		case BAPSNET_CLIENTCHANGE:
 			{
 				System::String^ username = clientSocket->receiveS();
-				if ((cmdReceived & BAPSNET_SYSTEM_VALUEMASK) == 1)
+				/*if ((cmdReceived & BAPSNET_SYSTEM_VALUEMASK) == 1)
 				{
 					MethodInvokerStr^ mi = gcnew MethodInvokerStr(this, &BAPSPresenterMain::addToChatList);
 					array<System::Object^>^ dd = gcnew array<System::Object^>(1) {username};
@@ -806,7 +805,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 					MethodInvokerStr^ mi = gcnew MethodInvokerStr(this, &BAPSPresenterMain::removeFromChatList);
 					array<System::Object^>^ dd = gcnew array<System::Object^>(1) {username};
 					this->Invoke(mi, dd);
-				}
+				}*/
 			}
 			break;
 		case BAPSNET_SCROLLTEXT:
@@ -901,7 +900,7 @@ void BAPSPresenterMain::logError(System::String^ errorMessage)
 }
 
 
-void BAPSPresenterMain::showVolumeControls(bool shouldShow)
+/*void BAPSPresenterMain::showVolumeControls(bool shouldShow)
 {
 	Channel0VolumeBar->Visible = shouldShow;
 	Channel1VolumeBar->Visible = shouldShow;
@@ -921,7 +920,7 @@ void BAPSPresenterMain::showVolumeControls(bool shouldShow)
 		trackList[1]->Width = 256;
 		trackList[2]->Width = 256;
 	}
-}
+}*/
 void BAPSPresenterMain::enableTimerControls(bool shouldEnable)
 {
 	this->timersEnabled = shouldEnable;

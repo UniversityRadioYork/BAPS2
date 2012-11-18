@@ -1,0 +1,5 @@
+C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSFormControls\bin\Release\BAPSFormControls.dll
+C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSFormControls\bin\Release\BAPSFormControls.pdb
+C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSFormControls\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSFormControls\obj\Release\BAPSFormControls.dll
+C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSFormControls\obj\Release\BAPSFormControls.pdb

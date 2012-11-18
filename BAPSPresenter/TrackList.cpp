@@ -6,20 +6,22 @@ using namespace BAPSPresenter;
 
 void TrackList::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 {
-	opLock->WaitOne();
+	//opLock->WaitOne();
     // The base class contains a bitmap, offScreen, for constructing
     // the control and is rendered when all items are populated.
     // This technique prevents flicker.
 	System::Drawing::Graphics^ gOffScreen = System::Drawing::Graphics::FromImage(offScreen);
+	gOffScreen->SmoothingMode = System::Drawing::Drawing2D::SmoothingMode::AntiAlias;
 	System::Drawing::Rectangle rect = this->ClientRectangle;
 	rect.Width-=2;
-	rect.Height = ((items->Count<scroll->IndexAtTop+DrawCount)?items->Count:scroll->IndexAtTop+DrawCount);
-	gOffScreen->FillRectangle(System::Drawing::Brushes::LightGray, rect);
+	//rect.Height = ((items->Count<scroll->IndexAtTop+DrawCount)?items->Count:scroll->IndexAtTop+DrawCount);
+	rect.Height = ((items->Count<scroll->Value+DrawCount)?items->Count:scroll->Value+DrawCount);
+	gOffScreen->FillRectangle(System::Drawing::SystemBrushes::Window, rect);
 	rect.Y = rect.Height;
 	rect.Height = this->ClientRectangle.Height-rect.Height;
 	if (rect.Height > 0)
 	{
-		gOffScreen->FillRectangle(System::Drawing::Brushes::SeaShell, rect);
+		gOffScreen->FillRectangle(System::Drawing::SystemBrushes::Window, rect);
 	}
     int itemTop = 0;
 
@@ -41,7 +43,7 @@ void TrackList::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 	}
 
 	// Get this type's assembly
-	System::Reflection::Assembly^ assem = System::Reflection::Assembly::GetExecutingAssembly();
+	/*System::Reflection::Assembly^ assem = System::Reflection::Assembly::GetExecutingAssembly();
 	// Get the stream that holds the resource
 	// NOTE1: Make sure not to close this stream!
 	// NOTE2: Also be very careful to match the case
@@ -64,33 +66,36 @@ void TrackList::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 	stream = assem->GetManifestResourceStream("textItemSel.png");
 	// Load the text item bitmap
 	Bitmap^ textItemSel = gcnew Bitmap(stream);
-	textItemSel->MakeTransparent();
+	textItemSel->MakeTransparent();*/
 
     // Draw the fonts in the list.
-	for(int n = scroll->IndexAtTop; n < ((items->Count<scroll->IndexAtTop+DrawCount)?items->Count:scroll->IndexAtTop+DrawCount); n++)
+	//for(int n = scroll->IndexAtTop; n < ((items->Count<scroll->IndexAtTop+DrawCount)?items->Count:scroll->IndexAtTop+DrawCount); n++)
+	for(int n = scroll->Value; n < ((items->Count<scroll->Value+DrawCount)?items->Count:scroll->Value+DrawCount); n++)
 	{
 
-		System::Drawing::Brush^ brush;
 		System::Drawing::Rectangle rect;
-		if (n == loadedIndex)
-		{
-			brush = System::Drawing::Brushes::PaleGoldenrod;
-		}
-		else if (n%2 == 0)
-		{
-			brush = System::Drawing::Brushes::Snow;
-		}
-		else
-		{
-			brush = System::Drawing::Brushes::AntiqueWhite;
-		}
 		rect = System::Drawing::Rectangle(0,
 										  itemTop,
 										  // If the scroll bar is visible, subtract the scrollbar width
 										  // otherwise subtract 2 for the width of the rectangle
-										  this->ClientSize.Width - (scroll->Visible ? scroll->Width : 1)-1,
-										  ItemHeight-1);
-		gOffScreen->FillRectangle(brush,rect);
+										  this->ClientSize.Width - (scroll->Visible ? scroll->Width : 1)-1, ItemHeight);
+		System::Drawing::Brush^ brush;
+		System::Drawing::Brush^ textbrush;
+		if (n == loadedIndex)
+		{
+			brush = System::Drawing::SystemBrushes::Highlight;
+			textbrush = System::Drawing::SystemBrushes::HighlightText;
+			gOffScreen->FillRectangle(brush,rect);
+		}
+		/*else if (n%2 == 0)
+		{
+			brush = System::Drawing::Brushes::Snow;
+		}*/
+		else
+		{
+			//brush = System::Drawing::SystemBrushes::Window;
+			textbrush = System::Drawing::SystemBrushes::ControlText;
+		}
 
 		/** Which index do we display here **/
 		int indexToShow = n;
@@ -109,25 +114,32 @@ void TrackList::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 		switch (items[indexToShow]->type)
 		{
 		case BAPSNET_FILEITEM:
-			gOffScreen->DrawImage(fileItem, 0,itemTop);
+			gOffScreen->FillEllipse(System::Drawing::Brushes::SteelBlue, 4, itemTop+4, 8, 8);
+			//gOffScreen->DrawString("Usr", this->Font, System::Drawing::Brushes::Red, 1, itemTop);
+			//gOffScreen->DrawImage(fileItem, 0,itemTop);
 			break;
 		case BAPSNET_LIBRARYITEM:
-			gOffScreen->DrawImage(libraryItem, 0,itemTop);
+			gOffScreen->FillEllipse(System::Drawing::Brushes::LimeGreen, 4, itemTop+4, 8, 8);
+			//gOffScreen->DrawString("Lib", this->Font, System::Drawing::Brushes::Green, 1, itemTop);
+			//gOffScreen->DrawImage(libraryItem, 0,itemTop);
 			break;
 		case BAPSNET_TEXTITEM:
+			//gOffScreen->FillEllipse(System::Drawing::Brushes::Blue, 4, itemTop+4, 8, 8);
 			if (items[indexToShow]->isSelectedTextItem)
 			{
-				gOffScreen->DrawImage(textItemSel, 0,itemTop);
+				gOffScreen->FillRectangle(System::Drawing::Brushes::Lavender,rect);
+				//gOffScreen->DrawImage(textItemSel, 0,itemTop);
 			}
-			else
+			/*else
 			{
 				gOffScreen->DrawImage(textItem, 0,itemTop);
-			}
+			}*/
+			gOffScreen->DrawString("T", this->Font, System::Drawing::Brushes::Blue, 4.0f, (float)itemTop+1.0f);
 			break;
 		}
 
         // Draw the item
-		gOffScreen->DrawString(items[indexToShow]->ToString(), this->Font, System::Drawing::Brushes::Black, System::Drawing::Rectangle(18, itemTop, this->ClientRectangle.Width-20,this->ItemHeight), gcnew System::Drawing::StringFormat(System::Drawing::StringFormatFlags::NoWrap));
+		gOffScreen->DrawString(items[indexToShow]->ToString(), this->Font, textbrush, System::Drawing::Rectangle(18, itemTop, this->ClientRectangle.Width-20,this->ItemHeight), gcnew System::Drawing::StringFormat(System::Drawing::StringFormatFlags::NoWrap));
 		rect.Height -= 1;
 		rect.Width -= 1;
 		// if drawing the loaded index or the index we are hovering over
@@ -138,29 +150,30 @@ void TrackList::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 
         itemTop += this->ItemHeight;
     }
-	// if we are adding to this control
-	if (addTo||this->Focused)
+	rect = this->ClientRectangle;
+	rect.Height-=3;
+	
+	rect.Width-= (scroll->Visible)?2:3;
+	if (scroll->Visible)
 	{
-		System::Drawing::Rectangle rect = this->ClientRectangle;
-		rect.Height-=3;
-		
-		rect.Width-= (scroll->Visible)?2:3;
-		if (scroll->Visible)
-		{
-			rect.Width -= scroll->Width;
-		}
-		gOffScreen->DrawRectangle(System::Drawing::Pens::DarkOrange, rect);
+		rect.Width -= scroll->Width;
+	}
+	// if we are adding to this control
+	//if (addTo||this->Focused)
+	if (addTo)
+	{
+		gOffScreen->DrawRectangle(System::Drawing::SystemPens::Highlight, rect);
 		rect.X++;
 		rect.Y++;
 		rect.Height-=2;
 		rect.Width-=2;
-		gOffScreen->DrawRectangle(System::Drawing::Pens::DarkOrange, rect);
-	}
+		gOffScreen->DrawRectangle(System::Drawing::SystemPens::Highlight, rect);
+	} else gOffScreen->DrawRectangle(System::Drawing::SystemPens::WindowFrame, rect);
 
     e->Graphics->DrawImage(offScreen, 1, 1);
 
     delete gOffScreen;
-	opLock->ReleaseMutex();
+	//opLock->ReleaseMutex();
 }
 
 void TrackList::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
@@ -172,7 +185,7 @@ void TrackList::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
 	{
 		return;
 	}
-	opLock->WaitOne();
+	//opLock->WaitOne();
 	System::Drawing::Point pt = System::Drawing::Point(e->X,e->Y);
 	//Retrieve the item at the specified location within the ListBox.
 	int index = indexFromY(e->Y);
@@ -197,38 +210,42 @@ void TrackList::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)
 		savedFromIndex = -1;
 		this->Invalidate();
 	}
-	opLock->ReleaseMutex();
+	//opLock->ReleaseMutex();
 }
 void TrackList::OnMouseWheel(System::Windows::Forms::MouseEventArgs^ e)
 {
 	__super::OnMouseWheel(e);
-	opLock->WaitOne();
-	int newTop = scroll->IndexAtTop - (e->Delta/120);
+	//opLock->WaitOne();
+	//int newTop = scroll->IndexAtTop - (e->Delta/120);
+	int newTop = scroll->Value - (e->Delta/120);
 	if (newTop < 0)
 	{
 		newTop = 0;
 	}
-	if (newTop > scroll->TotalItems-scroll->ViewableItems)
+	/*if (newTop > scroll->TotalItems-scroll->ViewableItems)
 	{
 		newTop = scroll->TotalItems-scroll->ViewableItems;
-	}
-	scroll->IndexAtTop = newTop;
+	}*/
+	if (newTop > scroll->Maximum - 9)
+		newTop = scroll->Maximum - 9;
+	//scroll->IndexAtTop = newTop;
+	scroll->Value = newTop;
 	this->Invalidate();
-	opLock->ReleaseMutex();
+	//opLock->ReleaseMutex();
 }
 
 void TrackList::OnDragEnter(System::Windows::Forms::DragEventArgs ^  e)
 {
 	__super::OnDragEnter(e);
-	if(e->Data->GetDataPresent(TrackListDragDrop::typeid))
-	{
+	if(e->Data->GetDataPresent(TrackListDragDrop::typeid)) {
 		TrackListDragDrop^ tldd =static_cast<TrackListDragDrop^>(e->Data->GetData(TrackListDragDrop::typeid));
 		e->Effect = System::Windows::Forms::DragDropEffects::Move;
-	}
-	else if(e->Data->GetDataPresent(FolderTempStruct::typeid))
-	{
+	} else if(e->Data->GetDataPresent(FolderTempStruct::typeid)) {
 		e->Effect = System::Windows::Forms::DragDropEffects::Copy;
-	}
+	} else if(e->Data->GetDataPresent(DataFormats::FileDrop)) {
+		e->Effect = System::Windows::Forms::DragDropEffects::All;
+	} else
+		e->Effect = System::Windows::Forms::DragDropEffects::None;
 }
 
 void TrackList::OnDragDrop(System::Windows::Forms::DragEventArgs ^  e)
@@ -259,6 +276,15 @@ void TrackList::OnDragDrop(System::Windows::Forms::DragEventArgs ^  e)
 		FolderTempStruct^ fts =static_cast<FolderTempStruct^>(e->Data->GetData(FolderTempStruct::typeid));
 		RequestChange(this, gcnew RequestChangeEventArgs(channel, CHANGE_ADD, fts->fromFolder, fts->fromIndex));
 	}
+	
+	else if(e->Data->GetDataPresent(DataFormats::FileDrop)) {
+
+		array<String^>^ Files = (array<String^>^) e->Data->GetData(DataFormats::FileDrop, false);
+		for (int i = 0; i < Files->Length; i++) {
+			System::String^ F = Files[i]->ToString();
+			
+		}
+	}
 	addTo = false;
 	this->Invalidate();
 }
@@ -287,16 +313,21 @@ void TrackList::OnDragOver(System::Windows::Forms::DragEventArgs ^  e)
 			{
 				tldd->moved = true;
 			}
-			if (yValue < 8 && scroll->IndexAtTop != 0)
+			//if (yValue < 8 && scroll->IndexAtTop != 0)
+			if (yValue < 8 && scroll->Value != 0)
 			{
 				System::Threading::Thread::Sleep(40);
-				scroll->IndexAtTop = scroll->IndexAtTop - 1;
+				//scroll->IndexAtTop = scroll->IndexAtTop - 1;
+				scroll->Value -= 1;
 				this->Invalidate();
 			}
-			else if (yValue > this->ClientRectangle.Height-8 && scroll->IndexAtTop != scroll->TotalItems-scroll->ViewableItems)
+			//else if (yValue > this->ClientRectangle.Height-8 && scroll->IndexAtTop != scroll->TotalItems-scroll->ViewableItems)
+			// THIS MIGHT BE WRONG!
+			else if (yValue > this->ClientRectangle.Height-8 && scroll->Value != 0)
 			{
 				System::Threading::Thread::Sleep(40);
-				scroll->IndexAtTop = scroll->IndexAtTop + 1;
+				//scroll->IndexAtTop = scroll->IndexAtTop + 1;
+				scroll->Value += 1;
 				this->Invalidate();
 			}
 			if (hi == -1)
@@ -359,7 +390,7 @@ bool TrackList::ProcessDialogKey(System::Windows::Forms::Keys keyData)
 bool TrackList::HandleKey(System::Windows::Forms::Keys keyData)
 {
 	bool retVal = false;
-	opLock->WaitOne();
+	//opLock->WaitOne();
 	int newSelectedIndex = -1;
 	switch(keyData)
 	{
@@ -409,7 +440,7 @@ bool TrackList::HandleKey(System::Windows::Forms::Keys keyData)
 		}
 		retVal = true;
 	}
-	opLock->ReleaseMutex();
+	//opLock->ReleaseMutex();
 
 	return retVal;
 }

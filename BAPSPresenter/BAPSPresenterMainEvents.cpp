@@ -20,16 +20,16 @@ System::Void BAPSPresenterMain::TrackBar_Scroll(System::Object ^  sender, System
 	msgQueue->Enqueue(gcnew ActionMessageU32int(cmd, intArg));
 }
 
-System::Void BAPSPresenterMain::VolumeBar_Scroll(System::Object ^  sender, System::EventArgs ^  e)
+/*System::Void BAPSPresenterMain::VolumeBar_Scroll(System::Object ^  sender, System::EventArgs ^  e)
 {
-	/** Update the server with the new value the user has selected **/
+	// Update the server with the new value the user has selected
 	Command cmd = BAPSNET_PLAYBACK | BAPSNET_VOLUME;
-	/** The tag contains the channel number as a managed int **/
+	// The tag contains the channel number as a managed int
 	cmd |= (safe_cast<int>(dynamic_cast<System::Windows::Forms::TrackBar^>(sender)->Tag) & 0x3f);
-	/** WORK NEEDED: why oh why do we need floats **/
+	// WORK NEEDED: why oh why do we need floats
 	float fltArg  = (float)((float)(dynamic_cast<System::Windows::Forms::TrackBar^>(sender)->Value) / 100.0);
 	msgQueue->Enqueue(gcnew ActionMessageFloat(cmd, fltArg));
-}
+}*/
 
 System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  sender, System::Windows::Forms::KeyEventArgs ^  e)
 {
@@ -134,8 +134,8 @@ System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  send
 				LocalConfigDialog^ ccd = gcnew LocalConfigDialog(this);
 				ccd->ShowDialog();
 				/** Show or hide the volume controls depending on the config setting **/
-				bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
-				showVolumeControls(showVolume);
+				/*bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
+				showVolumeControls(showVolume);*/
 				/** Enable or disable the timers depending on the config setting **/
 				bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "No"),"Yes") == 0);
 				enableTimerControls(enableTimers);
@@ -206,7 +206,7 @@ System::Void BAPSPresenterMain::RefreshDirectory_Click(System::Object ^  sender,
 {
 	Command cmd = BAPSNET_SYSTEM | BAPSNET_LISTFILES;
 	/** The senders tag refers to the folder that needs to be refreshed **/
-	cmd |= (safe_cast<int>(dynamic_cast<BAPSButton^>(sender)->Tag) & 0x3f);
+	cmd |= (safe_cast<int>(dynamic_cast<System::Windows::Forms::Button^>(sender)->Tag) & 0x3f);
 	msgQueue->Enqueue(gcnew ActionMessage(cmd));
 }
 
@@ -228,9 +228,9 @@ System::Void BAPSPresenterMain::loadShow_Click(System::Object ^  sender, System:
 	loadShowDialog = nullptr;
 }
 
-System::Void BAPSPresenterMain::feedbackButton_Click(System::Object ^  sender, System::EventArgs ^  e)
+/*System::Void BAPSPresenterMain::feedbackButton_Click(System::Object ^  sender, System::EventArgs ^  e)
 {
-	/** Handle stored for same reason as record library **/
+	// Handle stored for same reason as record library
 	feedbackDialog = gcnew FeedbackDialog(this,msgQueue);
 	feedbackDialog->ShowDialog();
 	feedbackDialog = nullptr;
@@ -240,7 +240,7 @@ System::Void BAPSPresenterMain::helpButton_Click(System::Object ^  sender, Syste
 	System::Windows::Forms::Help::ShowHelp(this,"BAPSPresenterHelp.chm");
 	//HelpDialog^ hd = gcnew HelpDialog();
 	//hd->Show();
-}
+}*/
 
 
 void BAPSPresenterMain::positionChanged(System::Object^ sender, System::EventArgs^ e)
@@ -371,7 +371,7 @@ System::Void BAPSPresenterMain::trackListContextMenuStrip_ItemClicked(System::Ob
 		}
 	}
 }
-System::Void BAPSPresenterMain::chatOnOff_Click(System::Object^  sender, System::EventArgs^  e)
+/*System::Void BAPSPresenterMain::chatOnOff_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	if (MainTextDisplay->Visible)
 	{
@@ -412,7 +412,7 @@ System::Void BAPSPresenterMain::newChatMessage_TextChanged(System::Object^  send
 	{
 		this->AcceptButton = nullptr;
 	}
-}
+}*/
 
 System::Void BAPSPresenterMain::nearEndFlash(System::Object ^  sender, System::EventArgs ^  e)
 {

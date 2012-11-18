@@ -10,25 +10,34 @@ void BAPSPresenterMain::showChannelOperation(System::Object^ _channel, System::O
 	switch (operation)
 	{
 	case BAPSNET_PLAY:
-		channelPlay[channel]->Highlighted = true;
+		//channelPlay[channel]->Highlighted = true;
+		channelPlay[channel]->BackColor = System::Drawing::Color::DarkGreen;
 		channelPlay[channel]->Enabled = false;
 		timeLine->locked[channel] = true;
-		channelPause[channel]->Highlighted = false;
-		channelStop[channel]->Highlighted = false;
+		//channelPause[channel]->Highlighted = false;
+		channelPause[channel]->BackColor = System::Drawing::SystemColors::Control;
+		//channelStop[channel]->Highlighted = false;
+		channelStop[channel]->BackColor = System::Drawing::SystemColors::Control;
 		break;
 	case BAPSNET_PAUSE:
-		channelPlay[channel]->Highlighted = false;
+		//channelPlay[channel]->Highlighted = false;
+		channelPlay[channel]->BackColor = System::Drawing::SystemColors::Control;
 		channelPlay[channel]->Enabled = true;
 		timeLine->locked[channel] = false;
-		channelPause[channel]->Highlighted = true;
-		channelStop[channel]->Highlighted = false;
+		//channelPause[channel]->Highlighted = true;
+		channelPause[channel]->BackColor = System::Drawing::Color::DarkOrange;
+		//channelStop[channel]->Highlighted = false;
+		channelStop[channel]->BackColor = System::Drawing::SystemColors::Control;
 		break;
 	case BAPSNET_STOP:
-		channelPlay[channel]->Highlighted = false;
+		//channelPlay[channel]->Highlighted = false;
+		channelPlay[channel]->BackColor = System::Drawing::SystemColors::Control;
 		channelPlay[channel]->Enabled = true;
 		timeLine->locked[channel] = false;
-		channelPause[channel]->Highlighted = false;
-		channelStop[channel]->Highlighted = true;
+		//channelPause[channel]->Highlighted = false;
+		channelPause[channel]->BackColor = System::Drawing::SystemColors::Control;
+		//channelStop[channel]->Highlighted = true;
+		channelStop[channel]->BackColor = System::Drawing::Color::Firebrick;
 		break;
 	}
 }
@@ -70,7 +79,7 @@ void BAPSPresenterMain::showPosition(System::Object^ _channel, System::Object^ _
 	}
 }
 
-void BAPSPresenterMain::showVolume(System::Object^ _channel, System::Object^ _value)
+/*void BAPSPresenterMain::showVolume(System::Object^ _channel, System::Object^ _value)
 {
 	int channel = safe_cast<int>(_channel);
 	float value = safe_cast<float>(_value);
@@ -79,15 +88,15 @@ void BAPSPresenterMain::showVolume(System::Object^ _channel, System::Object^ _va
 		if (volumeBar[channel]->Minimum > (int)(value*100) ||
 			volumeBar[channel]->Maximum < (int)(value*100))
 		{
-			/** WORK NEEDED: if this happens we need the user to know **/
+			// WORK NEEDED: if this happens we need the user to know
 		}
 		else
 		{
-			/** Set the value (*100) **/
+			// Set the value (*100)
 			volumeBar[channel]->Value = (int)(value*100);
 		}
 	}
-}
+}*/
 
 void BAPSPresenterMain::showLoadedItem(System::Object^ _channel, System::Object^ _index, System::Object^ _itemType, System::String^ description)
 {

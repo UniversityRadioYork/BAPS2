@@ -137,10 +137,10 @@ namespace BAPSPresenter {
 			// status
 			// 
 			this->status->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->statusLabel});
-			this->status->Location = System::Drawing::Point(0, 343);
+			this->status->Location = System::Drawing::Point(0, 354);
 			this->status->Name = L"status";
 			this->status->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
-			this->status->Size = System::Drawing::Size(648, 22);
+			this->status->Size = System::Drawing::Size(649, 22);
 			this->status->TabIndex = 905;
 			this->status->Text = L"statusStrip1";
 			// 
@@ -148,7 +148,7 @@ namespace BAPSPresenter {
 			// 
 			this->statusLabel->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
 			this->statusLabel->Name = L"statusLabel";
-			this->statusLabel->Size = System::Drawing::Size(633, 17);
+			this->statusLabel->Size = System::Drawing::Size(634, 17);
 			this->statusLabel->Spring = true;
 			this->statusLabel->Text = L"status";
 			this->statusLabel->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -156,6 +156,7 @@ namespace BAPSPresenter {
 			// cancelButton
 			// 
 			this->cancelButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->cancelButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->cancelButton->Location = System::Drawing::Point(336, 320);
 			this->cancelButton->Name = L"cancelButton";
 			this->cancelButton->Size = System::Drawing::Size(88, 24);
@@ -166,6 +167,7 @@ namespace BAPSPresenter {
 			// saveButton
 			// 
 			this->saveButton->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->saveButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->saveButton->Location = System::Drawing::Point(232, 320);
 			this->saveButton->Name = L"saveButton";
 			this->saveButton->Size = System::Drawing::Size(88, 24);
@@ -179,18 +181,20 @@ namespace BAPSPresenter {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->CancelButton = this->cancelButton;
-			this->ClientSize = System::Drawing::Size(648, 365);
+			this->ClientSize = System::Drawing::Size(649, 376);
 			this->ControlBox = false;
 			this->Controls->Add(this->status);
 			this->Controls->Add(this->cancelButton);
 			this->Controls->Add(this->saveButton);
+			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->KeyPreview = true;
 			this->Name = L"ConfigDialog";
 			this->Text = L"Configuration Settings";
-			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &ConfigDialog::ConfigDialog_KeyDown);
 			this->Load += gcnew System::EventHandler(this, &ConfigDialog::ConfigDialog_Load);
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &ConfigDialog::ConfigDialog_KeyDown);
 			this->status->ResumeLayout(false);
 			this->status->PerformLayout();
 			this->ResumeLayout(false);

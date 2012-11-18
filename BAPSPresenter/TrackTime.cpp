@@ -93,12 +93,12 @@ void TrackTime::OnPaint(System::Windows::Forms::PaintEventArgs^ e)
 	e->Graphics->DrawLine(System::Drawing::Pens::Black, ClientRectangle.Width-1, BASE_Y_LINE+5, ClientRectangle.Width-1, BASE_Y_LINE-5);
 
 	/** draw a box round it all **/
-	System::Drawing::Pen^ myPen = System::Drawing::Pens::LightGray;
+	/*System::Drawing::Pen^ myPen = System::Drawing::Pens::LightGray;
 	if (this->Focused)
 	{
 		myPen = System::Drawing::Pens::Red;
 	}
-	e->Graphics->DrawPath(myPen, backgroundPath);
+	e->Graphics->DrawPath(myPen, backgroundPath);*/
 }
 
 void TrackTime::OnMouseDown(System::Windows::Forms::MouseEventArgs^ e)

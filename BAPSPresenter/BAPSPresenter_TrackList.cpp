@@ -11,7 +11,7 @@ System::Void BAPSPresenterMain::TrackList_RequestChange(System::Object^  o, BAPS
 	{
 	case CHANGE_SELECTEDINDEX:
 		{
-			if (channelPlay[e->channel]->Enabled)
+			if ((trackList[e->channel]->items[e->index]->type == BAPSNET_TEXTITEM) || (channelPlay[e->channel]->Enabled))
 			{
 				Command cmd = BAPSNET_PLAYBACK | BAPSNET_LOAD;
 				/** Channel number is in the sender's tag **/
@@ -21,7 +21,8 @@ System::Void BAPSPresenterMain::TrackList_RequestChange(System::Object^  o, BAPS
 				msgQueue->Enqueue(gcnew ActionMessageU32int(cmd, intArg));
 				
 				loadImpossibleTimer[e->channel]->Enabled = false;
-				loadedText[e->channel]->Highlighted = false;
+				//loadedText[e->channel]->Highlighted = false;
+				loadedText[e->channel]->BackColor = System::Drawing::SystemColors::Window;
 			}
 			else
 			{
@@ -45,7 +46,7 @@ System::Void BAPSPresenterMain::TrackList_RequestChange(System::Object^  o, BAPS
 	case CHANGE_ADD:
 		{
 			Command cmd = BAPSNET_PLAYLIST | BAPSNET_ADDITEM | (e->channel & 0x3f);
-			msgQueue->Enqueue(gcnew ActionMessageU32intU32intString(cmd, (u32int)BAPSNET_FILEITEM, e->index, directoryList[e->index]->getItem(e->index2)->ToString()));
+			msgQueue->Enqueue(gcnew ActionMessageU32intU32intString(cmd, (u32int)BAPSNET_FILEITEM, e->index, directoryList[e->index]->Items[e->index2]->ToString()));
 		}
 		break;
 	case CHANGE_COPY:
@@ -66,10 +67,14 @@ System::Void BAPSPresenterMain::loadImpossibleFlicker(System::Object ^  sender, 
 	if (cts->timeout == 0)
 	{
 		timer->Enabled = false;
-		loadedText[cts->channel]->Highlighted = false;
+		//loadedText[cts->channel]->Highlighted = false;
+		loadedText[cts->channel]->BackColor = System::Drawing::SystemColors::Window;
 	}
 	else
 	{
-		loadedText[cts->channel]->Highlighted = !loadedText[cts->channel]->Highlighted;
+		if (loadedText[cts->channel]->BackColor == System::Drawing::SystemColors::Window)
+			loadedText[cts->channel]->BackColor = System::Drawing::Color::LightSteelBlue;
+		else
+			loadedText[cts->channel]->BackColor = System::Drawing::SystemColors::Window;
 	}
 }

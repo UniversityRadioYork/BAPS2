@@ -1,6 +1,6 @@
 
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BAPSPresenter", "BAPSPresenter\BAPSPresenter.vcproj", "{46FD9397-DD3B-456A-9D95-504D60F6A9B5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tinker", "Tinker\Tinker.vcproj", "{72C648CC-A0E6-4439-8474-76BE38A621B4}"
@@ -17,7 +17,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tinkerinc++", "Tinkerinc++\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAPSFormControls", "BAPSFormControls\BAPSFormControls.csproj", "{4C3D1722-7B93-4081-8D61-572F8F088CED}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BAPSController", "BAPSController\BAPSController.vcproj", "{E1CEEE2E-DF20-4929-80BD-D73E896C5245}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BAPSControllerAssembly", "BAPSController\BAPSController.vcproj", "{E1CEEE2E-DF20-4929-80BD-D73E896C5245}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +78,7 @@ Global
 		{9A851E69-B851-432F-B2E8-2C3A03E54D29}.Debug|Any CPU.ActiveCfg = Debug
 		{9A851E69-B851-432F-B2E8-2C3A03E54D29}.Debug|Any CPU.Build.0 = Debug
 		{9A851E69-B851-432F-B2E8-2C3A03E54D29}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{9A851E69-B851-432F-B2E8-2C3A03E54D29}.Debug|Mixed Platforms.Build.0 = Debug
 		{9A851E69-B851-432F-B2E8-2C3A03E54D29}.Debug|Win32.ActiveCfg = Debug
 		{9A851E69-B851-432F-B2E8-2C3A03E54D29}.Debug|Win32.Build.0 = Debug
 		{9A851E69-B851-432F-B2E8-2C3A03E54D29}.Release|Any CPU.ActiveCfg = Release

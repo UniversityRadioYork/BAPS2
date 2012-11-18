@@ -6,7 +6,11 @@ using namespace BAPSPresenter;
 
 System::Void LocalConfigDialog::saveButton_Click(System::Object ^  sender, System::EventArgs ^  e)
 {
-	ConfigManager::setConfigValue("ServerAddress", serverText->Text);
+	if (serverText->Text->Equals("studio1")) ConfigManager::setConfigValue("ServerAddress", "10.0.0.50");
+	else if (serverText->Text->Equals("studio2")) ConfigManager::setConfigValue("ServerAddress", "10.0.0.40");
+	else if (serverText->Text->Equals("production")) ConfigManager::setConfigValue("ServerAddress", "10.0.0.14");
+	else if (serverText->Text->Equals("localhost")) ConfigManager::setConfigValue("ServerAddress", "127.0.0.1");
+	else ConfigManager::setConfigValue("ServerAddress", serverText->Text);
 	ConfigManager::setConfigValue("ServerPort", portText->Text);
 	ConfigManager::setConfigValue("DefaultUsername", usernameText->Text);
 	ConfigManager::setConfigValue("DefaultPassword", passwordText->Text);

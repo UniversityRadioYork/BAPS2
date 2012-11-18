@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="BAPS2">
+</Property><Property Name="Solution File" Value="C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPS2.sln">
+</Property><Property Name="Date" Value="17 July 2011">
+</Property><Property Name="Time" Value="16:22">
+</Property></Properties><Event ErrorLevel="0" Project="BAPSPresenter" Source="BAPSPresenter\BAPSPresenter.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="BAPSPresenter" Source="BAPSPresenter\BAPSPresenter.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="0" Project="BAPSPresenter" Source="BAPSPresenter\BAPSPresenter.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="BAPSPresenter" Source="BAPSPresenter\BAPSPresenter.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Tinker" Source="Tinker\Tinker.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="Tinker" Source="Tinker\Tinker.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="0" Project="Tinker" Source="Tinker\Tinker.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="Tinker" Source="Tinker\Tinker.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="BAPSServerAssembly" Source="BAPSServerAssembly\BAPSServerAssembly.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="BAPSServerAssembly" Source="BAPSServerAssembly\BAPSServerAssembly.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="0" Project="BAPSServerAssembly" Source="BAPSServerAssembly\BAPSServerAssembly.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="BAPSServerAssembly" Source="BAPSServerAssembly\BAPSServerAssembly.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="BAPSServerService" Source="BAPSServerService\BAPSServerService.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="BAPSServerService" Source="BAPSServerService\BAPSServerService.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="TinkerInCSharp" Source="TinkerInCSharp\TinkerInCSharp.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TinkerInCSharp" Source="TinkerInCSharp\TinkerInCSharp.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Tinkerinc++" Source="Tinkerinc++\Tinkerinc++.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="Tinkerinc++" Source="Tinkerinc++\Tinkerinc++.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="0" Project="Tinkerinc++" Source="Tinkerinc++\Tinkerinc++.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="Tinkerinc++" Source="Tinkerinc++\Tinkerinc++.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="BAPSFormControls" Source="BAPSFormControls\BAPSFormControls.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="BAPSFormControls" Source="BAPSFormControls\BAPSFormControls.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="BAPSController" Source="BAPSController\BAPSController.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="BAPSController" Source="BAPSController\BAPSController.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="0" Project="BAPSController" Source="BAPSController\BAPSController.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="BAPSController" Source="BAPSController\BAPSController.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="BAPS2.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="BAPS2.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="BAPSServerService" Source="BAPSServerService\BAPSServerService.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TinkerInCSharp" Source="TinkerInCSharp\TinkerInCSharp.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="BAPSFormControls" Source="BAPSFormControls\BAPSFormControls.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

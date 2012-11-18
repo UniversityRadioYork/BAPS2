@@ -82,9 +82,7 @@ System::Void LoadShowDialog::goButton_Click(System::Object ^  sender, System::Ev
 				listBox->Enabled = false;
 				goButton->Enabled = false;
 				/** Wipe the listbox in case we are doing this after going 'back' **/
-				listBox->clearList();
-				/** Set the description to the new text **/
-				dialogTitle->Text = "Select a show:";
+				listBox->Items->Clear();
 				/** Done fiddling **/
 				this->ResumeLayout(false);
 				this->PerformLayout();
@@ -121,18 +119,16 @@ System::Void LoadShowDialog::goButton_Click(System::Object ^  sender, System::Ev
 			if (listBox->Enabled)
 			{
 				/** Find out what the selection is **/
-				Name2Id^ selectedId = static_cast<Name2Id^>(listBox->getItem(listBox->SelectedIndex));
+				Name2Id^ selectedId = static_cast<Name2Id^>(listBox->Items[listBox->SelectedIndex]);
 				/** The Channel Count will be already in the cache as it is a non restricted config option
 				**/
 				Command cmd = BAPSNET_DATABASE | BAPSNET_GETLISTINGS;
 				msgQueue->Enqueue(gcnew ActionMessageU32int(cmd, selectedId->id));
 				/** Disable the stage 1 ui **/
-				listBox->clearList();
+				listBox->Items->Clear();
 				listBox->Enabled = false;
 				listBox->Visible = false;
 				goButton->Enabled = false;
-				/** Set the new title **/
-				dialogTitle->Text = "Select channels:";
 				/** Move to stage 2 **/
 				stage = 2;
 			}
@@ -140,7 +136,7 @@ System::Void LoadShowDialog::goButton_Click(System::Object ^  sender, System::Ev
 			{
 				/** This is a back button now **/
 				/** Clear the stage 1 ui **/
-				listBox->clearList();
+				listBox->Items->Clear();
 				listBox->Visible = false;
 				/** enable the stage 1 ui **/
 				todaysShowsRadio->Visible = true;
@@ -150,7 +146,6 @@ System::Void LoadShowDialog::goButton_Click(System::Object ^  sender, System::Ev
 				newShowsOnly->Visible = true;
 				/** Reset the Go button text and the title  **/
 				goButton->Text = "Go";
-				dialogTitle->Text = "Get list of shows for:";
 				/** Go back to stage 0 **/
 				stage = 0;
 			}
@@ -202,7 +197,7 @@ void LoadShowDialog::notifyError(System::Object^ _errorCode, System::String^ mes
 void LoadShowDialog::setShowResultCount(System::Object^ count)
 {
 	/** On receiving a new result count we empty the listbox ( it should already be empty ) **/
-	listBox->clearList();
+	listBox->Items->Clear();
 	/** Make sure the box is disabled **/
 	listBox->Enabled = false;
 	/** Set the count **/
@@ -212,15 +207,15 @@ void LoadShowDialog::setShowResultCount(System::Object^ count)
 		/** If it is 0 then there are no shows and we enable a back button, 
 			to choose another user etc
 		**/
-		listBox->addItem("No shows available");
+		listBox->Items->Add("No shows available");
 		goButton->Text = "Back";
 		goButton->Enabled = true;
 	}
 }
 void LoadShowDialog::addShow(System::Object^ id, System::String^ description)
 {
-	listBox->addItem(gcnew Name2Id(safe_cast<int>(id), description));
-	if (listBox->itemCount() == showResultCount)
+	listBox->Items->Add(gcnew Name2Id(safe_cast<int>(id), description));
+	if (listBox->Items->Count == showResultCount)
 	{
 		/** When the listbox is full enable it **/
 		listBox->Enabled = true;
@@ -259,7 +254,7 @@ void LoadShowDialog::addListing(System::Object^ _listingid, System::Object^ _cha
 	this->SuspendLayout();
 
 	/** As we receive more listings we go further down the form... **/
-	panel->Location = System::Drawing::Point(0, 64+((listingResultCount-listingResultCountLeft)*24));
+	panel->Location = System::Drawing::Point(0, 36+((listingResultCount-listingResultCountLeft)*24));
 	/** One less result **/
 	listingResultCountLeft--;
 	/** Set up standard control info **/
@@ -280,7 +275,7 @@ void LoadShowDialog::addListing(System::Object^ _listingid, System::Object^ _cha
 		{
 			/** When we get to the last listing we add the channel labels **/
 			System::Windows::Forms::Label^ label = gcnew System::Windows::Forms::Label();
-			label->Location = System::Drawing::Point(132+(i*24), 48);
+			label->Location = System::Drawing::Point(132+(i*24), 18);
 			label->Name = System::String::Concat("ChannelLabel", i.ToString());
 			label->Size = System::Drawing::Size(16, 16);
 			label->TabStop = false;
@@ -339,7 +334,7 @@ void LoadShowDialog::addListing(System::Object^ _listingid, System::Object^ _cha
 	{
 		/** When we get to the last listing we add the channel labels **/
 		System::Windows::Forms::Label^ label = gcnew System::Windows::Forms::Label();
-		label->Location = System::Drawing::Point(125+((totalChannels+1)*24), 48);
+		label->Location = System::Drawing::Point(125+((totalChannels+1)*24), 18);
 		label->Size = System::Drawing::Size(100, 16);
 		label->TabStop = false;
 		label->BackColor = System::Drawing::Color::Transparent;
