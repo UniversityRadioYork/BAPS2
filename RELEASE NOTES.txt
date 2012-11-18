@@ -1,0 +1,248 @@
+##
+Release 2.6.2 v0
+--
+Features
+--
+New USB based BAPS Controller module
+Updated record library search to allow dirty search
+Dirty items are marked with 2 stars in the results
+Unknown items are marked with 1 star in the results
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+None
+--
+
+##
+Release 2.6 v0
+--
+Features
+--
+Now uses new recordlibrary tables rec_*
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+None
+--
+
+##
+Release 2.5 v0
+--
+Features
+--
+server state now stored to xml config file and restored on startup
+timers in client disabled and hidden by default
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+None
+--
+##
+Release 2.4 v2
+--
+Features
+--
+None
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+Searching by release date now allows blank artist and title
+timeline dragging cant go past 'now'
+--
+##
+Release 2.4 v1
+--
+Features
+--
+1) Second automation attempt (more reliable but not final)
+2) Config option to restrict using non clean music
+3) Search record library by release date
+4) about box now on ctrl+alt+a
+5) ctrl a now selects all in large news window
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+None
+--
+##
+Release 2.3 v1
+--
+Features
+--
+1) First attempt at automation
+2) Removed attempt to fetch audio using 'location' field
+3) Find shows for 'today'
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+None
+--
+##
+Release 2.2 v1
+--
+Features
+--
+1) Channels renamed to 1, 2, 3
+2) load show message changed to 'E-mail / BAPS showid'
+3) autoscroll on track list
+4) Optional channel clearing when loading show
+5) No loading audio while channel is busy playing
+6) 'Search again' option in record library
+7) order by functionality in record library
+8) Scroll on hold up down scrollbar button
+9) no play while playing
+10) flashing warning when attempting to load when playing
+11) countdown to track end flasher
+12) Load show from list of today's shows
+--
+Known Issues
+--
+Epilepsy warning
+--
+Bug Fixes
+--
+None
+--
+
+##
+Release 2.1 v4
+--
+Features
+--
+Implementation of 'fader/button start' code
+--
+Known Issues
+--
+None
+--
+Bug Fixes
+--
+Deleting a loaded track no longer causes config flags to be reset
+Possibly found the config system bug server side and client side
+Stopped the about window from being able to open another about window
+Stopped the load show windows from being able to open another load show window
+Disallow use of ctrl+a in text window
+--
+
+##
+Release 2.1 v3
+--
+Features:
+--
+Playback control from any window
+defaults to 'other user' in load show
+baps controller can be enabled/disabled
+--
+Known Issues
+--
+Config System occasionally crashes in client due to drop downs (presumed)
+--
+Bug Fixes
+--
+Starting audio from audiowall no longer loads if it is already loaded
+Cue and Intro positions save for duration of session
+Cue positions are now per track rather than on a load by load basis
+Text screen can no longer be closed by alt+F4 (crashfix)
+Guarded the serial port close statement to ensure a port is open before being closed
+Mutex releases removed from error states as they were causing double releases due to finally blocks
+No Close for audiowall
+--
+
+##
+Release 2.1 v1
+--
+Features:
+Audiowall
+--
+Known Issues:
+--
+Config system causes presenter crash when saving sporadically, although save is successful. (object disposed exception when receiving config update)
+--
+Bug Fixes
+--
+NONE
+--
+
+##
+Release 2.0 v3
+--
+Features:
+--
+NONE
+--
+Known Issues:
+--
+Config system causes presenter crash when saving sporadically, although save is successful. (object disposed exception when receiving config update)
+--
+Bug Fixes:
+--
+Channel config for automatic advance, play on load and repeat, are reset when a channel is reset
+The load show form clears the help text in the username box when it gets focus
+--
+
+##
+Release 2.0 V2
+--
+Features:
+--
+Updated Help System
+Added default username and password to BAPS Presenter
+--
+Known Issues:
+--
+Config system causes presenter crash when saving sporadically, although save is successful. (object disposed exception when receiving config update)
+--
+Bug Fixes:
+--
+Maximizing windows works regardless of varying screen resolutions
+Altered play button in channel 2 to read F5 instead of F4.
+Cannot delete playing track now
+--
+
+##
+Initial release 2.0
+--
+Features:
+--
+NONE
+--
+Known Issues:
+--
+1) Maximizing windows on multi screen systems of varying resoutions chooses to maximize to the primary screen size rather than the current screen size
+2) Config system causes presenter crash when saving sporadically, although save is successful. (object disposed exception when receiving config update)
+--
+
+
+
+
+
+
+
+
+
+
+

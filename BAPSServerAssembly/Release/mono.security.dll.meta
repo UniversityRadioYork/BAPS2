@@ -1,0 +1,1644 @@
+Assembly Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756: 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Class Mono.Math.BigInteger: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Sign, UInt32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Math.BigInteger): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Math.BigInteger, UInt32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(UInt32[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(UInt32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(UInt64): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Parse(String): PrivateScope, Public, Static, HideBySig
+    Add(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig
+    Subtract(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig
+    Modulus(BigInteger, Int32): PrivateScope, Public, Static, HideBySig
+    Modulus(BigInteger, UInt32): PrivateScope, Public, Static, HideBySig
+    Modulus(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig
+    Divid(BigInteger, Int32): PrivateScope, Public, Static, HideBySig
+    Divid(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig
+    Multiply(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig
+    Multiply(BigInteger, Int32): PrivateScope, Public, Static, HideBySig
+    GenerateRandom(Int32, RandomNumberGenerator): PrivateScope, Public, Static, HideBySig
+    GenerateRandom(Int32): PrivateScope, Public, Static, HideBySig
+    Randomize(RandomNumberGenerator): PrivateScope, Public, HideBySig
+    Randomize(): PrivateScope, Public, HideBySig
+    BitCount(): PrivateScope, Public, HideBySig
+    TestBit(UInt32): PrivateScope, Public, HideBySig
+    TestBit(Int32): PrivateScope, Public, HideBySig
+    SetBit(UInt32): PrivateScope, Public, HideBySig
+    ClearBit(UInt32): PrivateScope, Public, HideBySig
+    SetBit(UInt32, Boolean): PrivateScope, Public, HideBySig
+    LowestSetBit(): PrivateScope, Public, HideBySig
+    GetBytes(): PrivateScope, Public, HideBySig
+    Compare(BigInteger): PrivateScope, Public, HideBySig
+    ToString(UInt32): PrivateScope, Public, HideBySig
+    ToString(UInt32, String): PrivateScope, Public, HideBySig
+    Clear(): PrivateScope, Public, HideBySig
+    GetHashCode(): PrivateScope, Public, Virtual, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+    Equals(Object): PrivateScope, Public, Virtual, HideBySig
+    GCD(BigInteger): PrivateScope, Public, HideBySig
+    ModInverse(BigInteger): PrivateScope, Public, HideBySig
+    ModPow(BigInteger, BigInteger): PrivateScope, Public, HideBySig
+    IsProbablePrime(): PrivateScope, Public, HideBySig
+    NextHighestPrime(BigInteger): PrivateScope, Public, Static, HideBySig
+    GeneratePseudoPrime(Int32): PrivateScope, Public, Static, HideBySig
+    Incr2(): PrivateScope, Public, HideBySig
+    op_Implicit(UInt32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Implicit(Int32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Implicit(UInt64): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Addition(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Subtraction(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Modulus(BigInteger, Int32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Modulus(BigInteger, UInt32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Modulus(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Division(BigInteger, Int32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Division(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Multiply(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Multiply(BigInteger, Int32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_LeftShift(BigInteger, Int32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_RightShift(BigInteger, Int32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Equality(BigInteger, UInt32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Inequality(BigInteger, UInt32): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Equality(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Inequality(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_GreaterThan(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_LessThan(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_GreaterThanOrEqual(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_LessThanOrEqual(BigInteger, BigInteger): PrivateScope, Public, Static, HideBySig, SpecialName
+Class Mono.Math.BigInteger+ModulusRing: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+    Void .ctor(Mono.Math.BigInteger): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    BarrettReduction(BigInteger): PrivateScope, Public, HideBySig
+    Multiply(BigInteger, BigInteger): PrivateScope, Public, HideBySig
+    Difference(BigInteger, BigInteger): PrivateScope, Public, HideBySig
+    Pow(BigInteger, BigInteger): PrivateScope, Public, HideBySig
+    EvenPow(BigInteger, BigInteger): PrivateScope, Public, HideBySig
+    Pow(UInt32, BigInteger): PrivateScope, Public, HideBySig
+Struct Mono.Math.BigInteger+Sign: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Sign Negative = -1 : Public, Static, Literal, HasDefault
+    Sign Zero = 0 : Public, Static, Literal, HasDefault
+    Sign Positive = 1 : Public, Static, Literal, HasDefault
+Class Mono.Math.Prime.PrimalityTests: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Methods:
+    RabinMillerTest(BigInteger, ConfidenceFactor): PrivateScope, Public, Static, HideBySig
+    SmallPrimeSppTest(BigInteger, ConfidenceFactor): PrivateScope, Public, Static, HideBySig
+Class Mono.Math.Prime.Generator.NextPrimeFinder: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Math.Prime.Generator.SequentialSearchPrimeGeneratorBase
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Math.Prime.Generator.SequentialSearchPrimeGeneratorBase: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Math.Prime.Generator.PrimeGeneratorBase
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    GenerateNewPrime(Int32): PrivateScope, Public, Virtual, HideBySig
+    GenerateNewPrime(Int32, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Math.Prime.Generator.PrimeGeneratorBase: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  Properties:
+    Mono.Math.Prime.ConfidenceFactor Confidence 'get ' : 
+    Mono.Math.Prime.PrimalityTest PrimalityTest 'get ' : 
+    Int32 TrialDivisionBounds 'get ' : 
+  Methods:
+    get_Confidence(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_PrimalityTest(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_TrialDivisionBounds(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    GenerateNewPrime(Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class Mono.Security.ASN1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte, Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Int32 Count 'get ' : 
+    Byte Tag   'get ' : 
+    Int32 Length 'get ' : 
+    Byte[] Value 'get set' : 
+    Mono.Security.ASN1 Item [Int32] 'get ' : 
+  Methods:
+    get_Count(): PrivateScope, Public, HideBySig, SpecialName
+    get_Tag(): PrivateScope, Public, HideBySig, SpecialName
+    get_Length(): PrivateScope, Public, HideBySig, SpecialName
+    get_Value(): PrivateScope, Public, HideBySig, SpecialName
+    set_Value(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_Item(Int32): PrivateScope, Public, HideBySig, SpecialName
+    Equals(Byte[]): PrivateScope, Public, HideBySig
+    CompareValue(Byte[]): PrivateScope, Public, HideBySig
+    Add(ASN1): PrivateScope, Public, HideBySig
+    GetBytes(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Element(Int32, Byte): PrivateScope, Public, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+    SaveToFile(String): PrivateScope, Public, HideBySig
+Class Mono.Security.ASN1Convert: AutoLayout, AnsiClass, Class, Public, Abstract, Sealed, BeforeFieldInit
+  Methods:
+    FromDateTime(DateTime): PrivateScope, Public, Static, HideBySig
+    FromInt32(Int32): PrivateScope, Public, Static, HideBySig
+    FromOid(String): PrivateScope, Public, Static, HideBySig
+    FromUnsignedBigInteger(Byte[]): PrivateScope, Public, Static, HideBySig
+    ToInt32(ASN1): PrivateScope, Public, Static, HideBySig
+    ToOid(ASN1): PrivateScope, Public, Static, HideBySig
+    ToDateTime(ASN1): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.PKCS7: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Methods:
+    Attribute(String, ASN1): PrivateScope, Public, Static, HideBySig
+    AlgorithmIdentifier(String): PrivateScope, Public, Static, HideBySig
+    AlgorithmIdentifier(String, ASN1): PrivateScope, Public, Static, HideBySig
+    IssuerAndSerialNumber(X509Certificate): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.PKCS7+Oid: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String rsaEncryption = 1.2.840.113549.1.1.1 : Public, Static, Literal, HasDefault
+    System.String data = 1.2.840.113549.1.7.1 : Public, Static, Literal, HasDefault
+    System.String signedData = 1.2.840.113549.1.7.2 : Public, Static, Literal, HasDefault
+    System.String envelopedData = 1.2.840.113549.1.7.3 : Public, Static, Literal, HasDefault
+    System.String signedAndEnvelopedData = 1.2.840.113549.1.7.4 : Public, Static, Literal, HasDefault
+    System.String digestedData = 1.2.840.113549.1.7.5 : Public, Static, Literal, HasDefault
+    System.String encryptedData = 1.2.840.113549.1.7.6 : Public, Static, Literal, HasDefault
+    System.String contentType = 1.2.840.113549.1.9.3 : Public, Static, Literal, HasDefault
+    System.String messageDigest = 1.2.840.113549.1.9.4 : Public, Static, Literal, HasDefault
+    System.String signingTime = 1.2.840.113549.1.9.5 : Public, Static, Literal, HasDefault
+    System.String countersignature = 1.2.840.113549.1.9.6 : Public, Static, Literal, HasDefault
+Class Mono.Security.PKCS7+ContentInfo: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.ASN1 ASN1 'get ' : 
+    Mono.Security.ASN1 Content 'get set' : 
+    System.String ContentType 'get set' : 
+  Methods:
+    get_ASN1(): PrivateScope, Public, HideBySig, SpecialName
+    get_Content(): PrivateScope, Public, HideBySig, SpecialName
+    set_Content(ASN1): PrivateScope, Public, HideBySig, SpecialName
+    get_ContentType(): PrivateScope, Public, HideBySig, SpecialName
+    set_ContentType(String): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, HideBySig
+Class Mono.Security.PKCS7+EncryptedData: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.ASN1 ASN1 'get ' : 
+    ContentInfo ContentInfo 'get ' : 
+    ContentInfo EncryptionAlgorithm 'get ' : 
+    Byte[] EncryptedContent 'get ' : 
+    Byte Version 'get set' : 
+  Methods:
+    get_ASN1(): PrivateScope, Public, HideBySig, SpecialName
+    get_ContentInfo(): PrivateScope, Public, HideBySig, SpecialName
+    get_EncryptionAlgorithm(): PrivateScope, Public, HideBySig, SpecialName
+    get_EncryptedContent(): PrivateScope, Public, HideBySig, SpecialName
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+    set_Version(Byte): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, HideBySig
+Class Mono.Security.PKCS7+EnvelopedData: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Collections.ArrayList RecipientInfos 'get ' : 
+    Mono.Security.ASN1 ASN1 'get ' : 
+    ContentInfo ContentInfo 'get ' : 
+    ContentInfo EncryptionAlgorithm 'get ' : 
+    Byte[] EncryptedContent 'get ' : 
+    Byte Version 'get set' : 
+  Methods:
+    get_RecipientInfos(): PrivateScope, Public, HideBySig, SpecialName
+    get_ASN1(): PrivateScope, Public, HideBySig, SpecialName
+    get_ContentInfo(): PrivateScope, Public, HideBySig, SpecialName
+    get_EncryptionAlgorithm(): PrivateScope, Public, HideBySig, SpecialName
+    get_EncryptedContent(): PrivateScope, Public, HideBySig, SpecialName
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+    set_Version(Byte): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, HideBySig
+Class Mono.Security.PKCS7+RecipientInfo: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Oid 'get ' : 
+    Byte[] Key 'get ' : 
+    Byte[] SubjectKeyIdentifier 'get ' : 
+    System.String Issuer 'get ' : 
+    Byte[] Serial 'get ' : 
+    Int32 Version 'get ' : 
+  Methods:
+    get_Oid(): PrivateScope, Public, HideBySig, SpecialName
+    get_Key(): PrivateScope, Public, HideBySig, SpecialName
+    get_SubjectKeyIdentifier(): PrivateScope, Public, HideBySig, SpecialName
+    get_Issuer(): PrivateScope, Public, HideBySig, SpecialName
+    get_Serial(): PrivateScope, Public, HideBySig, SpecialName
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+Class Mono.Security.PKCS7+SignedData: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.ASN1 ASN1 'get ' : 
+    Mono.Security.X509.X509CertificateCollection Certificates 'get ' : 
+    ContentInfo ContentInfo 'get ' : 
+    System.Collections.ArrayList Crls 'get ' : 
+    System.String HashName 'get set' : 
+    SignerInfo SignerInfo 'get ' : 
+    Byte Version 'get set' : 
+    Boolean UseAuthenticatedAttributes 'get set' : 
+  Methods:
+    get_ASN1(): PrivateScope, Public, HideBySig, SpecialName
+    get_Certificates(): PrivateScope, Public, HideBySig, SpecialName
+    get_ContentInfo(): PrivateScope, Public, HideBySig, SpecialName
+    get_Crls(): PrivateScope, Public, HideBySig, SpecialName
+    get_HashName(): PrivateScope, Public, HideBySig, SpecialName
+    set_HashName(String): PrivateScope, Public, HideBySig, SpecialName
+    get_SignerInfo(): PrivateScope, Public, HideBySig, SpecialName
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+    set_Version(Byte): PrivateScope, Public, HideBySig, SpecialName
+    get_UseAuthenticatedAttributes(): PrivateScope, Public, HideBySig, SpecialName
+    set_UseAuthenticatedAttributes(Boolean): PrivateScope, Public, HideBySig, SpecialName
+    VerifySignature(AsymmetricAlgorithm): PrivateScope, Public, HideBySig
+    GetBytes(): PrivateScope, Public, HideBySig
+Class Mono.Security.PKCS7+SignerInfo: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String IssuerName 'get ' : 
+    Byte[] SerialNumber 'get ' : 
+    Byte[] SubjectKeyIdentifier 'get ' : 
+    Mono.Security.ASN1 ASN1 'get ' : 
+    System.Collections.ArrayList AuthenticatedAttributes 'get ' : 
+    Mono.Security.X509.X509Certificate Certificate 'get set' : 
+    System.String HashName 'get set' : 
+    System.Security.Cryptography.AsymmetricAlgorithm Key 'get set' : 
+    Byte[] Signature 'get set' : 
+    System.Collections.ArrayList UnauthenticatedAttributes 'get ' : 
+    Byte Version 'get set' : 
+  Methods:
+    get_IssuerName(): PrivateScope, Public, HideBySig, SpecialName
+    get_SerialNumber(): PrivateScope, Public, HideBySig, SpecialName
+    get_SubjectKeyIdentifier(): PrivateScope, Public, HideBySig, SpecialName
+    get_ASN1(): PrivateScope, Public, HideBySig, SpecialName
+    get_AuthenticatedAttributes(): PrivateScope, Public, HideBySig, SpecialName
+    get_Certificate(): PrivateScope, Public, HideBySig, SpecialName
+    set_Certificate(X509Certificate): PrivateScope, Public, HideBySig, SpecialName
+    get_HashName(): PrivateScope, Public, HideBySig, SpecialName
+    set_HashName(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Key(): PrivateScope, Public, HideBySig, SpecialName
+    set_Key(AsymmetricAlgorithm): PrivateScope, Public, HideBySig, SpecialName
+    get_Signature(): PrivateScope, Public, HideBySig, SpecialName
+    set_Signature(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_UnauthenticatedAttributes(): PrivateScope, Public, HideBySig, SpecialName
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+    set_Version(Byte): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, HideBySig
+Class Mono.Security.StrongName: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Security.Cryptography.RSA): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Boolean CanSign 'get ' : 
+    System.Security.Cryptography.RSA RSA 'get set' : 
+    Byte[] PublicKey 'get ' : 
+    Byte[] PublicKeyToken 'get ' : 
+    System.String TokenAlgorithm 'get set' : 
+  Methods:
+    get_CanSign(): PrivateScope, Public, HideBySig, SpecialName
+    get_RSA(): PrivateScope, Public, HideBySig, SpecialName
+    set_RSA(RSA): PrivateScope, Public, HideBySig, SpecialName
+    get_PublicKey(): PrivateScope, Public, HideBySig, SpecialName
+    get_PublicKeyToken(): PrivateScope, Public, HideBySig, SpecialName
+    get_TokenAlgorithm(): PrivateScope, Public, HideBySig, SpecialName
+    set_TokenAlgorithm(String): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, HideBySig
+    Hash(String): PrivateScope, Public, HideBySig
+    Sign(String): PrivateScope, Public, HideBySig
+    Verify(String): PrivateScope, Public, HideBySig
+Class Mono.Security.Authenticode.AuthenticodeBase: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String spcIndirectDataContext = 1.3.6.1.4.1.311.2.1.4 : Public, Static, Literal, HasDefault
+Class Mono.Security.Authenticode.AuthenticodeDeformatter: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Authenticode.AuthenticodeBase
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String FileName 'get set' : 
+    Byte[] Hash 'get ' : 
+    Int32 Reason 'get ' : 
+    Byte[] Signature 'get ' : 
+    System.DateTime Timestamp 'get ' : 
+    Mono.Security.X509.X509CertificateCollection Certificates 'get ' : 
+    Mono.Security.X509.X509Certificate SigningCertificate 'get ' : 
+  Methods:
+    get_FileName(): PrivateScope, Public, HideBySig, SpecialName
+    set_FileName(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Hash(): PrivateScope, Public, HideBySig, SpecialName
+    get_Reason(): PrivateScope, Public, HideBySig, SpecialName
+    get_Signature(): PrivateScope, Public, HideBySig, SpecialName
+    get_Timestamp(): PrivateScope, Public, HideBySig, SpecialName
+    get_Certificates(): PrivateScope, Public, HideBySig, SpecialName
+    get_SigningCertificate(): PrivateScope, Public, HideBySig, SpecialName
+    IsTrusted(): PrivateScope, Public, HideBySig
+Class Mono.Security.Authenticode.AuthenticodeFormatter: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Authenticode.AuthenticodeBase
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.Authenticode.Authority Authority 'get set' : 
+    Mono.Security.X509.X509CertificateCollection Certificates 'get ' : 
+    System.Collections.ArrayList Crl 'get ' : 
+    System.String Hash 'get set' : 
+    System.Security.Cryptography.RSA RSA 'get set' : 
+    System.Uri TimestampUrl 'get set' : 
+    System.String Description 'get set' : 
+    System.Uri Url 'get set' : 
+  Methods:
+    get_Authority(): PrivateScope, Public, HideBySig, SpecialName
+    set_Authority(Authority): PrivateScope, Public, HideBySig, SpecialName
+    get_Certificates(): PrivateScope, Public, HideBySig, SpecialName
+    get_Crl(): PrivateScope, Public, HideBySig, SpecialName
+    get_Hash(): PrivateScope, Public, HideBySig, SpecialName
+    set_Hash(String): PrivateScope, Public, HideBySig, SpecialName
+    get_RSA(): PrivateScope, Public, HideBySig, SpecialName
+    set_RSA(RSA): PrivateScope, Public, HideBySig, SpecialName
+    get_TimestampUrl(): PrivateScope, Public, HideBySig, SpecialName
+    set_TimestampUrl(Uri): PrivateScope, Public, HideBySig, SpecialName
+    get_Description(): PrivateScope, Public, HideBySig, SpecialName
+    set_Description(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Url(): PrivateScope, Public, HideBySig, SpecialName
+    set_Url(Uri): PrivateScope, Public, HideBySig, SpecialName
+    TimestampRequest(Byte[]): PrivateScope, Public, HideBySig
+    ProcessTimestamp(Byte[]): PrivateScope, Public, HideBySig
+    Sign(String): PrivateScope, Public, HideBySig
+    Timestamp(String): PrivateScope, Public, HideBySig
+Class Mono.Security.Authenticode.SoftwarePublisherCertificate: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.X509.X509CertificateCollection Certificates 'get ' : 
+    System.Collections.ArrayList Crls 'get ' : 
+  Methods:
+    get_Certificates(): PrivateScope, Public, HideBySig, SpecialName
+    get_Crls(): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, HideBySig
+    CreateFromFile(String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Authenticode.PrivateKey: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[], System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Boolean Encrypted 'get ' : 
+    Int32 KeyType 'get set' : 
+    System.Security.Cryptography.RSA RSA 'get set' : 
+    Boolean Weak 'get set' : 
+  Methods:
+    get_Encrypted(): PrivateScope, Public, HideBySig, SpecialName
+    get_KeyType(): PrivateScope, Public, HideBySig, SpecialName
+    set_KeyType(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_RSA(): PrivateScope, Public, HideBySig, SpecialName
+    set_RSA(RSA): PrivateScope, Public, HideBySig, SpecialName
+    get_Weak(): PrivateScope, Public, HideBySig, SpecialName
+    set_Weak(Boolean): PrivateScope, Public, HideBySig, SpecialName
+    Save(String): PrivateScope, Public, HideBySig
+    Save(String, String): PrivateScope, Public, HideBySig
+    CreateFromFile(String): PrivateScope, Public, Static, HideBySig
+    CreateFromFile(String, String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.ARC4Managed: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Cryptography.RC4
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Security.Cryptography.ICryptoTransform
+  Properties:
+    Byte[] Key 'get set' : 
+    Boolean CanReuseTransform 'get ' : 
+    Boolean CanTransformMultipleBlocks 'get ' : 
+    Int32 InputBlockSize 'get ' : 
+    Int32 OutputBlockSize 'get ' : 
+  Methods:
+    get_Key(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_Key(Byte[]): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_CanReuseTransform(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_CanTransformMultipleBlocks(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_InputBlockSize(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_OutputBlockSize(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    CreateEncryptor(Byte[], Byte[]): PrivateScope, Public, Virtual, HideBySig
+    CreateDecryptor(Byte[], Byte[]): PrivateScope, Public, Virtual, HideBySig
+    GenerateIV(): PrivateScope, Public, Virtual, HideBySig
+    GenerateKey(): PrivateScope, Public, Virtual, HideBySig
+    TransformBlock(Byte[], Int32, Int32, Byte[], Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    TransformFinalBlock(Byte[], Int32, Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Security.Cryptography.RC4: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :System.Security.Cryptography.SymmetricAlgorithm
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Byte[] IV  'get set' : 
+  Methods:
+    get_IV(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_IV(Byte[]): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    Create(): PrivateScope, Public, Static, HideBySig
+    Create(String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.CryptoConvert: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Methods:
+    FromCapiPrivateKeyBlob(Byte[]): PrivateScope, Public, Static, HideBySig
+    FromCapiPrivateKeyBlob(Byte[], Int32): PrivateScope, Public, Static, HideBySig
+    ToCapiPrivateKeyBlob(RSA): PrivateScope, Public, Static, HideBySig
+    FromCapiPublicKeyBlob(Byte[]): PrivateScope, Public, Static, HideBySig
+    FromCapiPublicKeyBlob(Byte[], Int32): PrivateScope, Public, Static, HideBySig
+    ToCapiPublicKeyBlob(RSA): PrivateScope, Public, Static, HideBySig
+    FromCapiKeyBlob(Byte[]): PrivateScope, Public, Static, HideBySig
+    FromCapiKeyBlob(Byte[], Int32): PrivateScope, Public, Static, HideBySig
+    ToCapiKeyBlob(AsymmetricAlgorithm, Boolean): PrivateScope, Public, Static, HideBySig
+    ToCapiKeyBlob(RSA, Boolean): PrivateScope, Public, Static, HideBySig
+    ToHex(Byte[]): PrivateScope, Public, Static, HideBySig
+    FromHex(String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.KeyBuilder: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Methods:
+    Key(Int32): PrivateScope, Public, Static, HideBySig
+    IV(Int32): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.BlockProcessor: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(System.Security.Cryptography.ICryptoTransform): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Security.Cryptography.ICryptoTransform, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Initialize(): PrivateScope, Public, HideBySig
+    Core(Byte[]): PrivateScope, Public, HideBySig
+    Core(Byte[], Int32, Int32): PrivateScope, Public, HideBySig
+    Final(): PrivateScope, Public, HideBySig
+Struct Mono.Security.Cryptography.DHParameters: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, Serializable, BeforeFieldInit
+  :System.ValueType
+  Fields:
+    Byte[] P : Public
+    Byte[] G : Public
+    Byte[] X : Public, NotSerialized
+Class Mono.Security.Cryptography.DiffieHellman: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :System.Security.Cryptography.AsymmetricAlgorithm
+  Methods:
+    Create(): PrivateScope, Public, Static, HideBySig
+    Create(String): PrivateScope, Public, Static, HideBySig
+    CreateKeyExchange(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    DecryptKeyExchange(Byte[]): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ExportParameters(Boolean): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ImportParameters(DHParameters): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    FromXmlString(String): PrivateScope, Public, Virtual, HideBySig
+    ToXmlString(Boolean): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.Cryptography.DiffieHellmanManaged: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :Mono.Security.Cryptography.DiffieHellman
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Int32, Int32, Mono.Security.Cryptography.DHKeyGeneration): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[], Byte[], Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[], Byte[], Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String KeyExchangeAlgorithm 'get ' : 
+    System.String SignatureAlgorithm 'get ' : 
+  Methods:
+    get_KeyExchangeAlgorithm(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_SignatureAlgorithm(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    CreateKeyExchange(): PrivateScope, Public, Virtual, HideBySig
+    DecryptKeyExchange(Byte[]): PrivateScope, Public, Virtual, HideBySig
+    ExportParameters(Boolean): PrivateScope, Public, Virtual, HideBySig
+    ImportParameters(DHParameters): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.Cryptography.KeyPairPersistence: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(System.Security.Cryptography.CspParameters): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Security.Cryptography.CspParameters, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Filename 'get ' : 
+    System.String KeyValue 'get set' : 
+    System.Security.Cryptography.CspParameters Parameters 'get ' : 
+  Methods:
+    get_Filename(): PrivateScope, Public, HideBySig, SpecialName
+    get_KeyValue(): PrivateScope, Public, HideBySig, SpecialName
+    set_KeyValue(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Parameters(): PrivateScope, Public, HideBySig, SpecialName
+    Load(): PrivateScope, Public, HideBySig
+    Save(): PrivateScope, Public, HideBySig
+    Remove(): PrivateScope, Public, HideBySig
+Class Mono.Security.Cryptography.MD2: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :System.Security.Cryptography.HashAlgorithm
+  Methods:
+    Create(): PrivateScope, Public, Static, HideBySig
+    Create(String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.MD2Managed: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Cryptography.MD2
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Initialize(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.Cryptography.MD4: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :System.Security.Cryptography.HashAlgorithm
+  Methods:
+    Create(): PrivateScope, Public, Static, HideBySig
+    Create(String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.MD4Managed: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Cryptography.MD4
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Initialize(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.Cryptography.PKCS1: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Methods:
+    I2OSP(Int32, Int32): PrivateScope, Public, Static, HideBySig
+    I2OSP(Byte[], Int32): PrivateScope, Public, Static, HideBySig
+    OS2IP(Byte[]): PrivateScope, Public, Static, HideBySig
+    RSAEP(RSA, Byte[]): PrivateScope, Public, Static, HideBySig
+    RSADP(RSA, Byte[]): PrivateScope, Public, Static, HideBySig
+    RSASP1(RSA, Byte[]): PrivateScope, Public, Static, HideBySig
+    RSAVP1(RSA, Byte[]): PrivateScope, Public, Static, HideBySig
+    Encrypt_OAEP(RSA, HashAlgorithm, RandomNumberGenerator, Byte[]): PrivateScope, Public, Static, HideBySig
+    Decrypt_OAEP(RSA, HashAlgorithm, Byte[]): PrivateScope, Public, Static, HideBySig
+    Encrypt_v15(RSA, RandomNumberGenerator, Byte[]): PrivateScope, Public, Static, HideBySig
+    Decrypt_v15(RSA, Byte[]): PrivateScope, Public, Static, HideBySig
+    Sign_v15(RSA, HashAlgorithm, Byte[]): PrivateScope, Public, Static, HideBySig
+    Verify_v15(RSA, HashAlgorithm, Byte[], Byte[]): PrivateScope, Public, Static, HideBySig
+    Encode_v15(HashAlgorithm, Byte[], Int32): PrivateScope, Public, Static, HideBySig
+    MGF1(HashAlgorithm, Byte[], Int32): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.PKCS8: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Methods:
+    GetType(Byte[]): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.PKCS8+PrivateKeyInfo: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Algorithm 'get set' : 
+    System.Collections.ArrayList Attributes 'get ' : 
+    Byte[] PrivateKey 'get set' : 
+    Int32 Version 'get set' : 
+  Methods:
+    get_Algorithm(): PrivateScope, Public, HideBySig, SpecialName
+    set_Algorithm(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Attributes(): PrivateScope, Public, HideBySig, SpecialName
+    get_PrivateKey(): PrivateScope, Public, HideBySig, SpecialName
+    set_PrivateKey(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+    set_Version(Int32): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, HideBySig
+    DecodeRSA(Byte[]): PrivateScope, Public, Static, HideBySig
+    Encode(RSA): PrivateScope, Public, Static, HideBySig
+    DecodeDSA(Byte[], DSAParameters): PrivateScope, Public, Static, HideBySig
+    Encode(DSA): PrivateScope, Public, Static, HideBySig
+    Encode(AsymmetricAlgorithm): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.PKCS8+EncryptedPrivateKeyInfo: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Algorithm 'get set' : 
+    Byte[] EncryptedData 'get set' : 
+    Byte[] Salt 'get set' : 
+    Int32 IterationCount 'get set' : 
+  Methods:
+    get_Algorithm(): PrivateScope, Public, HideBySig, SpecialName
+    set_Algorithm(String): PrivateScope, Public, HideBySig, SpecialName
+    get_EncryptedData(): PrivateScope, Public, HideBySig, SpecialName
+    set_EncryptedData(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_Salt(): PrivateScope, Public, HideBySig, SpecialName
+    set_Salt(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_IterationCount(): PrivateScope, Public, HideBySig, SpecialName
+    set_IterationCount(Int32): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, HideBySig
+Struct Mono.Security.Cryptography.PKCS8+KeyInfo: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    KeyInfo PrivateKey = 0 : Public, Static, Literal, HasDefault
+    KeyInfo Unknown = 2 : Public, Static, Literal, HasDefault
+    KeyInfo EncryptedPrivateKey = 1 : Public, Static, Literal, HasDefault
+Class Mono.Security.Cryptography.RSAManaged: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Security.Cryptography.RSA
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Int32 KeySize 'get ' : 
+    System.String KeyExchangeAlgorithm 'get ' : 
+    Boolean PublicOnly 'get ' : 
+    System.String SignatureAlgorithm 'get ' : 
+    Boolean UseKeyBlinding 'get set' : 
+    Boolean IsCrtPossible 'get ' : 
+  Events:
+    KeyGeneratedEventHandler KeyGenerated: 
+  Methods:
+    get_KeySize(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_KeyExchangeAlgorithm(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_PublicOnly(): PrivateScope, Public, HideBySig, SpecialName
+    get_SignatureAlgorithm(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_UseKeyBlinding(): PrivateScope, Public, HideBySig, SpecialName
+    set_UseKeyBlinding(Boolean): PrivateScope, Public, HideBySig, SpecialName
+    get_IsCrtPossible(): PrivateScope, Public, HideBySig, SpecialName
+    add_KeyGenerated(KeyGeneratedEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_KeyGenerated(KeyGeneratedEventHandler): PrivateScope, Public, HideBySig, SpecialName
+    DecryptValue(Byte[]): PrivateScope, Public, Virtual, HideBySig
+    EncryptValue(Byte[]): PrivateScope, Public, Virtual, HideBySig
+    ExportParameters(Boolean): PrivateScope, Public, Virtual, HideBySig
+    ImportParameters(RSAParameters): PrivateScope, Public, Virtual, HideBySig
+    ToXmlString(Boolean): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.Cryptography.RSAManaged+KeyGeneratedEventHandler: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Object, EventArgs): PrivateScope, Public, Virtual, HideBySig
+    BeginInvoke(Object, EventArgs, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Security.Cryptography.SHA224: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :System.Security.Cryptography.HashAlgorithm
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Create(): PrivateScope, Public, Static, HideBySig
+    Create(String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.Cryptography.SHA224Managed: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Cryptography.SHA224
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Initialize(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.PKCS5: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String pbeWithMD2AndDESCBC = 1.2.840.113549.1.5.1 : Public, Static, Literal, HasDefault
+    System.String pbeWithMD5AndDESCBC = 1.2.840.113549.1.5.3 : Public, Static, Literal, HasDefault
+    System.String pbeWithMD2AndRC2CBC = 1.2.840.113549.1.5.4 : Public, Static, Literal, HasDefault
+    System.String pbeWithMD5AndRC2CBC = 1.2.840.113549.1.5.6 : Public, Static, Literal, HasDefault
+    System.String pbeWithSHA1AndDESCBC = 1.2.840.113549.1.5.10 : Public, Static, Literal, HasDefault
+    System.String pbeWithSHA1AndRC2CBC = 1.2.840.113549.1.5.11 : Public, Static, Literal, HasDefault
+Class Mono.Security.X509.PKCS9: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String friendlyName = 1.2.840.113549.1.9.20 : Public, Static, Literal, HasDefault
+    System.String localKeyId = 1.2.840.113549.1.9.21 : Public, Static, Literal, HasDefault
+Class Mono.Security.X509.PKCS12: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[], System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[], Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.ICloneable
+  Fields:
+    System.String pbeWithSHAAnd128BitRC4 = 1.2.840.113549.1.12.1.1 : Public, Static, Literal, HasDefault
+    System.String pbeWithSHAAnd40BitRC4 = 1.2.840.113549.1.12.1.2 : Public, Static, Literal, HasDefault
+    System.String pbeWithSHAAnd3KeyTripleDESCBC = 1.2.840.113549.1.12.1.3 : Public, Static, Literal, HasDefault
+    System.String pbeWithSHAAnd2KeyTripleDESCBC = 1.2.840.113549.1.12.1.4 : Public, Static, Literal, HasDefault
+    System.String pbeWithSHAAnd128BitRC2CBC = 1.2.840.113549.1.12.1.5 : Public, Static, Literal, HasDefault
+    System.String pbeWithSHAAnd40BitRC2CBC = 1.2.840.113549.1.12.1.6 : Public, Static, Literal, HasDefault
+    System.String keyBag = 1.2.840.113549.1.12.10.1.1 : Public, Static, Literal, HasDefault
+    System.String pkcs8ShroudedKeyBag = 1.2.840.113549.1.12.10.1.2 : Public, Static, Literal, HasDefault
+    System.String certBag = 1.2.840.113549.1.12.10.1.3 : Public, Static, Literal, HasDefault
+    System.String crlBag = 1.2.840.113549.1.12.10.1.4 : Public, Static, Literal, HasDefault
+    System.String secretBag = 1.2.840.113549.1.12.10.1.5 : Public, Static, Literal, HasDefault
+    System.String safeContentsBag = 1.2.840.113549.1.12.10.1.6 : Public, Static, Literal, HasDefault
+    System.String x509Certificate = 1.2.840.113549.1.9.22.1 : Public, Static, Literal, HasDefault
+    System.String sdsiCertificate = 1.2.840.113549.1.9.22.2 : Public, Static, Literal, HasDefault
+    System.String x509Crl = 1.2.840.113549.1.9.23.1 : Public, Static, Literal, HasDefault
+    Int32 CryptoApiPasswordLimit = 32 : Public, Static, Literal, HasDefault
+  Properties:
+    System.String Password 'set' : 
+    Int32 IterationCount 'get set' : 
+    System.Collections.ArrayList Keys 'get ' : 
+    Mono.Security.X509.X509CertificateCollection Certificates 'get ' : 
+    Int32 MaximumPasswordLength 'get set' : 
+  Methods:
+    set_Password(String): PrivateScope, Public, HideBySig, SpecialName
+    get_IterationCount(): PrivateScope, Public, HideBySig, SpecialName
+    set_IterationCount(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Keys(): PrivateScope, Public, HideBySig, SpecialName
+    get_Certificates(): PrivateScope, Public, HideBySig, SpecialName
+    get_MaximumPasswordLength(): PrivateScope, Public, Static, HideBySig, SpecialName
+    set_MaximumPasswordLength(Int32): PrivateScope, Public, Static, HideBySig, SpecialName
+    Decrypt(String, Byte[], Int32, Byte[]): PrivateScope, Public, HideBySig
+    Decrypt(EncryptedData): PrivateScope, Public, HideBySig
+    Encrypt(String, Byte[], Int32, Byte[]): PrivateScope, Public, HideBySig
+    GetBytes(): PrivateScope, Public, HideBySig
+    AddCertificate(X509Certificate): PrivateScope, Public, HideBySig
+    AddCertificate(X509Certificate, IDictionary): PrivateScope, Public, HideBySig
+    RemoveCertificate(X509Certificate): PrivateScope, Public, HideBySig
+    RemoveCertificate(X509Certificate, IDictionary): PrivateScope, Public, HideBySig
+    AddPkcs8ShroudedKeyBag(AsymmetricAlgorithm): PrivateScope, Public, HideBySig
+    AddPkcs8ShroudedKeyBag(AsymmetricAlgorithm, IDictionary): PrivateScope, Public, HideBySig
+    RemovePkcs8ShroudedKeyBag(AsymmetricAlgorithm): PrivateScope, Public, HideBySig
+    AddKeyBag(AsymmetricAlgorithm): PrivateScope, Public, HideBySig
+    AddKeyBag(AsymmetricAlgorithm, IDictionary): PrivateScope, Public, HideBySig
+    RemoveKeyBag(AsymmetricAlgorithm): PrivateScope, Public, HideBySig
+    GetAsymmetricAlgorithm(IDictionary): PrivateScope, Public, HideBySig
+    GetCertificate(IDictionary): PrivateScope, Public, HideBySig
+    GetAttributes(AsymmetricAlgorithm): PrivateScope, Public, HideBySig
+    GetAttributes(X509Certificate): PrivateScope, Public, HideBySig
+    SaveToFile(String): PrivateScope, Public, HideBySig
+    Clone(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    LoadFromFile(String): PrivateScope, Public, Static, HideBySig
+    LoadFromFile(String, String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.X509.PKCS12+DeriveBytes: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String HashName 'get set' : 
+    Int32 IterationCount 'get set' : 
+    Byte[] Password 'get set' : 
+    Byte[] Salt 'get set' : 
+  Methods:
+    get_HashName(): PrivateScope, Public, HideBySig, SpecialName
+    set_HashName(String): PrivateScope, Public, HideBySig, SpecialName
+    get_IterationCount(): PrivateScope, Public, HideBySig, SpecialName
+    set_IterationCount(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Password(): PrivateScope, Public, HideBySig, SpecialName
+    set_Password(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_Salt(): PrivateScope, Public, HideBySig, SpecialName
+    set_Salt(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    DeriveKey(Int32): PrivateScope, Public, HideBySig
+    DeriveIV(Int32): PrivateScope, Public, HideBySig
+    DeriveMAC(Int32): PrivateScope, Public, HideBySig
+Struct Mono.Security.X509.PKCS12+DeriveBytes+Purpose: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Purpose MAC = 2 : Public, Static, Literal, HasDefault
+    Purpose IV = 1 : Public, Static, Literal, HasDefault
+    Purpose Key = 0 : Public, Static, Literal, HasDefault
+Class Mono.Security.X509.X501: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Methods:
+    ToString(ASN1): PrivateScope, Public, Static, HideBySig
+    FromString(String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.X509.X509Builder: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  Properties:
+    System.String Hash 'get set' : 
+  Methods:
+    get_Hash(): PrivateScope, Public, HideBySig, SpecialName
+    set_Hash(String): PrivateScope, Public, HideBySig, SpecialName
+    Sign(AsymmetricAlgorithm): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Sign(RSA): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Sign(DSA): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Security.X509.X509Certificate: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Runtime.Serialization.ISerializable
+  Properties:
+    System.Security.Cryptography.DSA DSA 'get set' : 
+    Mono.Security.X509.X509ExtensionCollection Extensions 'get ' : 
+    Byte[] Hash 'get ' : 
+    System.String IssuerName 'get ' : 
+    System.String KeyAlgorithm 'get ' : 
+    Byte[] KeyAlgorithmParameters 'get ' : 
+    Byte[] PublicKey 'get ' : 
+    System.Security.Cryptography.RSA RSA 'get set' : 
+    Byte[] RawData 'get ' : 
+    Byte[] SerialNumber 'get ' : 
+    Byte[] Signature 'get ' : 
+    System.String SignatureAlgorithm 'get ' : 
+    Byte[] SignatureAlgorithmParameters 'get ' : 
+    System.String SubjectName 'get ' : 
+    System.DateTime ValidFrom 'get ' : 
+    System.DateTime ValidUntil 'get ' : 
+    Int32 Version 'get ' : 
+    Boolean IsCurrent 'get ' : 
+    Boolean IsSelfSigned 'get ' : 
+  Methods:
+    get_DSA(): PrivateScope, Public, HideBySig, SpecialName
+    set_DSA(DSA): PrivateScope, Public, HideBySig, SpecialName
+    get_Extensions(): PrivateScope, Public, HideBySig, SpecialName
+    get_Hash(): PrivateScope, Public, HideBySig, SpecialName
+    get_IssuerName(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_KeyAlgorithm(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_KeyAlgorithmParameters(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_PublicKey(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_RSA(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    set_RSA(RSA): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_RawData(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_SerialNumber(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Signature(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_SignatureAlgorithm(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_SignatureAlgorithmParameters(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_SubjectName(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_ValidFrom(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_ValidUntil(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsCurrent(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsSelfSigned(): PrivateScope, Public, HideBySig, SpecialName
+    WasCurrent(DateTime): PrivateScope, Public, HideBySig
+    VerifySignature(AsymmetricAlgorithm): PrivateScope, Public, HideBySig
+    CheckSignature(Byte[], String, Byte[]): PrivateScope, Public, HideBySig
+    GetObjectData(SerializationInfo, StreamingContext): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, HasSecurity
+Class Mono.Security.X509.X509CertificateCollection: AutoLayout, AnsiClass, Class, Public, Serializable, BeforeFieldInit
+  :System.Collections.CollectionBase
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Certificate[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509CertificateCollection): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.X509.X509Certificate Item [Int32] 'get set' : 
+  Methods:
+    get_Item(Int32): PrivateScope, Public, HideBySig, SpecialName
+    set_Item(Int32, X509Certificate): PrivateScope, Public, HideBySig, SpecialName
+    Add(X509Certificate): PrivateScope, Public, HideBySig
+    AddRange(X509Certificate[]): PrivateScope, Public, HideBySig
+    AddRange(X509CertificateCollection): PrivateScope, Public, HideBySig
+    Contains(X509Certificate): PrivateScope, Public, HideBySig
+    CopyTo(X509Certificate[], Int32): PrivateScope, Public, HideBySig
+    GetEnumerator(): PrivateScope, Public, HideBySig
+    GetHashCode(): PrivateScope, Public, Virtual, HideBySig
+    IndexOf(X509Certificate): PrivateScope, Public, HideBySig
+    Insert(Int32, X509Certificate): PrivateScope, Public, HideBySig
+    Remove(X509Certificate): PrivateScope, Public, HideBySig
+Class Mono.Security.X509.X509CertificateCollection+X509CertificateEnumerator: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(Mono.Security.X509.X509CertificateCollection): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Collections.IEnumerator
+  Properties:
+    Mono.Security.X509.X509Certificate Current 'get ' : 
+  Methods:
+    get_Current(): PrivateScope, Public, HideBySig, SpecialName
+    MoveNext(): PrivateScope, Public, HideBySig
+    Reset(): PrivateScope, Public, HideBySig
+Class Mono.Security.X509.X509CertificateBuilder: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Builder
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Byte Version 'get set' : 
+    Byte[] SerialNumber 'get set' : 
+    System.String IssuerName 'get set' : 
+    System.DateTime NotBefore 'get set' : 
+    System.DateTime NotAfter 'get set' : 
+    System.String SubjectName 'get set' : 
+    System.Security.Cryptography.AsymmetricAlgorithm SubjectPublicKey 'get set' : 
+    Byte[] IssuerUniqueId 'get set' : 
+    Byte[] SubjectUniqueId 'get set' : 
+    Mono.Security.X509.X509ExtensionCollection Extensions 'get ' : 
+  Methods:
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+    set_Version(Byte): PrivateScope, Public, HideBySig, SpecialName
+    get_SerialNumber(): PrivateScope, Public, HideBySig, SpecialName
+    set_SerialNumber(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_IssuerName(): PrivateScope, Public, HideBySig, SpecialName
+    set_IssuerName(String): PrivateScope, Public, HideBySig, SpecialName
+    get_NotBefore(): PrivateScope, Public, HideBySig, SpecialName
+    set_NotBefore(DateTime): PrivateScope, Public, HideBySig, SpecialName
+    get_NotAfter(): PrivateScope, Public, HideBySig, SpecialName
+    set_NotAfter(DateTime): PrivateScope, Public, HideBySig, SpecialName
+    get_SubjectName(): PrivateScope, Public, HideBySig, SpecialName
+    set_SubjectName(String): PrivateScope, Public, HideBySig, SpecialName
+    get_SubjectPublicKey(): PrivateScope, Public, HideBySig, SpecialName
+    set_SubjectPublicKey(AsymmetricAlgorithm): PrivateScope, Public, HideBySig, SpecialName
+    get_IssuerUniqueId(): PrivateScope, Public, HideBySig, SpecialName
+    set_IssuerUniqueId(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_SubjectUniqueId(): PrivateScope, Public, HideBySig, SpecialName
+    set_SubjectUniqueId(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_Extensions(): PrivateScope, Public, HideBySig, SpecialName
+Class Mono.Security.X509.X509Chain: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509CertificateCollection): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.X509.X509CertificateCollection Chain 'get ' : 
+    Mono.Security.X509.X509Certificate Root 'get ' : 
+    Mono.Security.X509.X509ChainStatusFlags Status 'get ' : 
+    Mono.Security.X509.X509CertificateCollection TrustAnchors 'get set' : 
+  Methods:
+    get_Chain(): PrivateScope, Public, HideBySig, SpecialName
+    get_Root(): PrivateScope, Public, HideBySig, SpecialName
+    get_Status(): PrivateScope, Public, HideBySig, SpecialName
+    get_TrustAnchors(): PrivateScope, Public, HideBySig, SpecialName
+    set_TrustAnchors(X509CertificateCollection): PrivateScope, Public, HideBySig, SpecialName, HasSecurity
+    LoadCertificate(X509Certificate): PrivateScope, Public, HideBySig
+    LoadCertificates(X509CertificateCollection): PrivateScope, Public, HideBySig
+    FindByIssuerName(String): PrivateScope, Public, HideBySig
+    Build(X509Certificate): PrivateScope, Public, HideBySig
+    Reset(): PrivateScope, Public, HideBySig
+Class Mono.Security.X509.X509Crl: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Collections.ArrayList Entries 'get ' : 
+    Mono.Security.X509.X509ExtensionCollection Extensions 'get ' : 
+    System.String IssuerName 'get ' : 
+    System.DateTime NextUpdate 'get ' : 
+    System.DateTime ThisUpdate 'get ' : 
+    System.String SignatureAlgorithm 'get ' : 
+    Byte[] Signature 'get ' : 
+    Byte Version 'get ' : 
+    Boolean IsCurrent 'get ' : 
+    X509CrlEntry Item [Int32] 'get ' : 
+    X509CrlEntry Item [Byte[]] 'get ' : 
+  Methods:
+    get_Entries(): PrivateScope, Public, HideBySig, SpecialName
+    get_Extensions(): PrivateScope, Public, HideBySig, SpecialName
+    get_IssuerName(): PrivateScope, Public, HideBySig, SpecialName
+    get_NextUpdate(): PrivateScope, Public, HideBySig, SpecialName
+    get_ThisUpdate(): PrivateScope, Public, HideBySig, SpecialName
+    get_SignatureAlgorithm(): PrivateScope, Public, HideBySig, SpecialName
+    get_Signature(): PrivateScope, Public, HideBySig, SpecialName
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsCurrent(): PrivateScope, Public, HideBySig, SpecialName
+    get_Item(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Item(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    WasCurrent(DateTime): PrivateScope, Public, HideBySig
+    GetBytes(): PrivateScope, Public, HideBySig
+    GetCrlEntry(X509Certificate): PrivateScope, Public, HideBySig
+    GetCrlEntry(Byte[]): PrivateScope, Public, HideBySig
+    VerifySignature(X509Certificate): PrivateScope, Public, HideBySig
+    VerifySignature(AsymmetricAlgorithm): PrivateScope, Public, HideBySig
+    CreateFromFile(String): PrivateScope, Public, Static, HideBySig
+Class Mono.Security.X509.X509Crl+X509CrlEntry: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  Properties:
+    Byte[] SerialNumber 'get ' : 
+    System.DateTime RevocationDate 'get ' : 
+    Mono.Security.X509.X509ExtensionCollection Extensions 'get ' : 
+  Methods:
+    get_SerialNumber(): PrivateScope, Public, HideBySig, SpecialName
+    get_RevocationDate(): PrivateScope, Public, HideBySig, SpecialName
+    get_Extensions(): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, HideBySig
+Class Mono.Security.X509.X509Extension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.ASN1 ASN1 'get ' : 
+    System.String Oid 'get ' : 
+    Boolean Critical 'get set' : 
+    System.String Name 'get ' : 
+    Mono.Security.ASN1 Value 'get ' : 
+  Methods:
+    get_ASN1(): PrivateScope, Public, HideBySig, SpecialName
+    get_Oid(): PrivateScope, Public, HideBySig, SpecialName
+    get_Critical(): PrivateScope, Public, HideBySig, SpecialName
+    set_Critical(Boolean): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Value(): PrivateScope, Public, HideBySig, SpecialName
+    Equals(Object): PrivateScope, Public, Virtual, HideBySig
+    GetBytes(): PrivateScope, Public, HideBySig
+    GetHashCode(): PrivateScope, Public, Virtual, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.X509ExtensionCollection: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Collections.CollectionBase
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.X509.X509Extension Item [Int32] 'get ' : 
+    Mono.Security.X509.X509Extension Item [System.String] 'get ' : 
+  Methods:
+    get_Item(Int32): PrivateScope, Public, HideBySig, SpecialName
+    get_Item(String): PrivateScope, Public, HideBySig, SpecialName
+    Add(X509Extension): PrivateScope, Public, HideBySig
+    AddRange(X509Extension[]): PrivateScope, Public, HideBySig
+    AddRange(X509ExtensionCollection): PrivateScope, Public, HideBySig
+    Contains(X509Extension): PrivateScope, Public, HideBySig
+    Contains(String): PrivateScope, Public, HideBySig
+    CopyTo(X509Extension[], Int32): PrivateScope, Public, HideBySig
+    IndexOf(X509Extension): PrivateScope, Public, HideBySig
+    IndexOf(String): PrivateScope, Public, HideBySig
+    Insert(Int32, X509Extension): PrivateScope, Public, HideBySig
+    Remove(X509Extension): PrivateScope, Public, HideBySig
+    Remove(String): PrivateScope, Public, HideBySig
+    GetBytes(): PrivateScope, Public, HideBySig
+Class Mono.Security.X509.X509Store: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  Properties:
+    Mono.Security.X509.X509CertificateCollection Certificates 'get ' : 
+    System.Collections.ArrayList Crls 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_Certificates(): PrivateScope, Public, HideBySig, SpecialName
+    get_Crls(): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, HideBySig, SpecialName
+    Clear(): PrivateScope, Public, HideBySig
+    Import(X509Certificate): PrivateScope, Public, HideBySig
+    Remove(X509Certificate): PrivateScope, Public, HideBySig
+Class Mono.Security.X509.X509StoreManager: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Properties:
+    Mono.Security.X509.X509Stores CurrentUser 'get ' : 
+    Mono.Security.X509.X509Stores LocalMachine 'get ' : 
+    Mono.Security.X509.X509CertificateCollection IntermediateCACertificates 'get ' : 
+    System.Collections.ArrayList IntermediateCACrls 'get ' : 
+    Mono.Security.X509.X509CertificateCollection TrustedRootCertificates 'get ' : 
+    System.Collections.ArrayList TrustedRootCACrls 'get ' : 
+    Mono.Security.X509.X509CertificateCollection UntrustedCertificates 'get ' : 
+  Methods:
+    get_CurrentUser(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_LocalMachine(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_IntermediateCACertificates(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_IntermediateCACrls(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_TrustedRootCertificates(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_TrustedRootCACrls(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_UntrustedCertificates(): PrivateScope, Public, Static, HideBySig, SpecialName
+Class Mono.Security.X509.X509Stores: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  Properties:
+    Mono.Security.X509.X509Store Personal 'get ' : 
+    Mono.Security.X509.X509Store OtherPeople 'get ' : 
+    Mono.Security.X509.X509Store IntermediateCA 'get ' : 
+    Mono.Security.X509.X509Store TrustedRoot 'get ' : 
+    Mono.Security.X509.X509Store Untrusted 'get ' : 
+  Methods:
+    get_Personal(): PrivateScope, Public, HideBySig, SpecialName
+    get_OtherPeople(): PrivateScope, Public, HideBySig, SpecialName
+    get_IntermediateCA(): PrivateScope, Public, HideBySig, SpecialName
+    get_TrustedRoot(): PrivateScope, Public, HideBySig, SpecialName
+    get_Untrusted(): PrivateScope, Public, HideBySig, SpecialName
+    Clear(): PrivateScope, Public, HideBySig
+Class Mono.Security.X509.X509Stores+Names: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String Personal = My : Public, Static, Literal, HasDefault
+    System.String OtherPeople = AddressBook : Public, Static, Literal, HasDefault
+    System.String IntermediateCA = CA : Public, Static, Literal, HasDefault
+    System.String TrustedRoot = Trust : Public, Static, Literal, HasDefault
+    System.String Untrusted = Disallowed : Public, Static, Literal, HasDefault
+Class Mono.Security.X509.X520: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+AttributeTypeAndValue: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, BeforeFieldInit
+  Properties:
+    System.String Value 'get set' : 
+    Mono.Security.ASN1 ASN1 'get ' : 
+  Methods:
+    get_Value(): PrivateScope, Public, HideBySig, SpecialName
+    set_Value(String): PrivateScope, Public, HideBySig, SpecialName
+    get_ASN1(): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(Byte): PrivateScope, Public, HideBySig
+    GetBytes(): PrivateScope, Public, HideBySig
+Class Mono.Security.X509.X520+Name: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+CommonName: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+SerialNumber: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+LocalityName: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+StateOrProvinceName: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+OrganizationName: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+OrganizationalUnitName: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+EmailAddress: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+DomainComponent: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+UserId: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+Oid: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+Title: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.X520+CountryName: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :Mono.Security.X509.X520+AttributeTypeAndValue
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Mono.Security.X509.Extensions.AuthorityKeyIdentifierExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Name 'get ' : 
+    Byte[] Identifier 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Identifier(): PrivateScope, Public, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.Extensions.BasicConstraintsExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 NoPathLengthConstraint = -1 : Public, Static, Literal, HasDefault
+  Properties:
+    Boolean CertificateAuthority 'get set' : 
+    System.String Name 'get ' : 
+    Int32 PathLenConstraint 'get set' : 
+  Methods:
+    get_CertificateAuthority(): PrivateScope, Public, HideBySig, SpecialName
+    set_CertificateAuthority(Boolean): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_PathLenConstraint(): PrivateScope, Public, HideBySig, SpecialName
+    set_PathLenConstraint(Int32): PrivateScope, Public, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.Extensions.CRLDistributionPointsExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Struct Mono.Security.X509.Extensions.CRLDistributionPointsExtension+ReasonFlags: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    ReasonFlags CertificateHold = 6 : Public, Static, Literal, HasDefault
+    ReasonFlags AffiliationChanged = 3 : Public, Static, Literal, HasDefault
+    ReasonFlags KeyCompromise = 1 : Public, Static, Literal, HasDefault
+    ReasonFlags PrivilegeWithdrawn = 7 : Public, Static, Literal, HasDefault
+    ReasonFlags Superseded = 4 : Public, Static, Literal, HasDefault
+    ReasonFlags AACompromise = 8 : Public, Static, Literal, HasDefault
+    ReasonFlags CessationOfOperation = 5 : Public, Static, Literal, HasDefault
+    ReasonFlags Unused = 0 : Public, Static, Literal, HasDefault
+    ReasonFlags CACompromise = 2 : Public, Static, Literal, HasDefault
+Class Mono.Security.X509.Extensions.CertificatePoliciesExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.Extensions.ExtendedKeyUsageExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Collections.ArrayList KeyPurpose 'get ' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_KeyPurpose(): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.Extensions.KeyAttributesExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Byte[] KeyIdentifier 'get ' : 
+    System.String Name 'get ' : 
+    System.DateTime NotAfter 'get ' : 
+    System.DateTime NotBefore 'get ' : 
+  Methods:
+    get_KeyIdentifier(): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_NotAfter(): PrivateScope, Public, HideBySig, SpecialName
+    get_NotBefore(): PrivateScope, Public, HideBySig, SpecialName
+    Support(KeyUsages): PrivateScope, Public, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.Extensions.KeyUsageExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Mono.Security.X509.Extensions.KeyUsages KeyUsage 'get set' : 
+    System.String Name 'get ' : 
+  Methods:
+    get_KeyUsage(): PrivateScope, Public, HideBySig, SpecialName
+    set_KeyUsage(KeyUsages): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    Support(KeyUsages): PrivateScope, Public, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.Extensions.NetscapeCertTypeExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    Support(CertTypes): PrivateScope, Public, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Struct Mono.Security.X509.Extensions.NetscapeCertTypeExtension+CertTypes: AutoLayout, AnsiClass, Class, NestedPublic, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    CertTypes Smime = 32 : Public, Static, Literal, HasDefault
+    CertTypes SslCA = 4 : Public, Static, Literal, HasDefault
+    CertTypes SslClient = 128 : Public, Static, Literal, HasDefault
+    CertTypes SmimeCA = 2 : Public, Static, Literal, HasDefault
+    CertTypes ObjectSigning = 16 : Public, Static, Literal, HasDefault
+    CertTypes SslServer = 64 : Public, Static, Literal, HasDefault
+    CertTypes ObjectSigningCA = 1 : Public, Static, Literal, HasDefault
+Class Mono.Security.X509.Extensions.PrivateKeyUsagePeriodExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Name 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.Extensions.SubjectAltNameExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Name 'get ' : 
+    System.String[] RFC822 'get ' : 
+    System.String[] DNSNames 'get ' : 
+    System.String[] IPAddresses 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_RFC822(): PrivateScope, Public, HideBySig, SpecialName
+    get_DNSNames(): PrivateScope, Public, HideBySig, SpecialName
+    get_IPAddresses(): PrivateScope, Public, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.X509.Extensions.SubjectKeyIdentifierExtension: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.X509.X509Extension
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.ASN1): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Mono.Security.X509.X509Extension): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Name 'get ' : 
+    Byte[] Identifier 'get ' : 
+  Methods:
+    get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Identifier(): PrivateScope, Public, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.Protocol.Ntlm.ChallengeResponse: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Properties:
+    System.String Password 'get set' : 
+    Byte[] Challenge 'get set' : 
+    Byte[] LM  'get ' : 
+    Byte[] NT  'get ' : 
+  Methods:
+    get_Password(): PrivateScope, Public, HideBySig, SpecialName
+    set_Password(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Challenge(): PrivateScope, Public, HideBySig, SpecialName
+    set_Challenge(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_LM(): PrivateScope, Public, HideBySig, SpecialName
+    get_NT(): PrivateScope, Public, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Security.Protocol.Ntlm.MessageBase: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  Properties:
+    Mono.Security.Protocol.Ntlm.NtlmFlags Flags 'get set' : 
+    Int32 Type 'get ' : 
+  Methods:
+    get_Flags(): PrivateScope, Public, HideBySig, SpecialName
+    set_Flags(NtlmFlags): PrivateScope, Public, HideBySig, SpecialName
+    get_Type(): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class Mono.Security.Protocol.Ntlm.Type1Message: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Protocol.Ntlm.MessageBase
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Domain 'get set' : 
+    System.String Host 'get set' : 
+  Methods:
+    get_Domain(): PrivateScope, Public, HideBySig, SpecialName
+    set_Domain(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Host(): PrivateScope, Public, HideBySig, SpecialName
+    set_Host(String): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.Protocol.Ntlm.Type2Message: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Protocol.Ntlm.MessageBase
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Byte[] Nonce 'get set' : 
+  Methods:
+    get_Nonce(): PrivateScope, Public, HideBySig, SpecialName
+    set_Nonce(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.Protocol.Ntlm.Type3Message: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Protocol.Ntlm.MessageBase
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Byte[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Byte[] Challenge 'get set' : 
+    System.String Domain 'get set' : 
+    System.String Host 'get set' : 
+    System.String Password 'get set' : 
+    System.String Username 'get set' : 
+    Byte[] LM  'get ' : 
+    Byte[] NT  'get ' : 
+  Methods:
+    get_Challenge(): PrivateScope, Public, HideBySig, SpecialName
+    set_Challenge(Byte[]): PrivateScope, Public, HideBySig, SpecialName
+    get_Domain(): PrivateScope, Public, HideBySig, SpecialName
+    set_Domain(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Host(): PrivateScope, Public, HideBySig, SpecialName
+    set_Host(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Password(): PrivateScope, Public, HideBySig, SpecialName
+    set_Password(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Username(): PrivateScope, Public, HideBySig, SpecialName
+    set_Username(String): PrivateScope, Public, HideBySig, SpecialName
+    get_LM(): PrivateScope, Public, HideBySig, SpecialName
+    get_NT(): PrivateScope, Public, HideBySig, SpecialName
+    GetBytes(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Security.Protocol.Tls.SslClientStream: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Protocol.Tls.SslStreamBase
+    Void .ctor(System.IO.Stream, System.String, Boolean): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.IO.Stream, System.String, System.Security.Cryptography.X509Certificates.X509Certificate): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.IO.Stream, System.String, System.Security.Cryptography.X509Certificates.X509CertificateCollection): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.IO.Stream, System.String, Boolean, Mono.Security.Protocol.Tls.SecurityProtocolType): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.IO.Stream, System.String, Boolean, Mono.Security.Protocol.Tls.SecurityProtocolType, System.Security.Cryptography.X509Certificates.X509CertificateCollection): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Security.Cryptography.X509Certificates.X509CertificateCollection ClientCertificates 'get ' : 
+    System.Security.Cryptography.X509Certificates.X509Certificate SelectedClientCertificate 'get ' : 
+    Mono.Security.Protocol.Tls.CertificateValidationCallback ServerCertValidationDelegate 'get set' : 
+    Mono.Security.Protocol.Tls.CertificateSelectionCallback ClientCertSelectionDelegate 'get set' : 
+    Mono.Security.Protocol.Tls.PrivateKeySelectionCallback PrivateKeyCertSelectionDelegate 'get set' : 
+  Methods:
+    get_ClientCertificates(): PrivateScope, Public, HideBySig, SpecialName
+    get_SelectedClientCertificate(): PrivateScope, Public, HideBySig, SpecialName
+    get_ServerCertValidationDelegate(): PrivateScope, Public, HideBySig, SpecialName
+    set_ServerCertValidationDelegate(CertificateValidationCallback): PrivateScope, Public, HideBySig, SpecialName
+    get_ClientCertSelectionDelegate(): PrivateScope, Public, HideBySig, SpecialName
+    set_ClientCertSelectionDelegate(CertificateSelectionCallback): PrivateScope, Public, HideBySig, SpecialName
+    get_PrivateKeyCertSelectionDelegate(): PrivateScope, Public, HideBySig, SpecialName
+    set_PrivateKeyCertSelectionDelegate(PrivateKeySelectionCallback): PrivateScope, Public, HideBySig, SpecialName
+Class Mono.Security.Protocol.Tls.SslStreamBase: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :System.IO.Stream
+  Properties:
+    Boolean CheckCertRevocationStatus 'get set' : 
+    Mono.Security.Protocol.Tls.CipherAlgorithmType CipherAlgorithm 'get ' : 
+    Int32 CipherStrength 'get ' : 
+    Mono.Security.Protocol.Tls.HashAlgorithmType HashAlgorithm 'get ' : 
+    Int32 HashStrength 'get ' : 
+    Int32 KeyExchangeStrength 'get ' : 
+    Mono.Security.Protocol.Tls.ExchangeAlgorithmType KeyExchangeAlgorithm 'get ' : 
+    Mono.Security.Protocol.Tls.SecurityProtocolType SecurityProtocol 'get ' : 
+    System.Security.Cryptography.X509Certificates.X509Certificate ServerCertificate 'get ' : 
+    Boolean CanRead 'get ' : 
+    Boolean CanSeek 'get ' : 
+    Boolean CanWrite 'get ' : 
+    Int64 Length 'get ' : 
+    Int64 Position 'get set' : 
+  Methods:
+    get_CheckCertRevocationStatus(): PrivateScope, Public, HideBySig, SpecialName
+    set_CheckCertRevocationStatus(Boolean): PrivateScope, Public, HideBySig, SpecialName
+    get_CipherAlgorithm(): PrivateScope, Public, HideBySig, SpecialName
+    get_CipherStrength(): PrivateScope, Public, HideBySig, SpecialName
+    get_HashAlgorithm(): PrivateScope, Public, HideBySig, SpecialName
+    get_HashStrength(): PrivateScope, Public, HideBySig, SpecialName
+    get_KeyExchangeStrength(): PrivateScope, Public, HideBySig, SpecialName
+    get_KeyExchangeAlgorithm(): PrivateScope, Public, HideBySig, SpecialName
+    get_SecurityProtocol(): PrivateScope, Public, HideBySig, SpecialName
+    get_ServerCertificate(): PrivateScope, Public, HideBySig, SpecialName
+    get_CanRead(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_CanSeek(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_CanWrite(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Length(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Position(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    set_Position(Int64): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    BeginRead(Byte[], Int32, Int32, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig
+    BeginWrite(Byte[], Int32, Int32, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig
+    EndRead(IAsyncResult): PrivateScope, Public, Virtual, HideBySig
+    EndWrite(IAsyncResult): PrivateScope, Public, Virtual, HideBySig
+    Close(): PrivateScope, Public, Virtual, HideBySig
+    Flush(): PrivateScope, Public, Virtual, HideBySig
+    Read(Byte[]): PrivateScope, Public, HideBySig
+    Read(Byte[], Int32, Int32): PrivateScope, Public, Virtual, HideBySig
+    Seek(Int64, SeekOrigin): PrivateScope, Public, Virtual, HideBySig
+    SetLength(Int64): PrivateScope, Public, Virtual, HideBySig
+    Write(Byte[]): PrivateScope, Public, HideBySig
+    Write(Byte[], Int32, Int32): PrivateScope, Public, Virtual, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Security.Protocol.Tls.SslServerStream: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Security.Protocol.Tls.SslStreamBase
+    Void .ctor(System.IO.Stream, System.Security.Cryptography.X509Certificates.X509Certificate): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.IO.Stream, System.Security.Cryptography.X509Certificates.X509Certificate, Boolean, Boolean): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.IO.Stream, System.Security.Cryptography.X509Certificates.X509Certificate, Boolean, Boolean, Mono.Security.Protocol.Tls.SecurityProtocolType): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Security.Cryptography.X509Certificates.X509Certificate ClientCertificate 'get ' : 
+    Mono.Security.Protocol.Tls.CertificateValidationCallback ClientCertValidationDelegate 'get set' : 
+    Mono.Security.Protocol.Tls.PrivateKeySelectionCallback PrivateKeyCertSelectionDelegate 'get set' : 
+  Methods:
+    get_ClientCertificate(): PrivateScope, Public, HideBySig, SpecialName
+    get_ClientCertValidationDelegate(): PrivateScope, Public, HideBySig, SpecialName
+    set_ClientCertValidationDelegate(CertificateValidationCallback): PrivateScope, Public, HideBySig, SpecialName
+    get_PrivateKeyCertSelectionDelegate(): PrivateScope, Public, HideBySig, SpecialName
+    set_PrivateKeyCertSelectionDelegate(PrivateKeySelectionCallback): PrivateScope, Public, HideBySig, SpecialName
+Class Mono.Xml.MiniParser: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Reset(): PrivateScope, Public, HideBySig
+    Parse(IReader, IHandler): PrivateScope, Public, HideBySig
+Interface Mono.Xml.MiniParser+IReader: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+  Methods:
+    Read(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Interface Mono.Xml.MiniParser+IAttrList: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+  Properties:
+    Int32 Length 'get ' : 
+    Boolean IsEmpty 'get ' : 
+    System.String[] Names 'get ' : 
+    System.String[] Values 'get ' : 
+  Methods:
+    get_Length(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    get_IsEmpty(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    get_Names(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    get_Values(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    GetName(Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    GetValue(Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    GetValue(String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    ChangeValue(String, String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Interface Mono.Xml.MiniParser+IMutableAttrList: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+  Interfaces:
+    Mono.Xml.MiniParser+IAttrList
+  Methods:
+    Clear(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    Add(String, String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    CopyFrom(IAttrList): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    Remove(Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    Remove(String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Interface Mono.Xml.MiniParser+IHandler: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+  Methods:
+    OnStartParsing(MiniParser): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    OnStartElement(String, IAttrList): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    OnEndElement(String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    OnChars(String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    OnEndParsing(MiniParser): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class Mono.Xml.MiniParser+HandlerAdapter: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    Mono.Xml.MiniParser+IHandler
+  Methods:
+    OnStartParsing(MiniParser): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    OnStartElement(String, IAttrList): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    OnEndElement(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    OnChars(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    OnEndParsing(MiniParser): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Xml.MiniParser+AttrListImpl: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(IAttrList): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    Mono.Xml.MiniParser+IMutableAttrList
+    Mono.Xml.MiniParser+IAttrList
+  Properties:
+    Int32 Length 'get ' : 
+    Boolean IsEmpty 'get ' : 
+    System.String[] Names 'get ' : 
+    System.String[] Values 'get ' : 
+  Methods:
+    get_Length(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_IsEmpty(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Names(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Values(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    GetName(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetValue(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetValue(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    ChangeValue(String, String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Clear(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Add(String, String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Remove(Int32): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    Remove(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    CopyFrom(IAttrList): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Xml.MiniParser+XMLError: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+  :System.Exception
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    Int32 Line 'get ' : 
+    Int32 Column 'get ' : 
+  Methods:
+    get_Line(): PrivateScope, Public, HideBySig, SpecialName
+    get_Column(): PrivateScope, Public, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Mono.Xml.SecurityParser: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Mono.Xml.MiniParser
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    Mono.Xml.MiniParser+IHandler
+    Mono.Xml.MiniParser+IReader
+  Methods:
+    LoadXml(String): PrivateScope, Public, HideBySig
+    ToXml(): PrivateScope, Public, HideBySig
+    Read(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    OnStartParsing(MiniParser): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    OnStartElement(String, IAttrList): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    OnEndElement(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    OnChars(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    OnEndParsing(MiniParser): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Math.Prime.PrimalityTest: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(BigInteger, ConfidenceFactor): PrivateScope, Public, Virtual, HideBySig
+    BeginInvoke(BigInteger, ConfidenceFactor, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Security.Protocol.Tls.CertificateValidationCallback: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(X509Certificate, Int32[]): PrivateScope, Public, Virtual, HideBySig
+    BeginInvoke(X509Certificate, Int32[], AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Security.Protocol.Tls.CertificateSelectionCallback: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(X509CertificateCollection, X509Certificate, String, X509CertificateCollection): PrivateScope, Public, Virtual, HideBySig
+    BeginInvoke(X509CertificateCollection, X509Certificate, String, X509CertificateCollection, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Class Mono.Security.Protocol.Tls.PrivateKeySelectionCallback: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Invoke(X509Certificate, String): PrivateScope, Public, Virtual, HideBySig
+    BeginInvoke(X509Certificate, String, AsyncCallback, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+Struct Mono.Math.Prime.ConfidenceFactor: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Math.Prime.ConfidenceFactor Low = 1 : Public, Static, Literal, HasDefault
+    Mono.Math.Prime.ConfidenceFactor ExtraLow = 0 : Public, Static, Literal, HasDefault
+    Mono.Math.Prime.ConfidenceFactor ExtraHigh = 4 : Public, Static, Literal, HasDefault
+    Mono.Math.Prime.ConfidenceFactor High = 3 : Public, Static, Literal, HasDefault
+    Mono.Math.Prime.ConfidenceFactor Provable = 5 : Public, Static, Literal, HasDefault
+    Mono.Math.Prime.ConfidenceFactor Medium = 2 : Public, Static, Literal, HasDefault
+Struct Mono.Security.Authenticode.Authority: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.Authenticode.Authority Individual = 0 : Public, Static, Literal, HasDefault
+    Mono.Security.Authenticode.Authority Maximum = 2 : Public, Static, Literal, HasDefault
+    Mono.Security.Authenticode.Authority Commercial = 1 : Public, Static, Literal, HasDefault
+Struct Mono.Security.Cryptography.DHKeyGeneration: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.Cryptography.DHKeyGeneration Random = 0 : Public, Static, Literal, HasDefault
+    Mono.Security.Cryptography.DHKeyGeneration Static = 1 : Public, Static, Literal, HasDefault
+Struct Mono.Security.X509.X509ChainStatusFlags: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.X509.X509ChainStatusFlags NoError = 0 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.X509ChainStatusFlags UntrustedRoot = 32 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.X509ChainStatusFlags NotSignatureValid = 8 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.X509ChainStatusFlags NotTimeValid = 1 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.X509ChainStatusFlags PartialChain = 65536 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.X509ChainStatusFlags InvalidBasicConstraints = 1024 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.X509ChainStatusFlags NotTimeNested = 2 : Public, Static, Literal, HasDefault
+Struct Mono.Security.X509.Extensions.KeyUsages: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.X509.Extensions.KeyUsages cRLSign = 2 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.Extensions.KeyUsages decipherOnly = 2048 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.Extensions.KeyUsages nonRepudiation = 64 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.Extensions.KeyUsages keyCertSign = 4 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.Extensions.KeyUsages keyEncipherment = 32 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.Extensions.KeyUsages encipherOnly = 1 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.Extensions.KeyUsages none = 0 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.Extensions.KeyUsages keyAgreement = 8 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.Extensions.KeyUsages digitalSignature = 128 : Public, Static, Literal, HasDefault
+    Mono.Security.X509.Extensions.KeyUsages dataEncipherment = 16 : Public, Static, Literal, HasDefault
+Struct Mono.Security.Protocol.Ntlm.NtlmFlags: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.Protocol.Ntlm.NtlmFlags NegotiateUnicode = 1 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Ntlm.NtlmFlags RequestTarget = 4 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Ntlm.NtlmFlags NegotiateOem = 2 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Ntlm.NtlmFlags NegotiateWorkstationSupplied = 8192 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Ntlm.NtlmFlags NegotiateDomainSupplied = 4096 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Ntlm.NtlmFlags NegotiateAlwaysSign = 32768 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Ntlm.NtlmFlags NegotiateNtlm = 512 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Ntlm.NtlmFlags Negotiate56 = -2147483648 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Ntlm.NtlmFlags Negotiate128 = 536870912 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Ntlm.NtlmFlags NegotiateNtlm2Key = 524288 : Public, Static, Literal, HasDefault
+Struct Mono.Security.Protocol.Tls.CipherAlgorithmType: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.Protocol.Tls.CipherAlgorithmType Rijndael = 4 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.CipherAlgorithmType Rc2 = 2 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.CipherAlgorithmType SkipJack = 5 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.CipherAlgorithmType Rc4 = 3 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.CipherAlgorithmType TripleDes = 6 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.CipherAlgorithmType None = 1 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.CipherAlgorithmType Des = 0 : Public, Static, Literal, HasDefault
+Struct Mono.Security.Protocol.Tls.ExchangeAlgorithmType: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.Protocol.Tls.ExchangeAlgorithmType Fortezza = 1 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.ExchangeAlgorithmType RsaSign = 4 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.ExchangeAlgorithmType RsaKeyX = 3 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.ExchangeAlgorithmType DiffieHellman = 0 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.ExchangeAlgorithmType None = 2 : Public, Static, Literal, HasDefault
+Struct Mono.Security.Protocol.Tls.HashAlgorithmType: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.Protocol.Tls.HashAlgorithmType Sha1 = 2 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.HashAlgorithmType Md5 = 0 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.HashAlgorithmType None = 1 : Public, Static, Literal, HasDefault
+Struct Mono.Security.Protocol.Tls.SecurityCompressionType: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.Protocol.Tls.SecurityCompressionType Zlib = 1 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.SecurityCompressionType None = 0 : Public, Static, Literal, HasDefault
+Struct Mono.Security.Protocol.Tls.SecurityProtocolType: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    Mono.Security.Protocol.Tls.SecurityProtocolType Ssl2 = 12 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.SecurityProtocolType Ssl3 = 48 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.SecurityProtocolType Tls = 192 : Public, Static, Literal, HasDefault
+    Mono.Security.Protocol.Tls.SecurityProtocolType Default = -1073741824 : Public, Static, Literal, HasDefault

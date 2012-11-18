@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Release Notes">
+		<param name="Local" value="ReleaseNotes.htm">
+		<param name="ImageNumber" value="11">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Broadcasting And Presenting Suite">
+		<param name="Local" value="Introduction.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Server">
+			<param name="Local" value="Introduction.htm#bapsserver">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Presenter">
+			<param name="Local" value="Introduction.htm#bapspresenter">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Controller">
+			<param name="Local" value="Introduction.htm">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Web Show Manager">
+			<param name="Local" value="Introduction.htm#bapswebshowmanager">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Music Manager">
+			<param name="Local" value="Introduction.htm#bapsmusicmanager">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BAPS Presenter">
+		<param name="Local" value="BAPSPresenterMain.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Add a track list entry">
+			<param name="Local" value="BAPSPresenter/addEntries.htm">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Manage track list entries">
+			<param name="Local" value="BAPSPresenter/manageEntries.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Moving entries around">
+				<param name="Local" value="BAPSPresenter\manageEntries.htm#moving">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Deleting an entry">
+				<param name="Local" value="BAPSPresenter\manageEntries.htm#delete">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Reset Channel">
+				<param name="Local" value="BAPSPresenter\manageEntries.htm#resetchannel">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Playing Audio">
+			<param name="Local" value="BAPSPresenter/playingAudio.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Track Controller">
+				<param name="Local" value="BAPSPresenter\playingAudio.htm#controller">
+				</OBJECT>
+			<UL>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Cue Position">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#cue">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="'Introduction' Position">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#intro">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Track Controller Summary">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#summary">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+			</UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Play/Pause/Stop">
+				<param name="Local" value="BAPSPresenter\playingAudio.htm#pps">
+				</OBJECT>
+			<UL>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Track Playing">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#playing">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Track Paused">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#paused">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Track Stopped">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#stopped">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+			</UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Playback options">
+				<param name="Local" value="BAPSPresenter\playingAudio.htm#options">
+				</OBJECT>
+			<UL>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Automatic Advance">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#advance">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Play on load">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#playload">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Repeat">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#repeat">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="AudioWall">
+					<param name="Local" value="BAPSPresenter\playingAudio.htm#audiowall">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+			</UL>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Using textual entries">
+			<param name="Local" value="BAPSPresenter/useText.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Viewing Textual Entries">
+				<param name="Local" value="BAPSPresenter\useText.htm#viewing">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Open/Close Text Window">
+				<param name="Local" value="BAPSPresenter\useText.htm#textwindow">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Loading a Show">
+			<param name="Local" value="BAPSPresenter/loadShow.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Enter user details">
+				<param name="Local" value="BAPSPresenter\loadShow.htm#user">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Choose a show">
+				<param name="Local" value="BAPSPresenter\loadShow.htm#show">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Select the channels">
+				<param name="Local" value="BAPSPresenter\loadShow.htm#channels">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BAPS Controller">
+		<param name="Local" value="BAPSControllerMain.htm">
+		<param name="ImageNumber" value="2">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="BAPS Paddle">
+			<param name="Local" value="BAPSController\BAPSPaddle.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="News Mode">
+				<param name="Local" value="BAPSController\BAPSPaddle.htm#news">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Playback Mode">
+				<param name="Local" value="BAPSController\BAPSPaddle.htm#playback">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+		</UL>
+	</UL>
+</UL>
+</BODY></HTML>

@@ -1,0 +1,44 @@
+
+
+GETTING STARTED
+===============
+
+    To compile Npgsql from cvs, do the following:
+ 
+    Get Npgsql source from anon pgfoundry cvs:
+    
+    cvs -d :pserver:anonymous@cvs.pgfoundry.org:/cvsroot/npgsql login
+    cvs -d :pserver:anonymous@cvs.pgfoundry.org:/cvsroot/npgsql checkout
+ 
+    When prompted for a password for anonymous, simply press the Enter key.
+
+    It will start download Npgsql sources in a folder called Npgsql.
+
+
+COMPILING
+=========
+
+    1.) The standard compile method.
+    To compile Npgsql, first get NAnt: nant.sf.net
+    Go to Npgsql/src/Npgsql folder and execute NAnt from command line.
+
+    >nant build
+    
+    It will create a folder called build/ms where you will find the two assemblies you need to run Npgsql: Npgsql.dll and the Tls library assembly. 
+      
+    2.) The method in Microsoft Visual Studio.
+    under Npgsql/src Npgsql.csproj and Npgsql.sln can be used.
+    however, VS2005 is automatically changed by the reason it was made from VS2003.  
+    3.) The method in ShapeDevelop.
+    under Npgsql/src Npgsql.csproj can be used by ShapeDevelop Version2.0.
+    it is automatically changed. It seems that it uses the project file of VS2005.  
+     
+INSTALL
+=======
+
+    Just copy the resulting .dll's to application directory.
+    
+    See RELEASENOTES for more information on this and earlier releases.
+    
+    
+   

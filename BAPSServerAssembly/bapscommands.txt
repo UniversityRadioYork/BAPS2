@@ -1,0 +1,36 @@
+This is an incomplete list of the commands the baps server will need to support.
+//send
+FOR EACH CHANNEL: 
+play
+stop
+pause
+loadfromfile<file>
+fadeto<volume><time>
+moveto<position>
+setvolume<volume>
+loadnext<playlist>
+loadprev<playlist>
+
+FOR EACH PLAYLIST: 
+
+loadplaylist<file>
+createplaylist<name>
+deleteplaylist<name>
+addtrack<file> (we need to decide how to store track info or whether to read it from client or read it from ID tags or the db...)
+movetrack<from><to>
+deletetrack<position>
+
+MISC:
+
+crossfade<channel1><channel2>
+
+//recieve
+
+FOR EACH CHANNEL:
+
+getchannelstatus
+getvolume
+getfile
+
+Mark Fenton (2004)
+mark.fenton@ury.york.ac.uk

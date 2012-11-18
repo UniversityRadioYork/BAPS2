@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<Title>Playing Audio</Title>
+<link rel="StyleSheet" href="/style.css" media="screen" type="text/css">
+</HEAD>
+<BODY>
+<h1>Playing Audio</h1>
+Before playing audio you must first load a track. You do this by clicking on an entry in the track list. Once loaded the track will have a darker background in the track list and the track name will also be in the description box as shown here:<br /><br/>
+<img src="loadedTrack.gif" alt="Loaded Track"><br /><br/>
+Once a track is loaded all the information is placed in the interface. This may take a short while depending on the size of the track.<br />
+<h2><a name="controller">Track Controller</a></h2>
+<h3><a name="cue">Cue Position</a></h3>
+A track will always play from its cue position. This position is specified by the lower arrow on the Track Controller. Hovering over the arrow changes the pointer to a slider symbol and the cue position can be altered by clicking and dragging:<br /><br />
+<img src="cuePosition.gif" alt="Cue Position"><br /><br/>
+<img src="cuePositionNew.gif" alt="New Cue Position"><br /><br/>
+The Cue Position will reset to the beginning when a track is loaded for the first time. Once set, the cue position is remembered until the track is removed from the list or the list is reloaded.
+<h3><a name="intro">'Introduction' Position</a></h3>
+To mark where the lyrics of a track start, or any other place of interest you can use the upper arrow on the Track Controller to set a position at which the introduction of a track ends:<br/><br/>
+<img src="introPosition.gif" alt="Intro Position"><br /><br/>
+<img src="introPositionNew.gif" alt="New Intro Position"><br /><br/>
+After setting introduction positions they are stored until you delete the track from your track list. Introduction positions for (L)ibrary tracks are stored to the Music Library and will be set when you or anyone else next loads the Music Library track.
+<h3><a name="summary">Track Controller Summary</a></h3>
+The black arrow is a marker for the current position in the loaded track. You can click and drag it at any point whether the audio is playing or not. There may be a small delay between moving the slider and the audio responding but it is not anticipated that the slider will need to be moved often.<br />
+Along the central black line are visual cues as to how long the track is the larger of the markers being 1 minute markers and the smaller being 10 second markers<br />
+Here is the Track Controller with all its elements described:<br /><br/>
+<img src="trackController.gif" alt="Track Controller"><br /><br/>
+
+
+<h2><a name="pps">Play/Pause/Stop</a></h2>
+You can control playback via the mouse or via the keyboard. The 'F' keys control playback from the keyboard as indicated on the interface. The 'F' keys will control baps regardless of which baps window is in focus. However, if no baps window has focus the 'F' keys will NOT work. The buttons change colour to indicate what is currently happening:<br />
+<h3><a name="playing">Track Playing</a></h3>
+<img src="trackPlaying.gif" alt="Track Playing"><br />
+Playing a track when a track is playing is not possible<br/>
+Pausing a track when a track is playing will stop the audio playing and keep its position where it is<br />
+Stopping a track when a track is playing will stop the audio playing and return the position to the Cue Position<br/>
+<h3><a name="paused">Track Paused</a></h3>
+<img src="trackPaused.gif" alt="Track Paused"><br />
+Playing a track when a track is paused will restart the track from the Cue Position<br/>
+(Un)Pausing a track when a track is paused will start the audio playing from its current position<br />
+Stopping a track when a track is paused will return the position to the Cue Position<br/>
+<h3><a name="stopped">Track Stopped</a></h3>
+<img src="trackStopped.gif" alt="Track Stopped"><br />
+Playing a track when a track is stopped will start the track from the Cue Position<br/>
+Pausing a track when a track is stopped will set the state to paused and keep the position where it is<br />
+Stopping a track when a track is stopped will return the position to the Cue Position<br/>
+<h2><a name="options">Playback options</a></h2>
+Right clicking on a Track List will open the option menu for the channel:<br/ ><br/>
+<img src="channelOptions.gif" alt="Channel Options"><br/><br/>
+When active an option has a tick next to it.<br/>
+<h3><a name="advance">Automatic Advance</a></h3>
+When active automatic advance will cause the channel to automatically move on to the next playable entry in the track list and load it as soon as a track finishes playing.
+<h3><a name="playload">Play on load</a></h3>
+When active play on load causes tracks to immediately play when they are selected. If both automatic advance and play on load are active it has the effect of automatically playing all tracks in a track list (from the one you select to load) until the end of the list is reached.
+<h3><a name="repeat">Repeat</a></h3>
+Setting repeat to anything other than repeat none will override the above options.<br/>
+When repeat one is active this will cause a track to repeat forever once you have started it playing<br />
+When repeat all is active this will cause all tracks in the list to be played over and over once you start any track playing<br />
+<h3><a name="audiowall">AudioWall</a></h3>
+Selecting audiowall for a particular channel will open a window full of buttons. Each button refers to an item in the tracklist you opened the audiowall from. The buttons are ordered from left to right, top to bottom and show the first 20 entries in the list. Clicking once on a button will immediately load and play the audio from its cue position. The track list entry which is currently loaded will be highlighted in red.
+</BODY>
+</HTML>
