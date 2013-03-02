@@ -20,3 +20,25 @@ C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSServerService\obj\Re
 C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSServerService\obj\Release\BAPSServerService.csproj.GenerateResource.Cache
 C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSServerService\obj\Release\BAPSServerService.exe
 C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSServerService\obj\Release\BAPSServerService.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\serverstate.xml
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\BAPSServerService.exe
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\BAPSServerService.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\BAPSServerAssembly.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\Mono.Security.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\BAPSControllerAssembly.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\Npgsql.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\BAPSControllerAssembly.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\Npgsql.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\BAPSServerAssembly.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\de\Npgsql.resources.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\es\Npgsql.resources.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\fi\Npgsql.resources.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\ja\Npgsql.resources.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Release\Interop.SpeechLib.dll
+D:\Dev\URY\baps2\BAPSServerService\obj\Release\ResolveAssemblyReference.cache
+D:\Dev\URY\baps2\BAPSServerService\obj\Release\Interop.SpeechLib.dll
+D:\Dev\URY\baps2\BAPSServerService\obj\Release\BAPSServerService.csproj.ResolveComReference.cache
+D:\Dev\URY\baps2\BAPSServerService\obj\Release\BAPSServerService.ProjectInstaller.resources
+D:\Dev\URY\baps2\BAPSServerService\obj\Release\BAPSServerService.csproj.GenerateResource.Cache
+D:\Dev\URY\baps2\BAPSServerService\obj\Release\BAPSServerService.exe
+D:\Dev\URY\baps2\BAPSServerService\obj\Release\BAPSServerService.pdb

@@ -229,6 +229,10 @@ void TrackList::OnMouseWheel(System::Windows::Forms::MouseEventArgs^ e)
 	if (newTop > scroll->Maximum - 9)
 		newTop = scroll->Maximum - 9;
 	//scroll->IndexAtTop = newTop;
+
+	// This stops the scroll going out of index
+	if (newTop < 0){ newTop = 0; }
+
 	scroll->Value = newTop;
 	this->Invalidate();
 	//opLock->ReleaseMutex();
