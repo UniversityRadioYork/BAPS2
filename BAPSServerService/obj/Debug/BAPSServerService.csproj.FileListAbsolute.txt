@@ -64,3 +64,25 @@ Z:\Public\!crap to be deleted\Ripper\BAPS2\BAPSServerService\obj\Debug\BAPSServe
 Z:\Public\!crap to be deleted\Ripper\BAPS2\BAPSServerService\obj\Debug\BAPSServerService.csproj.GenerateResource.Cache
 Z:\Public\!crap to be deleted\Ripper\BAPS2\BAPSServerService\obj\Debug\BAPSServerService.exe
 Z:\Public\!crap to be deleted\Ripper\BAPS2\BAPSServerService\obj\Debug\BAPSServerService.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\serverstate.xml
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\BAPSServerService.exe
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\BAPSServerService.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\BAPSServerAssembly.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\Mono.Security.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\BAPSControllerAssembly.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\Npgsql.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\BAPSControllerAssembly.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\Npgsql.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\BAPSServerAssembly.pdb
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\de\Npgsql.resources.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\es\Npgsql.resources.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\fi\Npgsql.resources.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\ja\Npgsql.resources.dll
+D:\Dev\URY\baps2\BAPSServerService\bin\Debug\Interop.SpeechLib.dll
+D:\Dev\URY\baps2\BAPSServerService\obj\Debug\ResolveAssemblyReference.cache
+D:\Dev\URY\baps2\BAPSServerService\obj\Debug\Interop.SpeechLib.dll
+D:\Dev\URY\baps2\BAPSServerService\obj\Debug\BAPSServerService.csproj.ResolveComReference.cache
+D:\Dev\URY\baps2\BAPSServerService\obj\Debug\BAPSServerService.ProjectInstaller.resources
+D:\Dev\URY\baps2\BAPSServerService\obj\Debug\BAPSServerService.csproj.GenerateResource.Cache
+D:\Dev\URY\baps2\BAPSServerService\obj\Debug\BAPSServerService.exe
+D:\Dev\URY\baps2\BAPSServerService\obj\Debug\BAPSServerService.pdb

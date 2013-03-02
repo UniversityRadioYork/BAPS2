@@ -3,3 +3,8 @@ C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSFormControls\bin\Rel
 C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSFormControls\obj\Release\ResolveAssemblyReference.cache
 C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSFormControls\obj\Release\BAPSFormControls.dll
 C:\Documents and Settings\ury\My Documents\Ripper\BAPS2\BAPSFormControls\obj\Release\BAPSFormControls.pdb
+D:\Dev\URY\baps2\BAPSFormControls\bin\Release\BAPSFormControls.dll
+D:\Dev\URY\baps2\BAPSFormControls\bin\Release\BAPSFormControls.pdb
+D:\Dev\URY\baps2\BAPSFormControls\obj\Release\ResolveAssemblyReference.cache
+D:\Dev\URY\baps2\BAPSFormControls\obj\Release\BAPSFormControls.dll
+D:\Dev\URY\baps2\BAPSFormControls\obj\Release\BAPSFormControls.pdb

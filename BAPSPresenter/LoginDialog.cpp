@@ -13,9 +13,9 @@ System::Void LoginDialog::loginButton_Click(System::Object ^  sender, System::Ev
 	}
 	else
 	{
-	if (serverText->Text->Equals("studio1")) serverText->Text = "10.0.0.50";
-	else if (serverText->Text->Equals("studio2")) serverText->Text = "10.0.0.40";
-	else if (serverText->Text->Equals("production")) serverText->Text = "10.0.0.14";
+	if (serverText->Text->Equals("studio1")) serverText->Text = "144.32.64.181";
+	else if (serverText->Text->Equals("studio2")) serverText->Text = "144.35.64.184";
+	else if (serverText->Text->Equals("production")) serverText->Text = "144.32.64.178";
 	else if (serverText->Text->Equals("localhost")) serverText->Text = "127.0.0.1";
 
 		/** Increment the attempt counter so the first attempt is the only
