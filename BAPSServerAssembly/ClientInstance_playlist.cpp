@@ -2,6 +2,7 @@
 #include "ClientInstance.h"
 #include "Exceptions.h"
 #include "Track.h"
+#include "LibraryTrack.h"  // mattbw 2013-11-18 (needed for getDirectLibraryTrack).
 
 using namespace BAPSServerAssembly;
 
@@ -42,6 +43,29 @@ BEGIN_ACTION_BLOCKED3(addFile, System::Byte channel, u32int directoryIndex, Syst
 	}
 }
 END_ACTION_UNBLOCK();
+
+/* 2013-11-18: Add get-track-by-ID functionality. */
+BEGIN_ACTION_BLOCKED5(
+	addDirectLibraryItem,
+	System::Byte channel,
+	u32int recordid,
+	u32int trackid,
+	System::String^ title,
+	System::String^ artist
+)
+{
+	LibraryTrack^ track = gcnew LibraryTrack;
+
+	track->RecordID = recordid;
+	track->TrackID = trackid;
+	track->setTitle(title);
+	track->setArtist(artist);
+	track->IntroPosition = 0;  // No point allowing people to set this; it's rarely used.
+
+	ClientManager::getAudio()->getPlaylist(channel)->addEntry(track);
+}
+END_ACTION_UNBLOCK();
+/* End 2013-11-18 changes.*/
 
 BEGIN_ACTION_BLOCKED2(addSearchItem, System::Byte channel, u32int index)
 {

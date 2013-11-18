@@ -293,10 +293,27 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 			case BAPSNET_LIBRARYITEM:
 				addSearchItem(cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK, connection->receiveI());
 				break;
+			/* mattbw 2013-11-18: Allow for direct library item addition.
+			 *
+			 * This was added in order to allow new BAPS clients to supply their own
+			 * library searching functions without having to go through BAPS, as is
+			 * the case with BAPSNET_LIBRARYITEM.
+			 */
+			case BAPSNET_DIRECTLIBRARYITEM:
+				addDirectLibraryItem(
+					cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK,  // Channel ID
+					connection->receiveI(),  // Record ID
+					connection->receiveI(),  // Track ID
+					connection->receiveS(),  // Title
+					connection->receiveS()   // Artist
+				);
+				break;
+			/* end 2013-11-18 */
 			case BAPSNET_TEXTITEM:
 				// WORK NEEDED: implement
 				break;
 			default:
+				LogManager::write("Received unknown item type.", LOG_ERROR, LOG_COMMS);
 				// WORK NEEDED: hmm
 				break;
 			}

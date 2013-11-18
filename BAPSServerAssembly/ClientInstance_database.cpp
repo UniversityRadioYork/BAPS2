@@ -232,6 +232,7 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 	}
 	return true;
 }
+
 LibraryTrack^ ClientInstance::getLibraryTrack(int index)
 {
 	LibraryTrack^ tempTrack = gcnew LibraryTrack();
