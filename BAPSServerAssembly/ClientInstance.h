@@ -44,7 +44,13 @@ namespace BAPSServerAssembly
 											BEGIN_MESSAGE_BLOCK();\
 											try\
 											{
-
+	/* mattbw 2013-11-18: Needed to add this for addDirectLibraryTrack.  Sorry! */
+	#define BEGIN_ACTION_BLOCKED5(x,y1,y2,y3,y4,y5)  void ClientInstance::x(y1,y2,y3,y4,y5)\
+										{\
+											BEGIN_MESSAGE_BLOCK();\
+											try\
+											{
+	/* End 2013-11-18. */
 	#define END_ACTION_UNBLOCK()			}\
 											finally\
 											{\
@@ -128,6 +134,9 @@ namespace BAPSServerAssembly
 		void addNote(System::Byte channel, System::String^ note) {};
 		void addFile(System::Byte channel, u32int directoryIndex, System::String^ filename);
 		void addSearchItem(System::Byte channel, u32int value);
+		/* mattbw 2013-11-18 */
+		void addDirectLibraryItem(System::Byte channel, u32int recordid, u32int trackid, System::String^ title, System::String^ artist);
+		/* end 2013-11-18 */
 		void deleteItem(System::Byte channel, u32int index);
 		void moveItemTo(System::Byte channel, u32int oldIndex, u32int newIndex);
 		void getPlaylist(System::Byte channel);

@@ -76,6 +76,7 @@ typedef unsigned short Command;
 #define BAPSNET_FILEITEM			1
 #define BAPSNET_LIBRARYITEM			2
 #define BAPSNET_TEXTITEM			3
+#define BAPSNET_DIRECTLIBRARYITEM	4  // mattbw 2013-11-18; needed for direct library addition
 
 /**
  * Text
