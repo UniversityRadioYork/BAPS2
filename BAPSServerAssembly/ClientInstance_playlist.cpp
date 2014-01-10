@@ -67,6 +67,19 @@ BEGIN_ACTION_BLOCKED5(
 END_ACTION_UNBLOCK();
 /* End 2013-11-18 changes.*/
 
+/* Added 2014-01-10 by mattbw. */
+BEGIN_ACTION_BLOCKED3(
+    addTextItem,             /* Adds a text item to the playlist. */
+	System::Byte channel,    /* Channel ID, starting from 0. */
+	System::String^ summary, /* Summary displayed in the playlist view. */ 
+	System::String^ details  /* Actual text displayed in the BAPS notes view. */
+)
+{
+	TextEntry^ entry = gcnew TextEntry(summary, details);
+	ClientManager::getAudio()->getPlaylist(channel)->addEntry(entry);
+}
+END_ACTION_UNBLOCK();
+
 BEGIN_ACTION_BLOCKED2(addSearchItem, System::Byte channel, u32int index)
 {
 	if (channel < CHANNEL_COUNT)
