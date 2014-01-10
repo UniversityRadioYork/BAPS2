@@ -279,71 +279,8 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 		}
 		break;
 	case BAPSNET_PLAYLIST:
-		switch (cmdReceived & BAPSNET_PLAYLIST_OPMASK)
-		{
-		case BAPSNET_ADDITEM:
-			switch (connection->receiveI())
-			{
-			case BAPSNET_VOIDITEM:
-				// nothing
-				break;
-			case BAPSNET_FILEITEM:
-				addFile(cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK, connection->receiveI(), connection->receiveS());
-				break;
-			case BAPSNET_LIBRARYITEM:
-				addSearchItem(cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK, connection->receiveI());
-				break;
-			/* mattbw 2013-11-18: Allow for direct library item addition.
-			 *
-			 * This was added in order to allow new BAPS clients to supply their own
-			 * library searching functions without having to go through BAPS, as is
-			 * the case with BAPSNET_LIBRARYITEM.
-			 */
-			case BAPSNET_DIRECTLIBRARYITEM:
-				addDirectLibraryItem(
-					cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK,  // Channel ID
-					connection->receiveI(),  // Record ID
-					connection->receiveI(),  // Track ID
-					connection->receiveS(),  // Title
-					connection->receiveS()   // Artist
-				);
-				break;
-			/* end 2013-11-18 */
-			case BAPSNET_TEXTITEM:
-				// WORK NEEDED: implement
-				break;
-			default:
-				LogManager::write("Received unknown item type.", LOG_ERROR, LOG_COMMS);
-				// WORK NEEDED: hmm
-				break;
-			}
-			break;
-		case BAPSNET_DELETEITEM:
-			deleteItem(cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK, connection->receiveI());
-			break;
-		case BAPSNET_MOVEITEMTO:
-			moveItemTo(cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK, connection->receiveI(), connection->receiveI());
-			break;
-		case BAPSNET_ITEM:
-			if (ISFLAGSET(cmdReceived,BAPSNET_PLAYBACK_MODEMASK))
-			{
-				// WORK NEEDED: getItem
-			}
-			break;
-		case BAPSNET_GETPLAYLIST:
-			getPlaylist(cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK);
-			break;
-		case BAPSNET_RESETPLAYLIST:
-			resetPlaylist(cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK);
-			break;
-		case BAPSNET_COPYITEM:
-			copyItem(cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK, connection->receiveI(), connection->receiveI());
-			break;
-		default:
-			LogManager::write(System::String::Concat("Received unknown Command, Possibly a deformed PLAYLIST: ", cmdReceived.ToString()), LOG_ERROR, LOG_COMMS);
-			dead = true;
-			break;
-		}
+		/* mattbw 2014-01-10: Separate this into its own function. */
+		decodePlaylistCommand(cmdReceived);
 		break;
 	case BAPSNET_BTEXT:
 		switch (cmdReceived & BAPSNET_TEXT_OPMASK)
@@ -547,6 +484,83 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 		break;
 	default:
 		LogManager::write(System::String::Concat("Received unknown Command: ", cmdReceived.ToString()), LOG_ERROR, LOG_COMMS);
+		dead = true;
+		break;
+	}
+}
+
+/* mattbw 2014-01-10: This was originally part of decodeCommand. */
+void ClientInstance::decodePlaylistCommand(Command cmdReceived)
+{
+	System::Byte channel = cmdReceived & BAPSNET_PLAYLIST_CHANNELMASK;
+
+	switch (cmdReceived & BAPSNET_PLAYLIST_OPMASK)
+	{
+	case BAPSNET_ADDITEM:
+		switch (connection->receiveI())
+		{
+		case BAPSNET_VOIDITEM:
+			// nothing
+			break;
+		case BAPSNET_FILEITEM:
+			addFile(channel, connection->receiveI(), connection->receiveS());
+			break;
+		case BAPSNET_LIBRARYITEM:
+			addSearchItem(channel, connection->receiveI());
+			break;
+		/* mattbw 2013-11-18: Allow for direct library item addition.
+		 *
+		 * This was added in order to allow new BAPS clients to supply their own
+		 * library searching functions without having to go through BAPS, as is
+		 * the case with BAPSNET_LIBRARYITEM.
+		 */
+		case BAPSNET_DIRECTLIBRARYITEM:
+			addDirectLibraryItem(
+				channel,                 // Channel ID
+				connection->receiveI(),  // Record ID
+				connection->receiveI(),  // Track ID
+				connection->receiveS(),  // Title
+				connection->receiveS()   // Artist
+			);
+			break;
+		/* end 2013-11-18 */
+		case BAPSNET_TEXTITEM:
+			/* mattbw 2014-01-10: Implement this. */
+			addTextItem(
+				channel,                 // Channel ID
+				connection->receiveS(),  // Summary
+				connection->receiveS()   // Details
+			);
+			break;
+		default:
+			LogManager::write("Received unknown item type.", LOG_ERROR, LOG_COMMS);
+			// WORK NEEDED: hmm
+			break;
+		}
+		break;
+	case BAPSNET_DELETEITEM:
+		deleteItem(channel, connection->receiveI());
+		break;
+	case BAPSNET_MOVEITEMTO:
+		moveItemTo(channel, connection->receiveI(), connection->receiveI());
+		break;
+	case BAPSNET_ITEM:
+		if (ISFLAGSET(cmdReceived,BAPSNET_PLAYBACK_MODEMASK))
+		{
+			// WORK NEEDED: getItem
+		}
+		break;
+	case BAPSNET_GETPLAYLIST:
+		getPlaylist(channel);
+		break;
+	case BAPSNET_RESETPLAYLIST:
+		resetPlaylist(channel);
+		break;
+	case BAPSNET_COPYITEM:
+		copyItem(channel, connection->receiveI(), connection->receiveI());
+		break;
+	default:
+		LogManager::write(System::String::Concat("Received unknown Command, Possibly a deformed PLAYLIST: ", cmdReceived.ToString()), LOG_ERROR, LOG_COMMS);
 		dead = true;
 		break;
 	}

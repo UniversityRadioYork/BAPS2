@@ -117,6 +117,7 @@ namespace BAPSServerAssembly
 	private:
 		/** Decodes Command values to actions **/
 		void decodeCommand(Command cmdReceived);
+		void decodePlaylistCommand(Command cmdReceived);  // mattbw 2014-01-10
 		/** Main program loop, each ClientInstance waits for Commands in this loop **/
 		void clientControlLoop();
 
@@ -131,12 +132,13 @@ namespace BAPSServerAssembly
 		void setVolume(System::Byte channel, float value);
 
 		/** PLAYLIST actions **/
-		void addNote(System::Byte channel, System::String^ note) {};
+		void addNote(System::Byte channel, System::String^ note) {}; // Seemingly unused
 		void addFile(System::Byte channel, u32int directoryIndex, System::String^ filename);
 		void addSearchItem(System::Byte channel, u32int value);
 		/* mattbw 2013-11-18 */
 		void addDirectLibraryItem(System::Byte channel, u32int recordid, u32int trackid, System::String^ title, System::String^ artist);
 		/* end 2013-11-18 */
+		void addTextItem(System::Byte channel, System::String^ summary, System::String^ details); // mattbw 2014-01-10
 		void deleteItem(System::Byte channel, u32int index);
 		void moveItemTo(System::Byte channel, u32int oldIndex, u32int newIndex);
 		void getPlaylist(System::Byte channel);
