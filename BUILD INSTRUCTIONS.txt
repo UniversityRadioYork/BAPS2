@@ -1,0 +1,15 @@
+***BUILD INSTRUCTIONS FOR VS2008 On 64-BIT MACHINES***
+
+Actually worked on 06/May/2015
+
+-- If it complains about lacking certain executables or libraries during build, the paths must be modified.
+-- Go to Tool -> Options -> Projects and Solutions -> VC++ Directories -> Executable files.
+-- Add C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin
+-- Then -> Library files. Add C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib
+
+-- BAPSSetup fails to build
+
+This seems to use some setup dialogue frames etc - BAPS has a custom one which it used to copy into
+Program Files (!). In the post WinXP days, this isn't really feasible so it must be put there manually.
+The file VsdServiceCredentials1Dlg.wid needs copying to C:\Program Files\Microsoft Visual Studio 9.0\Common7\Tools\Deployment\VsdDialogs\0 and 1033. The entire (yes, entire) VsdDialogs path may also need
+copying to the not-x86 path. Maybe the other way around.
