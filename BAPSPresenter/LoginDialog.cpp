@@ -14,7 +14,7 @@ System::Void LoginDialog::loginButton_Click(System::Object ^  sender, System::Ev
 	else
 	{
 	if (serverText->Text->Equals("studio1")) serverText->Text = "144.32.64.181";
-	else if (serverText->Text->Equals("studio2")) serverText->Text = "144.35.64.184";
+	else if (serverText->Text->Equals("studio2")) serverText->Text = "144.32.64.184";
 	else if (serverText->Text->Equals("production")) serverText->Text = "144.32.64.178";
 	else if (serverText->Text->Equals("localhost")) serverText->Text = "127.0.0.1";
 
