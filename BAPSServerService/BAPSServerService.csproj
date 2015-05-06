@@ -137,8 +137,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy ..\..\..\release\baps.dll .\
-copy ..\..\..\common\VsdServiceCredentials1Dlg.wid "$(DevEnvDir)\..\Tools\Deployment\VsdDialogs\1033"
-copy ..\..\..\common\VsdServiceCredentials1Dlg.wid "$(DevEnvDir)\..\Tools\Deployment\VsdDialogs\0"</PostBuildEvent>
+    <PostBuildEvent>copy ..\..\..\release\baps.dll</PostBuildEvent>
   </PropertyGroup>
 </Project>
