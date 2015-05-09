@@ -137,6 +137,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy ..\..\..\release\baps.dll</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
