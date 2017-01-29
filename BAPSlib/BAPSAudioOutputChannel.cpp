@@ -200,7 +200,8 @@ DWORD CBAPSAudioOutputChannel::EventMonitorThreadProc()
 	HRESULT hr;
 	HANDLE hObject[2];
 	BOOL bExit;
-	long lEventCode, lParam1, lParam2;
+	long lEventCode;
+	LONG_PTR lParam1, lParam2;
 
 	// Get the DirectShow event
 	hr = m_pMediaEvent->GetEventHandle((OAEVENT*)&hObject[0]);
