@@ -263,5 +263,10 @@ namespace BAPSServerService
         {
             base.Uninstall(savedState);
         }
+
+        private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
+        {
+
+        }
     }
 }

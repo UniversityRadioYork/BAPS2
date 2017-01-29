@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Comms">
+      <UniqueIdentifier>{5319bfcb-a8ea-4623-a271-0b9ce8c6a9ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Audio">
+      <UniqueIdentifier>{970ed28b-02a3-4e06-a418-71fe1fbfd2ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{4a0e3c34-4d2b-4c06-b96b-7a58e974a466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClientInstance">
+      <UniqueIdentifier>{52f2ad67-a15b-400d-83ed-8057f18da209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Main">
+      <UniqueIdentifier>{2e1f5d27-74c6-4116-b049-2242aa169808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Playlist">
+      <UniqueIdentifier>{91707f90-a782-4ee9-a18d-d56bcb40bf91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{a9c948a6-96a5-4083-93e7-e167a7148c07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Audio">
+      <UniqueIdentifier>{08589f29-0476-4365-8656-f76b55c18442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BAPSlib">
+      <UniqueIdentifier>{3d999d2f-8636-412c-8c48-da1cb76ac1c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Comms">
+      <UniqueIdentifier>{f1b247fa-258c-4362-bd42-bd9990e8acca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ClientInstance">
+      <UniqueIdentifier>{f34e7224-110a-4880-aa29-f0db2a4f756b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Main">
+      <UniqueIdentifier>{248f0957-8921-4381-9bee-30bf67f484d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{20cd8baf-8833-4bd0-b924-016f31f2c6f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Playlist">
+      <UniqueIdentifier>{c831e220-897e-4225-97e2-49a2801bb35f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{349352a5-1e96-431f-af6e-23e8fe4f1aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ServerSocket.cpp">
+      <Filter>Source Files\Comms</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioOutput.cpp">
+      <Filter>Source Files\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="globalaudioobject.cpp">
+      <Filter>Source Files\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncActionManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LogManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="UserManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientInstance.cpp">
+      <Filter>Source Files\ClientInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientInstance_config.cpp">
+      <Filter>Source Files\ClientInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientInstance_database.cpp">
+      <Filter>Source Files\ClientInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientInstance_playback.cpp">
+      <Filter>Source Files\ClientInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientInstance_playlist.cpp">
+      <Filter>Source Files\ClientInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientInstance_system.cpp">
+      <Filter>Source Files\ClientInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Stdafx.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Playlist.cpp">
+      <Filter>Source Files\Playlist</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigDescriptorInt.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigDescriptorIntChoice.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigDescriptorString.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigDescriptorStringChoice.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="EmailWrapper.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AudioOutput.h">
+      <Filter>Header Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalAudioObject.h">
+      <Filter>Header Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\decodeStructs.h">
+      <Filter>Header Files\Comms</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSocket.h">
+      <Filter>Header Files\Comms</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientInstance.h">
+      <Filter>Header Files\ClientInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Stdafx.h">
+      <Filter>Header Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncActionManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BAPSController.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LogManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entry.h">
+      <Filter>Header Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryTrack.h">
+      <Filter>Header Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="Playlist.h">
+      <Filter>Header Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEntry.h">
+      <Filter>Header Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="Track.h">
+      <Filter>Header Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigChoices.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDescriptor.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDescriptorChoice.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDescriptorInt.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDescriptorIntChoice.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDescriptorString.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDescriptorStringChoice.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigIntChoices.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ConfigOptions.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigStringChoices.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="EmailWrapper.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputChannels.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputDevices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="serverstate.xml" />
+  </ItemGroup>
+</Project>

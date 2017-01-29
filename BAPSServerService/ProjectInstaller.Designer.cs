@@ -34,6 +34,7 @@ namespace BAPSServerService
             // 
             // serviceProcessInstaller1
             // 
+            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.serviceProcessInstaller1.Password = null;
             this.serviceProcessInstaller1.Username = null;
             // 
@@ -42,6 +43,7 @@ namespace BAPSServerService
             this.serviceInstaller1.Description = "Broadcasting And Presenting Suite - Server";
             this.serviceInstaller1.ServiceName = "BAPS Server Service";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
             // 
             // bapsServiceController
             // 

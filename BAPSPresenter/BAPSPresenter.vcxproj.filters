@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Messages">
+      <UniqueIdentifier>{d9990367-4b06-4447-8a49-00d5189d89f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\About">
+      <UniqueIdentifier>{7e3d0260-f1b6-4593-8ccd-92972a272b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ConfigDialog">
+      <UniqueIdentifier>{1a5f11a8-0382-4acf-85a6-3e587a584100}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LoadShowDialog">
+      <UniqueIdentifier>{c1c38b73-834e-4ff6-8a6a-cb3fc1d88412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LoginDialog">
+      <UniqueIdentifier>{118d4f3e-cf6c-4763-b40b-f1582007b429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RecordLibrarySearch">
+      <UniqueIdentifier>{ef77a3f4-5337-427d-9b66-15c28ba3c190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SecurityDialog">
+      <UniqueIdentifier>{7a6794b1-8993-4cc8-90e3-d0b543798d02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LocalConfigDialog">
+      <UniqueIdentifier>{ec2c962b-79ce-4758-99aa-27ce435817c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AudioWall">
+      <UniqueIdentifier>{8933a6b2-c3ab-47c0-9939-8221b72ca35c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSLabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSListBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenter_TrackList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenterMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenterMainEvents.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenterMainEvents_Directory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenterMainReactions_config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenterMainReactions_database.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenterMainReactions_playback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenterMainReactions_playlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSPresenterMainReactions_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BAPSScrollBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSocket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="About.cpp">
+      <Filter>Header Files\About</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigDialog.cpp">
+      <Filter>Header Files\ConfigDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadShowDialog.cpp">
+      <Filter>Header Files\LoadShowDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginDialog.cpp">
+      <Filter>Header Files\LoginDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordLibrarySearch.cpp">
+      <Filter>Header Files\RecordLibrarySearch</Filter>
+    </ClCompile>
+    <ClCompile Include="SecurityDialog.cpp">
+      <Filter>Header Files\SecurityDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalConfigDialog.cpp">
+      <Filter>Header Files\LocalConfigDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioWall.cpp">
+      <Filter>Header Files\AudioWall</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BAPSButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BAPSLabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BAPSListBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BAPSPresenterMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BAPSScrollBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientHelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataGridComboBoxColumn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\decodeStructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\UtilityMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageDelay.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageFloat.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageString.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageStringString.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageStringStringString.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageStringStringU32int.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageStringU32int.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageU32int.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageU32intString.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageU32intU32int.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageU32intU32intString.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMessageU32intU32intU32int.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="About.h">
+      <Filter>Header Files\About</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDialog.h">
+      <Filter>Header Files\ConfigDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigOptionInfo.h">
+      <Filter>Header Files\ConfigDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ConfigOptions.h">
+      <Filter>Header Files\ConfigDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadShowDialog.h">
+      <Filter>Header Files\LoadShowDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginDialog.h">
+      <Filter>Header Files\LoginDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordLibrarySearch.h">
+      <Filter>Header Files\RecordLibrarySearch</Filter>
+    </ClInclude>
+    <ClInclude Include="SecurityDialog.h">
+      <Filter>Header Files\SecurityDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="SecurityDialogStructs.h">
+      <Filter>Header Files\SecurityDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalConfigDialog.h">
+      <Filter>Header Files\LocalConfigDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioWall.h">
+      <Filter>Header Files\AudioWall</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="BAPS1616.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="fileItem.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="libraryItem.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textItem.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textItemSel.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\help\BAPSPresenterHelp.chm" />
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="About.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AudioWall.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BAPSPresenterMain.resX">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigDialog.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadShowDialog.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LocalConfigDialog.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginDialog.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordLibrarySearch.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SecurityDialog.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextDialog.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
