@@ -224,27 +224,6 @@
     <ClInclude Include="utility.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPS.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputChannel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputChannels.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputDevice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputDevices.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSCommon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico">

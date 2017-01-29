@@ -93,7 +93,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\Common;..\..\BAPSLib\$(Platform)\$(Configuration);..\..\BAPSLib\$(Platform)\$(Configuration)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Common;..\BAPSLib\$(Platform)\$(Configuration);..\BAPSLib\$(Platform)\$(Configuration)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -115,7 +115,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\Common;..\..\BAPSLib\$(Platform)\$(Configuration);..\..\BAPSLib\$(Platform)\$(Configuration)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Common;..\BAPSLib\$(Platform)\$(Configuration);..\BAPSLib\$(Platform)\$(Configuration)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -124,7 +124,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <AdditionalLibraryDirectories>..\..\BAPSLib\$(Platform)\$(Configuration)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\BAPSLib\$(Platform)\$(Configuration)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
@@ -137,7 +137,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\Common;..\..\BAPSLib\$(Platform)\$(Configuration);..\..\BAPSLib\$(Platform)\$(Configuration)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Common;..\BAPSLib\$(Platform)\$(Configuration);..\BAPSLib\$(Platform)\$(Configuration)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -158,7 +158,7 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>..\Common;..\..\BAPSLib\$(Platform)\$(Configuration);..\..\BAPSLib\$(Platform)\$(Configuration)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Common;..\BAPSLib\$(Platform)\$(Configuration);..\BAPSLib\$(Platform)\$(Configuration)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -167,7 +167,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <AdditionalLibraryDirectories>..\..\BAPSLib\$(Platform)\$(Configuration)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\BAPSLib\$(Platform)\$(Configuration)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
@@ -235,13 +235,6 @@
     <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPS.h" />
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutput.h" />
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputChannel.h" />
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputChannels.h" />
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputDevice.h" />
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSAudioOutputDevices.h" />
-    <ClInclude Include="..\..\BAPSLib\$(Platform)\$(Configuration)\inc\BAPSCommon.h" />
     <ClInclude Include="..\Common\ConfigOptions.h" />
     <ClInclude Include="..\Common\decodeStructs.h" />
     <ClInclude Include="AsyncActionManager.h" />
