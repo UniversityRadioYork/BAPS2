@@ -19,7 +19,11 @@ BAPSController::BAPSController()
 
 	if (hDll == 0)
 	{
+		this->hasUSBDevices = false;
 		return;
+	}
+	else {
+		this->hasUSBDevices = true;
 	}
 
 	USBm_FindDevices =      (USBm_FindDevices_type)GetProcAddress(hDll, "USBm_FindDevices");
@@ -200,4 +204,9 @@ void BAPSController::runHelper()
 array<System::String^>^ BAPSController::getSerialNumbers()
 {
 	return safe_cast<array<System::String^>^>(serialNumbers->Clone());
+}
+
+bool BAPSController::hasUSB()
+{
+	return hasUSBDevices;
 }

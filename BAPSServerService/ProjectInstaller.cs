@@ -256,8 +256,14 @@ namespace BAPSServerService
         }
         public override void Rollback(System.Collections.IDictionary savedState)
         {
-            base.Rollback(savedState);
-
+            try
+            {
+                base.Rollback(savedState);
+            }
+            catch (System.Exception)
+            {
+                /** ignore it **/
+            }
         }
         public override void Uninstall(System.Collections.IDictionary savedState)
         {

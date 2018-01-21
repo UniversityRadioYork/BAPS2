@@ -122,7 +122,7 @@ void AsyncActionManager::doActions(System::Object^)
 				if (updateDataset->Tables->Count == 1 &&
 					updateDataset->Tables[0]->Rows->Count != 0)
 				{
-					ServerID = updateDataset->Tables[0]->Rows[0][0]->ToString();
+					ServerID = updateDataset->Tables[0]->Rows[0]->ToString();
 				}
 				else
 				{
@@ -136,7 +136,7 @@ void AsyncActionManager::doActions(System::Object^)
 																  "WHERE servername=:sname");
 					updateDataset->Reset();
 					bapsDataAdapter->Fill(updateDataset);
-					ServerID = updateDataset->Tables[0]->Rows[0][0]->ToString();
+					ServerID = updateDataset->Tables[0]->Rows[0]->ToString();
 				}
 				bapsDataAdapter->SelectCommand = oldCommand;
 
@@ -155,7 +155,7 @@ void AsyncActionManager::doActions(System::Object^)
 						if (updateDataset->Tables->Count == 1 &&
 							updateDataset->Tables[0]->Rows->Count != 0)
 						{
-							AudioID = updateDataset->Tables[0]->Rows[0][0]->ToString();
+							AudioID = updateDataset->Tables[0]->Rows[0]->ToString();
 						}
 					}
 					if (AudioID == nullptr)
@@ -178,7 +178,7 @@ void AsyncActionManager::doActions(System::Object^)
 						if (updateDataset->Tables->Count == 1 &&
 							updateDataset->Tables[0]->Rows->Count != 0)
 						{
-							AudioID = updateDataset->Tables[0]->Rows[0][0]->ToString();
+							AudioID = updateDataset->Tables[0]->Rows[0]->ToString();
 						}
 						else
 						{
@@ -207,8 +207,8 @@ void AsyncActionManager::doActions(System::Object^)
 							
 							updateDataset->Reset();
 							bapsDataAdapter->Fill(updateDataset);
-							System::Object^ fred  = updateDataset->Tables[0]->Rows[0][0];
-							AudioID = updateDataset->Tables[0]->Rows[0][0]->ToString();
+							System::Object^ fred  = updateDataset->Tables[0]->Rows[0];
+							AudioID = updateDataset->Tables[0]->Rows[0]->ToString();
 						}
 						bapsDataAdapter->SelectCommand = oldCommand;
 					}

@@ -1,4 +1,4 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "GlobalAudioObject.h"
 #include "ConfigManager.h"
 #include "Exceptions.h"

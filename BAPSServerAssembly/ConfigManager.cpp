@@ -144,12 +144,22 @@ void ConfigManager::initConfigManager()
 	BAPSControllerAssembly::BAPSController^ bc = gcnew BAPSControllerAssembly::BAPSController();
 
 	ConfigStringChoices^ bapsController2Choices = gcnew ConfigStringChoices();
-	array<System::String^>^ serials = bc->getSerialNumbers();
-	for (int i = 0 ; i < serials->Length ; i++)
-	{
-		bapsController2Choices->add(serials[i], serials[i], (i==0));
+	array<System::String^>^ serials = {};
+
+	if (bc->hasUSB() == true) {
+		serials = bc->getSerialNumbers();
+		for (int i = 0; i < serials->Length; i++)
+		{
+			bapsController2Choices->add(serials[i], serials[i], (i == 0));
+		}
+
+		bapsController2Choices->add("none", "none", (serials->Length == 0));
 	}
-	bapsController2Choices->add("none","none", (serials->Length==0));
+	else
+	{
+		bapsController2Choices->add("none", "none", true);
+	}
+	
 	delete bc;
 
 	configDescriptions[CONFIG_BAPSCONTROLLER2ENABLED] = gcnew ConfigDescriptorIntChoice("BAPSController2Enabled", "BAPS USB Controller Enabled", noYesChoices, CA_SU_ONLY);
