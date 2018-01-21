@@ -104,6 +104,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //        create and display the main program window.
 //
 
+NotifyCallback urm;
 
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {

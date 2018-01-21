@@ -28,6 +28,7 @@ namespace BAPSControllerAssembly
 			}
 		}
 		array<System::String^>^ getSerialNumbers();
+		bool hasUSB();
 	private:
 		void runHelper();
 		HINSTANCE hDll;
@@ -81,6 +82,7 @@ namespace BAPSControllerAssembly
 		array<System::String^>^ serialNumbers;
 		array<unsigned char>^ lastByteA;
 		array<unsigned char>^ lastByteB;
+		bool hasUSBDevices;
 		bool quit;
 		System::Threading::Thread^ pollThread;
 		SignalCallback^ callback;
