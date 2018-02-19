@@ -408,93 +408,53 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackTime0 = (gcnew BAPSPresenter::TrackTime());
 			this->trackListContextMenuStrip->SuspendLayout();
 			this->SuspendLayout();
-			// 
-			// trackListContextMenuStrip
-			// 
-			this->trackListContextMenuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(12) {this->resetChannelStripMenuItem, 
-				this->toolStripSeparator2, this->deleteItemToolStripMenuItem, this->toolStripSeparator3, this->automaticAdvanceToolStripMenuItem, 
-				this->playOnLoadToolStripMenuItem, this->toolStripSeparator1, this->repeatAllToolStripMenuItem, this->repeatOneToolStripMenuItem, 
-				this->repeatNoneToolStripMenuItem, this->toolStripSeparator4, this->showAudioWallToolStripMenuItem});
+			this->trackListContextMenuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(12) {
+				this->resetChannelStripMenuItem,
+					this->toolStripSeparator2, this->deleteItemToolStripMenuItem, this->toolStripSeparator3, this->automaticAdvanceToolStripMenuItem,
+					this->playOnLoadToolStripMenuItem, this->toolStripSeparator1, this->repeatAllToolStripMenuItem, this->repeatOneToolStripMenuItem,
+					this->repeatNoneToolStripMenuItem, this->toolStripSeparator4, this->showAudioWallToolStripMenuItem
+			});
 			this->trackListContextMenuStrip->Name = L"trackListContextMenuStrip";
 			this->trackListContextMenuStrip->ShowCheckMargin = true;
 			this->trackListContextMenuStrip->ShowImageMargin = false;
 			this->trackListContextMenuStrip->Size = System::Drawing::Size(178, 204);
-			this->trackListContextMenuStrip->ItemClicked += gcnew System::Windows::Forms::ToolStripItemClickedEventHandler(this, &BAPSPresenterMain::trackListContextMenuStrip_ItemClicked);
 			this->trackListContextMenuStrip->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &BAPSPresenterMain::trackListContextMenuStrip_Opening);
-			// 
-			// resetChannelStripMenuItem
-			// 
+			this->trackListContextMenuStrip->ItemClicked += gcnew System::Windows::Forms::ToolStripItemClickedEventHandler(this, &BAPSPresenterMain::trackListContextMenuStrip_ItemClicked);
 			this->resetChannelStripMenuItem->Name = L"resetChannelStripMenuItem";
 			this->resetChannelStripMenuItem->Size = System::Drawing::Size(177, 22);
 			this->resetChannelStripMenuItem->Text = L"&Reset Channel";
-			// 
-			// toolStripSeparator2
-			// 
 			this->toolStripSeparator2->Name = L"toolStripSeparator2";
 			this->toolStripSeparator2->Size = System::Drawing::Size(174, 6);
-			// 
-			// deleteItemToolStripMenuItem
-			// 
 			this->deleteItemToolStripMenuItem->Name = L"deleteItemToolStripMenuItem";
 			this->deleteItemToolStripMenuItem->Size = System::Drawing::Size(177, 22);
 			this->deleteItemToolStripMenuItem->Text = L"&Delete Item";
-			// 
-			// toolStripSeparator3
-			// 
 			this->toolStripSeparator3->Name = L"toolStripSeparator3";
 			this->toolStripSeparator3->Size = System::Drawing::Size(174, 6);
-			// 
-			// automaticAdvanceToolStripMenuItem
-			// 
 			this->automaticAdvanceToolStripMenuItem->Name = L"automaticAdvanceToolStripMenuItem";
 			this->automaticAdvanceToolStripMenuItem->Size = System::Drawing::Size(177, 22);
 			this->automaticAdvanceToolStripMenuItem->Text = L"&Automatic advance";
-			// 
-			// playOnLoadToolStripMenuItem
-			// 
 			this->playOnLoadToolStripMenuItem->Name = L"playOnLoadToolStripMenuItem";
 			this->playOnLoadToolStripMenuItem->Size = System::Drawing::Size(177, 22);
 			this->playOnLoadToolStripMenuItem->Text = L"&Play on load";
-			// 
-			// toolStripSeparator1
-			// 
 			this->toolStripSeparator1->Name = L"toolStripSeparator1";
 			this->toolStripSeparator1->Size = System::Drawing::Size(174, 6);
-			// 
-			// repeatAllToolStripMenuItem
-			// 
 			this->repeatAllToolStripMenuItem->Name = L"repeatAllToolStripMenuItem";
 			this->repeatAllToolStripMenuItem->Size = System::Drawing::Size(177, 22);
 			this->repeatAllToolStripMenuItem->Text = L"Repeat a&ll";
-			// 
-			// repeatOneToolStripMenuItem
-			// 
 			this->repeatOneToolStripMenuItem->Name = L"repeatOneToolStripMenuItem";
 			this->repeatOneToolStripMenuItem->Size = System::Drawing::Size(177, 22);
 			this->repeatOneToolStripMenuItem->Text = L"Repeat &one";
-			// 
-			// repeatNoneToolStripMenuItem
-			// 
 			this->repeatNoneToolStripMenuItem->Name = L"repeatNoneToolStripMenuItem";
 			this->repeatNoneToolStripMenuItem->Size = System::Drawing::Size(177, 22);
 			this->repeatNoneToolStripMenuItem->Text = L"Repeat &none";
-			// 
-			// toolStripSeparator4
-			// 
 			this->toolStripSeparator4->Name = L"toolStripSeparator4";
 			this->toolStripSeparator4->Size = System::Drawing::Size(174, 6);
-			// 
-			// showAudioWallToolStripMenuItem
-			// 
 			this->showAudioWallToolStripMenuItem->Name = L"showAudioWallToolStripMenuItem";
 			this->showAudioWallToolStripMenuItem->Size = System::Drawing::Size(177, 22);
 			this->showAudioWallToolStripMenuItem->Text = L"&Show AudioWall";
-			// 
-			// MainTextDisplay
-			// 
 			this->MainTextDisplay->AcceptsReturn = true;
 			this->MainTextDisplay->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->MainTextDisplay->Font = (gcnew System::Drawing::Font(L"Tahoma", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->MainTextDisplay->Font = (gcnew System::Drawing::Font(L"Tahoma", 15.75, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->MainTextDisplay->Location = System::Drawing::Point(8, 647);
 			this->MainTextDisplay->Multiline = true;
@@ -503,38 +463,26 @@ private: System::ComponentModel::IContainer^  components;
 			this->MainTextDisplay->Size = System::Drawing::Size(1024, 82);
 			this->MainTextDisplay->TabIndex = 29;
 			this->MainTextDisplay->Text = L"<You can type notes here>";
-			// 
-			// Directory0
-			// 
 			this->Directory0->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->Directory0->Location = System::Drawing::Point(12, 116);
 			this->Directory0->Name = L"Directory0";
 			this->Directory0->Size = System::Drawing::Size(234, 132);
 			this->Directory0->TabIndex = 215;
 			this->Directory0->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::Directory_MouseDown);
-			// 
-			// Directory1
-			// 
 			this->Directory1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->Directory1->Location = System::Drawing::Point(12, 276);
 			this->Directory1->Name = L"Directory1";
 			this->Directory1->Size = System::Drawing::Size(234, 132);
 			this->Directory1->TabIndex = 216;
 			this->Directory1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::Directory_MouseDown);
-			// 
-			// Directory2
-			// 
 			this->Directory2->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->Directory2->Location = System::Drawing::Point(12, 436);
 			this->Directory2->Name = L"Directory2";
 			this->Directory2->Size = System::Drawing::Size(234, 132);
 			this->Directory2->TabIndex = 217;
 			this->Directory2->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::Directory_MouseDown);
-			// 
-			// loadShowButton
-			// 
 			this->loadShowButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->loadShowButton->Font = (gcnew System::Drawing::Font(L"Tahoma", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->loadShowButton->Font = (gcnew System::Drawing::Font(L"Tahoma", 14.25, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->loadShowButton->Location = System::Drawing::Point(12, 12);
 			this->loadShowButton->Name = L"loadShowButton";
@@ -542,11 +490,8 @@ private: System::ComponentModel::IContainer^  components;
 			this->loadShowButton->TabIndex = 218;
 			this->loadShowButton->Text = L"Load Show";
 			this->loadShowButton->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::loadShow_Click);
-			// 
-			// bapsButton1
-			// 
 			this->bapsButton1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->bapsButton1->Font = (gcnew System::Drawing::Font(L"Tahoma", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->bapsButton1->Font = (gcnew System::Drawing::Font(L"Tahoma", 14.25, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->bapsButton1->Location = System::Drawing::Point(132, 12);
 			this->bapsButton1->Name = L"bapsButton1";
@@ -554,9 +499,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->bapsButton1->TabIndex = 219;
 			this->bapsButton1->Text = L"Search Library";
 			this->bapsButton1->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::SearchRecordLib_Click);
-			// 
-			// Directory0Refresh
-			// 
 			this->Directory0Refresh->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Directory0Refresh->Location = System::Drawing::Point(12, 94);
 			this->Directory0Refresh->Name = L"Directory0Refresh";
@@ -564,9 +506,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory0Refresh->TabIndex = 220;
 			this->Directory0Refresh->Text = L"Jingles";
 			this->Directory0Refresh->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::RefreshDirectory_Click);
-			// 
-			// Directory1Refresh
-			// 
 			this->Directory1Refresh->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Directory1Refresh->Location = System::Drawing::Point(12, 254);
 			this->Directory1Refresh->Name = L"Directory1Refresh";
@@ -574,9 +513,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory1Refresh->TabIndex = 221;
 			this->Directory1Refresh->Text = L"Beds";
 			this->Directory1Refresh->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::RefreshDirectory_Click);
-			// 
-			// Directory2Refresh
-			// 
 			this->Directory2Refresh->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Directory2Refresh->Location = System::Drawing::Point(12, 414);
 			this->Directory2Refresh->Name = L"Directory2Refresh";
@@ -584,9 +520,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory2Refresh->TabIndex = 222;
 			this->Directory2Refresh->Text = L"Adverts";
 			this->Directory2Refresh->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::RefreshDirectory_Click);
-			// 
-			// Channel0Play
-			// 
 			this->Channel0Play->BackColor = System::Drawing::SystemColors::Control;
 			this->Channel0Play->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Channel0Play->Location = System::Drawing::Point(252, 415);
@@ -596,9 +529,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0Play->Text = L"F1 - Play";
 			this->Channel0Play->UseVisualStyleBackColor = false;
 			this->Channel0Play->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
-			// 
-			// Channel0Pause
-			// 
 			this->Channel0Pause->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Channel0Pause->Location = System::Drawing::Point(343, 415);
 			this->Channel0Pause->Name = L"Channel0Pause";
@@ -607,9 +537,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0Pause->Text = L"F2 - Pause";
 			this->Channel0Pause->UseVisualStyleBackColor = true;
 			this->Channel0Pause->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
-			// 
-			// Channel0Stop
-			// 
 			this->Channel0Stop->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Channel0Stop->Location = System::Drawing::Point(433, 415);
 			this->Channel0Stop->Name = L"Channel0Stop";
@@ -618,9 +545,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0Stop->Text = L"F3 - Stop";
 			this->Channel0Stop->UseVisualStyleBackColor = true;
 			this->Channel0Stop->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
-			// 
-			// Channel1Play
-			// 
 			this->Channel1Play->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Channel1Play->Location = System::Drawing::Point(514, 415);
 			this->Channel1Play->Name = L"Channel1Play";
@@ -629,9 +553,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Play->Text = L"F1 - Play";
 			this->Channel1Play->UseVisualStyleBackColor = true;
 			this->Channel1Play->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
-			// 
-			// Channel1Pause
-			// 
 			this->Channel1Pause->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Channel1Pause->Location = System::Drawing::Point(604, 415);
 			this->Channel1Pause->Name = L"Channel1Pause";
@@ -640,9 +561,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Pause->Text = L"F2 - Pause";
 			this->Channel1Pause->UseVisualStyleBackColor = true;
 			this->Channel1Pause->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
-			// 
-			// Channel1Stop
-			// 
 			this->Channel1Stop->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Channel1Stop->Location = System::Drawing::Point(695, 415);
 			this->Channel1Stop->Name = L"Channel1Stop";
@@ -651,9 +569,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Stop->Text = L"F3 - Stop";
 			this->Channel1Stop->UseVisualStyleBackColor = true;
 			this->Channel1Stop->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
-			// 
-			// Channel2Play
-			// 
 			this->Channel2Play->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Channel2Play->Location = System::Drawing::Point(776, 415);
 			this->Channel2Play->Name = L"Channel2Play";
@@ -662,9 +577,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Play->Text = L"F1 - Play";
 			this->Channel2Play->UseVisualStyleBackColor = true;
 			this->Channel2Play->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
-			// 
-			// Channel2Pause
-			// 
 			this->Channel2Pause->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Channel2Pause->Location = System::Drawing::Point(866, 415);
 			this->Channel2Pause->Name = L"Channel2Pause";
@@ -673,9 +585,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Pause->Text = L"F2 - Pause";
 			this->Channel2Pause->UseVisualStyleBackColor = true;
 			this->Channel2Pause->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
-			// 
-			// Channel2Stop
-			// 
 			this->Channel2Stop->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Channel2Stop->Location = System::Drawing::Point(957, 415);
 			this->Channel2Stop->Name = L"Channel2Stop";
@@ -684,9 +593,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Stop->Text = L"F3 - Stop";
 			this->Channel2Stop->UseVisualStyleBackColor = true;
 			this->Channel2Stop->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
-			// 
-			// Channel0LoadedText
-			// 
 			this->Channel0LoadedText->AutoEllipsis = true;
 			this->Channel0LoadedText->BackColor = System::Drawing::SystemColors::Window;
 			this->Channel0LoadedText->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
@@ -697,9 +603,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0LoadedText->TabIndex = 224;
 			this->Channel0LoadedText->Text = L"--NONE--";
 			this->Channel0LoadedText->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// Channel1LoadedText
-			// 
 			this->Channel1LoadedText->AutoEllipsis = true;
 			this->Channel1LoadedText->BackColor = System::Drawing::SystemColors::Window;
 			this->Channel1LoadedText->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
@@ -710,9 +613,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1LoadedText->TabIndex = 224;
 			this->Channel1LoadedText->Text = L"--NONE--";
 			this->Channel1LoadedText->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// Channel2LoadedText
-			// 
 			this->Channel2LoadedText->AutoEllipsis = true;
 			this->Channel2LoadedText->BackColor = System::Drawing::SystemColors::Window;
 			this->Channel2LoadedText->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
@@ -723,10 +623,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2LoadedText->TabIndex = 224;
 			this->Channel2LoadedText->Text = L"--NONE--";
 			this->Channel2LoadedText->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// timeLine
-			// 
-			this->timeLine->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->timeLine->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->timeLine->Location = System::Drawing::Point(12, 589);
 			this->timeLine->Name = L"timeLine";
@@ -735,10 +632,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->timeLine->TabStop = false;
 			this->timeLine->Text = L"timeLine1";
 			this->timeLine->StartTimeChanged += gcnew BAPSPresenter::TimeLineEventHandler(this, &BAPSPresenterMain::timeLine_StartTimeChanged);
-			// 
-			// Channel2Length
-			// 
-			this->Channel2Length->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Channel2Length->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Channel2Length->HighlightColor = System::Drawing::Color::Red;
 			this->Channel2Length->Highlighted = false;
@@ -751,10 +645,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Length->Tag = L"";
 			this->Channel2Length->Text = L"--:--";
 			this->Channel2Length->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::ChannelLength_MouseDown);
-			// 
-			// Channel1TimeLeft
-			// 
-			this->Channel1TimeLeft->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Channel1TimeLeft->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Channel1TimeLeft->HighlightColor = System::Drawing::Color::HotPink;
 			this->Channel1TimeLeft->Highlighted = false;
@@ -765,10 +656,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1TimeLeft->TabIndex = 113;
 			this->Channel1TimeLeft->TabStop = false;
 			this->Channel1TimeLeft->Text = L"0:00:00";
-			// 
-			// Channel1Length
-			// 
-			this->Channel1Length->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Channel1Length->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Channel1Length->HighlightColor = System::Drawing::Color::Red;
 			this->Channel1Length->Highlighted = false;
@@ -781,14 +669,11 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Length->Tag = L"";
 			this->Channel1Length->Text = L"--:--";
 			this->Channel1Length->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::ChannelLength_MouseDown);
-			// 
-			// trackList0
-			// 
 			this->trackList0->AllowDrop = true;
 			this->trackList0->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
 			this->trackList0->Channel = 0;
 			this->trackList0->ContextMenuStrip = this->trackListContextMenuStrip;
-			this->trackList0->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->trackList0->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->trackList0->LastIndexClicked = -1;
 			this->trackList0->LoadedIndex = -1;
@@ -798,10 +683,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackList0->TabIndex = 10;
 			this->trackList0->Text = L"trackList0";
 			this->trackList0->RequestChange += gcnew BAPSPresenter::RequestChangeEventHandler(this, &BAPSPresenterMain::TrackList_RequestChange);
-			// 
-			// Channel0Length
-			// 
-			this->Channel0Length->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Channel0Length->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Channel0Length->HighlightColor = System::Drawing::Color::Red;
 			this->Channel0Length->Highlighted = false;
@@ -814,10 +696,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0Length->Tag = L"";
 			this->Channel0Length->Text = L"--:--";
 			this->Channel0Length->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &BAPSPresenterMain::ChannelLength_MouseDown);
-			// 
-			// Channel2TimeLeft
-			// 
-			this->Channel2TimeLeft->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Channel2TimeLeft->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Channel2TimeLeft->HighlightColor = System::Drawing::Color::HotPink;
 			this->Channel2TimeLeft->Highlighted = false;
@@ -828,10 +707,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2TimeLeft->TabIndex = 116;
 			this->Channel2TimeLeft->TabStop = false;
 			this->Channel2TimeLeft->Text = L"0:00:00";
-			// 
-			// Channel0TimeLeft
-			// 
-			this->Channel0TimeLeft->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Channel0TimeLeft->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Channel0TimeLeft->HighlightColor = System::Drawing::Color::HotPink;
 			this->Channel0TimeLeft->Highlighted = false;
@@ -842,10 +718,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0TimeLeft->TabIndex = 110;
 			this->Channel0TimeLeft->TabStop = false;
 			this->Channel0TimeLeft->Text = L"0:00:00";
-			// 
-			// Channel1TimeGone
-			// 
-			this->Channel1TimeGone->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Channel1TimeGone->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Channel1TimeGone->HighlightColor = System::Drawing::Color::Red;
 			this->Channel1TimeGone->Highlighted = false;
@@ -856,10 +729,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1TimeGone->TabIndex = 112;
 			this->Channel1TimeGone->TabStop = false;
 			this->Channel1TimeGone->Text = L"0:00:00";
-			// 
-			// Channel2TimeGone
-			// 
-			this->Channel2TimeGone->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Channel2TimeGone->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Channel2TimeGone->HighlightColor = System::Drawing::Color::Red;
 			this->Channel2TimeGone->Highlighted = false;
@@ -870,10 +740,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2TimeGone->TabIndex = 115;
 			this->Channel2TimeGone->TabStop = false;
 			this->Channel2TimeGone->Text = L"0:00:00";
-			// 
-			// Channel0TimeGone
-			// 
-			this->Channel0TimeGone->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Channel0TimeGone->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Channel0TimeGone->HighlightColor = System::Drawing::Color::Red;
 			this->Channel0TimeGone->Highlighted = false;
@@ -884,13 +751,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel0TimeGone->TabIndex = 109;
 			this->Channel0TimeGone->TabStop = false;
 			this->Channel0TimeGone->Text = L"0:00:00";
-			// 
-			// trackList2
-			// 
 			this->trackList2->AllowDrop = true;
 			this->trackList2->Channel = 2;
 			this->trackList2->ContextMenuStrip = this->trackListContextMenuStrip;
-			this->trackList2->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->trackList2->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->trackList2->LastIndexClicked = -1;
 			this->trackList2->LoadedIndex = -1;
@@ -900,13 +764,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackList2->TabIndex = 14;
 			this->trackList2->Text = L"trackList2";
 			this->trackList2->RequestChange += gcnew BAPSPresenter::RequestChangeEventHandler(this, &BAPSPresenterMain::TrackList_RequestChange);
-			// 
-			// trackList1
-			// 
 			this->trackList1->AllowDrop = true;
 			this->trackList1->Channel = 1;
 			this->trackList1->ContextMenuStrip = this->trackListContextMenuStrip;
-			this->trackList1->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->trackList1->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->trackList1->LastIndexClicked = -1;
 			this->trackList1->LoadedIndex = -1;
@@ -916,13 +777,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackList1->TabIndex = 12;
 			this->trackList1->Text = L"trackList1";
 			this->trackList1->RequestChange += gcnew BAPSPresenter::RequestChangeEventHandler(this, &BAPSPresenterMain::TrackList_RequestChange);
-			// 
-			// trackTime1
-			// 
 			this->trackTime1->Channel = 1;
 			this->trackTime1->CuePosition = 0;
 			this->trackTime1->Duration = 0;
-			this->trackTime1->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->trackTime1->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->trackTime1->IntroPosition = 0;
 			this->trackTime1->Location = System::Drawing::Point(514, 474);
@@ -932,13 +790,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackTime1->Size = System::Drawing::Size(256, 72);
 			this->trackTime1->TabIndex = 26;
 			this->trackTime1->Text = L"trackTime1";
-			// 
-			// trackTime2
-			// 
 			this->trackTime2->Channel = 2;
 			this->trackTime2->CuePosition = 0;
 			this->trackTime2->Duration = 0;
-			this->trackTime2->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->trackTime2->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->trackTime2->IntroPosition = 0;
 			this->trackTime2->Location = System::Drawing::Point(776, 474);
@@ -948,13 +803,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackTime2->Size = System::Drawing::Size(256, 72);
 			this->trackTime2->TabIndex = 27;
 			this->trackTime2->Text = L"trackTime2";
-			// 
-			// trackTime0
-			// 
 			this->trackTime0->Channel = 0;
 			this->trackTime0->CuePosition = 0;
 			this->trackTime0->Duration = 0;
-			this->trackTime0->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->trackTime0->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->trackTime0->IntroPosition = 0;
 			this->trackTime0->Location = System::Drawing::Point(252, 474);
@@ -964,9 +816,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->trackTime0->Size = System::Drawing::Size(256, 72);
 			this->trackTime0->TabIndex = 25;
 			this->trackTime0->Text = L"trackTime0";
-			// 
-			// BAPSPresenterMain
-			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
@@ -1009,10 +858,10 @@ private: System::ComponentModel::IContainer^  components;
 			this->Controls->Add(this->trackTime1);
 			this->Controls->Add(this->trackTime2);
 			this->Controls->Add(this->trackTime0);
-			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
-			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->KeyPreview = true;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
@@ -1020,6 +869,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"BAPS Presenter";
+			this->Load += gcnew System::EventHandler(this, &BAPSPresenterMain::BAPSPresenterMain_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &BAPSPresenterMain::BAPSPresenterMain_KeyDown);
 			this->trackListContextMenuStrip->ResumeLayout(false);
 			this->ResumeLayout(false);
@@ -1031,6 +881,8 @@ private: System::Void trackList0_DragDrop(System::Object^  sender, System::Windo
 			 
 			 
 		 }
+private: System::Void BAPSPresenterMain_Load(System::Object^  sender, System::EventArgs^  e) {
+}
 };
 }
 

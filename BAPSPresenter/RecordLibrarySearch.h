@@ -175,8 +175,10 @@ namespace BAPSPresenter {
 			// 
 			// statusStrip
 			// 
-			this->statusStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->connectionStatus, 
-				this->progressBar, this->resultsInfo});
+			this->statusStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->connectionStatus,
+					this->progressBar, this->resultsInfo
+			});
 			this->statusStrip->Location = System::Drawing::Point(0, 492);
 			this->statusStrip->Name = L"statusStrip";
 			this->statusStrip->Size = System::Drawing::Size(508, 22);
@@ -219,7 +221,7 @@ namespace BAPSPresenter {
 			// 
 			// Title
 			// 
-			this->Title->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left) 
+			this->Title->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->Title->BackColor = System::Drawing::SystemColors::Window;
 			this->Title->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
@@ -229,12 +231,12 @@ namespace BAPSPresenter {
 			this->Title->TabIndex = 0;
 			this->Title->Text = L"<Enter the Title to search for>";
 			this->Title->TextChanged += gcnew System::EventHandler(this, &RecordLibrarySearch::Some_TextChanged);
-			this->Title->Leave += gcnew System::EventHandler(this, &RecordLibrarySearch::Title_Leave);
 			this->Title->Enter += gcnew System::EventHandler(this, &RecordLibrarySearch::Text_Enter);
+			this->Title->Leave += gcnew System::EventHandler(this, &RecordLibrarySearch::Title_Leave);
 			// 
 			// Artist
 			// 
-			this->Artist->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left) 
+			this->Artist->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->Artist->BackColor = System::Drawing::SystemColors::Window;
 			this->Artist->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
@@ -244,8 +246,8 @@ namespace BAPSPresenter {
 			this->Artist->TabIndex = 1;
 			this->Artist->Text = L"<Enter the Artist to search for>";
 			this->Artist->TextChanged += gcnew System::EventHandler(this, &RecordLibrarySearch::Some_TextChanged);
-			this->Artist->Leave += gcnew System::EventHandler(this, &RecordLibrarySearch::Artist_Leave);
 			this->Artist->Enter += gcnew System::EventHandler(this, &RecordLibrarySearch::Text_Enter);
+			this->Artist->Leave += gcnew System::EventHandler(this, &RecordLibrarySearch::Artist_Leave);
 			// 
 			// artistRadioButton
 			// 
@@ -361,7 +363,7 @@ namespace BAPSPresenter {
 			this->AddToChannel0->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->AddToChannel0->BackColor = System::Drawing::Color::Transparent;
 			this->AddToChannel0->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->AddToChannel0->Font = (gcnew System::Drawing::Font(L"Tahoma", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->AddToChannel0->Font = (gcnew System::Drawing::Font(L"Tahoma", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->AddToChannel0->Location = System::Drawing::Point(12, 447);
 			this->AddToChannel0->Name = L"AddToChannel0";
@@ -376,7 +378,7 @@ namespace BAPSPresenter {
 			this->AddToChannel1->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->AddToChannel1->BackColor = System::Drawing::Color::Transparent;
 			this->AddToChannel1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->AddToChannel1->Font = (gcnew System::Drawing::Font(L"Tahoma", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->AddToChannel1->Font = (gcnew System::Drawing::Font(L"Tahoma", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->AddToChannel1->Location = System::Drawing::Point(177, 447);
 			this->AddToChannel1->Name = L"AddToChannel1";
@@ -391,7 +393,7 @@ namespace BAPSPresenter {
 			this->AddToChannel2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->AddToChannel2->BackColor = System::Drawing::Color::Transparent;
 			this->AddToChannel2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->AddToChannel2->Font = (gcnew System::Drawing::Font(L"Tahoma", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->AddToChannel2->Font = (gcnew System::Drawing::Font(L"Tahoma", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->AddToChannel2->Location = System::Drawing::Point(340, 447);
 			this->AddToChannel2->Name = L"AddToChannel2";
@@ -403,8 +405,8 @@ namespace BAPSPresenter {
 			// 
 			// ResultsBox
 			// 
-			this->ResultsBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) 
-				| System::Windows::Forms::AnchorStyles::Left) 
+			this->ResultsBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->ResultsBox->Location = System::Drawing::Point(12, 112);
 			this->ResultsBox->Name = L"ResultsBox";
@@ -437,9 +439,9 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->dateReleasedRadioButton);
 			this->Controls->Add(this->dateAddedRadioButton);
 			this->Controls->Add(this->artistRadioButton);
-			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->KeyPreview = true;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
@@ -449,6 +451,7 @@ namespace BAPSPresenter {
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"Record Library Search";
+			this->Load += gcnew System::EventHandler(this, &RecordLibrarySearch::RecordLibrarySearch_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &RecordLibrarySearch::RecordLibrarySearch_KeyDown);
 			this->statusStrip->ResumeLayout(false);
 			this->statusStrip->PerformLayout();
@@ -459,5 +462,7 @@ namespace BAPSPresenter {
 #pragma endregion
 
 
+private: System::Void RecordLibrarySearch_Load(System::Object^  sender, System::EventArgs^  e) {
+}
 };
 }

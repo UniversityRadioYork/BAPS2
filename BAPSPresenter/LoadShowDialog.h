@@ -143,18 +143,12 @@ namespace BAPSPresenter {
 			this->cancelButton = (gcnew System::Windows::Forms::Button());
 			this->listBox = (gcnew System::Windows::Forms::ListBox());
 			this->SuspendLayout();
-			// 
-			// errorLabel
-			// 
 			this->errorLabel->BackColor = System::Drawing::Color::Transparent;
 			this->errorLabel->ForeColor = System::Drawing::Color::Red;
 			this->errorLabel->Location = System::Drawing::Point(12, 3);
 			this->errorLabel->Name = L"errorLabel";
 			this->errorLabel->Size = System::Drawing::Size(310, 16);
 			this->errorLabel->TabIndex = 100;
-			// 
-			// newShowsOnly
-			// 
 			this->newShowsOnly->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->newShowsOnly->BackColor = System::Drawing::Color::Transparent;
 			this->newShowsOnly->Checked = true;
@@ -166,10 +160,7 @@ namespace BAPSPresenter {
 			this->newShowsOnly->TabIndex = 1;
 			this->newShowsOnly->Text = L"New shows only";
 			this->newShowsOnly->UseVisualStyleBackColor = false;
-			// 
-			// otherUser
-			// 
-			this->otherUser->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left) 
+			this->otherUser->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->otherUser->BackColor = System::Drawing::SystemColors::Window;
 			this->otherUser->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
@@ -180,9 +171,6 @@ namespace BAPSPresenter {
 			this->otherUser->TabIndex = 4;
 			this->otherUser->Text = L"<E-mail / BAPS showid>";
 			this->otherUser->Enter += gcnew System::EventHandler(this, &LoadShowDialog::otherUser_Enter);
-			// 
-			// todaysShowsRadio
-			// 
 			this->todaysShowsRadio->BackColor = System::Drawing::Color::Transparent;
 			this->todaysShowsRadio->FlatAppearance->CheckedBackColor = System::Drawing::Color::SeaShell;
 			this->todaysShowsRadio->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
@@ -193,9 +181,6 @@ namespace BAPSPresenter {
 			this->todaysShowsRadio->Text = L"Today\'s shows";
 			this->todaysShowsRadio->UseVisualStyleBackColor = false;
 			this->todaysShowsRadio->CheckedChanged += gcnew System::EventHandler(this, &LoadShowDialog::check_Changed);
-			// 
-			// otherUserRadio
-			// 
 			this->otherUserRadio->BackColor = System::Drawing::Color::Transparent;
 			this->otherUserRadio->Checked = true;
 			this->otherUserRadio->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
@@ -207,9 +192,6 @@ namespace BAPSPresenter {
 			this->otherUserRadio->Text = L"Other user:";
 			this->otherUserRadio->UseVisualStyleBackColor = false;
 			this->otherUserRadio->CheckedChanged += gcnew System::EventHandler(this, &LoadShowDialog::check_Changed);
-			// 
-			// systemUserRadio
-			// 
 			this->systemUserRadio->BackColor = System::Drawing::Color::Transparent;
 			this->systemUserRadio->FlatAppearance->BorderSize = 3;
 			this->systemUserRadio->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
@@ -220,9 +202,6 @@ namespace BAPSPresenter {
 			this->systemUserRadio->Text = L"Recommended Audio";
 			this->systemUserRadio->UseVisualStyleBackColor = false;
 			this->systemUserRadio->CheckedChanged += gcnew System::EventHandler(this, &LoadShowDialog::check_Changed);
-			// 
-			// goButton
-			// 
 			this->goButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->goButton->Location = System::Drawing::Point(12, 130);
 			this->goButton->Name = L"goButton";
@@ -231,9 +210,6 @@ namespace BAPSPresenter {
 			this->goButton->Text = L"Go";
 			this->goButton->UseVisualStyleBackColor = true;
 			this->goButton->Click += gcnew System::EventHandler(this, &LoadShowDialog::goButton_Click);
-			// 
-			// cancelButton
-			// 
 			this->cancelButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->cancelButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->cancelButton->Location = System::Drawing::Point(247, 130);
@@ -243,9 +219,6 @@ namespace BAPSPresenter {
 			this->cancelButton->Text = L"Cancel";
 			this->cancelButton->UseVisualStyleBackColor = true;
 			this->cancelButton->Click += gcnew System::EventHandler(this, &LoadShowDialog::cancelButton_Click);
-			// 
-			// listBox
-			// 
 			this->listBox->FormattingEnabled = true;
 			this->listBox->Location = System::Drawing::Point(12, 3);
 			this->listBox->Name = L"listBox";
@@ -253,9 +226,6 @@ namespace BAPSPresenter {
 			this->listBox->TabIndex = 101;
 			this->listBox->Visible = false;
 			this->listBox->SelectedIndexChanged += gcnew System::EventHandler(this, &LoadShowDialog::listBox_SelectedIndexChanged);
-			// 
-			// LoadShowDialog
-			// 
 			this->AcceptButton = this->goButton;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -271,10 +241,10 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->otherUserRadio);
 			this->Controls->Add(this->systemUserRadio);
 			this->Controls->Add(this->todaysShowsRadio);
-			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
-			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->KeyPreview = true;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;

@@ -361,6 +361,7 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 		switch (cmdReceived & BAPSNET_CONFIG_OPMASK)
 		{
 		case BAPSNET_GETOPTIONS:
+			LogManager::write("Reached L364", LOG_ERROR, LOG_COMMS);
 			sendAllOptions();
 			break;
 		case BAPSNET_GETOPTIONCHOICES:
