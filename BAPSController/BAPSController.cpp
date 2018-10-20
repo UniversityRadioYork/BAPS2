@@ -203,7 +203,14 @@ void BAPSController::runHelper()
 
 array<System::String^>^ BAPSController::getSerialNumbers()
 {
-	return safe_cast<array<System::String^>^>(serialNumbers->Clone());
+	if (hasUSBDevices == true) {
+		return safe_cast<array<System::String^>^>(serialNumbers->Clone());
+	}
+	else {
+		array<System::String^>^ empty = gcnew array<System::String^>(1);
+		empty[0] = "";
+		return empty;
+	}
 }
 
 bool BAPSController::hasUSB()
