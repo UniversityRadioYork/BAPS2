@@ -265,12 +265,19 @@ namespace BAPSServerService
                 /** ignore it **/
             }
         }
-        public override void Uninstall(System.Collections.IDictionary savedState)
+        /* Removed the following because it seemed to prevent the BAPS Server Service from being removed on Uninstall.
+         * Don't ask me why, but it does.
+         * public override void Uninstall(System.Collections.IDictionary savedState)
         {
             base.Uninstall(savedState);
-        }
+        } */
 
         private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
+        {
+
+        }
+
+        private void serviceProcessInstaller1_AfterInstall(object sender, InstallEventArgs e)
         {
 
         }
