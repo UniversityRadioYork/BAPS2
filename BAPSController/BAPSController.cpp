@@ -19,11 +19,9 @@ BAPSController::BAPSController()
 
 	if (hDll == 0)
 	{
-		this->hasUSBDevices = false;
+		// Initialise empty array and get out
+		this->serialNumbers = gcnew array<System::String^>(0);
 		return;
-	}
-	else {
-		this->hasUSBDevices = true;
 	}
 
 	USBm_FindDevices =      (USBm_FindDevices_type)GetProcAddress(hDll, "USBm_FindDevices");
@@ -190,7 +188,7 @@ void BAPSController::runHelper()
 				USBm_DirectionB(i, 0x00, 0xFF);
 				USBm_WriteB(i, 0xFF);
 			}
-		
+
 			/* Swap in the new names and offsets */
 			serialNumbers = newSerialNumbers;
 			deviceCount = newDeviceCount;
@@ -203,15 +201,6 @@ void BAPSController::runHelper()
 
 array<System::String^>^ BAPSController::getSerialNumbers()
 {
-	if (hasUSBDevices == true) {
-		return safe_cast<array<System::String^>^>(serialNumbers->Clone());
-	} else {
-		array<System::String^>^ empty = gcnew array<System::String^>(0);
-		return empty;
-	}
-}
-
-bool BAPSController::hasUSB()
-{
-	return hasUSBDevices;
+	// Just returns empty array if no usb
+	return safe_cast<array<System::String^>^>(serialNumbers->Clone());
 }
