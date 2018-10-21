@@ -271,16 +271,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="app.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="BAPS1616.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="fileItem.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="icon1.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="libraryItem.png">
@@ -290,6 +284,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="textItemSel.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Common\app.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
