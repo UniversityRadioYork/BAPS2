@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_279D46963AF347829CFBD3C295AA815E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_316226F94C8543899B8445A98A7C0946"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -187,6 +193,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -203,6 +225,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -292,7 +330,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:BAPSServerAssembly, Version=2.6.2.0, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:BAPSServerAssembly, Version=2.7.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_1F5CD9C8B6F24FDDBE69FCABFE9F4701"
@@ -317,6 +355,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_279D46963AF347829CFBD3C295AA815E"
+            {
+            "SourcePath" = "8:header-logo.bmp"
+            "TargetName" = "8:header-logo.bmp"
+            "Tag" = "8:"
+            "Folder" = "8:_AA6E4ED00D1542C3AC78BFB908085FED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D3FBA1DCC31457398F77F2A76F910C9"
@@ -610,15 +668,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BAPS2"
-        "ProductCode" = "8:{D4FCAF84-61A5-4E97-A131-8601C5C9FC2D}"
-        "PackageCode" = "8:{981C723A-6F99-4E6B-B42C-68521E6D3AF6}"
+        "ProductCode" = "8:{32284CF2-2D92-4F7E-972B-83F474EBD89E}"
+        "PackageCode" = "8:{A9371E7C-BAF5-43AD-A815-B673840C4C6D}"
         "UpgradeCode" = "8:{CA0D6999-E3B1-4ACC-86AC-FAB85E211A57}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:2.6.2"
+        "ProductVersion" = "8:2.7.0"
         "Manufacturer" = "8:URY"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/UniversityRadioYork/BAPS2/"
@@ -1371,7 +1429,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_279D46963AF347829CFBD3C295AA815E"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "UpdateText"
@@ -1522,7 +1581,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_279D46963AF347829CFBD3C295AA815E"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -1566,7 +1626,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_279D46963AF347829CFBD3C295AA815E"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -1590,8 +1651,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1203"
+                            "Setting" = "3:2"
+                            "Value" = "8:The installer will guide you through the steps required to install [ProductName] on your computer."
                             "DefaultValue" = "8:#1203"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -1614,7 +1675,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_279D46963AF347829CFBD3C295AA815E"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1636,7 +1698,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_279D46963AF347829CFBD3C295AA815E"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "InstallAllUsersVisible"
@@ -1876,7 +1939,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8D19959388A44CB69CA8C6F1C2BE4EDA"
             {
-            "SourcePath" = "8:..\\Win32\\Debug\\BAPSPresenter.exe"
+            "SourcePath" = "8:..\\BAPSPresenter\\Win32\\Debug\\BAPSPresenter.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_AA6E4ED00D1542C3AC78BFB908085FED"
