@@ -264,6 +264,7 @@ namespace BAPSPresenter {
 			this->CancelButton = this->cancelButton;
 			this->ClientSize = System::Drawing::Size(219, 152);
 			this->ControlBox = false;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Controls->Add(this->serverText);
 			this->Controls->Add(this->cancelButton);
 			this->Controls->Add(this->loginButton);
@@ -279,7 +280,6 @@ namespace BAPSPresenter {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->Name = L"LoginDialog";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"BAPS Presenter: Please Login";
 			this->Load += gcnew System::EventHandler(this, &LoginDialog::LoginDialog_Load);
 			this->ResumeLayout(false);

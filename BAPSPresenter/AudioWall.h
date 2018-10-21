@@ -169,9 +169,12 @@ namespace BAPSPresenter {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1026, 735);
-			this->ControlBox = false;
+			this->ControlBox = true;
+			this->MinimizeBox = false;
+			this->MaximizeBox = false;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->KeyPreview = true;
 			this->Name = L"AudioWall";
 			this->Text = L"Audio Wall";

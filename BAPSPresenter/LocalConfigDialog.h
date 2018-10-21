@@ -267,6 +267,7 @@ namespace BAPSPresenter {
 			this->CancelButton = this->cancelButton;
 			this->ClientSize = System::Drawing::Size(246, 218);
 			this->ControlBox = false;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Controls->Add(this->serverText);
 			this->Controls->Add(this->cancelButton);
 			this->Controls->Add(this->saveButton);

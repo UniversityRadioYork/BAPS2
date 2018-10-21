@@ -612,6 +612,7 @@ namespace BAPSPresenter {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(539, 378);
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Controls->Add(this->securityPageControl);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
