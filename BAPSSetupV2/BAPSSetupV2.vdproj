@@ -710,20 +710,6 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_73D13475BF4744EE9540E500B7BB6A58"
-                            {
-                            "Name" = "8:[Manufacturer]"
-                            "Condition" = "8:"
-                            "AlwaysCreate" = "11:TRUE"
-                            "DeleteAtUninstall" = "11:TRUE"
-                            "Transitive" = "11:FALSE"
-                                "Keys"
-                                {
-                                }
-                                "Values"
-                                {
-                                }
-                            }
                             "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_89BB68442EF44D5EB4CF84FA70A6848C"
                             {
                             "Name" = "8:URY"
@@ -1199,7 +1185,7 @@
                                             "Condition" = "8:"
                                             "Transitive" = "11:FALSE"
                                             "ValueTypes" = "3:3"
-                                            "Value" = "3:1"
+                                            "Value" = "3:0"
                                             }
                                             "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_DFEC33F89F1C410FA277EE845F1104AC"
                                             {
