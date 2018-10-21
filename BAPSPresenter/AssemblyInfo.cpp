@@ -14,12 +14,12 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyTitleAttribute("BAPS Presenter")];
 [assembly:AssemblyDescriptionAttribute("Broadcasting and Presenting Suite - Presenter Interface")];
 [assembly:AssemblyConfigurationAttribute("Private")];
-[assembly:AssemblyCompanyAttribute("Uni-Software")];
+[assembly:AssemblyCompanyAttribute("University Radio York")];
 [assembly:AssemblyProductAttribute("BAPS Presenter - User Interface")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c)  2008")];
-[assembly:AssemblyTrademarkAttribute("Uni-Software")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c)  2018")];
+[assembly:AssemblyTrademarkAttribute("University Radio York")];
 [assembly:AssemblyCultureAttribute("")];
-[assembly:AssemblyInformationalVersionAttribute("2.6.2.0")];
+[assembly:AssemblyInformationalVersionAttribute("2.7.0.0")];
 
 //
 // Version information for an assembly consists of the following four values:
@@ -32,7 +32,7 @@ using namespace System::Security::Permissions;
 // You can specify all the value or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly:AssemblyVersionAttribute("2.6.2.0")];
+[assembly:AssemblyVersionAttribute("2.7.0.0")];
 
 [assembly:ComVisible(false)];
 
