@@ -79,9 +79,10 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 	{
 		ConfigStringChoices^ bapsController2Choices = gcnew ConfigStringChoices();
 		
-		array<System::String^>^ serials = gcnew array<System::String^>(1);
+		// Initialise 
+		array<System::String^>^ serials = gcnew array<System::String^>(0);
 		if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2ENABLED) == CONFIG_YES_VALUE) {
-			array<System::String^>^ serials = BAPSController::getBAPSController2Serials();
+			serials = BAPSController::getBAPSController2Serials();
 		}
 
 		for (int i = 0 ; i < serials->Length ; i++)
