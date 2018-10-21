@@ -27,9 +27,10 @@ namespace BAPSServerAssembly
 				}
 			}
 
+			// Defined, but does nothing if no usb device is defined
+			bapsController2 = gcnew BAPSControllerAssembly::BAPSController();
 			if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2ENABLED) == CONFIG_YES_VALUE)
 			{
-				bapsController2 = gcnew BAPSControllerAssembly::BAPSController();
 				bapsController2->run(gcnew BAPSControllerAssembly::SignalCallback(handleSignal));
 			}
 		}

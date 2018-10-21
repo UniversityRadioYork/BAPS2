@@ -9,7 +9,7 @@ using namespace BAPSServerAssembly;
 #define BEGIN_CONFIG_BLOCK() ClientManager::getConfigLock();
 #define END_CONFIG_BLOCK() ClientManager::releaseConfigLock();
 
-/** 
+/**
  *  WORK NEEDED: validation functions, post-set functions for refreshing server
  *				 services with the new config values, security stuff
 **/
@@ -21,14 +21,14 @@ BEGIN_ACTION_BLOCKED1(sendOption,int optionid)
 {
 	/** The mode mask flips the bit to say this is an option not a count **/
 	Command cmd = BAPSNET_CONFIG | BAPSNET_OPTION | BAPSNET_CONFIG_MODEMASK;
-	/** 
+	/**
 		*  If the option is an indexed option the value field is set to the
 		*  controlling option's id. (This value is arbitrary using this value
 		*  is easiest
 	**/
 	if (CONFIG_ISINDEXED(optionid))
 	{
-		cmd |= BAPSNET_CONFIG_USEVALUEMASK;	
+		cmd |= BAPSNET_CONFIG_USEVALUEMASK;
 		cmd |= CONFIG_INDEXOPTION(optionid);
 	}
 	/** Send the optionid, optionDescription and optionType **/
@@ -38,7 +38,7 @@ END_ACTION_UNBLOCK();
 
 BEGIN_ACTION_BLOCKED0(sendAllOptions)
 {
-	/** 
+	/**
 	 *  Number of options is always CONFIG_LASTOPTION as it
 	 *  is at the end of the enum
 	**/
@@ -78,18 +78,14 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 	if (optionid == CONFIG_BAPSCONTROLLER2SERIAL)
 	{
 		ConfigStringChoices^ bapsController2Choices = gcnew ConfigStringChoices();
-		
-		// Initialise 
-		array<System::String^>^ serials = gcnew array<System::String^>(0);
-		if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2ENABLED) == CONFIG_YES_VALUE) {
-			serials = BAPSController::getBAPSController2Serials();
-		}
 
+		array<System::String^>^ serials = BAPSController::getBAPSController2Serials();
 		for (int i = 0 ; i < serials->Length ; i++)
 		{
 			bapsController2Choices->add(serials[i], serials[i], (i==0));
 		}
 		bapsController2Choices->add("none","none", (serials->Length==0));
+
 		safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_BAPSCONTROLLER2SERIAL])->setChoices(bapsController2Choices);
 		if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2DEVICECOUNT) < ((serials->Length==0)?1:serials->Length))
 		{
@@ -97,11 +93,11 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 		}
 	}
 
-	/** 
+	/**
 	 *  Should be called for any CONFIG_TYPE_CHOICE option
 	 *  returns all the possible choices the option can be.
 	**/
-	/** 
+	/**
 	 *  If the specified option:
 	 *  a) is not a valid option
 	 *  b) is not a CHOICE type
@@ -115,7 +111,7 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 		return;
 	}
 
-	/** 
+	/**
 	 *  We are certain now that the option is of CHOICE type, so cast
 	 *  its descriptor to the choice superclass
 	**/
@@ -163,7 +159,7 @@ BEGIN_ACTION_BLOCKED3(sendOptionConfigSettings, int optionid, bool shouldBroadca
 			cmd &= ~BAPSNET_CONFIG_VALUEMASK;
 			/** Set the value field to the current index **/
 			cmd |= j;
-			/** 
+			/**
 				*  Send the correct type of data, the CONFIG_TYPE informs the
 				*  client of what to expect
 			**/
@@ -203,7 +199,7 @@ BEGIN_ACTION_BLOCKED3(sendOptionConfigSettings, int optionid, bool shouldBroadca
 				}
 				break;
 			default:
-				/** This case will cause a client and/or server to hang, it will be a programming error server side **/ 
+				/** This case will cause a client and/or server to hang, it will be a programming error server side **/
 				LogManager::write(System::String::Concat("The following option has an invalid type:\n", CONFIG_KEY(optionid), CONFIG_DESC(optionid)), LOG_ERROR, LOG_CONFIG);
 				break;
 			}
@@ -249,7 +245,7 @@ BEGIN_ACTION_BLOCKED3(sendOptionConfigSettings, int optionid, bool shouldBroadca
 			}
 			break;
 		default:
-			/** This case will cause a client and/or server to hang, it will be a programming error server side **/ 
+			/** This case will cause a client and/or server to hang, it will be a programming error server side **/
 			LogManager::write(System::String::Concat("The following option has an invalid type:\n", CONFIG_KEY(optionid), CONFIG_DESC(optionid)), LOG_ERROR, LOG_CONFIG);
 			break;
 		}
@@ -260,7 +256,7 @@ END_ACTION_UNBLOCK();
 BEGIN_ACTION_BLOCKED0(sendAllConfigSettings)
 {
 	/** Finds all valid settings and sends them to the client **/
-	/** 
+	/**
 	 *  The count is more complex as we do not know easily how many settings
 	 *  there are due to indexed options, this short loop works this out
 	**/
@@ -536,7 +532,7 @@ BEGIN_ACTION_BLOCKED1(sendUser, System::String^ username)
 		ClientManager::send(this, cmd, const_cast<System::String^>(UserManager::UserResultText[UR_USERNOTEXIST]));
 		return;
 	}
-	
+
 	Command cmd = BAPSNET_CONFIG | BAPSNET_USER | BAPSNET_CONFIG_MODEMASK;
 	ClientManager::send(this, cmd, username, GETPERM(username));
 }

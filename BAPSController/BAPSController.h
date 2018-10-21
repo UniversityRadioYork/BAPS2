@@ -8,7 +8,7 @@ using namespace System;
 
 
 namespace BAPSControllerAssembly
-{	
+{
 	public delegate void SignalCallback(System::String^, int);
 
 	public ref class BAPSController
@@ -28,7 +28,6 @@ namespace BAPSControllerAssembly
 			}
 		}
 		array<System::String^>^ getSerialNumbers();
-		bool hasUSB();
 	private:
 		void runHelper();
 		HINSTANCE hDll;
@@ -77,12 +76,11 @@ namespace BAPSControllerAssembly
 		USBm_Copyright_type         USBm_Copyright;
 		USBm_About_type             USBm_About;
 		USBm_Version_type           USBm_Version;
-		
+
 		int deviceCount;
 		array<System::String^>^ serialNumbers;
 		array<unsigned char>^ lastByteA;
 		array<unsigned char>^ lastByteB;
-		bool hasUSBDevices;
 		bool quit;
 		System::Threading::Thread^ pollThread;
 		SignalCallback^ callback;
