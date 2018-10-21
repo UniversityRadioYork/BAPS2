@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BAPS Server Platform")]
 [assembly: AssemblyDescription("A Digital Playout System for Radio Stations")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Uni-Software")]
+[assembly: AssemblyCompany("University Radio York")]
 [assembly: AssemblyProduct("BAPSServerService")]
-[assembly: AssemblyCopyright("Copyright ©  2008")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("2.6.2.0")]
-[assembly: AssemblyFileVersion("2.6.2.0")]
+[assembly: AssemblyVersion("2.7.0.0")]
+[assembly: AssemblyFileVersion("2.7.0.0")]
