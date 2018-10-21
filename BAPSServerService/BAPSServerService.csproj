@@ -91,6 +91,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
@@ -161,6 +164,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.ico" />
     <Content Include="serverstate.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
