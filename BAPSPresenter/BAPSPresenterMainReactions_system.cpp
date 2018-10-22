@@ -14,13 +14,14 @@ void BAPSPresenterMain::addFileToDirectoryList(System::Object^ _directoryIndex, 
 	}
 }
 
-void BAPSPresenterMain::clearFiles(System::Object^ _directoryIndex)
+void BAPSPresenterMain::clearFiles(System::Object^ _directoryIndex, System::String^ niceDirectoryName)
 {
 	int directoryIndex = safe_cast<int>(_directoryIndex);
 	if (directoryIndex < 3)
 	{
 		/** Empty the list box ready for new entries (required due to implicit indexing) **/
 		directoryList[directoryIndex]->Items->Clear();
+		directoryRefresh[directoryIndex]->Text = niceDirectoryName;
 	}
 }
 

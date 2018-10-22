@@ -16,6 +16,7 @@
 #include "BAPSLabel.h"
 #include "BAPSListBox.h"
 #include "TimeLine.h"
+#include "ConfigManager.h"
 
 #define DISABLE_INDEX_CHANGE() 	channelList[channel]->Enabled=false;\
 								channelList[channel]->remove_SelectedIndexChanged( gcnew System::EventHandler(this, &BAPSPresenterMain::LoadNewIndex_Event));
@@ -124,7 +125,7 @@ namespace BAPSPresenter {
 			SYSTEM functions
 		**/
 		void addFileToDirectoryList(System::Object^ _directoryIndex, System::Object^ _fileIndex, System::String^ entry);
-		void clearFiles(System::Object^ _directoryIndex);
+		void clearFiles(System::Object^ _directoryIndex, System::String^ niceDirectoryName);
 		void displayVersion(System::String^ version, System::String^ date, System::String^ time, System::String^ author);
 		//void processFeedbackResult(int resultCode);
 		//void addToChatList(System::String^ username);
@@ -193,6 +194,7 @@ namespace BAPSPresenter {
 		
 		/** Arrays with channel number indices for easy updating **/
 		array<System::Windows::Forms::ListBox^>^	directoryList;
+		array<Windows::Forms::Button^>^		directoryRefresh;
 		array<System::Windows::Forms::Label^>^		loadedText;
 		array<BAPSLabel^>^		trackLengthText;
 		array<BAPSLabel^>^		timeLeftText;
@@ -562,7 +564,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory0Refresh->Name = L"Directory0Refresh";
 			this->Directory0Refresh->Size = System::Drawing::Size(234, 23);
 			this->Directory0Refresh->TabIndex = 220;
-			this->Directory0Refresh->Text = L"Jingles";
 			this->Directory0Refresh->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::RefreshDirectory_Click);
 			// 
 			// Directory1Refresh
@@ -572,7 +573,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory1Refresh->Name = L"Directory1Refresh";
 			this->Directory1Refresh->Size = System::Drawing::Size(234, 23);
 			this->Directory1Refresh->TabIndex = 221;
-			this->Directory1Refresh->Text = L"Beds";
 			this->Directory1Refresh->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::RefreshDirectory_Click);
 			// 
 			// Directory2Refresh
@@ -582,7 +582,6 @@ private: System::ComponentModel::IContainer^  components;
 			this->Directory2Refresh->Name = L"Directory2Refresh";
 			this->Directory2Refresh->Size = System::Drawing::Size(234, 23);
 			this->Directory2Refresh->TabIndex = 222;
-			this->Directory2Refresh->Text = L"Adverts";
 			this->Directory2Refresh->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::RefreshDirectory_Click);
 			// 
 			// Channel0Play

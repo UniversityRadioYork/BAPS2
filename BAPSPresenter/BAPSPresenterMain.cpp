@@ -206,9 +206,15 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	directoryList[0]->Tag   = number0;
 	directoryList[1]->Tag   = number1;
 	directoryList[2]->Tag   = number2;
-	Directory0Refresh->Tag = number0;
-	Directory1Refresh->Tag = number1;
-	Directory2Refresh->Tag = number2;
+
+	directoryRefresh	= gcnew array<System::Windows::Forms::Button^>(3);
+	directoryRefresh[0] = Directory0Refresh;
+	directoryRefresh[1] = Directory1Refresh;
+	directoryRefresh[2] = Directory2Refresh;
+	directoryRefresh[0]->Tag = number0;
+	directoryRefresh[1]->Tag = number1;
+	directoryRefresh[2]->Tag = number2;
+
 	loadedText		   = gcnew array<System::Windows::Forms::Label^>(3);
 	loadedText[0]	   = Channel0LoadedText;
 	loadedText[1]	   = Channel1LoadedText;
@@ -761,8 +767,9 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 			else
 			{
 				int count = clientSocket->receiveI();
-				MethodInvokerObj^ mi = gcnew MethodInvokerObj(this, &BAPSPresenterMain::clearFiles);
-				array<System::Object^>^ dd = gcnew array<System::Object^>(1) {cmdReceived & BAPSNET_SYSTEM_VALUEMASK};
+				System::String^ niceDirectoryName = clientSocket->receiveS();
+				MethodInvokerObjStr^ mi = gcnew MethodInvokerObjStr(this, &BAPSPresenterMain::clearFiles);
+				array<System::Object^>^ dd = gcnew array<System::Object^>(2) {cmdReceived & BAPSNET_SYSTEM_VALUEMASK, niceDirectoryName};
 				this->Invoke(mi, dd);
 			}
 			break;
