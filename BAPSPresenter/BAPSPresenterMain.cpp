@@ -890,7 +890,7 @@ void BAPSPresenterMain::logError(System::String^ errorMessage)
 	System::IO::StreamWriter^ stream = nullptr;
 	try
 	{
-		stream = gcnew System::IO::StreamWriter("c:\\bapserror.log", true);
+		stream = gcnew System::IO::StreamWriter("bapserror.log", true);
 		stream->Write(errorMessage);
 	}
 	catch (System::Exception^)
