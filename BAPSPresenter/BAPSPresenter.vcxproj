@@ -124,8 +124,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
       <Command>copy ..\help\BAPSPresenterHelp.chm ..\release\
-</Command>
-      <Outputs>..\release\BAPSPresenterHelp.chm;%(Outputs)</Outputs>
+
+copy bapserror.log ..\release\</Command>
+      <Outputs>..\release\BAPSPresenterHelp.chm;..\release\bapserror.log;%(Outputs)</Outputs>
+      <Inputs>%(Inputs)</Inputs>
     </CustomBuildStep>
     <ClCompile>
       <AdditionalIncludeDirectories>..\Common;..\BAPSLib\$(Platform)\$(Configuration);..\BAPSLib\$(Platform)\$(Configuration)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -179,8 +181,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildStep>
       <Command>copy ..\help\BAPSPresenterHelp.chm ..\release\
-</Command>
-      <Outputs>..\release\BAPSPresenterHelp.chm;%(Outputs)</Outputs>
+
+copy bapserror.log ..\release\</Command>
+      <Outputs>..\release\BAPSPresenterHelp.chm;..\release\bapserror.log;%(Outputs)</Outputs>
+      <Inputs>%(Inputs)</Inputs>
     </CustomBuildStep>
     <Midl>
       <TargetEnvironment>X64</TargetEnvironment>
@@ -350,6 +354,11 @@
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="bapserror.log">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </Text>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

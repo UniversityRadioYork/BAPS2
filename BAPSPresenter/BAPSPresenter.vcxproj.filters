@@ -301,6 +301,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="bapserror.log" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="About.resx">
