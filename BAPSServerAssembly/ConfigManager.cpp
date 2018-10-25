@@ -71,7 +71,7 @@ void ConfigManager::initConfigManager()
 		// WORK NEEDED: better exception system
 		throw gcnew System::Exception("device enumeration failed");
 	}
-	
+
 	ConfigStringChoices^ deviceChoices = gcnew ConfigStringChoices();
 	int i = 0;
 	bool isDefault = true;
@@ -82,7 +82,7 @@ void ConfigManager::initConfigManager()
 		{
 			isDefault = false;
 		}
-		
+
 		deviceChoices->add(LPCWSTRToString(devices->GetDevice(i)->GetDescription()),
 						   LPCWSTRToString(devices->GetDevice(i)->GetID()),
 						   isDefault);
@@ -144,12 +144,15 @@ void ConfigManager::initConfigManager()
 	BAPSControllerAssembly::BAPSController^ bc = gcnew BAPSControllerAssembly::BAPSController();
 
 	ConfigStringChoices^ bapsController2Choices = gcnew ConfigStringChoices();
+
 	array<System::String^>^ serials = bc->getSerialNumbers();
-	for (int i = 0 ; i < serials->Length ; i++)
+	for (int i = 0; i < serials->Length; i++)
 	{
-		bapsController2Choices->add(serials[i], serials[i], (i==0));
+		bapsController2Choices->add(serials[i], serials[i], (i == 0));
 	}
-	bapsController2Choices->add("none","none", (serials->Length==0));
+
+	bapsController2Choices->add("none", "none", (serials->Length == 0));
+
 	delete bc;
 
 	configDescriptions[CONFIG_BAPSCONTROLLER2ENABLED] = gcnew ConfigDescriptorIntChoice("BAPSController2Enabled", "BAPS USB Controller Enabled", noYesChoices, CA_SU_ONLY);
@@ -170,7 +173,7 @@ void ConfigManager::initConfigManager()
 	configErrors[CE_BADMASK] = "Badly formatted mask";
 	configErrors[CE_RESTRICTIONEXISTS] = "IP restriction already exists";
 	configErrors[CE_RESTRICTIONNOTEXIST] = "IP restriction does not exist";
-	
+
 }
 
 void ConfigManager::closeConfigManager()

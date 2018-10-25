@@ -19,6 +19,8 @@ BAPSController::BAPSController()
 
 	if (hDll == 0)
 	{
+		// Initialise empty array and get out
+		this->serialNumbers = gcnew array<System::String^>(0);
 		return;
 	}
 
@@ -186,7 +188,7 @@ void BAPSController::runHelper()
 				USBm_DirectionB(i, 0x00, 0xFF);
 				USBm_WriteB(i, 0xFF);
 			}
-		
+
 			/* Swap in the new names and offsets */
 			serialNumbers = newSerialNumbers;
 			deviceCount = newDeviceCount;
@@ -199,5 +201,6 @@ void BAPSController::runHelper()
 
 array<System::String^>^ BAPSController::getSerialNumbers()
 {
+	// Just returns empty array if no usb
 	return safe_cast<array<System::String^>^>(serialNumbers->Clone());
 }

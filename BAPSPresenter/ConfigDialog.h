@@ -186,6 +186,7 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->status);
 			this->Controls->Add(this->cancelButton);
 			this->Controls->Add(this->saveButton);
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;

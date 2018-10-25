@@ -162,7 +162,7 @@ typedef unsigned short Command;
  * System
  **/
 #define BAPSNET_LISTFILES		(0<<8)	//C-[x][VALUE-dirnumber]
-#define BAPSNET_FILENAME		(1<<8)	//S-[0](count)[VALUE-dirnumber] u32int count
+#define BAPSNET_FILENAME		(1<<8)	//S-[0](count)[VALUE-dirnumber] u32int count, string niceDirectoryName
 										//	[1](data) [VALUE-dirnumber] u32int index, string filename
 #define BAPSNET_SENDMESSAGE		(2<<8)	//C-	u32int clientid, string message
 #define BAPSNET_AUTOUPDATE		(3<<8)	//C-[VALUE-1](on)

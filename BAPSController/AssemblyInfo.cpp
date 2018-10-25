@@ -14,12 +14,12 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyTitleAttribute("BAPS USB Controller")];
 [assembly:AssemblyDescriptionAttribute(".NET wrapper for the 2nd generation BAPS Controller")];
 [assembly:AssemblyConfigurationAttribute("Private")];
-[assembly:AssemblyCompanyAttribute("Uni-Software")];
+[assembly:AssemblyCompanyAttribute("URY")];
 [assembly:AssemblyProductAttribute("BAPS USB Controller")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c)  2008")];
-[assembly:AssemblyTrademarkAttribute("Uni-Software")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c)  2018")];
+[assembly:AssemblyTrademarkAttribute("University Radio York")];
 [assembly:AssemblyCultureAttribute("")];
-[assembly:AssemblyInformationalVersionAttribute("1.0.0.0")];
+[assembly:AssemblyInformationalVersionAttribute("1.1.0.0")];
 
 //
 // Version information for an assembly consists of the following four values:
@@ -32,7 +32,7 @@ using namespace System::Security::Permissions;
 // You can specify all the value or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly:AssemblyVersionAttribute("1.0.0.0")];
+[assembly:AssemblyVersionAttribute("1.1.0.0")];
 
 [assembly:ComVisible(false)];
 

@@ -1,4 +1,25 @@
 ##
+Release 2.7.0
+--
+Features
+--
+New BAPSSetup installer which is natively supported by Visual Studio 2015/17.
+--
+Known Issues
+--
+BAPSSetup will require a local user's credentials to run the Server Service as.
+This is not currently styled into the installer, but is rather a popup.
+--
+Bug Fixes
+--
+Fixes USB based BAPS Controller software such that the Ctrl - Alt - O menu for administrator no longer crashes the server.
+All windows and popups will now appear in sensible places, central to the parent window.
+Audiowall now has a button to close the window.
+All windows now share the same icon, some had old blue logo.
+The sidebar jingles/beds/adverts refresh buttons now actually follow the registry / options values.
+--
+
+##
 Release 2.6.2 v0
 --
 Features

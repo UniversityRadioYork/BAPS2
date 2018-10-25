@@ -153,9 +153,11 @@ END_ACTION_UNBLOCK();
 void ClientInstance::refreshDir(unsigned char directoryNumber)
 {
 	System::String^ directoryName = "";
+	System::String^ niceDirectoryName = "";
 	try
 	{
 		directoryName = CONFIG_GETSTRn(CONFIG_DIRECTORYLOCATION, directoryNumber);
+		niceDirectoryName = CONFIG_GETSTRn(CONFIG_NICEDIRECTORYNAME, directoryNumber);
 		array<System::String^>^ files = System::IO::Directory::GetFiles(directoryName);
 		array<System::String^>^ audioFiles = gcnew array<System::String^>(files->Length);
 		int i = 0;
@@ -172,7 +174,7 @@ void ClientInstance::refreshDir(unsigned char directoryNumber)
 		}
 
 		Command cmd = BAPSNET_SYSTEM | BAPSNET_FILENAME | (directoryNumber & BAPSNET_SYSTEM_VALUEMASK);
-		ClientManager::send(this, cmd, (u32int)audioCount );
+		ClientManager::send(this, cmd, (u32int)audioCount, (System::String^)niceDirectoryName);
 
 		cmd = BAPSNET_SYSTEM | BAPSNET_FILENAME | BAPSNET_SYSTEM_MODEMASK | (directoryNumber & BAPSNET_SYSTEM_VALUEMASK);
 

@@ -288,6 +288,7 @@ namespace BAPSPresenter {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(284, 384);
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Controls->Add(this->presenterGroup);
 			this->Controls->Add(this->mailTitle);
 			this->Controls->Add(this->serverGroup);
