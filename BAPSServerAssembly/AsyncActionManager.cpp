@@ -17,9 +17,9 @@ void AsyncActionManager::doActions(System::Object^)
 	{
 		if (introPositions->Count != 0)
 		{
-			System::String^ connStr = System::String::Concat("Server=", CONFIG_GETSTR(CONFIG_DBSERVER), ";");
+			System::String^ connStr = System::String::Concat("Host=", CONFIG_GETSTR(CONFIG_DBSERVER), ";");
 			connStr = System::String::Concat(connStr, "Database=", CONFIG_GETSTR(CONFIG_LIBRARYDBNAME), ";");
-			connStr = System::String::Concat(connStr, "User Id=", CONFIG_GETSTR(CONFIG_DBUSERNAME), ";");
+			connStr = System::String::Concat(connStr, "Username=", CONFIG_GETSTR(CONFIG_DBUSERNAME), ";");
 			connStr = System::String::Concat(connStr, "Password=", CONFIG_GETSTR(CONFIG_DBPASSWORD), ";");
 			connStr = System::String::Concat(connStr, "Port=", CONFIG_GETSTR(CONFIG_DBPORT), ";");
 
@@ -63,10 +63,7 @@ void AsyncActionManager::doActions(System::Object^)
 					errorMessages = System::String::Concat(
 									errorMessages,
 									"Message: \n", e->Message, "\n",
-									"Error SQL: \n", e->ErrorSql, "\n",
-									"Error Position: \n", e->Position, "\n",
-									"Detail: \n", e->Detail, "\n",
-									"Hint: \n", e->Hint, "\n",
+									"Error Code: \n", e->ErrorCode, "\n",
 									"Stack Trace: \n", e->StackTrace);
 					/** Log an error - **/
 					LogManager::write(errorMessages, LOG_ERROR, LOG_DATABASE);
@@ -82,9 +79,9 @@ void AsyncActionManager::doActions(System::Object^)
 		}
 		if (playbackEvents->Count > 0)
 		{
-			System::String^ connStr = System::String::Concat("Server=", CONFIG_GETSTR(CONFIG_DBSERVER), ";");
+			System::String^ connStr = System::String::Concat("Host=", CONFIG_GETSTR(CONFIG_DBSERVER), ";");
 			connStr = System::String::Concat(connStr, "Database=", CONFIG_GETSTR(CONFIG_BAPSDBNAME), ";");
-			connStr = System::String::Concat(connStr, "User Id=", CONFIG_GETSTR(CONFIG_DBUSERNAME), ";");
+			connStr = System::String::Concat(connStr, "Username=", CONFIG_GETSTR(CONFIG_DBUSERNAME), ";");
 			connStr = System::String::Concat(connStr, "Password=", CONFIG_GETSTR(CONFIG_DBPASSWORD), ";");
 			connStr = System::String::Concat(connStr, "Port=", CONFIG_GETSTR(CONFIG_DBPORT), ";");
 
@@ -257,13 +254,10 @@ void AsyncActionManager::doActions(System::Object^)
 				System::String^ errorMessages = "PGSQL ERROR:\n";
 				/** Get all the errors returned from the db server **/
 				errorMessages = System::String::Concat(
-								errorMessages,
-								"Message: \n", e->Message, "\n",
-								"Error SQL: \n", e->ErrorSql, "\n",
-								"Error Position: \n", e->Position, "\n",
-								"Detail: \n", e->Detail, "\n",
-								"Hint: \n", e->Hint, "\n",
-								"Stack Trace: \n", e->StackTrace);
+					errorMessages,
+					"Message: \n", e->Message, "\n",
+					"Error Code: \n", e->ErrorCode, "\n",
+					"Stack Trace: \n", e->StackTrace);
 				/** Log an error - **/
 				LogManager::write(errorMessages, LOG_ERROR, LOG_DATABASE);
 			}
