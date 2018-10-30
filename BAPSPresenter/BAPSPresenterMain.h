@@ -35,7 +35,6 @@ namespace BAPSPresenter {
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
-	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
 
@@ -194,15 +193,15 @@ namespace BAPSPresenter {
 		
 		/** Arrays with channel number indices for easy updating **/
 		array<System::Windows::Forms::ListBox^>^	directoryList;
-		array<Windows::Forms::Button^>^		directoryRefresh;
+		array<System::Windows::Forms::Button^>^		directoryRefresh;
 		array<System::Windows::Forms::Label^>^		loadedText;
 		array<BAPSLabel^>^		trackLengthText;
 		array<BAPSLabel^>^		timeLeftText;
 		array<BAPSLabel^>^		timeGoneText;
 		/*array<System::Windows::Forms::TrackBar^>^	volumeBar;*/
-		array<Windows::Forms::Button^>^		channelPlay;
-		array<Windows::Forms::Button^>^		channelPause;
-		array<Windows::Forms::Button^>^		channelStop;
+		array<System::Windows::Forms::Button^>^		channelPlay;
+		array<System::Windows::Forms::Button^>^		channelPause;
+		array<System::Windows::Forms::Button^>^		channelStop;
 		array<BAPSPresenter::TrackTime^>^ trackTime;
 		array<System::Windows::Forms::Timer^>^ loadImpossibleTimer;
 		array<System::Windows::Forms::Timer^>^ nearEndTimer;

@@ -170,7 +170,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	volumeBar[2]       = Channel2VolumeBar;
 	Channel2VolumeBar->Tag = number2;*/
 
-	channelPlay			= gcnew array<Windows::Forms::Button^>(3);
+	channelPlay			= gcnew array<System::Windows::Forms::Button^>(3);
 	channelPlay[0]		= Channel0Play;
 	channelPlay[0]->Tag	= gcnew ChannelOperationLookup(0, BAPSNET_PLAY);
 	channelPlay[1]		= Channel1Play;
@@ -178,7 +178,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	channelPlay[2]		= Channel2Play;
 	channelPlay[2]->Tag	= gcnew ChannelOperationLookup(2, BAPSNET_PLAY);
 
-	channelPause		= gcnew array<Windows::Forms::Button^>(3);
+	channelPause		= gcnew array<System::Windows::Forms::Button^>(3);
 	channelPause[0]		= Channel0Pause;
 	channelPause[0]->Tag	= gcnew ChannelOperationLookup(0, BAPSNET_PAUSE);
 	channelPause[1]		= Channel1Pause;
@@ -186,7 +186,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	channelPause[2]		= Channel2Pause;
 	channelPause[2]->Tag	= gcnew ChannelOperationLookup(2, BAPSNET_PAUSE);
 
-	channelStop			= gcnew array<Windows::Forms::Button^>(3);
+	channelStop			= gcnew array<System::Windows::Forms::Button^>(3);
 	channelStop[0]		= Channel0Stop;
 	channelStop[0]->Tag	= gcnew ChannelOperationLookup(0, BAPSNET_STOP);
 	channelStop[1]		= Channel1Stop;
