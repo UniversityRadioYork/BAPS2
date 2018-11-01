@@ -92,6 +92,32 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 			CONFIG_SET(CONFIG_BAPSCONTROLLER2DEVICECOUNT, (serials->Length==0)?1:serials->Length);
 		}
 	}
+	else if (optionid == CONFIG_DEVICE)
+	{
+		/** Recheck for an updated list of audio devices plugged in. Set them for the config menu to display. **/
+		CBAPSAudioOutputDevices* devices = new CBAPSAudioOutputDevices();
+		if (devices->Initialise() == FALSE)
+		{
+			LogManager::write("Could not re-enumerate list of audio devices.\n", LOG_ERROR, LOG_CONFIG);
+		}
+
+		ConfigStringChoices^ deviceChoices = gcnew ConfigStringChoices();
+		int i = 0;
+		bool isDefault = true;
+
+		for (i = 0; i < devices->GetCount(); i++)
+		{
+			if (i != 0)
+			{
+				isDefault = false;
+			}
+
+			deviceChoices->add(LPCWSTRToString(devices->GetDevice(i)->GetDescription()),
+				LPCWSTRToString(devices->GetDevice(i)->GetID()),
+				isDefault);
+		}
+		safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_DEVICE])->setChoices(deviceChoices);
+	}
 
 	/**
 	 *  Should be called for any CONFIG_TYPE_CHOICE option
