@@ -110,14 +110,14 @@ void ConfigManager::initConfigManager()
 
 	configDescriptions = gcnew array<ConfigDescriptor^>(CONFIG_LASTOPTION);
 	configDescriptions[CONFIG_CHANNELCOUNT] = gcnew ConfigDescriptorInt("ChannelCount", "Number of Channels", 1, CA_RD_ONLY);
-	configDescriptions[CONFIG_DEVICE] = gcnew ConfigDescriptorStringChoice("Device", CONFIG_CHANNELCOUNT, "Output device", deviceChoices, CA_SU_ONLY);
-	configDescriptions[CONFIG_CHANNELNAME] = gcnew ConfigDescriptorString("ChannelName", CONFIG_CHANNELCOUNT, "Channel Name", "[set-me]", CA_RD_ONLY);
-	configDescriptions[CONFIG_AUTOADVANCE] = gcnew ConfigDescriptorIntChoice("AutoAdvance", CONFIG_CHANNELCOUNT, "Automatically advance", noYesChoices, CA_ANY);
+	configDescriptions[CONFIG_DEVICE] = gcnew ConfigDescriptorStringChoice("Device", CONFIG_CHANNELCOUNT, "Device", deviceChoices, CA_SU_ONLY);
+	configDescriptions[CONFIG_CHANNELNAME] = gcnew ConfigDescriptorString("ChannelName", CONFIG_CHANNELCOUNT, "Name", "[set-me]", CA_RD_ONLY);
+	configDescriptions[CONFIG_AUTOADVANCE] = gcnew ConfigDescriptorIntChoice("AutoAdvance", CONFIG_CHANNELCOUNT, "Auto Advance", noYesChoices, CA_ANY);
 	configDescriptions[CONFIG_AUTOPLAY] = gcnew ConfigDescriptorIntChoice("AutoPlay", CONFIG_CHANNELCOUNT, "Play on load", noYesChoices, CA_ANY);
 	configDescriptions[CONFIG_REPEAT] = gcnew ConfigDescriptorIntChoice("Repeat", CONFIG_CHANNELCOUNT, "Repeat", repeatChoices, CA_ANY);
 	configDescriptions[CONFIG_DIRECTORYCOUNT] = gcnew ConfigDescriptorInt("DirectoryCount", "Number of directories", 3, CA_RD_ONLY);
-	configDescriptions[CONFIG_NICEDIRECTORYNAME] = gcnew ConfigDescriptorString("NiceDirectoryName", CONFIG_DIRECTORYCOUNT, "Nice directory name", "[set-me]", CA_RD_ONLY);
-	configDescriptions[CONFIG_DIRECTORYLOCATION] = gcnew ConfigDescriptorString("Directory", CONFIG_DIRECTORYCOUNT, "Directory location", "[set-me]", CA_SU_ONLY);
+	configDescriptions[CONFIG_NICEDIRECTORYNAME] = gcnew ConfigDescriptorString("NiceDirectoryName", CONFIG_DIRECTORYCOUNT, "Name", "[set-me]", CA_RD_ONLY);
+	configDescriptions[CONFIG_DIRECTORYLOCATION] = gcnew ConfigDescriptorString("Directory", CONFIG_DIRECTORYCOUNT, "Location", "[set-me]", CA_SU_ONLY);
 	configDescriptions[CONFIG_SERVERID] = gcnew ConfigDescriptorString("ServerID", "Server Identifier", "unspecified", CA_SU_ONLY);
 	configDescriptions[CONFIG_PORT] = gcnew ConfigDescriptorInt("Port", "Server port", 1350, CA_SU_ONLY);
 	configDescriptions[CONFIG_MAXQUEUECONNS] = gcnew ConfigDescriptorInt("MaxQueueConnections", "Maximum connections to queue", 10, CA_SU_ONLY);
@@ -130,15 +130,15 @@ void ConfigManager::initConfigManager()
 	configDescriptions[CONFIG_DBPASSWORD] = gcnew ConfigDescriptorString("LibraryDBPassword", "Database Password", "[set-me]", CA_SU_ONLY);
 	configDescriptions[CONFIG_LIBRARYLOCATION] = gcnew ConfigDescriptorString("LibraryLocation", "Music Library location", "[set-me]", CA_SU_ONLY);
 	configDescriptions[CONFIG_SAVEINTROPOSITIONS] = gcnew ConfigDescriptorIntChoice("SaveIntroPositions", "Save Intro Positions", noYesChoices, CA_SU_ONLY);
-	configDescriptions[CONFIG_STOREPLAYBACKEVENTS] = gcnew ConfigDescriptorIntChoice("StorePlaybackEvents", "Store Playback Events", playbackEventChoices, CA_SU_ONLY);
+	configDescriptions[CONFIG_STOREPLAYBACKEVENTS] = gcnew ConfigDescriptorIntChoice("StorePlaybackEvents", "Log/Tracklist Playbacks", playbackEventChoices, CA_SU_ONLY);
 	configDescriptions[CONFIG_LOGNAME] = gcnew ConfigDescriptorString("LogName", "System Log Name", "BAPS Log", CA_SU_ONLY);
 	configDescriptions[CONFIG_LOGSOURCE] = gcnew ConfigDescriptorString("LogSource", "System Log Source", "BAPS", CA_SU_ONLY);
-	configDescriptions[CONFIG_SUPPORTADDRESS] = gcnew ConfigDescriptorString("SupportAddress", "Support E-mail address", "baps@ury.york.ac.uk", CA_RD_ONLY);
+	configDescriptions[CONFIG_SUPPORTADDRESS] = gcnew ConfigDescriptorString("SupportAddress", "Support E-mail address", "baps@ury.org.uk", CA_RD_ONLY);
 	configDescriptions[CONFIG_SMTPSERVER] = gcnew ConfigDescriptorString("SMTP Server", "SMTP server IP address", "<none>", CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSCONTROLLERENABLED] = gcnew ConfigDescriptorIntChoice("BAPSControllerEnabled", "BAPS Controller Enabled", noYesChoices, CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSControllerButtonCount", "BAPS Controller Button Count", 6, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLERENABLED] = gcnew ConfigDescriptorIntChoice("BAPSControllerEnabled", "COM Controller Enabled", noYesChoices, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSControllerButtonCount", "COM Controller Button Count", 6, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCODE] = gcnew ConfigDescriptorInt("BAPSControllerButtonCode", CONFIG_BAPSCONTROLLERBUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSPADDLEMODE] = gcnew ConfigDescriptorIntChoice("BAPSPaddleMode", "BAPS Paddle Mode", paddleChoices ,CA_ANY);
+	configDescriptions[CONFIG_BAPSPADDLEMODE] = gcnew ConfigDescriptorIntChoice("BAPSPaddleMode", "COM Controller Paddle Mode", paddleChoices ,CA_ANY);
 	configDescriptions[CONFIG_CLEANMUSICONLY] = gcnew ConfigDescriptorIntChoice("OnlyAllowCleanMusic", "Only Allow Clean Music", noYesChoices ,CA_SU_ONLY);
 
 	BAPSControllerAssembly::BAPSController^ bc = gcnew BAPSControllerAssembly::BAPSController();
@@ -155,14 +155,14 @@ void ConfigManager::initConfigManager()
 
 	delete bc;
 
-	configDescriptions[CONFIG_BAPSCONTROLLER2ENABLED] = gcnew ConfigDescriptorIntChoice("BAPSController2Enabled", "BAPS USB Controller Enabled", noYesChoices, CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSCONTROLLER2DEVICECOUNT] = gcnew ConfigDescriptorInt("BAPSController2DeviceCount", "BAPS USB Controller Device Count", (serials->Length==0)?1:serials->Length, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLER2ENABLED] = gcnew ConfigDescriptorIntChoice("BAPSController2Enabled", "USB Controller Enabled", noYesChoices, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLER2DEVICECOUNT] = gcnew ConfigDescriptorInt("BAPSController2DeviceCount", "USB Controller Device Count", (serials->Length==0)?1:serials->Length, CA_SU_ONLY);
 	CONFIG_SET(CONFIG_BAPSCONTROLLER2DEVICECOUNT, (serials->Length==0)?1:serials->Length);
 
 	/* work needed: force the device count */
 	configDescriptions[CONFIG_BAPSCONTROLLER2SERIAL] = gcnew ConfigDescriptorStringChoice("BAPSController2Serial", CONFIG_BAPSCONTROLLER2DEVICECOUNT, "Serial", bapsController2Choices, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSCONTROLLER2OFFSET] = gcnew ConfigDescriptorInt("BAPSController2Offset", CONFIG_BAPSCONTROLLER2DEVICECOUNT, "Signal Offset", 0, CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSCONTROLLER2BUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSController2ButtonCount", "BAPS USB Controller Button Count", 6, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLER2BUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSController2ButtonCount", "USB Controller Button Count", 6, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSCONTROLLER2BUTTONCODE] = gcnew ConfigDescriptorInt("BAPSController2ButtonCode", CONFIG_BAPSCONTROLLER2BUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
 
 	configErrors = gcnew array<System::String^>(CE_LASTERROR);
