@@ -271,7 +271,7 @@ void ConfigDialog::updateUI()
 					cbc = gcnew DataGridComboBoxColumn();
 					cbc->HeaderText = option->getDescription();
 					cbc->MappingName = option->getDescription();
-					/** cbc->Width = 200; **/
+					cbc->Width = 200;
 					dg->TableStyles[0]->GridColumnStyles->Add(cbc);
 					/** In order for the combo box to receive its values it has to be exposed
 						DO NOT MESS WITH IT.. AT ALL
