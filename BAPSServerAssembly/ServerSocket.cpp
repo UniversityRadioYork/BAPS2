@@ -50,13 +50,13 @@ ServerSocket::~ServerSocket()
 
 void ServerSocket::send(const System::String^ s)
 {
-	/** Strings are a combination of integer length and then ascii data **/
+	/** Strings are a combination of integer length and then UTF8 data **/
 	send(static_cast<u32int>(System::Text::Encoding::UTF8->GetByteCount(const_cast<System::String^>(s))));
 	send(System::Text::Encoding::UTF8->GetBytes(const_cast<System::String^>(s)));
 }
 System::String^ ServerSocket::receiveS()
 {
-	/** As before we find out how long the string is first and then grab the ascii data **/
+	/** As before we find out how long the string is first and then grab the UTF8 data **/
 	int stringLength = receiveI();
 	System::String^ theString= "";
 
