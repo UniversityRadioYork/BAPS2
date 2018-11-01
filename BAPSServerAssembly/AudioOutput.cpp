@@ -165,6 +165,26 @@ bool AudioOutput::loadTrack(Track^ entry)
 		stop();
 	}
 
+	/** 
+	 * If the audio device config option for this channel has changed, now is the time to swap the device over.
+	**/
+
+	/** Read the device name from the registry **/
+	System::String^ AudioDeviceID = CONFIG_GETSTRn(CONFIG_DEVICE, channelNumber);
+	/**
+		BAPS needs an LPWSTR, we send it a managed LPWSTR as it is used only
+		for a lookup this is safe, ie it is not stored in unmanaged code.
+	**/
+	LPWSTR szDevice = stringToLPWSTR(AudioDeviceID);
+	/** Fetch the new output device **/
+	CBAPSAudioOutputDevice* pSelectedDevice = audioOutput->GetAudioOutputDevices()->GetDevice(szDevice);
+
+
+	if (pChannel->GetDevice() != pSelectedDevice)
+	{
+		pChannel->SetDevice(pSelectedDevice);
+	}
+
 	pin_ptr<const wchar_t> szFilename = PtrToStringChars(entry->getFileLocation());
 
 	if (isValid() && pChannel->LoadFile(szFilename) == TRUE)

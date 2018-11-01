@@ -69,7 +69,7 @@ void ConfigManager::initConfigManager()
 	if (devices->Initialise() == FALSE)
 	{
 		// WORK NEEDED: better exception system
-		throw gcnew System::Exception("device enumeration failed");
+		throw gcnew System::Exception("Audio device enumeration failed.");
 	}
 
 	ConfigStringChoices^ deviceChoices = gcnew ConfigStringChoices();
