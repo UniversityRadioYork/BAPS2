@@ -32,7 +32,7 @@ namespace BAPSPresenter {
 			pCompileDateText->Text = __DATE__;
 			pCompileTimeText->Text = __TIME__;
 			pVersionText->Text = System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version->ToString();
-			pAuthorText->Text = L"Matthew Fortune\nUI based on work by:\nMark Fenton\nSimplifications by:\nAlex Williams";
+			pAuthorText->Text = L"Matthew Fortune\n\nUI based on work by:\nMark Fenton\n\nSimplifications by:\nAlex Williams\n\nMaintained By:\nMatthew Stratford (2018)\n";
 
 		}
 		void serverVersion(System::String^ version, System::String^ date, System::String^ time, System::String^ author)

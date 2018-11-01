@@ -461,7 +461,7 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 			break;
 		case BAPSNET_VERSION:
 			{
-				System::String^ author = "Matthew Fortune\nAudio Library: Dan Lambert";
+				System::String^ author = "Matthew Fortune\n\nAudio Library: Dan Lambert\n\nMaintained By:\nMatthew Stratford (2018)\n";
 				System::String^ version = System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version->ToString();
 				Command cmd = BAPSNET_SYSTEM | BAPSNET_VERSION;
 				ClientManager::send(this, cmd, version, __DATE__, __TIME__, author);
