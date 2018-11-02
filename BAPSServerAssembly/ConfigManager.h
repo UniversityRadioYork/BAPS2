@@ -99,7 +99,7 @@ namespace BAPSServerAssembly
 				channelCount = CONFIG_GETINT(CONFIG_CHANNELCOUNT);
 				if (channelCount < 1)
 				{
-					setChannelCount(1);
+					setChannelCount(3);
 				}
 			}
 			return channelCount;

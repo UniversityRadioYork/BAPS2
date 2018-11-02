@@ -109,7 +109,7 @@ void ConfigManager::initConfigManager()
 	playbackEventChoices->add("All play events", CONFIG_PLAYBACKEVENT_STORE_ALL);
 
 	configDescriptions = gcnew array<ConfigDescriptor^>(CONFIG_LASTOPTION);
-	configDescriptions[CONFIG_CHANNELCOUNT] = gcnew ConfigDescriptorInt("ChannelCount", "Number of Channels", 1, CA_RD_ONLY);
+	configDescriptions[CONFIG_CHANNELCOUNT] = gcnew ConfigDescriptorInt("ChannelCount", "Number of Channels", 3, CA_RD_ONLY);
 	configDescriptions[CONFIG_DEVICE] = gcnew ConfigDescriptorStringChoice("Device", CONFIG_CHANNELCOUNT, "Device", deviceChoices, CA_SU_ONLY);
 	configDescriptions[CONFIG_CHANNELNAME] = gcnew ConfigDescriptorString("ChannelName", CONFIG_CHANNELCOUNT, "Name", "[set-me]", CA_RD_ONLY);
 	configDescriptions[CONFIG_AUTOADVANCE] = gcnew ConfigDescriptorIntChoice("AutoAdvance", CONFIG_CHANNELCOUNT, "Auto Advance", noYesChoices, CA_ANY);
