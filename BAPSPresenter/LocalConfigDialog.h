@@ -36,7 +36,7 @@ namespace BAPSPresenter {
 			usernameText->Text = ConfigManager::getConfigValueString("DefaultUsername", "");
 			passwordText->Text = ConfigManager::getConfigValueString("DefaultPassword", "");
 			showVolumeList->SelectedItem = ConfigManager::getConfigValueString("ShowVolume", "No");
-			enableTimersList->SelectedItem = ConfigManager::getConfigValueString("EnableTimers", "No");
+			enableTimersList->SelectedItem = ConfigManager::getConfigValueString("EnableTimers", "Yes");
 		}
 
 	protected:

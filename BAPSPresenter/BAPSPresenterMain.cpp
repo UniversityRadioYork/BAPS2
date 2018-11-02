@@ -304,8 +304,8 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	/*bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
 	showVolumeControls(showVolume);*/
 
-	/** Enable or disable the timers depending on the config setting **/
-	bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "No"),"Yes") == 0);
+	/** Enable or disable the timers depending on the config setting, enable on default when no registry config value set. **/
+	bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "Yes"),"Yes") == 0);
 	enableTimerControls(enableTimers);
 
 	/** Start the receive thread so we are ready for the autoupdate messages **/ 
