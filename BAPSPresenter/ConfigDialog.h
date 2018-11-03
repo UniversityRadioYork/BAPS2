@@ -104,6 +104,7 @@ namespace BAPSPresenter {
 			 System::Collections::Queue^ msgQueue;
 
 		System::Void saveButton_Click(System::Object ^  sender, System::EventArgs ^  e);
+		System::Void restartButton_Click(System::Object ^  sender, System::EventArgs ^  e);
 		System::Void ConfigDialog_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 		System::Void cancelButton_Click(System::Object^  sender, System::EventArgs^  e);
 		System::Void ConfigDialog_Load(System::Object^  sender, System::EventArgs^  e);
@@ -112,6 +113,7 @@ namespace BAPSPresenter {
 	private: System::Windows::Forms::ToolStripStatusLabel^  statusLabel;
 	private: System::Windows::Forms::Button^  cancelButton;
 	private: System::Windows::Forms::Button^  saveButton;
+	private: System::Windows::Forms::Button^  restartButton;
 
 	private:
 		/// <summary>
@@ -131,6 +133,7 @@ namespace BAPSPresenter {
 			this->statusLabel = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->cancelButton = (gcnew System::Windows::Forms::Button());
 			this->saveButton = (gcnew System::Windows::Forms::Button());
+			this->restartButton = (gcnew System::Windows::Forms::Button());
 			this->status->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -175,6 +178,17 @@ namespace BAPSPresenter {
 			this->saveButton->Text = L"Save Settings";
 			this->saveButton->Click += gcnew System::EventHandler(this, &ConfigDialog::saveButton_Click);
 			// 
+			// restartButton
+			// 
+			this->restartButton->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->restartButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->restartButton->Location = System::Drawing::Point(150, 320);
+			this->restartButton->Name = L"restartButton";
+			this->restartButton->Size = System::Drawing::Size(88, 24);
+			this->restartButton->TabIndex = 903;
+			this->restartButton->Text = L"Restart Server";
+			this->restartButton->Click += gcnew System::EventHandler(this, &ConfigDialog::restartButton_Click);
+			// 
 			// ConfigDialog
 			// 
 			this->AcceptButton = this->saveButton;
@@ -186,6 +200,7 @@ namespace BAPSPresenter {
 			this->Controls->Add(this->status);
 			this->Controls->Add(this->cancelButton);
 			this->Controls->Add(this->saveButton);
+			this->Controls->Add(this->restartButton);
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));

@@ -43,7 +43,7 @@ void ConfigDialog::setNumberOfOptions(int _numberOfOptions)
 	/** Inform user they can't edit any config **/
 	if (numberOfOptions == 0)
 	{
-		System::Windows::Forms::MessageBox::Show("There are no options which you are able to configure", "Error:", System::Windows::Forms::MessageBoxButtons::OK);
+		System::Windows::Forms::MessageBox::Show("There are no options which you are able to configure.", "Error:", System::Windows::Forms::MessageBoxButtons::OK);
 		this->Close();
 	}
 }
@@ -134,6 +134,7 @@ void ConfigDialog::updateUI()
 			status->Top = yOffset+(24*(yMultiplier))+32;
 			/** Move the save and cancel buttons to a sensible place **/
 			saveButton->Top = yOffset+(24*(yMultiplier))+4;
+			restartButton->Top = yOffset + (24 * (yMultiplier)) + 4;
 			cancelButton->Top = yOffset+(24*(yMultiplier))+4;
 			/** New horizontal offset to represent next column **/
 			xOffset = (columnNumber * (columnWidth + columnLRPadding)) + columnLRPadding;
@@ -364,6 +365,7 @@ void ConfigDialog::updateUI()
 		this->Height = minHeight;
 		status->Top = yOffset+(24*(yMultiplier+1)+32);
 		saveButton->Top = yOffset+(24*(yMultiplier))+4;
+		restartButton->Top = yOffset + (24 * (yMultiplier)) + 4;
 		cancelButton->Top = yOffset+(24*(yMultiplier))+4;
 	}
 	this->Width = totalColumns * (columnWidth + 2*columnLRPadding);
@@ -431,6 +433,13 @@ System::Void ConfigDialog::saveButton_Click(System::Object ^  sender, System::Ev
 			}
 		}
 	}
+}
+
+System::Void ConfigDialog::restartButton_Click(System::Object ^  sender, System::EventArgs ^  e) {
+	restartButton->Enabled = false;
+	Command cmd;
+	cmd = BAPSNET_SYSTEM | BAPSNET_QUIT;
+	msgQueue->Enqueue(gcnew ActionMessage(cmd));
 }
 
 void ConfigDialog::setResult(System::Object^ optionid, System::Object^ result)

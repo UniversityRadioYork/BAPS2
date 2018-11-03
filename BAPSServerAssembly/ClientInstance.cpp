@@ -476,6 +476,16 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 				ClientManager::send(this, cmd, (u32int)result);
 			}
 			break;
+		case BAPSNET_QUIT:
+		{
+			/** Used to restart the server from the config menu **/
+			LogManager::write("Recieved BAPSNET_QUIT, restarting.", LOG_INFO, LOG_SYSTEM);
+			Command cmd = BAPSNET_SYSTEM | BAPSNET_QUIT;
+			/* Send 0 to signify this is an expected quit. */
+			ClientManager::broadcast(cmd, (float)0);
+			dead = true;
+			break;
+		}
 		default:
 			LogManager::write(System::String::Concat("Received unknown Command, Possibly a deformed SYSTEM: ", cmdReceived.ToString()), LOG_ERROR, LOG_COMMS);
 			dead = true;

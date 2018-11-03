@@ -143,10 +143,10 @@ namespace BAPSPresenter {
 		void decodeCommand(Command cmdReceived);
 		/** Loop to watch for an outgoing message on the queue and send it **/
 		void senderFunc();
-		/** Function to async send the notify of a Comms Error **/
-		void sendNotifyCommsError(System::String^ description);
+		/** Function to async send the notify of a Comms Error / allow a way to restart the client. **/
+		void sendQuit(System::String^ description, bool silent);
 		/** Function to notify of a Comms Error **/
-		void notifyCommsError(System::String^ description);
+		void quit(System::String^ description, bool silent);
 		/** Function to open write and close a log file -- FOR EMERGENCIES ONLY **/
 		void logError(System::String^ errorMessage);
 

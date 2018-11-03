@@ -6,6 +6,7 @@ namespace BAPSPresenter
 	/** Delegated for all the various messages to be passed to subforms **/
 	delegate void MethodInvokerObj(System::Object^);
 	delegate void MethodInvokerStr(System::String^);
+	delegate void MethodInvokerStrBool(System::String^, bool);
 	delegate void MethodInvokerStrObj(System::String^, System::Object^);
 	delegate void MethodInvokerObjStr(System::Object^, System::String^);
 	delegate void MethodInvokerObjObj(System::Object^, System::Object^);

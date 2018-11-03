@@ -363,22 +363,24 @@ BAPSPresenterMain::~BAPSPresenterMain()
 		delete components;
 	}
 }
-void BAPSPresenterMain::notifyCommsError(System::String^ description)
+void BAPSPresenterMain::quit(System::String^ description, bool silent)
 {
 	/** On Communications errors this is called to notify the user **/
 	/** Only current option is to die **/
 	dead = true;
-	System::Windows::Forms::MessageBox::Show(System::String::Concat(description, "\nClick OK to restart the Presenter Interface.\nPlease notify support that an error occurred."), "System error:", System::Windows::Forms::MessageBoxButtons::OK);
-	logError(description);
+	if (!silent) {
+		System::Windows::Forms::MessageBox::Show(System::String::Concat(description, "\nClick OK to restart the Presenter Interface.\nPlease notify support that an error occurred."), "System error:", System::Windows::Forms::MessageBoxButtons::OK);
+		logError(description);
+	}
 	crashed = true;
 	this->Close();
 }
-void BAPSPresenterMain::sendNotifyCommsError(System::String^ description)
+void BAPSPresenterMain::sendQuit(System::String^ description, bool silent)
 {
 	if (!crashed)
 	{
-		MethodInvokerStr^ mi = gcnew MethodInvokerStr(this, &BAPSPresenterMain::notifyCommsError);
-		array<System::Object^>^ dd = gcnew array<System::Object^>(1) {description};
+		MethodInvokerStrBool^ mi = gcnew MethodInvokerStrBool(this, &BAPSPresenterMain::quit);
+		array<System::Object^>^ dd = gcnew array<System::Object^>(2) {description, silent};
 		this->BeginInvoke(mi,dd);
 	}
 }
@@ -400,7 +402,7 @@ void BAPSPresenterMain::receiverFunc()
 		if (!dead)
 		{
 			/** If we receive an exception we assume it to be a bad thing **/
-			sendNotifyCommsError(System::String::Concat("Receiver Loop Failed, server may have died:\n", e->Message, "\nStack Trace:\n", e->StackTrace));
+			sendQuit(System::String::Concat("Receiver Loop Failed, server may have died:\n", e->Message, "\n\nStack Trace:\n", e->StackTrace), false);
 		}
 	}
 #endif
@@ -507,7 +509,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed PLAYBACK.\n");
+				sendQuit("Received unknown command, possibly a malformed PLAYBACK.\n", false);
 			}
 			break;
 		}
@@ -557,7 +559,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed PLAYLIST.\n");
+				sendQuit("Received unknown command, possibly a malformed PLAYLIST.\n", false);
 			}
 			break;
 		}
@@ -621,7 +623,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed DATABASE.\n");
+				sendQuit("Received unknown command, possibly a malformed DATABASE.\n", false);
 			}
 			break;
 		}
@@ -744,7 +746,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed CONFIG.\n");
+				sendQuit("Received unknown command, possibly a malformed CONFIG.\n", false);
 			}
 			break;
 		}
@@ -829,10 +831,14 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 				this->Invoke(mi, dd);
 			}
 			break;
+		case BAPSNET_QUIT:
+			//The server should send an int representing if this is an expected quit (0) or an exception error (1)."
+			sendQuit("The Server is shutting down/restarting.\n", cmdReceived & BAPSNET_SYSTEM_VALUEMASK == 1 ? false : true);
+			break;
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed SYSTEM.\n");
+				sendQuit("Received unknown command, possibly a malformed SYSTEM.\n", false);
 			}
 			break;
 		}
@@ -840,7 +846,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 	default:
 		{
 			/** ERROR **/
-			sendNotifyCommsError("Received unknown command.\n");
+			sendQuit("Received unknown command.\n", false);
 		}
 		break;
 	}
@@ -880,7 +886,7 @@ void BAPSPresenterMain::senderFunc()
 		if (!dead)
 		{
 			/** If we receive an exception we assume it to be a bad thing **/
-			sendNotifyCommsError(System::String::Concat("Sender Loop Failed, server may have died:\n", e->Message, "\nStack Trace:\n", e->StackTrace));
+			sendQuit(System::String::Concat("Sender Loop Failed, server may have died:\n", e->Message, "\n\nStack Trace:\n", e->StackTrace), false);
 		}
 	}
 #endif
