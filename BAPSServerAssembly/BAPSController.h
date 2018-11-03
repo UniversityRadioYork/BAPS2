@@ -17,13 +17,14 @@ namespace BAPSServerAssembly
 			{
 				try
 				{
-					serialPort = gcnew System::IO::Ports::SerialPort("COM1", 2400, System::IO::Ports::Parity::None,8,System::IO::Ports::StopBits::One);
+					serialPort = gcnew System::IO::Ports::SerialPort(CONFIG_GETSTR(CONFIG_BAPSCONTROLLERPORT), 2400, System::IO::Ports::Parity::None,8,System::IO::Ports::StopBits::One);
 					serialPort->Open();
 					serialPort->DataReceived += gcnew System::IO::Ports::SerialDataReceivedEventHandler(&BAPSController::handleData);
 				}
 				catch (System::Exception^ e)
 				{
-					throw gcnew BAPSTerminateException(System::String::Concat("Failed to start BAPS Controller:\n", e->Message, "Stack Trace:\n",e->StackTrace));
+					CONFIG_SET(CONFIG_BAPSCONTROLLERENABLED, CONFIG_NO_VALUE);
+					LogManager::write(System::String::Concat("Failed to start BAPS Serial Controller:\n", e->Message, "Stack Trace:\n", e->StackTrace), LOG_INFO, LOG_COMMS);
 				}
 			}
 

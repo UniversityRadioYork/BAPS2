@@ -118,6 +118,31 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 		}
 		safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_DEVICE])->setChoices(deviceChoices);
 	}
+	else if (optionid == CONFIG_BAPSCONTROLLERPORT) {
+		/** Get the serial port options for BAPSController (1) **/
+		ConfigStringChoices^ controllerPortChoices = gcnew ConfigStringChoices();
+
+		try {
+			array<System::String^>^ serialPortNames = System::IO::Ports::SerialPort::GetPortNames();
+			int i;
+			bool isDefault = true;
+			for (i = 0; i < serialPortNames->Length; i++)
+			{
+				if (i != 0)
+				{
+					isDefault = false;
+				}
+				controllerPortChoices->add(serialPortNames[i],
+					serialPortNames[i],
+					isDefault);
+			}
+			safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_BAPSCONTROLLERPORT])->setChoices(controllerPortChoices);
+		}
+		catch (System::Exception^ e) {
+			CONFIG_SET(CONFIG_BAPSCONTROLLERENABLED, CONFIG_NO_VALUE);
+			LogManager::write(System::String::Concat("Failed to enumerate Serial Port Names:\n", e->Message, "Stack Trace:\n", e->StackTrace), LOG_WARNING, LOG_COMMS);
+		}
+	}
 
 	/**
 	 *  Should be called for any CONFIG_TYPE_CHOICE option

@@ -129,20 +129,39 @@ void ConfigManager::initConfigManager()
 	configDescriptions[CONFIG_DBUSERNAME] = gcnew ConfigDescriptorString("LibraryDBUsername", "Database Username", "[set-me]", CA_SU_ONLY);
 	configDescriptions[CONFIG_DBPASSWORD] = gcnew ConfigDescriptorString("LibraryDBPassword", "Database Password", "[set-me]", CA_SU_ONLY);
 	configDescriptions[CONFIG_LIBRARYLOCATION] = gcnew ConfigDescriptorString("LibraryLocation", "Music Library location", "[set-me]", CA_SU_ONLY);
+	configDescriptions[CONFIG_CLEANMUSICONLY] = gcnew ConfigDescriptorIntChoice("OnlyAllowCleanMusic", "Only Allow Clean Music", noYesChoices, CA_SU_ONLY);
 	configDescriptions[CONFIG_SAVEINTROPOSITIONS] = gcnew ConfigDescriptorIntChoice("SaveIntroPositions", "Save Intro Positions", noYesChoices, CA_SU_ONLY);
 	configDescriptions[CONFIG_STOREPLAYBACKEVENTS] = gcnew ConfigDescriptorIntChoice("StorePlaybackEvents", "Log/Tracklist Playbacks", playbackEventChoices, CA_SU_ONLY);
 	configDescriptions[CONFIG_LOGNAME] = gcnew ConfigDescriptorString("LogName", "System Log Name", "BAPS Log", CA_SU_ONLY);
 	configDescriptions[CONFIG_LOGSOURCE] = gcnew ConfigDescriptorString("LogSource", "System Log Source", "BAPS", CA_SU_ONLY);
 	configDescriptions[CONFIG_SUPPORTADDRESS] = gcnew ConfigDescriptorString("SupportAddress", "Support E-mail address", "baps@ury.org.uk", CA_RD_ONLY);
 	configDescriptions[CONFIG_SMTPSERVER] = gcnew ConfigDescriptorString("SMTP Server", "SMTP server IP address", "<none>", CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSCONTROLLERENABLED] = gcnew ConfigDescriptorIntChoice("BAPSControllerEnabled", "COM Controller Enabled", noYesChoices, CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSControllerButtonCount", "COM Controller Button Count", 6, CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCODE] = gcnew ConfigDescriptorInt("BAPSControllerButtonCode", CONFIG_BAPSCONTROLLERBUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSPADDLEMODE] = gcnew ConfigDescriptorIntChoice("BAPSPaddleMode", "COM Controller Paddle Mode", paddleChoices ,CA_ANY);
-	configDescriptions[CONFIG_CLEANMUSICONLY] = gcnew ConfigDescriptorIntChoice("OnlyAllowCleanMusic", "Only Allow Clean Music", noYesChoices ,CA_SU_ONLY);
-
+	
 	BAPSControllerAssembly::BAPSController^ bc = gcnew BAPSControllerAssembly::BAPSController();
 
+	/** Get the serial port options for BAPSController (1) on startup **/
+	ConfigStringChoices^ controllerPortChoices = gcnew ConfigStringChoices();
+
+	try {
+		array<System::String^>^ serialPortNames = System::IO::Ports::SerialPort::GetPortNames();
+
+		isDefault = true;
+		for (i = 0; i < serialPortNames->Length; i++)
+		{
+			if (i != 0)
+			{
+				isDefault = false;
+			}
+			controllerPortChoices->add(serialPortNames[i],
+				serialPortNames[i],
+				isDefault);
+		}
+	}
+	catch (System::Exception^ e) {
+		throw gcnew BAPSTerminateException(System::String::Concat("Failed to enumerate Serial Port Names:\n", e->Message, "Stack Trace:\n", e->StackTrace));
+	}
+
+	/** Get the serial numbers of BAPSController2 devices **/
 	ConfigStringChoices^ bapsController2Choices = gcnew ConfigStringChoices();
 
 	array<System::String^>^ serials = bc->getSerialNumbers();
@@ -154,6 +173,13 @@ void ConfigManager::initConfigManager()
 	bapsController2Choices->add("none", "none", (serials->Length == 0));
 
 	delete bc;
+
+	configDescriptions[CONFIG_BAPSCONTROLLERENABLED] = gcnew ConfigDescriptorIntChoice("BAPSControllerEnabled", "COM Controller Enabled", noYesChoices, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLERPORT] = gcnew ConfigDescriptorStringChoice("BAPSControllerPort", "COM Controller Port", controllerPortChoices, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSControllerButtonCount", "COM Controller Button Count", 6, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCODE] = gcnew ConfigDescriptorInt("BAPSControllerButtonCode", CONFIG_BAPSCONTROLLERBUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSPADDLEMODE] = gcnew ConfigDescriptorIntChoice("BAPSPaddleMode", "COM Controller Paddle Mode", paddleChoices, CA_ANY);
+
 
 	configDescriptions[CONFIG_BAPSCONTROLLER2ENABLED] = gcnew ConfigDescriptorIntChoice("BAPSController2Enabled", "USB Controller Enabled", noYesChoices, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSCONTROLLER2DEVICECOUNT] = gcnew ConfigDescriptorInt("BAPSController2DeviceCount", "USB Controller Device Count", (serials->Length==0)?1:serials->Length, CA_SU_ONLY);
