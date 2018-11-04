@@ -624,7 +624,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Play->Name = L"Channel1Play";
 			this->Channel1Play->Size = System::Drawing::Size(75, 23);
 			this->Channel1Play->TabIndex = 223;
-			this->Channel1Play->Text = L"F1 - Play";
+			this->Channel1Play->Text = L"F5 - Play";
 			this->Channel1Play->UseVisualStyleBackColor = true;
 			this->Channel1Play->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -635,7 +635,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Pause->Name = L"Channel1Pause";
 			this->Channel1Pause->Size = System::Drawing::Size(75, 23);
 			this->Channel1Pause->TabIndex = 223;
-			this->Channel1Pause->Text = L"F2 - Pause";
+			this->Channel1Pause->Text = L"F6 - Pause";
 			this->Channel1Pause->UseVisualStyleBackColor = true;
 			this->Channel1Pause->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -646,7 +646,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Stop->Name = L"Channel1Stop";
 			this->Channel1Stop->Size = System::Drawing::Size(75, 23);
 			this->Channel1Stop->TabIndex = 223;
-			this->Channel1Stop->Text = L"F3 - Stop";
+			this->Channel1Stop->Text = L"F7 - Stop";
 			this->Channel1Stop->UseVisualStyleBackColor = true;
 			this->Channel1Stop->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -657,7 +657,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Play->Name = L"Channel2Play";
 			this->Channel2Play->Size = System::Drawing::Size(75, 23);
 			this->Channel2Play->TabIndex = 223;
-			this->Channel2Play->Text = L"F1 - Play";
+			this->Channel2Play->Text = L"F9 - Play";
 			this->Channel2Play->UseVisualStyleBackColor = true;
 			this->Channel2Play->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -668,7 +668,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Pause->Name = L"Channel2Pause";
 			this->Channel2Pause->Size = System::Drawing::Size(75, 23);
 			this->Channel2Pause->TabIndex = 223;
-			this->Channel2Pause->Text = L"F2 - Pause";
+			this->Channel2Pause->Text = L"F10 - Pause";
 			this->Channel2Pause->UseVisualStyleBackColor = true;
 			this->Channel2Pause->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -679,7 +679,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Stop->Name = L"Channel2Stop";
 			this->Channel2Stop->Size = System::Drawing::Size(75, 23);
 			this->Channel2Stop->TabIndex = 223;
-			this->Channel2Stop->Text = L"F3 - Stop";
+			this->Channel2Stop->Text = L"F11 - Stop";
 			this->Channel2Stop->UseVisualStyleBackColor = true;
 			this->Channel2Stop->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
