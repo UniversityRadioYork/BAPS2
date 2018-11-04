@@ -833,7 +833,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 			break;
 		case BAPSNET_QUIT:
 			//The server should send an int representing if this is an expected quit (0) or an exception error (1)."
-			sendQuit("The Server is shutting down/restarting.\n", cmdReceived & BAPSNET_SYSTEM_VALUEMASK == 1 ? false : true);
+			sendQuit("The Server is shutting down/restarting.\n", (cmdReceived & BAPSNET_SYSTEM_VALUEMASK) == 1 ? false : true);
 			break;
 		default:
 			{
