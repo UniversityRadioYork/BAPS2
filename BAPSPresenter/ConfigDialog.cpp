@@ -27,12 +27,12 @@ using namespace BAPSPresenter;
 ref struct IndexControlsLookup
 {
 	System::Windows::Forms::DataGrid^ dg;
-	System::Data::DataTable^ dt;
-	IndexControlsLookup(System::Windows::Forms::DataGrid^ _dg,
-						System::Data::DataTable^ _dt)
-						: dg(_dg),
-						  dt(_dt)
-	{}
+System::Data::DataTable^ dt;
+IndexControlsLookup(System::Windows::Forms::DataGrid^ _dg,
+	System::Data::DataTable^ _dt)
+	: dg(_dg),
+	dt(_dt)
+{}
 };
 
 void ConfigDialog::setNumberOfOptions(int _numberOfOptions)
@@ -88,27 +88,27 @@ void ConfigDialog::updateUI()
 	/** The total number of columns **/
 	const int totalColumns = 3;
 
+	const int columnTopBottomPadding = 16;
+	const int columnWidth = 350;
+	const int columnLRPadding = 10;
 
-	int columnTopBottomPadding = 16;
-	int columnWidth = 400;
-	int columnLRPadding = 10;
+	const int datagridHeight = 120;
+	const int datagridRowHeight = 25;
 
-	int datagridHeight = 120;
-	int datagridRowHeight = 25;
-	int controlHeight = 20;
-	
-	int labelWidth = 180;
-	int labelHeight = 20;
-
-	int controlWidth = columnWidth - labelWidth;
-
-	int rowBottomPadding = 10;
+	const int labelWidth = 160;
+	const int labelHeight = 20;
+	const int controlHeight = 20;
+	const int controlWidth = columnWidth - labelWidth;
+	const int rowBottomPadding = 10;
+	const int rowHeight = controlHeight + rowBottomPadding;
 
 	/** Vertical offset from the fixed start coordinarte **/
 	int yOffset = columnTopBottomPadding;
 	/** Horizontal offset from the fixed start coordinarte **/
 	int xOffset = columnLRPadding;
 
+	/** Decide if now is the time to switch to a new column. **/
+	bool splitColumn;
 
 	/** Lets save some time and wait until the end to draw all this! **/
 	this->SuspendLayout();
@@ -120,22 +120,38 @@ void ConfigDialog::updateUI()
 
 
 
-	for (i = 0 ; i < ops->Count ; i++, yMultiplier++)
+	for (i = 0; i < ops->Count; i++, yMultiplier++)
 	{
-		/** When half the controls have been generated move onto the second column
-			WORK NEEDED: a better method of splitting controls into 2 columns, half
-			the options != half space on screen due to indexed options.
+
+		splitColumn = (columnNumber < (totalColumns) && i - 1 >= columnNumber * (ops->Count / totalColumns));
+		/**
+		 * If splitting to new column or if we've reached the end of the last column
+		 * check if we need to make the window height larger based on the last row's contents
 		**/
-		if (columnNumber < (totalColumns+1) && i-1 >= columnNumber*(ops->Count/totalColumns))
+		if (splitColumn || (i == ops->Count - 1))
 		{
 			/** Set the form height to the height of the first column **/
-			this->Height = (28+yOffset+(24*(yMultiplier)) + status->Height + (2*columnTopBottomPadding));
+			int newHeight = ((rowHeight *(yMultiplier)) + status->Height + (2 * columnTopBottomPadding));
+			if (newHeight > this->Height) {
+				this->Height = newHeight;
+			}
+		}
+		/** When half the controls have been generated move onto the second column
+			WORK NEEDED: a better method of splitting controls into columns, eg. half
+			the options != half space on screen due to indexed options.
+		**/
+		if (splitColumn)
+		{
+			
 			/** Place the statusBar correctly after resize **/
-			status->Top = yOffset+(24*(yMultiplier))+32;
-			/** Move the save and cancel buttons to a sensible place **/
-			saveButton->Top = yOffset+(24*(yMultiplier))+4;
-			restartButton->Top = yOffset + (24 * (yMultiplier)) + 4;
-			cancelButton->Top = yOffset+(24*(yMultiplier))+4;
+			status->Top = yOffset + (rowHeight *(yMultiplier)) + columnTopBottomPadding;
+
+			/** Move the buttons to a sensible place **/
+			int buttonTopOffset		= yOffset + (rowHeight *(yMultiplier)) + (2 * columnTopBottomPadding);
+			saveButton->Location	= System::Drawing::Point(columnLRPadding, buttonTopOffset);
+			cancelButton->Location	= System::Drawing::Point(saveButton->Right + 10, buttonTopOffset);
+			restartButton->Location	= System::Drawing::Point(cancelButton->Right + 10, buttonTopOffset);
+
 			/** New horizontal offset to represent next column **/
 			xOffset = (columnNumber * (columnWidth + columnLRPadding)) + columnLRPadding;
 			/** Back to the top row **/
@@ -171,13 +187,13 @@ void ConfigDialog::updateUI()
 				dg->DataMember = "";
 				dg->HeaderForeColor = System::Drawing::SystemColors::ControlText;
 				/** Use the horizontal and vertical attributes to place the control correctly **/
-				dg->Location = System::Drawing::Point(xOffset, yOffset + ((controlHeight + rowBottomPadding) * yMultiplier));
+				dg->Location = System::Drawing::Point(xOffset, yOffset + (rowHeight * yMultiplier));
 				/** The control refers to the group of options and is so named **/
 				dg->Name = System::String::Concat("groupOption", option->getGroupid().ToString());
 				/** Set the size of the entire grid. **/
 				dg->Size = System::Drawing::Size(columnWidth, datagridHeight);
-				/** WORK NEEDED: why do we subtract 20 first! **/
-				yOffset += (datagridHeight) - datagridRowHeight;//-20);
+				/** Account for the size of the datagrid, so that the next control boxes don't draw ontop of it **/
+				yOffset += datagridHeight + rowBottomPadding - rowHeight;
 				/** WORK NEEDED: tabindex counter **/
 				dg->TabIndex = 2;
 				dg->TableStyles->Add(dgts);
@@ -194,6 +210,8 @@ void ConfigDialog::updateUI()
 
 				/** Create a datatable to hold all the info for this set of options **/
 				dt = gcnew System::Data::DataTable();
+
+
 				/** Add an index column so that visually we can see which index we are editing **/
 				dt->Columns->Add("index", System::Type::GetType("System.Int32"));
 				dt->Columns["index"]->ReadOnly = true;
@@ -211,6 +229,7 @@ void ConfigDialog::updateUI()
 					rows are deleted or created by altering the value of the option controlling
 					the number of indices 
 				**/
+
 				System::Data::DataView^ dv = gcnew System::Data::DataView(dt);
 				dv->AllowNew = false;
 				dv->AllowDelete = false;
@@ -223,13 +242,13 @@ void ConfigDialog::updateUI()
 			else
 			{
 				/** Get the datatable and the grid out of the cache and effectively remove an item
-					from the column by backing up the vertical offset by 24 (the same value as
+					from the column by backing up the vertical offset by the row height (the same value as
 					the multiplier's multiplicand)
 				**/
 				IndexControlsLookup^ icl = static_cast<IndexControlsLookup^>(indexControls[option->getGroupid()]);
 				dt = icl->dt;
 				dg = icl->dg;
-				yOffset -= datagridRowHeight;
+				yOffset -= rowHeight;
 			}
 			/** Each option type has to be treated differently as it is stored differently in the datatable **/
 			switch (option->getType())
@@ -246,7 +265,6 @@ void ConfigDialog::updateUI()
 					**/
 					tbc->HeaderText = option->getDescription();
 					tbc->MappingName = option->getDescription();
-					/** tbc->Width = 200; **/
 					dg->TableStyles[0]->GridColumnStyles->Add(tbc);
 				}
 				break;
@@ -260,7 +278,6 @@ void ConfigDialog::updateUI()
 					/** Same rules as above **/
 					tbc->HeaderText = option->getDescription();
 					tbc->MappingName = option->getDescription();
-					/** tbc->Width = 200; **/
 					dg->TableStyles[0]->GridColumnStyles->Add(tbc);
 				}
 				break;

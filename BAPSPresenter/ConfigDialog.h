@@ -185,7 +185,7 @@ namespace BAPSPresenter {
 			this->restartButton->Location = System::Drawing::Point(150, 320);
 			this->restartButton->Name = L"restartButton";
 			this->restartButton->Size = System::Drawing::Size(88, 24);
-			this->restartButton->TabIndex = 903;
+			this->restartButton->TabIndex = 905;
 			this->restartButton->Text = L"Restart Server";
 			this->restartButton->Click += gcnew System::EventHandler(this, &ConfigDialog::restartButton_Click);
 			// 
@@ -196,7 +196,9 @@ namespace BAPSPresenter {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->CancelButton = this->cancelButton;
 			this->ClientSize = System::Drawing::Size(649, 376);
-			this->ControlBox = false;
+			this->ControlBox = true;
+			this->MinimizeBox = false;
+			this->MaximizeBox = false;
 			this->Controls->Add(this->status);
 			this->Controls->Add(this->cancelButton);
 			this->Controls->Add(this->saveButton);
