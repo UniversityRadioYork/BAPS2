@@ -168,19 +168,19 @@ void ClientInstance::clientControlLoop()
 	catch (System::Net::Sockets::SocketException^ e) 
 	{
 		/** Client application may have abruptly disappeared **/
-		LogManager::write(System::String::Concat("clientControlLoop, Socket exception caught:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
+		LogManager::write(System::String::Concat("clientControlLoop, Socket exception caught:\n", e->Message, "\n\nStack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
 	}
 	catch (System::ObjectDisposedException^ e) 
 	{
 		/** Client application may have closed gracefully but not warned us, or
 		 *  our connection has been closed by the ClientManager
 		 **/
-		LogManager::write(System::String::Concat("clientControlLoop, Object Disposed exception caught:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
+		LogManager::write(System::String::Concat("clientControlLoop, Object Disposed exception caught:\n", e->Message, "\n\nStack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
 	}
 	catch (System::InvalidOperationException^ e) 
 	{
 		/** Bad programming and poor exception handling might get us here **/
-		LogManager::write(System::String::Concat("clientControlLoop, Invalid operation exception caught:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
+		LogManager::write(System::String::Concat("clientControlLoop, Invalid operation exception caught:\n", e->Message, "\n\nStack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
 	}
 	catch (System::Threading::AbandonedMutexException^ ame)
 	{
