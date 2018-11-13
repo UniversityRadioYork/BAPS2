@@ -482,7 +482,7 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 			LogManager::write("Recieved BAPSNET_QUIT, restarting.", LOG_INFO, LOG_SYSTEM);
 			Command cmd = BAPSNET_SYSTEM | BAPSNET_QUIT;
 			/* Send 0 to signify this is an expected quit. */
-			ClientManager::broadcast(cmd, (float)0);
+			ClientManager::broadcast(cmd, (u32int) 0);
 			dead = true;
 			break;
 		}

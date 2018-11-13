@@ -99,9 +99,15 @@ void BAPSServerAssembly::Utility::start()
 
 void BAPSServerAssembly::Utility::stop()
 {
-	Command cmd = BAPSNET_SYSTEM | BAPSNET_QUIT;
-	/* Send 1 to signify this is an unexpected quit. */
-	ClientManager::broadcast(cmd, (float)1);
+	try {
+		Command cmd = BAPSNET_SYSTEM | BAPSNET_QUIT;
+		/* Send 1 to signify this is an unexpected quit. */
+		ClientManager::broadcast(cmd,(u32int) 1);
+	}
+	catch (System::Exception^) {
+		// If we couldn't send a message, not the end of the world.
+		;
+	}
 	BAPSController::closeBAPSController();
 	ClientManager::closeClientManager();
 	AsyncActionManager::closeAsyncActionManager();
