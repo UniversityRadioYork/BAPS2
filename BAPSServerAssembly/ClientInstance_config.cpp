@@ -96,25 +96,19 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 	{
 		/** Recheck for an updated list of audio devices plugged in. Set them for the config menu to display. **/
 		CBAPSAudioOutputDevices* devices = new CBAPSAudioOutputDevices();
-		if (devices->Initialise() == FALSE)
+		if (!devices->Initialise())
 		{
 			LogManager::write("Could not re-enumerate list of audio devices.\n", LOG_ERROR, LOG_CONFIG);
 		}
 
 		ConfigStringChoices^ deviceChoices = gcnew ConfigStringChoices();
-		int i = 0;
-		bool isDefault = true;
 
-		for (i = 0; i < devices->GetCount(); i++)
+		for (int i = 0; i < devices->GetCount(); i++)
 		{
-			if (i != 0)
-			{
-				isDefault = false;
-			}
-
+			// The first option is the default.
 			deviceChoices->add(LPCWSTRToString(devices->GetDevice(i)->GetDescription()),
 				LPCWSTRToString(devices->GetDevice(i)->GetID()),
-				isDefault);
+				i == 0);
 		}
 		safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_DEVICE])->setChoices(deviceChoices);
 	}
@@ -124,17 +118,13 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 
 		try {
 			array<System::String^>^ serialPortNames = System::IO::Ports::SerialPort::GetPortNames();
-			int i;
-			bool isDefault = true;
-			for (i = 0; i < serialPortNames->Length; i++)
+
+			for (int i = 0; i < serialPortNames->Length; i++)
 			{
-				if (i != 0)
-				{
-					isDefault = false;
-				}
+				// The first option is the default.
 				controllerPortChoices->add(serialPortNames[i],
 					serialPortNames[i],
-					isDefault);
+					i == 0);
 			}
 			safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_BAPSCONTROLLERPORT])->setChoices(controllerPortChoices);
 		}

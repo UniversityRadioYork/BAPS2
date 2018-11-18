@@ -76,8 +76,6 @@ void ConfigDialog::updateUI()
 		workings of .NET framework
 	**/
 	ops->Reverse();
-	/** The current index into the option array **/
-	int i = 0;
 
 	/** The vertical multiplier (essentially how many control have been generated into the
 		current column.
@@ -119,8 +117,8 @@ void ConfigDialog::updateUI()
 
 
 
-
-	for (i = 0; i < ops->Count; i++, yMultiplier++)
+	/** i -> The current index into the option array **/
+	for (int i = 0; i < ops->Count; i++, yMultiplier++)
 	{
 
 		splitColumn = (columnNumber < (totalColumns) && i - 1 >= columnNumber * (ops->Count / totalColumns));
