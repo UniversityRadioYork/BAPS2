@@ -1,6 +1,7 @@
 #pragma once
 
 // The options rendered in the config menu depend on this ordering.
+// Afaik these can be reordered to change the order they appear in the config menu.
 enum ConfigOption
 {
 	CONFIG_CHANNELCOUNT,
