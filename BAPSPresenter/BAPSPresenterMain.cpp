@@ -837,7 +837,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		case BAPSNET_QUIT:
 			{
 				//The server should send an int representing if this is an expected quit (0) or an exception error (1)."
-				bool expected = clientSocket->receiveB();
+				bool expected = clientSocket->receiveI();
 				sendQuit("The Server is shutting down/restarting.\n", expected);
 			}
 			break;
