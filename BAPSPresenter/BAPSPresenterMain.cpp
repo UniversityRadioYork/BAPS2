@@ -363,6 +363,9 @@ BAPSPresenterMain::~BAPSPresenterMain()
 		delete components;
 	}
 }
+/** This closes the main BAPS window (returns to login).
+	Silent is used when the server is restarting expectingly,
+	for example when restarting from config menu. **/
 void BAPSPresenterMain::quit(System::String^ description, bool silent)
 {
 	/** On Communications errors this is called to notify the user **/
@@ -834,8 +837,8 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		case BAPSNET_QUIT:
 			{
 				//The server should send an int representing if this is an expected quit (0) or an exception error (1)."
-				int expected = clientSocket->receiveI();
-				sendQuit("The Server is shutting down/restarting.\n", (expected == 0));
+				bool expected = clientSocket->receiveB();
+				sendQuit("The Server is shutting down/restarting.\n", expected);
 			}
 			break;
 		default:
