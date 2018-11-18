@@ -162,8 +162,7 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 	int count = choice->getChoiceCount();
 	ClientManager::send(this, cmd, (u32int)optionid, (u32int)count);
 	/** Loop through all the choices sending each one's description and id **/
-	int i = 0;
-	for ( i = 0 ; i < count ; i++ )
+	for (int i = 0 ; i < count ; i++ )
 	{
 		/** The MODEMASK says that this is a choice not a choice count **/
 		cmd = BAPSNET_CONFIG | BAPSNET_OPTIONCHOICE | BAPSNET_CONFIG_MODEMASK;
@@ -193,8 +192,7 @@ BEGIN_ACTION_BLOCKED3(sendOptionConfigSettings, int optionid, bool shouldBroadca
 			LogManager::write(System::String::Concat("The option controlling the indices of the folling option is set to more than 0x3f:\n", CONFIG_KEY(optionid), CONFIG_DESC(optionid)), LOG_ERROR, LOG_CONFIG);
 		}
 		/** Loop through all the indices for this option **/
-		int j = 0;
-		for (j = 0 ; j < thisOptionCount ; j++)
+		for (int j = 0 ; j < thisOptionCount ; j++)
 		{
 			/** Clear the value field **/
 			cmd &= ~BAPSNET_CONFIG_VALUEMASK;
