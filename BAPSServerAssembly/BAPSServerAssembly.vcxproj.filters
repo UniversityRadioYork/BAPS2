@@ -241,4 +241,7 @@
   <ItemGroup>
     <Xml Include="serverstate.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Release\BAPSControllerAssembly.dll" />
+  </ItemGroup>
 </Project>

@@ -1,3 +1,12 @@
+***BUILD INSTRUCTIONS FOR VS2017***
+
+The issues below should now be gone, since BAPS.lib has been integrated back into the regular project file.
+
+The custom diaglogs for BAPSSetup are no longer required.
+
+To build BAPSSetup, you will need to install the following (or equivalent for your version of VS):
+https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.MicrosoftVisualStudio2017InstallerProjects
+
 ***BUILD INSTRUCTIONS FOR VS2008 On 64-BIT MACHINES***
 
 
@@ -16,6 +25,8 @@ Actually worked on 06/May/2015
 
 -- BAPSSetup fails to build
 
+EDIT V2.7.1 (November 2018)- This dialog is replaced with standard radio button templates, this should no longer be required.
+
 This seems to use some setup dialogue frames etc - BAPS has a custom one which it used to copy into
 Program Files (!).
 In the post WinXP days, this isn't really feasible so it must be put there manually.
@@ -23,6 +34,3 @@ In the post WinXP days, this isn't really feasible so it must be put there manua
 The file VsdServiceCredentials1Dlg.wid needs copying to C:\Program Files\Microsoft Visual Studio 9.0\Common7\Tools\Deployment\VsdDialogs\0 and 1033.
 The entire (yes, entire) VsdDialogs path may also need
  copying to the not-x86 path. Maybe the other way around.
-
-To use the BAPSSetupV2, you will need to install the follow (or equivalent for your version of VS):
-https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.MicrosoftVisualStudio2017InstallerProjects
