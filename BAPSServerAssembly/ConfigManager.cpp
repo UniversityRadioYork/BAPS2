@@ -139,12 +139,13 @@ void ConfigManager::initConfigManager()
 	try {
 		array<System::String^>^ serialPortNames = System::IO::Ports::SerialPort::GetPortNames();
 
+		/* Add a default option of None, since empty default config options break stuff. */
+		controllerPortChoices->add("None", "None", true);
 		for (int i = 0; i < serialPortNames->Length; i++)
 		{
-			// The first option is the default.
 			controllerPortChoices->add(serialPortNames[i],
 				serialPortNames[i],
-				i == 0);
+				false);
 		}
 	}
 	catch (System::Exception^ e) {
