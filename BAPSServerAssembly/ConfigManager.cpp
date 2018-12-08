@@ -168,7 +168,7 @@ void ConfigManager::initConfigManager()
 	configDescriptions[CONFIG_BAPSCONTROLLERENABLED] = gcnew ConfigDescriptorIntChoice("BAPSControllerEnabled", "COM Controller Enabled", noYesChoices, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSCONTROLLERPORT] = gcnew ConfigDescriptorStringChoice("BAPSControllerPort", "COM Controller Port", controllerPortChoices, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSControllerButtonCount", "COM Controller Button Count", 6, CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCODE] = gcnew ConfigDescriptorInt("BAPSControllerButtonCode", CONFIG_BAPSCONTROLLERBUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLERBUTTONCODE] = gcnew ConfigDescriptorInt("BAPSControllerButtonCode", CONFIG_BAPSCONTROLLERBUTTONCOUNT, "Button Code", 1, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSPADDLEMODE] = gcnew ConfigDescriptorIntChoice("BAPSPaddleMode", "COM Controller Paddle Mode", paddleChoices, CA_ANY);
 
 
@@ -180,7 +180,7 @@ void ConfigManager::initConfigManager()
 	configDescriptions[CONFIG_BAPSCONTROLLER2SERIAL] = gcnew ConfigDescriptorStringChoice("BAPSController2Serial", CONFIG_BAPSCONTROLLER2DEVICECOUNT, "Serial", bapsController2Choices, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSCONTROLLER2OFFSET] = gcnew ConfigDescriptorInt("BAPSController2Offset", CONFIG_BAPSCONTROLLER2DEVICECOUNT, "Signal Offset", 0, CA_SU_ONLY);
 	configDescriptions[CONFIG_BAPSCONTROLLER2BUTTONCOUNT] = gcnew ConfigDescriptorInt("BAPSController2ButtonCount", "USB Controller Button Count", 6, CA_SU_ONLY);
-	configDescriptions[CONFIG_BAPSCONTROLLER2BUTTONCODE] = gcnew ConfigDescriptorInt("BAPSController2ButtonCode", CONFIG_BAPSCONTROLLER2BUTTONCOUNT, "Button Code", 255, CA_SU_ONLY);
+	configDescriptions[CONFIG_BAPSCONTROLLER2BUTTONCODE] = gcnew ConfigDescriptorInt("BAPSController2ButtonCode", CONFIG_BAPSCONTROLLER2BUTTONCOUNT, "Button Code", 1, CA_SU_ONLY);
 
 	configErrors = gcnew array<System::String^>(CE_LASTERROR);
 	configErrors[CE_NOERROR] = "No error";
