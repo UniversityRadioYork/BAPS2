@@ -87,13 +87,13 @@ void BAPSServerAssembly::Utility::start()
 	{
 		LogManager::emergency(System::String::Concat("Initialization error:\n", bte->Message, "\n\nStack Trace:\n",bte->StackTrace));
 		stop();
-		exit(1);
+		System::Environment::Exit(1);
 	}
 	catch (System::Exception^ e)
 	{
 		LogManager::emergency(System::String::Concat("Received unexpected exception, terminating immediately:\n", e->Message, "\n\nStack Trace:\n",e->StackTrace));
 		stop();
-		exit(2);
+		System::Environment::Exit(2);
 	}
 }
 

@@ -484,6 +484,7 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 			/* Send 0 to signify this is an expected quit. */
 			ClientManager::broadcast(cmd, (u32int) 0);
 			dead = true;
+			throw gcnew BAPSTerminateException("Server restarting. Triggered from BAPSNet.");
 			break;
 		}
 		default:
