@@ -207,6 +207,13 @@ namespace BAPSServerAssembly
 				{
 					System::Byte data = serialPort->ReadByte();
 					handled=false;
+					if (data == 255)
+					{
+						// Keepalive, used for the controller to know that BAPS is alive and talking over serial.
+						array<System::Byte>^ response = gcnew array<System::Byte>(1);
+						response[0] = 255;
+						serialPort->Write(response, 0, 1);
+					}
 					if (mode == CONFIG_CONTROLLER_PLAYBACK)
 					{
 						if (buttonCount>0 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 0))
