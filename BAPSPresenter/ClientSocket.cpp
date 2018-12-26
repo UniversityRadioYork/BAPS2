@@ -36,13 +36,13 @@ ClientSocket::~ClientSocket()
 
 void ClientSocket::send(System::String^ s)
 {
-	/** Strings are a combination of integer length and then ascii data **/
-	send(static_cast<u32int>(System::Text::Encoding::ASCII->GetByteCount(s)));
-	send(System::Text::Encoding::ASCII->GetBytes(s));
+	/** Strings are a combination of integer length and then UTF8 data **/
+	send(static_cast<u32int>(System::Text::Encoding::UTF8->GetByteCount(s)));
+	send(System::Text::Encoding::UTF8->GetBytes(s));
 }
 System::String^ ClientSocket::receiveS()
 {
-	/** As before we find out how long the string is first and then grab the ascii data **/
+	/** As before we find out how long the string is first and then grab the UTF8 data **/
 	int stringLength = receiveI();
 	System::String^ theString= "";
 
@@ -53,7 +53,7 @@ System::String^ ClientSocket::receiveS()
 		{
 			toReceive = MAX_RECEIVE_BUFFER;
 		}
-		theString = System::String::Concat(theString, System::Text::Encoding::ASCII->GetString(receive(toReceive), 0, toReceive));
+		theString = System::String::Concat(theString, System::Text::Encoding::UTF8->GetString(receive(toReceive), 0, toReceive));
 		stringLength -= toReceive;
 	}
 	return theString;

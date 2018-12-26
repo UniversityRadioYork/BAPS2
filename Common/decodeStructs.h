@@ -183,4 +183,5 @@ typedef unsigned short Command;
 										//   [VALUE-1] scroll up
 #define BAPSNET_TEXTSIZE		(14<<8) //S- [VALUE-0] text smaller
 										//	 [VALUE-1] text bigger
+#define BAPSNET_QUIT			(15<<8) //(no args)
 #endif // __DECODESTRUCTS_H__

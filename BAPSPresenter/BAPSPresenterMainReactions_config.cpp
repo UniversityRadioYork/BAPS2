@@ -158,7 +158,7 @@ void BAPSPresenterMain::processConfigSetting(Command cmdReceived, int optionid, 
 		break;
 	default:
 		{
-			sendNotifyCommsError("Invalid type received in processConfigSetting");
+			sendQuit("Invalid type received in processConfigSetting", false);
 		}
 		break;
 	}

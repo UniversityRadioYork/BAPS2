@@ -17,13 +17,14 @@ namespace BAPSServerAssembly
 			{
 				try
 				{
-					serialPort = gcnew System::IO::Ports::SerialPort("COM1", 2400, System::IO::Ports::Parity::None,8,System::IO::Ports::StopBits::One);
+					serialPort = gcnew System::IO::Ports::SerialPort(CONFIG_GETSTR(CONFIG_BAPSCONTROLLERPORT), 2400, System::IO::Ports::Parity::None,8,System::IO::Ports::StopBits::One);
 					serialPort->Open();
 					serialPort->DataReceived += gcnew System::IO::Ports::SerialDataReceivedEventHandler(&BAPSController::handleData);
 				}
 				catch (System::Exception^ e)
 				{
-					throw gcnew BAPSTerminateException(System::String::Concat("Failed to start BAPS Controller:\n", e->Message, "Stack Trace:\n",e->StackTrace));
+					CONFIG_SET(CONFIG_BAPSCONTROLLERENABLED, CONFIG_NO_VALUE);
+					LogManager::write(System::String::Concat("Failed to start BAPS Serial Controller:\n", e->Message, "Stack Trace:\n", e->StackTrace), LOG_INFO, LOG_COMMS);
 				}
 			}
 
@@ -206,6 +207,13 @@ namespace BAPSServerAssembly
 				{
 					System::Byte data = serialPort->ReadByte();
 					handled=false;
+					if (data == 255)
+					{
+						// Keepalive, used for the controller to know that BAPS is alive and talking over serial.
+						array<System::Byte>^ response = gcnew array<System::Byte>(1);
+						response[0] = 255;
+						serialPort->Write(response, 0, 1);
+					}
 					if (mode == CONFIG_CONTROLLER_PLAYBACK)
 					{
 						if (buttonCount>0 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 0))

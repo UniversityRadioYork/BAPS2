@@ -20,7 +20,7 @@ namespace BAPSServerAssembly
 		/** Destroy the socket so that it doesn't block threads from exiting **/
 		~ServerSocket();
 
-		/** Strings are sent as an integer representing length and the ascii data **/
+		/** Strings are sent as an integer representing length and the UTF8 data **/
 		void send(const System::String^ s);
 		System::String^ receiveS();
 

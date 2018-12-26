@@ -106,13 +106,10 @@ bool ClientInstance::searchMusicLib(System::String^ artist, System::String^ titl
 		System::String^ errorMessages = "PGSQL ERROR:\n";
 		/** Get all the errors returned from the db server **/
 		errorMessages = System::String::Concat(
-						errorMessages,
-						"Message: \n", e->Message, "\n",
-						"Error SQL: \n", e->ErrorSql, "\n",
-						"Error Position: \n", e->Position, "\n",
-						"Detail: \n", e->Detail, "\n",
-						"Hint: \n", e->Hint, "\n",
-						"Stack Trace: \n", e->StackTrace);
+			errorMessages,
+			"Message: \n", e->Message, "\n",
+			"Error Code: \n", e->ErrorCode, "\n",
+			"Stack Trace: \n", e->StackTrace);
 
 		/** Send/Log an error and quit the function - **/
 		LogManager::write(errorMessages, LOG_ERROR, LOG_DATABASE);
@@ -341,13 +338,10 @@ bool ClientInstance::executeQuery(System::String^ sql)
 		System::String^ errorMessages = "PGSQL ERROR:\n";
 		/** Get all the errors returned from the db server **/
 		errorMessages = System::String::Concat(
-						errorMessages,
-						"Message: \n", e->Message, "\n",
-						"Error SQL: \n", e->ErrorSql, "\n",
-						"Error Position: \n", e->Position, "\n",
-						"Detail: \n", e->Detail, "\n",
-						"Hint: \n", e->Hint, "\n",
-						"Stack Trace: \n", e->StackTrace);
+			errorMessages,
+			"Message: \n", e->Message, "\n",
+			"Error Code: \n", e->ErrorCode, "\n",
+			"Stack Trace: \n", e->StackTrace);
 		/** Send/Log an error and quit the function - **/
 		LogManager::write(errorMessages, LOG_ERROR, LOG_DATABASE);
 		Command cmd = BAPSNET_DATABASE | BAPSNET_BAPSDBERROR | 1;

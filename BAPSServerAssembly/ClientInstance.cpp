@@ -168,19 +168,19 @@ void ClientInstance::clientControlLoop()
 	catch (System::Net::Sockets::SocketException^ e) 
 	{
 		/** Client application may have abruptly disappeared **/
-		LogManager::write(System::String::Concat("clientControlLoop, Socket exception caught:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
+		LogManager::write(System::String::Concat("clientControlLoop, Socket exception caught:\n", e->Message, "\n\nStack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
 	}
 	catch (System::ObjectDisposedException^ e) 
 	{
 		/** Client application may have closed gracefully but not warned us, or
 		 *  our connection has been closed by the ClientManager
 		 **/
-		LogManager::write(System::String::Concat("clientControlLoop, Object Disposed exception caught:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
+		LogManager::write(System::String::Concat("clientControlLoop, Object Disposed exception caught:\n", e->Message, "\n\nStack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
 	}
 	catch (System::InvalidOperationException^ e) 
 	{
 		/** Bad programming and poor exception handling might get us here **/
-		LogManager::write(System::String::Concat("clientControlLoop, Invalid operation exception caught:\n", e->Message, "Stack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
+		LogManager::write(System::String::Concat("clientControlLoop, Invalid operation exception caught:\n", e->Message, "\n\nStack Trace:\n",e->StackTrace), LOG_ERROR, LOG_COMMS);
 	}
 	catch (System::Threading::AbandonedMutexException^ ame)
 	{
@@ -461,7 +461,7 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 			break;
 		case BAPSNET_VERSION:
 			{
-				System::String^ author = "Matthew Fortune\nAudio Library: Dan Lambert";
+				System::String^ author = "Matthew Fortune\n\nAudio Library: Dan Lambert\n\nMaintained By:\nMatthew Stratford (2018)\n";
 				System::String^ version = System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version->ToString();
 				Command cmd = BAPSNET_SYSTEM | BAPSNET_VERSION;
 				ClientManager::send(this, cmd, version, __DATE__, __TIME__, author);
@@ -476,6 +476,17 @@ void ClientInstance::decodeCommand(Command cmdReceived)
 				ClientManager::send(this, cmd, (u32int)result);
 			}
 			break;
+		case BAPSNET_QUIT:
+		{
+			/** Used to restart the server from the config menu **/
+			LogManager::write("Recieved BAPSNET_QUIT, restarting.", LOG_INFO, LOG_SYSTEM);
+			Command cmd = BAPSNET_SYSTEM | BAPSNET_QUIT;
+			/* Send 0 to signify this is an expected quit. */
+			ClientManager::broadcast(cmd, (u32int) 0);
+			dead = true;
+			throw gcnew BAPSTerminateException("Server restarting. Triggered from BAPSNet.");
+			break;
+		}
 		default:
 			LogManager::write(System::String::Concat("Received unknown Command, Possibly a deformed SYSTEM: ", cmdReceived.ToString()), LOG_ERROR, LOG_COMMS);
 			dead = true;

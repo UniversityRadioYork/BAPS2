@@ -170,7 +170,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	volumeBar[2]       = Channel2VolumeBar;
 	Channel2VolumeBar->Tag = number2;*/
 
-	channelPlay			= gcnew array<Windows::Forms::Button^>(3);
+	channelPlay			= gcnew array<System::Windows::Forms::Button^>(3);
 	channelPlay[0]		= Channel0Play;
 	channelPlay[0]->Tag	= gcnew ChannelOperationLookup(0, BAPSNET_PLAY);
 	channelPlay[1]		= Channel1Play;
@@ -178,7 +178,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	channelPlay[2]		= Channel2Play;
 	channelPlay[2]->Tag	= gcnew ChannelOperationLookup(2, BAPSNET_PLAY);
 
-	channelPause		= gcnew array<Windows::Forms::Button^>(3);
+	channelPause		= gcnew array<System::Windows::Forms::Button^>(3);
 	channelPause[0]		= Channel0Pause;
 	channelPause[0]->Tag	= gcnew ChannelOperationLookup(0, BAPSNET_PAUSE);
 	channelPause[1]		= Channel1Pause;
@@ -186,7 +186,7 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	channelPause[2]		= Channel2Pause;
 	channelPause[2]->Tag	= gcnew ChannelOperationLookup(2, BAPSNET_PAUSE);
 
-	channelStop			= gcnew array<Windows::Forms::Button^>(3);
+	channelStop			= gcnew array<System::Windows::Forms::Button^>(3);
 	channelStop[0]		= Channel0Stop;
 	channelStop[0]->Tag	= gcnew ChannelOperationLookup(0, BAPSNET_STOP);
 	channelStop[1]		= Channel1Stop;
@@ -304,8 +304,8 @@ BAPSPresenterMain::BAPSPresenterMain(void)
 	/*bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
 	showVolumeControls(showVolume);*/
 
-	/** Enable or disable the timers depending on the config setting **/
-	bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "No"),"Yes") == 0);
+	/** Enable or disable the timers depending on the config setting, enable on default when no registry config value set. **/
+	bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "Yes"),"Yes") == 0);
 	enableTimerControls(enableTimers);
 
 	/** Start the receive thread so we are ready for the autoupdate messages **/ 
@@ -363,22 +363,27 @@ BAPSPresenterMain::~BAPSPresenterMain()
 		delete components;
 	}
 }
-void BAPSPresenterMain::notifyCommsError(System::String^ description)
+/** This closes the main BAPS window (returns to login).
+	Silent is used when the server is restarting expectingly,
+	for example when restarting from config menu. **/
+void BAPSPresenterMain::quit(System::String^ description, bool silent)
 {
 	/** On Communications errors this is called to notify the user **/
 	/** Only current option is to die **/
 	dead = true;
-	System::Windows::Forms::MessageBox::Show(System::String::Concat(description, "\nClick OK to restart the Presenter Interface.\nPlease notify support that an error occurred."), "System error:", System::Windows::Forms::MessageBoxButtons::OK);
-	logError(description);
+	if (!silent) {
+		System::Windows::Forms::MessageBox::Show(System::String::Concat(description, "\nClick OK to restart the Presenter Interface.\nPlease notify support that an error occurred."), "System error:", System::Windows::Forms::MessageBoxButtons::OK);
+		logError(description);
+	}
 	crashed = true;
 	this->Close();
 }
-void BAPSPresenterMain::sendNotifyCommsError(System::String^ description)
+void BAPSPresenterMain::sendQuit(System::String^ description, bool silent)
 {
 	if (!crashed)
 	{
-		MethodInvokerStr^ mi = gcnew MethodInvokerStr(this, &BAPSPresenterMain::notifyCommsError);
-		array<System::Object^>^ dd = gcnew array<System::Object^>(1) {description};
+		MethodInvokerStrBool^ mi = gcnew MethodInvokerStrBool(this, &BAPSPresenterMain::quit);
+		array<System::Object^>^ dd = gcnew array<System::Object^>(2) {description, silent};
 		this->BeginInvoke(mi,dd);
 	}
 }
@@ -400,7 +405,7 @@ void BAPSPresenterMain::receiverFunc()
 		if (!dead)
 		{
 			/** If we receive an exception we assume it to be a bad thing **/
-			sendNotifyCommsError(System::String::Concat("Receiver Loop Failed, server may have died:\n", e->Message, "\nStack Trace:\n", e->StackTrace));
+			sendQuit(System::String::Concat("Receiver Loop Failed, server may have died:\n", e->Message, "\n\nStack Trace:\n", e->StackTrace), false);
 		}
 	}
 #endif
@@ -507,7 +512,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed PLAYBACK.\n");
+				sendQuit("Received unknown command, possibly a malformed PLAYBACK.\n", false);
 			}
 			break;
 		}
@@ -557,7 +562,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed PLAYLIST.\n");
+				sendQuit("Received unknown command, possibly a malformed PLAYLIST.\n", false);
 			}
 			break;
 		}
@@ -621,7 +626,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed DATABASE.\n");
+				sendQuit("Received unknown command, possibly a malformed DATABASE.\n", false);
 			}
 			break;
 		}
@@ -744,7 +749,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed CONFIG.\n");
+				sendQuit("Received unknown command, possibly a malformed CONFIG.\n", false);
 			}
 			break;
 		}
@@ -829,10 +834,17 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 				this->Invoke(mi, dd);
 			}
 			break;
+		case BAPSNET_QUIT:
+			{
+				//The server should send an int representing if this is an expected quit (0) or an exception error (1)."
+				bool expected = clientSocket->receiveI();
+				sendQuit("The Server is shutting down/restarting.\n", expected);
+			}
+			break;
 		default:
 			{
 				/** ERROR **/
-				sendNotifyCommsError("Received unknown command, possibly a malformed SYSTEM.\n");
+				sendQuit("Received unknown command, possibly a malformed SYSTEM.\n", false);
 			}
 			break;
 		}
@@ -840,7 +852,7 @@ void BAPSPresenterMain::decodeCommand(Command cmdReceived)
 	default:
 		{
 			/** ERROR **/
-			sendNotifyCommsError("Received unknown command.\n");
+			sendQuit("Received unknown command.\n", false);
 		}
 		break;
 	}
@@ -880,7 +892,7 @@ void BAPSPresenterMain::senderFunc()
 		if (!dead)
 		{
 			/** If we receive an exception we assume it to be a bad thing **/
-			sendNotifyCommsError(System::String::Concat("Sender Loop Failed, server may have died:\n", e->Message, "\nStack Trace:\n", e->StackTrace));
+			sendQuit(System::String::Concat("Sender Loop Failed, server may have died:\n", e->Message, "\n\nStack Trace:\n", e->StackTrace), false);
 		}
 	}
 #endif

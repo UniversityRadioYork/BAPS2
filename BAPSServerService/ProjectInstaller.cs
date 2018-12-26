@@ -207,39 +207,33 @@ namespace BAPSServerService
         {
             if (!Context.Parameters.ContainsKey("CredentialType"))
             {
+                /** Just let windows bring up a popup for itself. **/
                 this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.User;
-                return;
-            }
-            if (Context.Parameters["CredentialType"].Equals("Predefined"))
-            {
-                switch (Context.Parameters["PredefinedAccount"])
-                {
-                    case "Network Service":
-                        this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.NetworkService;
-                        break;
-                    case "Local Service":
-                        this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalService;
-                        break;
-                    case "Local System":
-                        this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
-                        break;
-                }
-                this.serviceProcessInstaller1.Username = "";
-                this.serviceProcessInstaller1.Password = "";
             }
             else
             {
-                this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.User;
-                if (!Context.Parameters["Passwd"].Equals(Context.Parameters["PasswdConf"]))
+                if (!Context.Parameters["CredentialType"].Equals("Custom User"))
                 {
-                    throw new System.Exception("Passwords do not match");
+                    switch (Context.Parameters["CredentialType"])
+                    {
+                        case "Network Service":
+                            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.NetworkService;
+                            break;
+                        case "Local Service":
+                            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalService;
+                            break;
+                        case "Local System":
+                            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
+                            break;
+                    }
+                    this.serviceProcessInstaller1.Username = "";
+                    this.serviceProcessInstaller1.Password = "";
                 }
-                if (!Context.Parameters["Uname"].Contains("\\"))
+                else
                 {
-                    Context.Parameters["Uname"] = System.String.Concat(".\\", Context.Parameters["Uname"]);
+                    /** Just let windows bring up a popup for itself. **/
+                    this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.User;
                 }
-                this.serviceProcessInstaller1.Username = Context.Parameters["Uname"];
-                this.serviceProcessInstaller1.Password = Context.Parameters["Passwd"];
             }
         }
         public override void Commit(System.Collections.IDictionary savedState)

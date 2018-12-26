@@ -27,12 +27,12 @@ using namespace BAPSPresenter;
 ref struct IndexControlsLookup
 {
 	System::Windows::Forms::DataGrid^ dg;
-	System::Data::DataTable^ dt;
-	IndexControlsLookup(System::Windows::Forms::DataGrid^ _dg,
-						System::Data::DataTable^ _dt)
-						: dg(_dg),
-						  dt(_dt)
-	{}
+System::Data::DataTable^ dt;
+IndexControlsLookup(System::Windows::Forms::DataGrid^ _dg,
+	System::Data::DataTable^ _dt)
+	: dg(_dg),
+	dt(_dt)
+{}
 };
 
 void ConfigDialog::setNumberOfOptions(int _numberOfOptions)
@@ -43,7 +43,7 @@ void ConfigDialog::setNumberOfOptions(int _numberOfOptions)
 	/** Inform user they can't edit any config **/
 	if (numberOfOptions == 0)
 	{
-		System::Windows::Forms::MessageBox::Show("There are no options which you are able to configure", "Error:", System::Windows::Forms::MessageBoxButtons::OK);
+		System::Windows::Forms::MessageBox::Show("There are no options which you are able to configure.", "Error:", System::Windows::Forms::MessageBoxButtons::OK);
 		this->Close();
 	}
 }
@@ -76,12 +76,7 @@ void ConfigDialog::updateUI()
 		workings of .NET framework
 	**/
 	ops->Reverse();
-	/** The current index into the option array **/
-	int i = 0;
-	/** Horizontal offset from the fixed start coordinarte **/
-	int xOffset = 0;
-	/** Vertical offset from the fixed start coordinarte **/
-	int yOffset = 16;
+
 	/** The vertical multiplier (essentially how many control have been generated into the
 		current column.
 	**/
@@ -90,34 +85,79 @@ void ConfigDialog::updateUI()
 	int columnNumber = 1;
 	/** The total number of columns **/
 	const int totalColumns = 3;
+
+	const int columnTopBottomPadding = 16;
+	const int columnWidth = 350;
+	const int columnLRPadding = 10;
+
+	const int datagridHeight = 120;
+	const int datagridRowHeight = 25;
+
+	const int labelWidth = 160;
+	const int labelHeight = 20;
+	const int controlHeight = 20;
+	const int controlWidth = columnWidth - labelWidth;
+	const int rowBottomPadding = 10;
+	const int rowHeight = controlHeight + rowBottomPadding;
+
+	/** Vertical offset from the fixed start coordinarte **/
+	int yOffset = columnTopBottomPadding;
+	/** Horizontal offset from the fixed start coordinarte **/
+	int xOffset = columnLRPadding;
+
+	/** Decide if now is the time to switch to a new column. **/
+	bool splitColumn;
+
 	/** Lets save some time and wait until the end to draw all this! **/
 	this->SuspendLayout();
 	/** Increment the index and the multiplier each iteration (so that the multiplier
 		can reset at start of column 2
 	**/
-	for (i = 0 ; i < ops->Count ; i++, yMultiplier++)
+
+
+
+
+	/** i -> The current index into the option array **/
+	for (int i = 0; i < ops->Count; i++, yMultiplier++)
 	{
-		/** When half the controls have been generated move onto the second column
-			WORK NEEDED: a better method of splitting controls into 2 columns, half
-			the options != half space on screen due to indexed options.
+
+		splitColumn = (columnNumber < (totalColumns) && i - 1 >= columnNumber * (ops->Count / totalColumns));
+		/**
+		 * If splitting to new column or if we've reached the end of the last column
+		 * check if we need to make the window height larger based on the last row's contents
 		**/
-		if (columnNumber < (totalColumns+1) && i-1 >= columnNumber*(ops->Count/totalColumns))
+		if (splitColumn || (i == ops->Count - 1))
 		{
 			/** Set the form height to the height of the first column **/
-			this->Height = (28+yOffset+(24*(yMultiplier)) + status->Height + 32);
+			int newHeight = ((rowHeight *(yMultiplier)) + status->Height + (2 * columnTopBottomPadding));
+			if (newHeight > this->Height) {
+				this->Height = newHeight;
+			}
+		}
+		/** When half the controls have been generated move onto the second column
+			WORK NEEDED: a better method of splitting controls into columns, eg. half
+			the options != half space on screen due to indexed options.
+		**/
+		if (splitColumn)
+		{
+			
 			/** Place the statusBar correctly after resize **/
-			status->Top = yOffset+(24*(yMultiplier))+32;
-			/** Move the save and cancel buttons to a sensible place **/
-			saveButton->Top = yOffset+(24*(yMultiplier))+4;
-			cancelButton->Top = yOffset+(24*(yMultiplier))+4;
+			status->Top = yOffset + (rowHeight *(yMultiplier)) + columnTopBottomPadding;
+
+			/** Move the buttons to a sensible place **/
+			int buttonTopOffset		= yOffset + (rowHeight *(yMultiplier)) + (2 * columnTopBottomPadding);
+			saveButton->Location	= System::Drawing::Point(columnLRPadding, buttonTopOffset);
+			cancelButton->Location	= System::Drawing::Point(saveButton->Right + 10, buttonTopOffset);
+			restartButton->Location	= System::Drawing::Point(cancelButton->Right + 10, buttonTopOffset);
+
 			/** New horizontal offset to represent next column **/
-			xOffset = columnNumber*328;
+			xOffset = (columnNumber * (columnWidth + columnLRPadding)) + columnLRPadding;
 			/** Back to the top row **/
 			yMultiplier = 0;
 			/** We are now on the next **/
 			columnNumber++;
 			/** Set the offset to the same value as originally **/
-			yOffset = 16;
+			yOffset = columnTopBottomPadding;
 		}
 		/** Get the current option **/
 		option = static_cast<ConfigOptionInfo^>(ops[i]);
@@ -145,14 +185,13 @@ void ConfigDialog::updateUI()
 				dg->DataMember = "";
 				dg->HeaderForeColor = System::Drawing::SystemColors::ControlText;
 				/** Use the horizontal and vertical attributes to place the control correctly **/
-				dg->Location = System::Drawing::Point(16+xOffset, yOffset+(24*yMultiplier));
+				dg->Location = System::Drawing::Point(xOffset, yOffset + (rowHeight * yMultiplier));
 				/** The control refers to the group of options and is so named **/
 				dg->Name = System::String::Concat("groupOption", option->getGroupid().ToString());
-				/** Control is 64 px high **/
-				int height = 64;
-				dg->Size = System::Drawing::Size(296, height);
-				/** WORK NEEDED: why do we subtract 20 first! **/
-				yOffset += (height-20);
+				/** Set the size of the entire grid. **/
+				dg->Size = System::Drawing::Size(columnWidth, datagridHeight);
+				/** Account for the size of the datagrid, so that the next control boxes don't draw ontop of it **/
+				yOffset += datagridHeight + rowBottomPadding - rowHeight;
 				/** WORK NEEDED: tabindex counter **/
 				dg->TabIndex = 2;
 				dg->TableStyles->Add(dgts);
@@ -169,6 +208,8 @@ void ConfigDialog::updateUI()
 
 				/** Create a datatable to hold all the info for this set of options **/
 				dt = gcnew System::Data::DataTable();
+
+
 				/** Add an index column so that visually we can see which index we are editing **/
 				dt->Columns->Add("index", System::Type::GetType("System.Int32"));
 				dt->Columns["index"]->ReadOnly = true;
@@ -186,6 +227,7 @@ void ConfigDialog::updateUI()
 					rows are deleted or created by altering the value of the option controlling
 					the number of indices 
 				**/
+
 				System::Data::DataView^ dv = gcnew System::Data::DataView(dt);
 				dv->AllowNew = false;
 				dv->AllowDelete = false;
@@ -198,13 +240,13 @@ void ConfigDialog::updateUI()
 			else
 			{
 				/** Get the datatable and the grid out of the cache and effectively remove an item
-					from the column by backing up the vertical offset by 24 (the same value as
+					from the column by backing up the vertical offset by the row height (the same value as
 					the multiplier's multiplicand)
 				**/
 				IndexControlsLookup^ icl = static_cast<IndexControlsLookup^>(indexControls[option->getGroupid()]);
 				dt = icl->dt;
 				dg = icl->dg;
-				yOffset -= 24;
+				yOffset -= rowHeight;
 			}
 			/** Each option type has to be treated differently as it is stored differently in the datatable **/
 			switch (option->getType())
@@ -221,7 +263,6 @@ void ConfigDialog::updateUI()
 					**/
 					tbc->HeaderText = option->getDescription();
 					tbc->MappingName = option->getDescription();
-					tbc->Width = 200;
 					dg->TableStyles[0]->GridColumnStyles->Add(tbc);
 				}
 				break;
@@ -235,7 +276,6 @@ void ConfigDialog::updateUI()
 					/** Same rules as above **/
 					tbc->HeaderText = option->getDescription();
 					tbc->MappingName = option->getDescription();
-					tbc->Width = 200;
 					dg->TableStyles[0]->GridColumnStyles->Add(tbc);
 				}
 				break;
@@ -267,9 +307,9 @@ void ConfigDialog::updateUI()
 			/** The non indexed options have labels to describe them **/
 			lbl = gcnew System::Windows::Forms::Label();
 			/** Place the label according to the horizontal and vertical rules **/
-			lbl->Location = System::Drawing::Point(16+xOffset, yOffset+(24*yMultiplier));
+			lbl->Location = System::Drawing::Point(xOffset, yOffset+((controlHeight + rowBottomPadding) * yMultiplier));
 			lbl->Name = System::String::Concat("optionLabel", option->getOptionid().ToString());
-			lbl->Size = System::Drawing::Size(192, 20);
+			lbl->Size = System::Drawing::Size(labelWidth, labelHeight);
 			lbl->TabStop = false;
 			/** The label contains the option description **/
 			lbl->Text = option->getDescription();
@@ -288,9 +328,9 @@ void ConfigDialog::updateUI()
 					**/
 					tb = gcnew System::Windows::Forms::TextBox();
 					/** Place the textbox according to the horizontal and vertical rules **/
-					tb->Location = System::Drawing::Point(216+xOffset, yOffset+(24*yMultiplier));
+					tb->Location = System::Drawing::Point(labelWidth + xOffset, yOffset + ((controlHeight + rowBottomPadding) * yMultiplier));
 					tb->Name = System::String::Concat("optionBox", option->getOptionid().ToString());
-					tb->Size = System::Drawing::Size(96, 20);
+					tb->Size = System::Drawing::Size(controlWidth, controlHeight);
 					/** WORK NEEDED: tab indices **/
 					tb->TabIndex = option->getOptionid();
 					/** Start with the control disabled and with set-me as its text to show it
@@ -310,9 +350,9 @@ void ConfigDialog::updateUI()
 				{
 					cb = gcnew System::Windows::Forms::ComboBox();
 					/** Place the textbox according to the horizontal and vertical rules **/
-					cb->Location = System::Drawing::Point(216+xOffset, yOffset+(24*yMultiplier));
+					cb->Location = System::Drawing::Point(labelWidth + xOffset, yOffset + ((controlHeight + rowBottomPadding) * yMultiplier));
 					cb->Name = System::String::Concat("optionBox", option->getOptionid().ToString());
-					cb->Size = System::Drawing::Size(96, 20);
+					cb->Size = System::Drawing::Size(controlWidth, controlHeight);
 					/** WORK NEEDED: tab indices **/
 					cb->TabIndex = option->getOptionid();
 					/** The control knows what option it refers to... unused for now maybe **/
@@ -340,9 +380,10 @@ void ConfigDialog::updateUI()
 		this->Height = minHeight;
 		status->Top = yOffset+(24*(yMultiplier+1)+32);
 		saveButton->Top = yOffset+(24*(yMultiplier))+4;
+		restartButton->Top = yOffset + (24 * (yMultiplier)) + 4;
 		cancelButton->Top = yOffset+(24*(yMultiplier))+4;
 	}
-	this->Width = totalColumns*328;
+	this->Width = totalColumns * (columnWidth + 2*columnLRPadding);
 	/** Show all the controls that have just been made **/
 	this->ResumeLayout(false);
 	this->PerformLayout();
@@ -407,6 +448,13 @@ System::Void ConfigDialog::saveButton_Click(System::Object ^  sender, System::Ev
 			}
 		}
 	}
+}
+
+System::Void ConfigDialog::restartButton_Click(System::Object ^  sender, System::EventArgs ^  e) {
+	restartButton->Enabled = false;
+	Command cmd;
+	cmd = BAPSNET_SYSTEM | BAPSNET_QUIT;
+	msgQueue->Enqueue(gcnew ActionMessage(cmd));
 }
 
 void ConfigDialog::setResult(System::Object^ optionid, System::Object^ result)

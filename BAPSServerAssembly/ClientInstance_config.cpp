@@ -80,16 +80,58 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 		ConfigStringChoices^ bapsController2Choices = gcnew ConfigStringChoices();
 
 		array<System::String^>^ serials = BAPSController::getBAPSController2Serials();
-		for (int i = 0 ; i < serials->Length ; i++)
+		for (int i = 0; i < serials->Length; i++)
 		{
-			bapsController2Choices->add(serials[i], serials[i], (i==0));
+			bapsController2Choices->add(serials[i], serials[i], (i == 0));
 		}
-		bapsController2Choices->add("none","none", (serials->Length==0));
+		bapsController2Choices->add("none", "none", (serials->Length == 0));
 
 		safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_BAPSCONTROLLER2SERIAL])->setChoices(bapsController2Choices);
-		if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2DEVICECOUNT) < ((serials->Length==0)?1:serials->Length))
+		if (CONFIG_GETINT(CONFIG_BAPSCONTROLLER2DEVICECOUNT) < ((serials->Length == 0) ? 1 : serials->Length))
 		{
-			CONFIG_SET(CONFIG_BAPSCONTROLLER2DEVICECOUNT, (serials->Length==0)?1:serials->Length);
+			CONFIG_SET(CONFIG_BAPSCONTROLLER2DEVICECOUNT, (serials->Length == 0) ? 1 : serials->Length);
+		}
+	}
+	else if (optionid == CONFIG_DEVICE)
+	{
+		/** Recheck for an updated list of audio devices plugged in. Set them for the config menu to display. **/
+		CBAPSAudioOutputDevices* devices = new CBAPSAudioOutputDevices();
+		if (!devices->Initialise())
+		{
+			LogManager::write("Could not re-enumerate list of audio devices.\n", LOG_ERROR, LOG_CONFIG);
+		}
+
+		ConfigStringChoices^ deviceChoices = gcnew ConfigStringChoices();
+
+		for (int i = 0; i < devices->GetCount(); i++)
+		{
+			// The first option is the default.
+			deviceChoices->add(LPCWSTRToString(devices->GetDevice(i)->GetDescription()),
+				LPCWSTRToString(devices->GetDevice(i)->GetID()),
+				i == 0);
+		}
+		safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_DEVICE])->setChoices(deviceChoices);
+	}
+	else if (optionid == CONFIG_BAPSCONTROLLERPORT) {
+		/** Get the serial port options for BAPSController (1) **/
+		ConfigStringChoices^ controllerPortChoices = gcnew ConfigStringChoices();
+
+		try {
+			array<System::String^>^ serialPortNames = System::IO::Ports::SerialPort::GetPortNames();
+
+			/* Add a default option of None, since empty default config options break stuff. */
+			controllerPortChoices->add("None", "None", true);
+			for (int i = 0; i < serialPortNames->Length; i++)
+			{
+				controllerPortChoices->add(serialPortNames[i],
+					serialPortNames[i],
+					false);
+			}
+			safe_cast<ConfigDescriptorStringChoice^>(ConfigManager::configDescriptions[CONFIG_BAPSCONTROLLERPORT])->setChoices(controllerPortChoices);
+		}
+		catch (System::Exception^ e) {
+			CONFIG_SET(CONFIG_BAPSCONTROLLERENABLED, CONFIG_NO_VALUE);
+			LogManager::write(System::String::Concat("Failed to enumerate Serial Port Names:\n", e->Message, "Stack Trace:\n", e->StackTrace), LOG_WARNING, LOG_COMMS);
 		}
 	}
 
@@ -121,8 +163,7 @@ BEGIN_ACTION_BLOCKED1(sendAllOptionChoices, u32int optionid)
 	int count = choice->getChoiceCount();
 	ClientManager::send(this, cmd, (u32int)optionid, (u32int)count);
 	/** Loop through all the choices sending each one's description and id **/
-	int i = 0;
-	for ( i = 0 ; i < count ; i++ )
+	for (int i = 0 ; i < count ; i++ )
 	{
 		/** The MODEMASK says that this is a choice not a choice count **/
 		cmd = BAPSNET_CONFIG | BAPSNET_OPTIONCHOICE | BAPSNET_CONFIG_MODEMASK;
@@ -152,8 +193,7 @@ BEGIN_ACTION_BLOCKED3(sendOptionConfigSettings, int optionid, bool shouldBroadca
 			LogManager::write(System::String::Concat("The option controlling the indices of the folling option is set to more than 0x3f:\n", CONFIG_KEY(optionid), CONFIG_DESC(optionid)), LOG_ERROR, LOG_CONFIG);
 		}
 		/** Loop through all the indices for this option **/
-		int j = 0;
-		for (j = 0 ; j < thisOptionCount ; j++)
+		for (int j = 0 ; j < thisOptionCount ; j++)
 		{
 			/** Clear the value field **/
 			cmd &= ~BAPSNET_CONFIG_VALUEMASK;

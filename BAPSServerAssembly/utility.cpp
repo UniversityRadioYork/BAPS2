@@ -66,7 +66,7 @@ System::String^ BAPSServerAssembly::getRandomString()
 void BAPSServerAssembly::UnhandledExceptionHandler( System::Object^ sender, System::UnhandledExceptionEventArgs^ args )
 {
 	System::Exception^ e = dynamic_cast<System::Exception^>(args->ExceptionObject);
-	LogManager::emergency(System::String::Concat("Unhandled exception:\n", e->Message,"\nStack trace:\n",e->StackTrace));
+	LogManager::emergency(System::String::Concat("Unhandled exception:\n", e->Message,"\n\nStack trace:\n",e->StackTrace));
 }
 
 void BAPSServerAssembly::Utility::start()
@@ -85,20 +85,29 @@ void BAPSServerAssembly::Utility::start()
 	}
 	catch (BAPSTerminateException^ bte)
 	{
-		LogManager::emergency(System::String::Concat("Initialization error:\n", bte->Message, "Stack Trace:\n",bte->StackTrace));
+		LogManager::emergency(System::String::Concat("Initialization error:\n", bte->Message, "\n\nStack Trace:\n",bte->StackTrace));
 		stop();
-		exit(1);
+		System::Environment::Exit(1);
 	}
 	catch (System::Exception^ e)
 	{
-		LogManager::emergency(System::String::Concat("Received unexpected exception, terminating immediately:\n", e->Message, "Stack Trace:\n",e->StackTrace));
+		LogManager::emergency(System::String::Concat("Received unexpected exception, terminating immediately:\n", e->Message, "\n\nStack Trace:\n",e->StackTrace));
 		stop();
-		exit(2);
+		System::Environment::Exit(2);
 	}
 }
 
 void BAPSServerAssembly::Utility::stop()
 {
+	try {
+		Command cmd = BAPSNET_SYSTEM | BAPSNET_QUIT;
+		/* Send 1 to signify this is an unexpected quit. */
+		ClientManager::broadcast(cmd,(u32int) 1);
+	}
+	catch (System::Exception^) {
+		// If we couldn't send a message, not the end of the world.
+		;
+	}
 	BAPSController::closeBAPSController();
 	ClientManager::closeClientManager();
 	AsyncActionManager::closeAsyncActionManager();

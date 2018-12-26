@@ -32,7 +32,7 @@ namespace BAPSPresenter {
 			pCompileDateText->Text = __DATE__;
 			pCompileTimeText->Text = __TIME__;
 			pVersionText->Text = System::Reflection::Assembly::GetExecutingAssembly()->GetName()->Version->ToString();
-			pAuthorText->Text = L"Matthew Fortune\nUI based on work by:\nMark Fenton\nSimplifications by:\nAlex Williams";
+			pAuthorText->Text = L"Matthew Fortune\n\nUI based on work by:\nMark Fenton\n\nSimplifications by:\nAlex Williams\n\nMaintained By:\nMatthew Stratford (2018)\n";
 
 		}
 		void serverVersion(System::String^ version, System::String^ date, System::String^ time, System::String^ author)
@@ -73,7 +73,7 @@ namespace BAPSPresenter {
 	private: System::Windows::Forms::Label^  sCompileDateText;
 	private: System::Windows::Forms::Label^  sCompileTimeText;
 	private: System::Windows::Forms::Label^  sAuthorText;
-	private: System::Windows::Forms::Label^  mailTitle;
+	private: System::Windows::Forms::Label^  headerTitle;
 	private: System::Windows::Forms::GroupBox^  serverGroup;
 
 		System::Void About_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
@@ -109,17 +109,27 @@ namespace BAPSPresenter {
 			this->sCompileDateText = (gcnew System::Windows::Forms::Label());
 			this->sCompileTimeText = (gcnew System::Windows::Forms::Label());
 			this->sAuthorText = (gcnew System::Windows::Forms::Label());
-			this->mailTitle = (gcnew System::Windows::Forms::Label());
+			this->headerTitle = (gcnew System::Windows::Forms::Label());
 			this->serverGroup = (gcnew System::Windows::Forms::GroupBox());
 			this->presenterGroup->SuspendLayout();
 			this->serverGroup->SuspendLayout();
 			this->SuspendLayout();
+
+			int headerHeight = 50;
+			int columnWidth = 300;
+			int columnPadding = 10;
+			int columnHeight = 250;
+			int textWidth = 200;
+			int labelWidth = columnWidth - textWidth - columnPadding;
+			int labelHeight = 16;
+
+
 			// 
 			// sVersionLabel
 			// 
 			this->sVersionLabel->Location = System::Drawing::Point(8, 16);
 			this->sVersionLabel->Name = L"sVersionLabel";
-			this->sVersionLabel->Size = System::Drawing::Size(56, 16);
+			this->sVersionLabel->Size = System::Drawing::Size(labelWidth, labelHeight);
 			this->sVersionLabel->TabIndex = 6;
 			this->sVersionLabel->Text = L"Version:";
 			// 
@@ -127,7 +137,7 @@ namespace BAPSPresenter {
 			// 
 			this->sCompileDateLabel->Location = System::Drawing::Point(8, 32);
 			this->sCompileDateLabel->Name = L"sCompileDateLabel";
-			this->sCompileDateLabel->Size = System::Drawing::Size(88, 16);
+			this->sCompileDateLabel->Size = System::Drawing::Size(labelWidth, labelHeight);
 			this->sCompileDateLabel->TabIndex = 5;
 			this->sCompileDateLabel->Text = L"Compile Date:";
 			// 
@@ -135,7 +145,7 @@ namespace BAPSPresenter {
 			// 
 			this->sCompileTimeLabel->Location = System::Drawing::Point(8, 48);
 			this->sCompileTimeLabel->Name = L"sCompileTimeLabel";
-			this->sCompileTimeLabel->Size = System::Drawing::Size(80, 16);
+			this->sCompileTimeLabel->Size = System::Drawing::Size(labelWidth, labelHeight);
 			this->sCompileTimeLabel->TabIndex = 8;
 			this->sCompileTimeLabel->Text = L"Compile Time:";
 			// 
@@ -143,15 +153,15 @@ namespace BAPSPresenter {
 			// 
 			this->sAuthorLabel->Location = System::Drawing::Point(8, 64);
 			this->sAuthorLabel->Name = L"sAuthorLabel";
-			this->sAuthorLabel->Size = System::Drawing::Size(80, 16);
+			this->sAuthorLabel->Size = System::Drawing::Size(labelWidth, labelHeight);
 			this->sAuthorLabel->TabIndex = 7;
-			this->sAuthorLabel->Text = L"Author:";
+			this->sAuthorLabel->Text = L"Authors:";
 			// 
 			// sVersionText
 			// 
 			this->sVersionText->Location = System::Drawing::Point(104, 16);
 			this->sVersionText->Name = L"sVersionText";
-			this->sVersionText->Size = System::Drawing::Size(160, 16);
+			this->sVersionText->Size = System::Drawing::Size(textWidth, 16);
 			this->sVersionText->TabIndex = 2;
 			// 
 			// presenterGroup
@@ -165,9 +175,9 @@ namespace BAPSPresenter {
 			this->presenterGroup->Controls->Add(this->pCompileDateText);
 			this->presenterGroup->Controls->Add(this->pCompileTimeText);
 			this->presenterGroup->Controls->Add(this->pAuthorText);
-			this->presenterGroup->Location = System::Drawing::Point(4, 81);
+			this->presenterGroup->Location = System::Drawing::Point(columnPadding, headerHeight + columnPadding);
 			this->presenterGroup->Name = L"presenterGroup";
-			this->presenterGroup->Size = System::Drawing::Size(272, 144);
+			this->presenterGroup->Size = System::Drawing::Size(columnWidth, columnHeight);
 			this->presenterGroup->TabIndex = 5;
 			this->presenterGroup->TabStop = false;
 			this->presenterGroup->Text = L"BAPS Presenter";
@@ -176,7 +186,7 @@ namespace BAPSPresenter {
 			// 
 			this->pVersionLabel->Location = System::Drawing::Point(8, 16);
 			this->pVersionLabel->Name = L"pVersionLabel";
-			this->pVersionLabel->Size = System::Drawing::Size(56, 16);
+			this->pVersionLabel->Size = System::Drawing::Size(labelWidth, labelHeight);
 			this->pVersionLabel->TabIndex = 0;
 			this->pVersionLabel->Text = L"Version:";
 			// 
@@ -184,7 +194,7 @@ namespace BAPSPresenter {
 			// 
 			this->pCompileDateLabel->Location = System::Drawing::Point(8, 32);
 			this->pCompileDateLabel->Name = L"pCompileDateLabel";
-			this->pCompileDateLabel->Size = System::Drawing::Size(88, 16);
+			this->pCompileDateLabel->Size = System::Drawing::Size(labelWidth, labelHeight);
 			this->pCompileDateLabel->TabIndex = 0;
 			this->pCompileDateLabel->Text = L"Compile Date:";
 			// 
@@ -192,7 +202,7 @@ namespace BAPSPresenter {
 			// 
 			this->pCompileTimeLabel->Location = System::Drawing::Point(8, 48);
 			this->pCompileTimeLabel->Name = L"pCompileTimeLabel";
-			this->pCompileTimeLabel->Size = System::Drawing::Size(80, 16);
+			this->pCompileTimeLabel->Size = System::Drawing::Size(labelWidth, labelHeight);
 			this->pCompileTimeLabel->TabIndex = 0;
 			this->pCompileTimeLabel->Text = L"Compile Time:";
 			// 
@@ -200,70 +210,70 @@ namespace BAPSPresenter {
 			// 
 			this->pAuthorLabel->Location = System::Drawing::Point(8, 64);
 			this->pAuthorLabel->Name = L"pAuthorLabel";
-			this->pAuthorLabel->Size = System::Drawing::Size(80, 16);
+			this->pAuthorLabel->Size = System::Drawing::Size(labelWidth, labelHeight);
 			this->pAuthorLabel->TabIndex = 0;
-			this->pAuthorLabel->Text = L"Author:";
+			this->pAuthorLabel->Text = L"Authors:";
 			// 
 			// pVersionText
 			// 
 			this->pVersionText->Location = System::Drawing::Point(104, 16);
 			this->pVersionText->Name = L"pVersionText";
-			this->pVersionText->Size = System::Drawing::Size(160, 16);
+			this->pVersionText->Size = System::Drawing::Size(textWidth, 16);
 			this->pVersionText->TabIndex = 0;
 			// 
 			// pCompileDateText
 			// 
 			this->pCompileDateText->Location = System::Drawing::Point(104, 32);
 			this->pCompileDateText->Name = L"pCompileDateText";
-			this->pCompileDateText->Size = System::Drawing::Size(160, 16);
+			this->pCompileDateText->Size = System::Drawing::Size(textWidth, 16);
 			this->pCompileDateText->TabIndex = 0;
 			// 
 			// pCompileTimeText
 			// 
 			this->pCompileTimeText->Location = System::Drawing::Point(104, 48);
 			this->pCompileTimeText->Name = L"pCompileTimeText";
-			this->pCompileTimeText->Size = System::Drawing::Size(160, 16);
+			this->pCompileTimeText->Size = System::Drawing::Size(textWidth, 16);
 			this->pCompileTimeText->TabIndex = 0;
 			// 
 			// pAuthorText
 			// 
 			this->pAuthorText->Location = System::Drawing::Point(104, 64);
 			this->pAuthorText->Name = L"pAuthorText";
-			this->pAuthorText->Size = System::Drawing::Size(160, 72);
+			this->pAuthorText->Size = System::Drawing::Size(textWidth, 150);
 			this->pAuthorText->TabIndex = 0;
 			// 
 			// sCompileDateText
 			// 
 			this->sCompileDateText->Location = System::Drawing::Point(104, 32);
 			this->sCompileDateText->Name = L"sCompileDateText";
-			this->sCompileDateText->Size = System::Drawing::Size(160, 16);
+			this->sCompileDateText->Size = System::Drawing::Size(textWidth, 16);
 			this->sCompileDateText->TabIndex = 1;
 			// 
 			// sCompileTimeText
 			// 
 			this->sCompileTimeText->Location = System::Drawing::Point(104, 48);
 			this->sCompileTimeText->Name = L"sCompileTimeText";
-			this->sCompileTimeText->Size = System::Drawing::Size(160, 16);
+			this->sCompileTimeText->Size = System::Drawing::Size(textWidth, 16);
 			this->sCompileTimeText->TabIndex = 4;
 			// 
 			// sAuthorText
 			// 
 			this->sAuthorText->Location = System::Drawing::Point(104, 64);
 			this->sAuthorText->Name = L"sAuthorText";
-			this->sAuthorText->Size = System::Drawing::Size(160, 72);
+			this->sAuthorText->Size = System::Drawing::Size(textWidth, 150);
 			this->sAuthorText->TabIndex = 3;
 			// 
-			// mailTitle
+			// headerTitle
 			// 
-			this->mailTitle->BackColor = System::Drawing::Color::Transparent;
-			this->mailTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->headerTitle->BackColor = System::Drawing::Color::Transparent;
+			this->headerTitle->Font = (gcnew System::Drawing::Font(L"Tahoma", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->mailTitle->Location = System::Drawing::Point(12, 9);
-			this->mailTitle->Name = L"mailTitle";
-			this->mailTitle->Size = System::Drawing::Size(256, 56);
-			this->mailTitle->TabIndex = 3;
-			this->mailTitle->Text = L"Broadcast And Presenting System";
-			this->mailTitle->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->headerTitle->Location = System::Drawing::Point(columnPadding, columnPadding);
+			this->headerTitle->Name = L"headerTitle";
+			this->headerTitle->Size = System::Drawing::Size((2 * columnWidth) + columnPadding, headerHeight);
+			this->headerTitle->TabIndex = 3;
+			this->headerTitle->Text = L"Broadcast And Presenting Suite";
+			this->headerTitle->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// serverGroup
 			// 
@@ -276,9 +286,9 @@ namespace BAPSPresenter {
 			this->serverGroup->Controls->Add(this->sCompileDateText);
 			this->serverGroup->Controls->Add(this->sCompileTimeText);
 			this->serverGroup->Controls->Add(this->sAuthorText);
-			this->serverGroup->Location = System::Drawing::Point(4, 233);
+			this->serverGroup->Location = System::Drawing::Point(columnWidth + (2*columnPadding), headerHeight + columnPadding);
 			this->serverGroup->Name = L"serverGroup";
-			this->serverGroup->Size = System::Drawing::Size(272, 144);
+			this->serverGroup->Size = System::Drawing::Size(columnWidth, columnHeight);
 			this->serverGroup->TabIndex = 4;
 			this->serverGroup->TabStop = false;
 			this->serverGroup->Text = L"BAPS Server";
@@ -287,12 +297,11 @@ namespace BAPSPresenter {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 384);
+			this->ClientSize = System::Drawing::Size(2*columnWidth + 3*columnPadding, headerHeight + columnHeight + 2*columnPadding);
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Controls->Add(this->presenterGroup);
-			this->Controls->Add(this->mailTitle);
+			this->Controls->Add(this->headerTitle);
 			this->Controls->Add(this->serverGroup);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->KeyPreview = true;
 			this->MaximizeBox = false;

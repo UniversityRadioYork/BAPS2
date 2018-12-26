@@ -18,7 +18,7 @@ namespace BAPSPresenter
 		/** Destroy the socket so that it doesn't block threads from exiting **/
 		~ClientSocket();
 
-		/** Strings are sent as an integer representing length and the ascii data **/
+		/** Strings are sent as an integer representing length and the UTF8 data **/
 		void send(System::String^ s);
 		System::String^ receiveS();
 

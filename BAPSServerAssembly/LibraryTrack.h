@@ -94,14 +94,7 @@ namespace BAPSServerAssembly
 			xw->WriteValue(trackID);
 			xw->WriteEndElement();
 			xw->WriteStartElement("location");
-			if (fileLocation != nullptr)
-			{
-				xw->WriteString(fileLocation);
-			}
-			else
-			{
-				xw->WriteString("");
-			}
+			xw->WriteString(getFileLocation());
 			xw->WriteEndElement();
 			xw->WriteStartElement("introposition");
 			xw->WriteValue(introPosition);

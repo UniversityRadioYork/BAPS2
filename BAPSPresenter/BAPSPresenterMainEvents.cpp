@@ -137,7 +137,7 @@ System::Void BAPSPresenterMain::BAPSPresenterMain_KeyDown(System::Object ^  send
 				/*bool showVolume = (System::String::Compare(ConfigManager::getConfigValueString("ShowVolume", "No"),"Yes") == 0);
 				showVolumeControls(showVolume);*/
 				/** Enable or disable the timers depending on the config setting **/
-				bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "No"),"Yes") == 0);
+				bool enableTimers = (System::String::Compare(ConfigManager::getConfigValueString("EnableTimers", "Yes"), "Yes") == 0);
 				enableTimerControls(enableTimers);
 			}
 			else

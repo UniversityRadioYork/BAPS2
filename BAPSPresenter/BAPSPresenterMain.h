@@ -35,7 +35,6 @@ namespace BAPSPresenter {
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
-	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
 
@@ -144,10 +143,10 @@ namespace BAPSPresenter {
 		void decodeCommand(Command cmdReceived);
 		/** Loop to watch for an outgoing message on the queue and send it **/
 		void senderFunc();
-		/** Function to async send the notify of a Comms Error **/
-		void sendNotifyCommsError(System::String^ description);
+		/** Function to async send the notify of a Comms Error / allow a way to restart the client. **/
+		void sendQuit(System::String^ description, bool silent);
 		/** Function to notify of a Comms Error **/
-		void notifyCommsError(System::String^ description);
+		void quit(System::String^ description, bool silent);
 		/** Function to open write and close a log file -- FOR EMERGENCIES ONLY **/
 		void logError(System::String^ errorMessage);
 
@@ -194,15 +193,15 @@ namespace BAPSPresenter {
 		
 		/** Arrays with channel number indices for easy updating **/
 		array<System::Windows::Forms::ListBox^>^	directoryList;
-		array<Windows::Forms::Button^>^		directoryRefresh;
+		array<System::Windows::Forms::Button^>^		directoryRefresh;
 		array<System::Windows::Forms::Label^>^		loadedText;
 		array<BAPSLabel^>^		trackLengthText;
 		array<BAPSLabel^>^		timeLeftText;
 		array<BAPSLabel^>^		timeGoneText;
 		/*array<System::Windows::Forms::TrackBar^>^	volumeBar;*/
-		array<Windows::Forms::Button^>^		channelPlay;
-		array<Windows::Forms::Button^>^		channelPause;
-		array<Windows::Forms::Button^>^		channelStop;
+		array<System::Windows::Forms::Button^>^		channelPlay;
+		array<System::Windows::Forms::Button^>^		channelPause;
+		array<System::Windows::Forms::Button^>^		channelStop;
 		array<BAPSPresenter::TrackTime^>^ trackTime;
 		array<System::Windows::Forms::Timer^>^ loadImpossibleTimer;
 		array<System::Windows::Forms::Timer^>^ nearEndTimer;
@@ -625,7 +624,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Play->Name = L"Channel1Play";
 			this->Channel1Play->Size = System::Drawing::Size(75, 23);
 			this->Channel1Play->TabIndex = 223;
-			this->Channel1Play->Text = L"F1 - Play";
+			this->Channel1Play->Text = L"F5 - Play";
 			this->Channel1Play->UseVisualStyleBackColor = true;
 			this->Channel1Play->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -636,7 +635,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Pause->Name = L"Channel1Pause";
 			this->Channel1Pause->Size = System::Drawing::Size(75, 23);
 			this->Channel1Pause->TabIndex = 223;
-			this->Channel1Pause->Text = L"F2 - Pause";
+			this->Channel1Pause->Text = L"F6 - Pause";
 			this->Channel1Pause->UseVisualStyleBackColor = true;
 			this->Channel1Pause->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -647,7 +646,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel1Stop->Name = L"Channel1Stop";
 			this->Channel1Stop->Size = System::Drawing::Size(75, 23);
 			this->Channel1Stop->TabIndex = 223;
-			this->Channel1Stop->Text = L"F3 - Stop";
+			this->Channel1Stop->Text = L"F7 - Stop";
 			this->Channel1Stop->UseVisualStyleBackColor = true;
 			this->Channel1Stop->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -658,7 +657,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Play->Name = L"Channel2Play";
 			this->Channel2Play->Size = System::Drawing::Size(75, 23);
 			this->Channel2Play->TabIndex = 223;
-			this->Channel2Play->Text = L"F1 - Play";
+			this->Channel2Play->Text = L"F9 - Play";
 			this->Channel2Play->UseVisualStyleBackColor = true;
 			this->Channel2Play->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -669,7 +668,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Pause->Name = L"Channel2Pause";
 			this->Channel2Pause->Size = System::Drawing::Size(75, 23);
 			this->Channel2Pause->TabIndex = 223;
-			this->Channel2Pause->Text = L"F2 - Pause";
+			this->Channel2Pause->Text = L"F10 - Pause";
 			this->Channel2Pause->UseVisualStyleBackColor = true;
 			this->Channel2Pause->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 
@@ -680,7 +679,7 @@ private: System::ComponentModel::IContainer^  components;
 			this->Channel2Stop->Name = L"Channel2Stop";
 			this->Channel2Stop->Size = System::Drawing::Size(75, 23);
 			this->Channel2Stop->TabIndex = 223;
-			this->Channel2Stop->Text = L"F3 - Stop";
+			this->Channel2Stop->Text = L"F11 - Stop";
 			this->Channel2Stop->UseVisualStyleBackColor = true;
 			this->Channel2Stop->Click += gcnew System::EventHandler(this, &BAPSPresenterMain::ChannelOperation_Click);
 			// 

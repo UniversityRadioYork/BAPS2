@@ -114,9 +114,6 @@
     <ClCompile Include="About.cpp">
       <Filter>Header Files\About</Filter>
     </ClCompile>
-    <ClCompile Include="ConfigDialog.cpp">
-      <Filter>Header Files\ConfigDialog</Filter>
-    </ClCompile>
     <ClCompile Include="LoadShowDialog.cpp">
       <Filter>Header Files\LoadShowDialog</Filter>
     </ClCompile>
@@ -134,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="AudioWall.cpp">
       <Filter>Header Files\AudioWall</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigDialog.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +298,7 @@
   <ItemGroup>
     <None Include="..\help\BAPSPresenterHelp.chm" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
