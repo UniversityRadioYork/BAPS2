@@ -292,8 +292,8 @@ void BAPSPresenterMain::ChannelListClear_Click(System::Object^ sender, System::E
 System::Void BAPSPresenterMain::trackListContextMenuStrip_Opening(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e)
 {
 	TrackList^ tl = safe_cast<TrackList^>(trackListContextMenuStrip->SourceControl);
-	int testValue = ConfigCache::getValueInt("Automatically advance", tl->Channel);
-	bool shouldCheck = (testValue == ConfigCache::findChoiceIndexFor("Automatically advance", "Yes"));
+	int testValue = ConfigCache::getValueInt("Auto Advance", tl->Channel);
+	bool shouldCheck = (testValue == ConfigCache::findChoiceIndexFor("Auto Advance", "Yes"));
 	automaticAdvanceToolStripMenuItem->Checked = shouldCheck;
 	testValue = ConfigCache::getValueInt("Play on load", tl->Channel);
 	shouldCheck = (testValue == ConfigCache::findChoiceIndexFor("Play on load", "Yes"));
@@ -314,7 +314,7 @@ System::Void BAPSPresenterMain::trackListContextMenuStrip_ItemClicked(System::Ob
 	Command cmd = BAPSNET_CONFIG | BAPSNET_SETCONFIGVALUE | BAPSNET_CONFIG_USEVALUEMASK | tl->Channel;
 	if (e->ClickedItem == automaticAdvanceToolStripMenuItem)
 	{
-		OptionCacheInfo^ oci = ConfigCache::getOption("Automatically advance");
+		OptionCacheInfo^ oci = ConfigCache::getOption("Auto Advance");
 		System::String^ newSetting = "Yes";
 		if (automaticAdvanceToolStripMenuItem->Checked)
 		{
