@@ -204,7 +204,6 @@ void AsyncActionManager::doActions(System::Object^)
 							
 							updateDataset->Reset();
 							bapsDataAdapter->Fill(updateDataset);
-							//System::Object^ fred  = updateDataset->Tables[0]->Rows[0];
 							AudioID = updateDataset->Tables[0]->Rows[0]->ItemArray[0]->ToString();
 						}
 						bapsDataAdapter->SelectCommand = oldCommand;
