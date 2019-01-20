@@ -1,6 +1,6 @@
 # BAPS2
 
-This is BAPS (Broacast And Presenting Suite), URY's long-lived playout system.
+This is BAPS (Broadcast And Presenting Suite), URY's long-lived playout system.
 
 ## Features
   - 3 Audio channels of (simultaneous) audio playback - backend mostly supports unlimited
