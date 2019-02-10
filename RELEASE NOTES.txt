@@ -1,4 +1,44 @@
 ##
+Release 2.7.1
+--
+Features
+--
+* Fix library tracks not being playable after server restart.
+  (The location field in the sql statement is never filled. Use the function to generate it to be saved in the XML file, so that it can replay it after server restart.)
+* Tracks and Artists are now sent over BAPSNET using UTF8. Now shows UTF8 characters in Presenter.
+* Timers are enabled by default.
+* Config menu now updates available audio devices, and channels will switch audio device on new file load.
+* Allows COM Port to be changed for BAPS Controller, and port list updates on opening config window.
+* Adds serial heartbeat to add support for the new BAPS Controller Arduino built into the Studio Blue Mattchbox
+  (If the Controller sends 255 over serial to the Server, the server will also respond 255, allowing the Controller to detect connection. In this case, the CONN LED on the new controller lights.
+* Adds a "Restart Server" button to config menu, as well as tiding up the config menu rendering code.
+
+ 
+ --
+ Changes
+ --
+ * Upgraded ngpsql library from v1 to v4.0.3.
+ * Adds BSD-3 Clause Licence
+ * Removed a lot of old/dead projects within the VS solution.
+ 
+ --
+ Bug Fixes
+ --
+ * Re-implemented original BAPSSetup installer with new (build in) form templates.
+    (Allows for Service user to be customisable again, as well as installing only Presenter)
+ * A couple of compiler warnings.
+ * Corrected F Key lables on the Presenter transport buttons (all were labeled F1, F2, F3)
+ 
+ --
+ Known Issues
+ --
+ * The BAPS.dll is still somehow different from the original from 2.6.2 and cannot play WAV files after playing MP3's.
+    (Copy-pasting the old one into Program Files fixes the issue temporarily.)
+ * BAPS sometimes goes fullscreen by itself, with the Ctrl + Shift + W combo being a separate function which doesn't fix it.
+    (Closing and reopenning fixes).
+
+
+##
 Release 2.7.0
 --
 Features
