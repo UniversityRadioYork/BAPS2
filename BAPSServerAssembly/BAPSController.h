@@ -213,6 +213,7 @@ namespace BAPSServerAssembly
 						array<System::Byte>^ response = gcnew array<System::Byte>(1);
 						response[0] = 255;
 						serialPort->Write(response, 0, 1);
+						handled=true;
 					}
 					if (mode == CONFIG_CONTROLLER_PLAYBACK)
 					{
