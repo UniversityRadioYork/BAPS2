@@ -215,7 +215,30 @@ namespace BAPSServerAssembly
 						serialPort->Write(response, 0, 1);
 						handled=true;
 					}
-					if (mode == CONFIG_CONTROLLER_PLAYBACK)
+					// 254 is used to send a response back to the controller, containing channel information. Useful if the controller has a UI.
+					else if (data == 254)
+					{
+						//Yes, this is rather manual, but I didn't like the look of trying to do JSON in C++
+						for (int i = 0; i < 3; i++) {
+							serialPort->Write(System::String::Concat("<CHANNEL:", i.ToString(), ","));
+							serialPort->Write(System::String::Concat("TITLE:", ClientManager::getAudio()->getOutput(i)->getLoadedTrack()->ToString(), ","));
+							serialPort->Write(System::String::Concat("LENGTH:", ClientManager::getAudio()->getOutput(i)->getFileDuration(), ","));
+							serialPort->Write(System::String::Concat("POS:", ClientManager::getAudio()->getOutput(i)->getFilePosition(), ","));
+							serialPort->Write("STATE:");
+							if (ClientManager::getAudio()->getOutput(0)->isPlaying()) {
+								serialPort->Write("PLAY");
+							}
+							else if (ClientManager::getAudio()->getOutput(0)->isPaused()) {
+								serialPort->Write("PAUSE");
+							}
+							else {
+								serialPort->Write("STOP");
+							}
+							serialPort->Write(">\r\n");
+						}
+						handled = true;
+					}
+					else if (mode == CONFIG_CONTROLLER_PLAYBACK)
 					{
 						if (buttonCount>0 && data == CONFIG_GETINTn(CONFIG_BAPSCONTROLLERBUTTONCODE, 0))
 						{
